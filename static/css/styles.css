@@ -1,0 +1,4405 @@
+/* ==========================================================================
+   🏛️ LONGEVITY ATHLETE V2 (PURE MINIMALIST LUXURY DESIGN SYSTEM)
+   ========================================================================== */
+:root {
+    --bg-color: #060913;
+    --card-bg: rgba(18, 27, 48, 0.75);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent-green: #10b981;
+    --accent-gold: #fbbf24;
+    --accent-yellow: #f59e0b;
+    --accent-red: #ef4444;
+    --accent-blue: #3b82f6;
+    --accent-cyan: #38bdf8;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    min-height: 100vh;
+    padding: 1.25rem;
+    background-image: radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.12) 0%, transparent 45%),
+                      radial-gradient(circle at 90% 90%, rgba(16, 185, 129, 0.08) 0%, transparent 45%);
+    background-attachment: fixed;
+    letter-spacing: -0.01em;
+}
+
+/* Header Navbar */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.brand-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.brand-logo {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #10b981, #0284c7);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+}
+
+.brand-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.sync-status-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent-green);
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    padding: 4px 12px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-green);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent-green);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+/* ==========================================================================
+   🧭 LIVE CONTEXT COMMAND BAR (HOME BASE, FASE, CTL 52, PESO TARGET)
+   ========================================================================== */
+.context-command-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.1rem;
+    padding: 0.55rem 0.85rem;
+    background: rgba(18, 27, 48, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+}
+
+.context-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.74rem;
+    font-weight: 700;
+    padding: 0.28rem 0.65rem;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-main);
+    letter-spacing: -0.01em;
+    transition: all 0.2s ease;
+}
+
+.context-pill.location-pill {
+    background: rgba(16, 185, 129, 0.12);
+    border-color: rgba(16, 185, 129, 0.35);
+    color: #34d399;
+}
+
+.context-pill.location-pill.travel-mode {
+    background: rgba(245, 158, 11, 0.18);
+    border-color: rgba(245, 158, 11, 0.45);
+    color: #fbbf24;
+}
+
+.context-pill.season-pill {
+    background: rgba(56, 189, 248, 0.1);
+    border-color: rgba(56, 189, 248, 0.25);
+    color: #38bdf8;
+}
+
+.context-pill.target-pill {
+    background: rgba(168, 85, 247, 0.1);
+    border-color: rgba(168, 85, 247, 0.25);
+    color: #c084fc;
+}
+
+.context-pill.weight-pill {
+    background: rgba(251, 191, 36, 0.1);
+    border-color: rgba(251, 191, 36, 0.25);
+    color: #fde047;
+}
+
+/* ==========================================================================
+   📊 TOP KPI 7-CARD GRID (STRICT SINGLE ROW ON ALL SCREENS)
+   ========================================================================== */
+.kpi-row-grid {
+    display: grid !important;
+    grid-template-columns: 1.4fr repeat(6, 1fr) !important;
+    gap: 0.5rem !important;
+    margin-bottom: 1.5rem !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    padding-bottom: 0.3rem !important;
+}
+
+/* Base Card Style */
+.kpi-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 0.85rem 0.75rem;
+    backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 125px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.kpi-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Card Title Header */
+.kpi-card-header {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    white-space: nowrap;
+}
+
+/* Readiness Featured Card */
+.readiness-card {
+    background: linear-gradient(145deg, rgba(20, 35, 55, 0.9) 0%, rgba(12, 22, 36, 0.95) 100%);
+    border: 1.5px solid var(--accent-green);
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
+    transition: all 0.3s ease;
+}
+
+.readiness-value-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0.3rem 0;
+}
+
+.readiness-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.65rem;
+    font-weight: 900;
+    color: var(--accent-green);
+    letter-spacing: 0.02em;
+}
+
+.mini-histogram {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 28px;
+}
+
+.mini-histogram .bar {
+    width: 4px;
+    background-color: var(--accent-green);
+    border-radius: 2px;
+}
+
+.readiness-subtitle {
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--accent-green);
+}
+
+/* Dynamic State Themes */
+.readiness-card.theme-ready,
+.readiness-card.status-ready {
+    border-color: #10b981 !important;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.25) !important;
+}
+.readiness-card.theme-ready .readiness-title,
+.readiness-card.theme-ready .readiness-subtitle,
+.readiness-card.status-ready .readiness-title,
+.readiness-card.status-ready .readiness-subtitle {
+    color: #10b981 !important;
+}
+.readiness-card.theme-ready .mini-histogram .bar,
+.readiness-card.status-ready .mini-histogram .bar {
+    background-color: #10b981 !important;
+}
+
+.readiness-card.theme-golden,
+.readiness-card.status-golden {
+    border-color: #fbbf24 !important;
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.3) !important;
+}
+.readiness-card.theme-golden .readiness-title,
+.readiness-card.theme-golden .readiness-subtitle,
+.readiness-card.status-golden .readiness-title,
+.readiness-card.status-golden .readiness-subtitle {
+    color: #fbbf24 !important;
+}
+.readiness-card.theme-golden .mini-histogram .bar,
+.readiness-card.status-golden .mini-histogram .bar {
+    background-color: #fbbf24 !important;
+}
+
+.readiness-card.theme-careful,
+.readiness-card.status-careful {
+    border-color: #f59e0b !important;
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.25) !important;
+}
+.readiness-card.theme-careful .readiness-title,
+.readiness-card.theme-careful .readiness-subtitle,
+.readiness-card.status-careful .readiness-title,
+.readiness-card.status-careful .readiness-subtitle {
+    color: #f59e0b !important;
+}
+.readiness-card.theme-careful .mini-histogram .bar,
+.readiness-card.status-careful .mini-histogram .bar {
+    background-color: #f59e0b !important;
+}
+
+.readiness-card.theme-stop,
+.readiness-card.status-stop {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.25) !important;
+}
+.readiness-card.theme-stop .readiness-title,
+.readiness-card.theme-stop .readiness-subtitle,
+.readiness-card.status-stop .readiness-title,
+.readiness-card.status-stop .readiness-subtitle {
+    color: #ef4444 !important;
+}
+.readiness-card.theme-stop .mini-histogram .bar,
+.readiness-card.status-stop .mini-histogram .bar {
+    background-color: #ef4444 !important;
+}
+
+/* Metric Cards Value Text & Sparkline Row */
+.compact-val-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.3rem;
+    margin: 0.2rem 0;
+}
+
+.metric-value {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.1;
+    white-space: nowrap;
+}
+
+.sparkline-svg {
+    width: 60px;
+    height: 26px;
+    overflow: visible;
+    flex-shrink: 0;
+}
+
+.sparkline-svg path {
+    fill: none;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.trend-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 1px 5px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.trend-badge.up {
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.15);
+}
+
+.trend-badge.down {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.15);
+}
+
+.trend-badge.neutral {
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.15);
+}
+
+.metric-subtitle {
+    font-size: 0.70rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Fallback breakpoint to maintain min card width on ultra-small screens without wrapping */
+@media (max-width: 1200px) {
+    .kpi-row-grid {
+        grid-template-columns: repeat(7, minmax(130px, 1fr)) !important;
+    }
+}
+
+/* ==========================================================================
+   🚴 LATEST WORKOUT STATS CARD
+   ========================================================================== */
+.latest-activity-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    backdrop-filter: blur(20px);
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.activity-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 0.6rem;
+}
+
+.activity-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: #ffffff;
+}
+
+.activity-sport-icon {
+    font-size: 1.2rem;
+}
+
+.activity-meta {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.activity-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.65rem;
+}
+
+.act-stat-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s ease-in-out;
+}
+
+.act-stat-item.status-good {
+    background: rgba(16, 185, 129, 0.08) !important;
+    border: 1px solid rgba(16, 185, 129, 0.35) !important;
+}
+.act-stat-item.status-good .act-stat-val {
+    color: #10b981 !important;
+}
+
+.act-stat-item.status-warn {
+    background: rgba(245, 158, 11, 0.08) !important;
+    border: 1px solid rgba(245, 158, 11, 0.35) !important;
+}
+.act-stat-item.status-warn .act-stat-val {
+    color: #f59e0b !important;
+}
+
+.act-stat-item.status-bad {
+    background: rgba(239, 68, 68, 0.08) !important;
+    border: 1px solid rgba(239, 68, 68, 0.35) !important;
+}
+.act-stat-item.status-bad .act-stat-val {
+    color: #ef4444 !important;
+}
+
+.act-stat-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.act-stat-val {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-top: 2px;
+}
+
+/* Regola Utente: Distanza, Carico (TSS) e FC hanno sempre numeri in bianco puro */
+#card-act-dist .act-stat-val,
+#card-act-tss .act-stat-val,
+#card-act-hr .act-stat-val {
+    color: #ffffff !important;
+}
+
+.act-stat-sub {
+    font-size: 0.68rem;
+    color: var(--accent-cyan);
+    margin-top: 1px;
+}
+
+.activity-note-box {
+    font-size: 0.76rem;
+    color: var(--accent-gold);
+    background: rgba(251, 191, 36, 0.08);
+    border: 1px dashed rgba(251, 191, 36, 0.3);
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+/* ==========================================================================
+   🏛️ 2-COLUMN DASHBOARD SECTION GRID
+   ========================================================================== */
+.dashboard-grid-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 900px) {
+    .dashboard-grid-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.dashboard-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.85rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.dash-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 0.6rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+/* 🎯 Workout Suggestions Card */
+.workout-subcard {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.workout-subcard-title {
+    font-weight: 700;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.workout-subcard-desc {
+    font-size: 0.78rem;
+    color: var(--text-main);
+    font-weight: 500;
+}
+
+.workout-subcard-meta {
+    font-size: 0.70rem;
+    color: var(--accent-cyan);
+}
+
+/* 🌤️ Weather Windows Card */
+.weather-windows-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.weather-win-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.weather-win-header {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.weather-win-temp {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.weather-win-detail {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+/* 📊 30-Day Load Distribution Bars */
+.dist-bar-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.dist-bar-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.dist-bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.dist-bar-track {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.dist-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.4s ease;
+}
+
+.dist-pie-direction {
+    font-size: 0.74rem;
+    color: var(--accent-green);
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px dashed rgba(16, 185, 129, 0.3);
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 600;
+}
+
+/* 👟 Shoes & Hydration Card */
+.shoe-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 0.65rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.shoe-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.shoe-bar-track {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.shoe-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #10b981, #f59e0b);
+    border-radius: 3px;
+}
+
+.hydration-box {
+    background: rgba(56, 189, 248, 0.08);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: 10px;
+    padding: 0.65rem 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* 🏷️ Race Discipline Filter Pills */
+.race-discipline-bar {
+    display: flex;
+    gap: 0.35rem;
+    overflow-x: auto;
+    padding-bottom: 0.3rem;
+    margin-top: 0.2rem;
+    scrollbar-width: thin;
+}
+
+.race-discipline-bar::-webkit-scrollbar {
+    height: 3px;
+}
+
+.race-discipline-bar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+}
+
+.race-filter-btn {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    color: var(--text-muted);
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 0.25rem 0.6rem;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.race-filter-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.race-filter-btn.active {
+    background: rgba(251, 191, 36, 0.15);
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   🥗 DAILY NUTRITION & CALORIC BALANCE STYLES
+   ========================================================================== */
+.nutrition-card {
+    background: linear-gradient(145deg, rgba(17, 24, 39, 0.95), rgba(15, 23, 42, 0.95));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 1.15rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    backdrop-filter: blur(12px);
+    margin-bottom: 1.25rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+.nutrition-status-badge {
+    font-size: 0.76rem;
+    font-weight: 800;
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.nutrition-status-badge.status-deficit {
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+}
+
+.nutrition-status-badge.status-pareggio {
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+}
+
+.nutrition-status-badge.status-surplus {
+    color: #f59e0b;
+    background: rgba(245, 158, 11, 0.12);
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.2);
+}
+
+.nutrition-status-badge.status-over {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.2);
+}
+
+.nutrition-status-badge.status-in_attesa {
+    color: #94a3b8;
+    background: rgba(148, 163, 184, 0.12);
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    box-shadow: none;
+}
+
+.nutrition-status-badge.status-auto_stima {
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.15);
+    border: 1px dashed rgba(56, 189, 248, 0.5);
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.15);
+}
+
+.nutrition-overview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.85rem;
+}
+
+.nutrition-stat-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.nutri-stat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 0.70rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 0.4rem;
+}
+
+.nutri-stat-val {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.nutri-breakdown-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+}
+
+.nutri-breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-muted);
+}
+
+.nutri-breakdown-item strong {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.nutri-macros-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.macro-bar-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.macro-bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+
+.macro-bar-track {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.macro-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.4s ease;
+}
+
+.nutri-input-section {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 0.75rem;
+}
+
+.nutri-input-form {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+}
+
+.nutri-input {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    padding: 0.55rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.nutri-input:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.25);
+}
+
+.nutri-unit-select {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    padding: 0.55rem 0.5rem;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.nutri-unit-select:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.25);
+}
+
+.nutri-unit-select option {
+    background: #111827;
+    color: #ffffff;
+}
+
+.nutri-add-btn {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.82rem;
+    border: none;
+    border-radius: 8px;
+    padding: 0.55rem 1.15rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.nutri-add-btn:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.nutri-add-btn:active {
+    transform: translateY(1px);
+}
+
+.nutri-logged-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.nutri-logged-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.nutri-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    max-height: 220px;
+    overflow-y: auto;
+    padding-right: 2px;
+}
+
+.nutri-item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 0.45rem 0.75rem;
+    font-size: 0.78rem;
+    transition: background 0.15s;
+}
+
+.nutri-item-row:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.nutri-item-info {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.nutri-item-name {
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.nutri-item-grams {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+}
+
+.nutri-item-macros {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.74rem;
+}
+
+.nutri-item-kcal {
+    font-weight: 800;
+    color: #10b981;
+}
+
+.nutri-item-del-btn {
+    background: none;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 0.85rem;
+    padding: 0.2rem 0.35rem;
+    opacity: 0.65;
+    transition: opacity 0.2s, transform 0.15s;
+    border-radius: 4px;
+}
+
+.nutri-item-del-btn:hover {
+    opacity: 1.0;
+    transform: scale(1.15);
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.nutri-empty-placeholder {
+    font-size: 0.74rem;
+    color: rgba(255, 255, 255, 0.45);
+    text-align: center;
+    padding: 0.6rem;
+    font-style: italic;
+}
+
+/* ==========================================================================
+   ⚖️ Nutrition Weight Gain/Loss & Thermodynamic Validation Box
+   ========================================================================== */
+.nutri-weight-estimate-box {
+    margin-top: 1rem;
+    padding: 1rem 1.15rem;
+    background: rgba(18, 24, 38, 0.75);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.nutri-weight-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 0.65rem;
+}
+
+.nutri-weight-title-group {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.nutri-weight-icon {
+    font-size: 1.35rem;
+    background: rgba(56, 189, 248, 0.1);
+    padding: 0.35rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nutri-weight-title {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--text-main);
+    text-transform: uppercase;
+}
+
+.nutri-weight-sub {
+    display: block;
+    font-size: 0.70rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-top: 1px;
+}
+
+.nutri-weight-badge {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 0.3rem 0.65rem;
+    border-radius: 20px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: all 0.25s ease;
+}
+
+.nutri-weight-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.3fr;
+    gap: 1rem;
+    align-items: center;
+}
+
+.nutri-weight-col {
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 9px;
+    padding: 0.75rem 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.nutri-weight-label {
+    font-size: 0.70rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.nutri-weight-val {
+    font-size: 1.35rem;
+    font-weight: 800;
+    line-height: 1.1;
+    display: flex;
+    align-items: baseline;
+    gap: 0.3rem;
+}
+
+.nutri-weight-unit {
+    font-size: 0.75rem;
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+.nutri-weight-hint {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.nutri-weight-action-col {
+    background: rgba(56, 189, 248, 0.03);
+    border-color: rgba(56, 189, 248, 0.15);
+}
+
+.nutri-weight-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nutri-weight-real-txt {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #10b981;
+}
+
+.nutri-weight-input-group {
+    display: flex;
+    gap: 0.4rem;
+    margin: 0.2rem 0;
+}
+
+.nutri-input-sm {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.78rem;
+    height: 32px;
+}
+
+.nutri-btn-sm {
+    background: linear-gradient(135deg, #0ea5e9, #0284c7);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0 0.65rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    height: 32px;
+    transition: transform 0.15s, opacity 0.2s;
+}
+
+.nutri-btn-sm:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.nutri-weight-msg {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.55rem 0.75rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    font-size: 0.74rem;
+    color: var(--text-main);
+    line-height: 1.4;
+}
+
+.nutri-weight-msg span:first-child {
+    font-size: 1.05rem;
+}
+
+/* ==========================================================================
+   📱 MOBILE RESPONSIVE OPTIMIZATION (iPhone & Android Native Look)
+   ========================================================================== */
+@media (max-width: 768px) {
+    body {
+        padding: 0.75rem 0.6rem;
+    }
+
+    /* Header */
+    .app-header {
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .brand-name {
+        font-size: 1.15rem;
+    }
+
+    .brand-logo {
+        width: 30px;
+        height: 30px;
+        font-size: 0.95rem;
+    }
+
+    .sync-status-badge {
+        font-size: 0.70rem;
+        padding: 3px 8px;
+    }
+
+    /* Top KPI cards: scrollable horizontal carousel with snap on mobile */
+    .kpi-row-grid {
+        display: flex !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 0.5rem !important;
+        padding-bottom: 0.5rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .kpi-row-grid > * {
+        flex: 0 0 135px !important;
+        min-width: 135px !important;
+        scroll-snap-align: start;
+    }
+
+    .kpi-row-grid > .readiness-card {
+        flex: 0 0 155px !important;
+        min-width: 155px !important;
+    }
+
+    .kpi-card {
+        min-height: 110px;
+        padding: 0.7rem 0.6rem;
+    }
+
+    .metric-value {
+        font-size: 1.25rem;
+    }
+
+    .sparkline-svg {
+        width: 45px;
+        height: 22px;
+    }
+
+    /* Latest Activity Card */
+    .latest-activity-card {
+        padding: 0.85rem;
+        margin-bottom: 1rem;
+    }
+
+    .activity-stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.45rem;
+    }
+
+    .act-stat-item {
+        padding: 0.45rem 0.6rem;
+    }
+
+    .act-stat-val {
+        font-size: 1.05rem;
+    }
+
+    /* Grid Rows to single column */
+    .dashboard-grid-row {
+        grid-template-columns: 1fr !important;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .dashboard-card {
+        padding: 0.85rem;
+        gap: 0.75rem;
+    }
+
+    .dash-card-header {
+        font-size: 0.95rem;
+    }
+
+    /* Weather windows on phone */
+    .weather-windows-row {
+        grid-template-columns: 1fr !important;
+        gap: 0.5rem;
+    }
+
+    /* Target race speedometer section */
+    .gauge-wrapper-mobile {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 0.6rem !important;
+    }
+
+    /* Race filter pills */
+    .race-discipline-bar {
+        padding-bottom: 0.4rem;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .race-filter-btn {
+        font-size: 0.68rem;
+        padding: 0.25rem 0.55rem;
+    }
+
+    /* 🥗 Nutrition Card Mobile */
+    .nutrition-overview-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.65rem !important;
+    }
+
+    .nutri-weight-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.65rem !important;
+    }
+
+    .nutri-weight-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.5rem !important;
+    }
+
+    .nutri-input-form {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.5rem !important;
+    }
+
+    .nutri-add-btn {
+        width: 100% !important;
+        justify-content: center !important;
+        padding: 0.65rem !important;
+    }
+
+    .nutri-item-row {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.4rem !important;
+    }
+
+    .nutri-item-macros {
+        width: 100% !important;
+        justify-content: space-between !important;
+    }
+}
+
+/* 🔬 Multi-Day Macro Analysis & Imbalance Monitor (Longevity Health) */
+.nutri-multi-day-box {
+    margin-top: 0.85rem;
+    background: linear-gradient(145deg, rgba(17, 24, 39, 0.75) 0%, rgba(11, 17, 30, 0.85) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.nutri-multi-day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 0.65rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.nutri-multi-day-title-group {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.nutri-multi-day-icon {
+    font-size: 1.35rem;
+    background: rgba(14, 165, 233, 0.12);
+    padding: 0.35rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nutri-multi-day-title {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--text-main);
+    text-transform: uppercase;
+}
+
+.nutri-multi-day-sub {
+    display: block;
+    font-size: 0.70rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-top: 1px;
+}
+
+.nutri-multi-day-badge {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 0.3rem 0.65rem;
+    border-radius: 20px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: all 0.25s ease;
+}
+
+.nutri-imbalance-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+}
+
+.nutri-imbalance-col {
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 9px;
+    padding: 0.7rem 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.nutri-imbalance-col:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.035);
+}
+
+.nutri-imbalance-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nutri-imbalance-label {
+    font-size: 0.70rem;
+    color: var(--text-muted);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.nutri-imbalance-val {
+    font-size: 1.25rem;
+    font-weight: 800;
+    line-height: 1.1;
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+}
+
+.nutri-imbalance-unit {
+    font-size: 0.72rem;
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+.nutri-imbalance-hint {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.nutri-imbalance-tag {
+    display: inline-block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    width: fit-content;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.nutri-analysis-insight-box {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.75rem 0.9rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-left: 3.5px solid #38bdf8;
+    border-radius: 8px;
+    font-size: 0.74rem;
+    line-height: 1.45;
+    color: var(--text-main);
+}
+
+.nutri-analysis-prescription-box {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.75rem 0.9rem;
+    background: rgba(16, 185, 129, 0.03);
+    border: 1px solid rgba(16, 185, 129, 0.15);
+    border-left: 3.5px solid #10b981;
+    border-radius: 8px;
+    font-size: 0.74rem;
+    line-height: 1.45;
+    color: var(--text-main);
+}
+
+@media (max-width: 1024px) {
+    .nutri-imbalance-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 580px) {
+    .nutri-imbalance-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* ==========================================================================
+   14. Clinical Longevity & Medicine 3.0 (Peter Attia & Gary Brecka Protocol)
+   ========================================================================== */
+.clinical-longevity-card {
+    background: var(--bg-card, #131722);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+    margin-top: 1.25rem;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+}
+
+.clinical-main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 0.2rem;
+    transition: all 0.25s ease;
+}
+
+.clinical-main-header:hover {
+    opacity: 0.95;
+}
+
+.clinical-main-header.open {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 0.8rem;
+}
+
+.btn-toggle-clinical {
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    color: #38bdf8;
+    padding: 0.42rem 0.85rem;
+    border-radius: 8px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.btn-toggle-clinical:hover {
+    background: rgba(56, 189, 248, 0.2);
+    border-color: #38bdf8;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.btn-toggle-clinical.open {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-main);
+}
+
+.clinical-collapsible-content {
+    display: none;
+    flex-direction: column;
+    gap: 1.1rem;
+    margin-top: 0.9rem;
+    animation: fadeIn 0.25s ease-in-out;
+}
+
+.clinical-collapsible-content.open {
+    display: flex;
+}
+
+.clinical-title-group {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.clinical-icon {
+    font-size: 1.35rem;
+}
+
+.clinical-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.3px;
+}
+
+.clinical-subtitle {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.clinical-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.btn-copy-prescription {
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(59, 130, 246, 0.22));
+    border: 1px solid rgba(56, 189, 248, 0.45);
+    color: #38bdf8;
+    padding: 0.42rem 0.85rem;
+    border-radius: 8px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.btn-copy-prescription:hover {
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.28), rgba(59, 130, 246, 0.38));
+    border-color: #38bdf8;
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(56, 189, 248, 0.3);
+}
+
+.btn-copy-prescription:active {
+    transform: translateY(0);
+}
+
+/* Validated Baseline Strip */
+.clinical-validated-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+}
+
+.val-strip-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.val-strip-tag {
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #38bdf8;
+}
+
+.val-strip-metrics {
+    font-size: 0.82rem;
+    color: #ffffff;
+    line-height: 1.35;
+}
+
+.val-strip-sub {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    line-height: 1.3;
+}
+
+/* Tabs Navigation */
+.clinical-tabs-nav {
+    display: flex;
+    gap: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 0.5rem;
+}
+
+.clinical-tab-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-muted);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.clinical-tab-btn:hover {
+    background: rgba(255, 255, 255, 0.07);
+    color: #ffffff;
+}
+
+.clinical-tab-btn.active {
+    background: rgba(56, 189, 248, 0.15);
+    border-color: rgba(56, 189, 248, 0.45);
+    color: #38bdf8;
+    box-shadow: 0 2px 8px rgba(56, 189, 248, 0.15);
+}
+
+/* Tab Panels */
+.clinical-tab-panel {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.clinical-tab-panel.active {
+    display: flex;
+}
+
+/* Routine Pillars List */
+.routine-pillars-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.routine-pillar-box {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    transition: border-color 0.15s ease;
+}
+
+.routine-pillar-box:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.routine-pillar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.routine-pillar-title {
+    font-size: 0.88rem;
+    font-weight: 800;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.routine-pillar-lead {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.routine-pillar-badge {
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+}
+
+.routine-exams-table {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.routine-exam-row {
+    display: grid;
+    grid-template-columns: 2.2fr 1.4fr 1fr 2.5fr;
+    gap: 0.6rem;
+    align-items: center;
+    font-size: 0.73rem;
+    padding: 0.35rem 0.5rem;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.015);
+}
+
+.routine-exam-row:nth-child(even) {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.exam-name {
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.exam-target {
+    color: #38bdf8;
+    font-weight: 600;
+    font-size: 0.70rem;
+}
+
+.exam-status-tag {
+    font-size: 0.60rem;
+    font-weight: 800;
+    text-align: center;
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    letter-spacing: 0.02em;
+    width: fit-content;
+}
+
+.exam-status-tag.validato {
+    background: rgba(16, 185, 129, 0.18);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.exam-status-tag.da-fare {
+    background: rgba(239, 68, 68, 0.18);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.exam-desc {
+    color: var(--text-muted);
+    font-size: 0.68rem;
+    line-height: 1.3;
+}
+
+/* Prevention & Cancer Screening Styles */
+.prevention-groups-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.prevention-priority-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.prev-group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.prev-group-title {
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.prev-group-tag {
+    font-size: 0.62rem;
+    font-weight: 800;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+}
+
+.prev-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.85rem;
+}
+
+.prev-card {
+    background: rgba(0, 0, 0, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 0.85rem 0.95rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.prev-card:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.prev-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.prev-card-title {
+    font-size: 0.84rem;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.3;
+}
+
+.prev-card-meta {
+    font-size: 0.67rem;
+    color: #38bdf8;
+    font-weight: 600;
+}
+
+.prev-freq-tag {
+    font-size: 0.62rem;
+    font-weight: 700;
+    padding: 0.12rem 0.45rem;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.85);
+    white-space: nowrap;
+}
+
+.prev-reason-box {
+    font-size: 0.70rem;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.02);
+    border-left: 2.5px solid #38bdf8;
+    padding: 0.4rem 0.6rem;
+    border-radius: 4px;
+}
+
+.prev-action-box {
+    font-size: 0.68rem;
+    color: #10b981;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+/* Toast Notification for Clipboard Copy */
+.clinical-toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: #10b981;
+    color: #ffffff;
+    padding: 0.6rem 1.1rem;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+    z-index: 9999;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    pointer-events: none;
+}
+
+.clinical-toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 1100px) {
+    .prev-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .routine-exam-row {
+        grid-template-columns: 1.8fr 1.2fr 0.9fr 2fr;
+    }
+}
+
+@media (max-width: 850px) {
+    .clinical-validated-strip {
+        grid-template-columns: 1fr;
+    }
+    .prev-cards-grid {
+        grid-template-columns: 1fr;
+    }
+    .routine-exam-row {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+    }
+}
+
+/* ==========================================================================
+   🥩 Garmin Index Body Composition (6-Card Grid)
+   ========================================================================== */
+.nutri-bodycomp-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: 0.4rem;
+    padding-top: 0.6rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.nutri-bodycomp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nutri-bodycomp-title {
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: var(--text-main);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.nutri-bodycomp-meta {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.nutri-bodycomp-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.65rem;
+}
+
+.nutri-bodycomp-card {
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 9px;
+    padding: 0.65rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    transition: transform 0.15s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.nutri-bodycomp-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.nutri-bodycomp-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nutri-bodycomp-card-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.nutri-bodycomp-card-val {
+    font-size: 1.25rem;
+    font-weight: 800;
+    line-height: 1.1;
+    display: flex;
+    align-items: baseline;
+    gap: 0.2rem;
+    margin: 0.15rem 0;
+}
+
+.nutri-bodycomp-card-unit {
+    font-size: 0.70rem;
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+.nutri-bodycomp-card-badge {
+    font-size: 0.64rem;
+    font-weight: 700;
+    padding: 0.15rem 0.45rem;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+    width: fit-content;
+}
+
+.nutri-bodycomp-card-hint {
+    font-size: 0.64rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    line-height: 1.2;
+    margin-top: 0.1rem;
+}
+
+/* Form Espandibile per la Bilancia */
+.nutri-bodycomp-form-drawer {
+    display: none;
+    margin-top: 0.6rem;
+    padding: 0.75rem;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px dashed rgba(56, 189, 248, 0.3);
+    border-radius: 9px;
+    gap: 0.6rem;
+    flex-direction: column;
+}
+
+.nutri-bodycomp-form-drawer.open {
+    display: flex;
+}
+
+.nutri-bodycomp-form-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.5rem;
+}
+
+.nutri-bodycomp-input-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.nutri-bodycomp-input-label {
+    font-size: 0.64rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.nutri-bc-toggle-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+    border-radius: 6px;
+    padding: 0.25rem 0.55rem;
+    font-size: 0.68rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.nutri-bc-toggle-btn:hover {
+    color: #38bdf8;
+    border-color: rgba(56, 189, 248, 0.3);
+    background: rgba(56, 189, 248, 0.08);
+}
+
+@media (max-width: 950px) {
+    .nutri-bodycomp-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+    .nutri-bodycomp-form-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .nutri-bodycomp-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    .nutri-bodycomp-form-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* ==========================================================================
+   🎯 Training Zones Collapsible Card (Garmin Setup via Rolling DFA alpha1)
+   ========================================================================== */
+.training-zones-card {
+    background: var(--card-bg, #111827);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease;
+}
+
+.zones-main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    gap: 1rem;
+}
+
+.zones-main-header:hover .zones-title-text {
+    color: #38bdf8;
+}
+
+.zones-header-title {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.zones-header-icon {
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.zones-title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    flex-wrap: wrap;
+}
+
+.zones-title-text {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-main, #f3f4f6);
+    transition: color 0.2s ease;
+}
+
+.zones-rolling-badge {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.2rem 0.55rem;
+    border-radius: 6px;
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.zones-header-sub {
+    font-size: 0.74rem;
+    color: var(--text-muted, #9ca3af);
+    margin-top: 0.2rem;
+}
+
+.zones-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+}
+
+.btn-copy-zones {
+    background: rgba(56, 189, 248, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    color: #38bdf8;
+    padding: 0.35rem 0.75rem;
+    border-radius: 7px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.btn-copy-zones:hover {
+    background: rgba(56, 189, 248, 0.25);
+    border-color: #38bdf8;
+    transform: translateY(-1px);
+}
+
+.btn-toggle-zones {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--text-muted, #9ca3af);
+    padding: 0.35rem 0.75rem;
+    border-radius: 7px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-toggle-zones:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-main, #f3f4f6);
+}
+
+.zones-collapsible-content {
+    margin-top: 1rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    animation: fadeInZones 0.25s ease;
+}
+
+@keyframes fadeInZones {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.zones-protocol-alert {
+    background: rgba(56, 189, 248, 0.08);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    border-radius: 8px;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.78rem;
+    color: #bae6fd;
+    line-height: 1.4;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+}
+
+/* Cardio-Mechanical Decoupling Box */
+.zones-decoupling-box {
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.zones-decoupling-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 0.5rem;
+}
+
+.zones-decoupling-badge {
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    letter-spacing: 0.3px;
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.4);
+    color: #f59e0b;
+}
+
+.zones-decoupling-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+    gap: 0.5rem;
+}
+
+.zones-dec-metric {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    padding: 0.35rem 0.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.zones-dec-metric .dec-lbl {
+    font-size: 0.65rem;
+    color: var(--text-muted, #9ca3af);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.zones-dec-metric .dec-val {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #f8fafc;
+}
+
+.zones-decoupling-advice {
+    background: rgba(56, 189, 248, 0.04);
+    border-left: 3px solid #38bdf8;
+    border-radius: 0 6px 6px 0;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.78rem;
+}
+
+.zones-tabs-bar {
+    display: flex;
+    gap: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 0.4rem;
+}
+
+.zones-tab-btn {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-muted, #9ca3af);
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.4rem 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.zones-tab-btn:hover {
+    color: var(--text-main, #f3f4f6);
+}
+
+.zones-tab-btn.active {
+    color: #38bdf8;
+    border-bottom-color: #38bdf8;
+}
+
+.zones-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.75rem;
+}
+
+.zone-card-item {
+    background: rgba(0, 0, 0, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-left: 4px solid var(--zone-border, #38bdf8);
+    border-radius: 9px;
+    padding: 0.75rem 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    transition: all 0.2s ease;
+}
+
+.zone-card-item:hover {
+    background: rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.zone-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.zone-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.zone-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-main, #f3f4f6);
+}
+
+.zone-metrics-row {
+    display: flex;
+    gap: 1.25rem;
+    padding: 0.4rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.zone-metric-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.zone-metric-lbl {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--text-muted, #9ca3af);
+}
+
+.zone-metric-val {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-main, #f3f4f6);
+}
+
+.zone-desc {
+    font-size: 0.72rem;
+    color: var(--text-muted, #9ca3af);
+    line-height: 1.35;
+}
+
+@media (max-width: 768px) {
+    .zones-main-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .zones-header-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+    .zones-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+
+
+/* View Toggle in Header */
+.view-toggle-header-btn {
+    background: rgba(56, 189, 248, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    color: #38bdf8;
+    font-weight: 700;
+    font-size: 0.78rem;
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.view-toggle-header-btn:hover {
+    background: rgba(56, 189, 248, 0.22);
+    color: #fff;
+    border-color: #38bdf8;
+    transform: translateY(-1px);
+}
+
+
+/* ==========================================================================
+   📱 BENTO MOBILE VIEW DESIGN SYSTEM (Inspired by 0xCal / iOS Bento Grid)
+   ========================================================================== */
+
+.bento-mobile-container {
+    display: none; /* Managed by JS / media query */
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0.5rem 0.75rem 5.5rem 0.75rem;
+    flex-direction: column;
+    gap: 0.9rem;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body.mode-bento .bento-mobile-container {
+    display: flex;
+}
+
+body.mode-bento .desktop-full-container {
+    display: none !important;
+}
+
+body.mode-bento .context-command-bar,
+body.mode-bento .kpi-row-grid {
+    display: none !important;
+}
+
+/* Bento Top Bar */
+.bento-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.25rem 0.25rem 0.5rem 0.25rem;
+}
+
+.bento-date-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #f8fafc;
+}
+
+.bento-date-nav {
+    background: none;
+    border: none;
+    color: #94a3b8;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1;
+}
+
+.bento-date-nav:hover {
+    color: #fff;
+}
+
+.bento-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.bento-sync-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    color: #10b981;
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 5px 10px;
+    border-radius: 16px;
+    cursor: pointer;
+}
+
+.bento-mode-toggle {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #cbd5e1;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.bento-mode-toggle:hover {
+    background: rgba(255, 255, 255, 0.16);
+    color: #fff;
+}
+
+/* Bento Base Card */
+.bento-card {
+    background: rgba(18, 27, 48, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 24px;
+    padding: 1.15rem;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+/* 1. Hero Today Card */
+.bento-hero-today {
+    background: linear-gradient(160deg, rgba(24, 35, 60, 0.95) 0%, rgba(13, 20, 36, 0.98) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.bento-hero-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.9rem;
+}
+
+.bento-hero-title h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.55rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.1;
+    margin: 0;
+}
+
+.bento-status-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.14);
+    padding: 2px 8px;
+    border-radius: 8px;
+    margin-top: 3px;
+}
+
+.bento-add-btn {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 18px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+    transition: transform 0.15s ease;
+}
+
+.bento-add-btn:active {
+    transform: scale(0.96);
+}
+
+/* Macro Row */
+.bento-macro-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+}
+
+.bento-macro-item {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 6px 8px;
+    text-align: center;
+}
+
+.bento-macro-label {
+    display: block;
+    font-size: 0.65rem;
+    color: #94a3b8;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.bento-macro-val {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: #f8fafc;
+}
+
+.bento-macro-val small {
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: #64748b;
+}
+
+/* Progress Track */
+.bento-progress-track {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    margin-bottom: 0.9rem;
+}
+
+.bento-bar-carbs {
+    background: #38bdf8;
+    height: 100%;
+    transition: width 0.4s ease;
+}
+
+.bento-bar-pro {
+    background: #10b981;
+    height: 100%;
+    transition: width 0.4s ease;
+}
+
+.bento-bar-fat {
+    background: #f59e0b;
+    height: 100%;
+    transition: width 0.4s ease;
+}
+
+/* Workout Pill */
+.bento-workout-pill {
+    background: rgba(16, 185, 129, 0.09);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    border-radius: 16px;
+    padding: 9px 12px;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-bottom: 0.75rem;
+}
+
+.bento-pill-icon {
+    font-size: 1.35rem;
+    line-height: 1;
+}
+
+.bento-pill-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #10b981;
+    line-height: 1.2;
+}
+
+.bento-pill-sub {
+    font-size: 0.72rem;
+    color: #94a3b8;
+    margin-top: 2px;
+}
+
+/* Meals Stream */
+.bento-meals-stream {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    max-height: 180px;
+    overflow-y: auto;
+    padding-right: 2px;
+}
+
+.bento-meal-chip {
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 6px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+}
+
+.bento-meal-name {
+    color: #f1f5f9;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.bento-meal-macros {
+    color: #94a3b8;
+    font-size: 0.7rem;
+}
+
+.bento-meal-kcal {
+    font-weight: 700;
+    color: #f8fafc;
+}
+
+/* 2. Middle Bento Grid (2 Columns) */
+.bento-grid-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
+}
+
+/* Weight Card (Warm Amber) */
+.bento-card-weight {
+    background: linear-gradient(160deg, rgba(245, 158, 11, 0.14) 0%, rgba(20, 24, 38, 0.95) 100%);
+    border: 1px solid rgba(245, 158, 11, 0.28);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 165px;
+}
+
+.bento-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bento-card-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #cbd5e1;
+}
+
+.bento-badge-amber {
+    font-size: 0.68rem;
+    font-weight: 700;
+    background: rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+    padding: 2px 7px;
+    border-radius: 10px;
+    border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.bento-weight-sparkline-box {
+    margin: 0.3rem 0;
+    height: 38px;
+}
+
+.bento-spark-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.bento-big-number {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.7rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+}
+
+.bento-big-number small {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    font-weight: 600;
+}
+
+.bento-subtext {
+    font-size: 0.68rem;
+    color: #94a3b8;
+    margin-top: 4px;
+}
+
+/* Readiness Card (Soft Emerald) */
+.bento-card-readiness {
+    background: linear-gradient(160deg, rgba(16, 185, 129, 0.14) 0%, rgba(20, 24, 38, 0.95) 100%);
+    border: 1px solid rgba(16, 185, 129, 0.28);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 165px;
+}
+
+.bento-badge-green {
+    font-size: 0.68rem;
+    font-weight: 700;
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+    padding: 2px 7px;
+    border-radius: 10px;
+    border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.bento-ctl-tsb-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0.4rem 0;
+}
+
+.bento-kpi-subitem {
+    text-align: center;
+}
+
+.bento-kpi-label {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+}
+
+.bento-kpi-num {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #fff;
+}
+
+.bento-kpi-divider {
+    width: 1px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.bento-biometrics-pill {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+    padding: 5px 8px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 0.68rem;
+    color: #94a3b8;
+}
+
+.bento-biometrics-pill strong {
+    color: #f8fafc;
+}
+
+/* 3. Consistency Card (Soft Sky Blue) */
+.bento-card-consistency {
+    background: linear-gradient(160deg, rgba(56, 189, 248, 0.12) 0%, rgba(13, 20, 36, 0.95) 100%);
+    border: 1px solid rgba(56, 189, 248, 0.24);
+}
+
+.bento-consistency-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.bento-toggle-pill {
+    display: flex;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 14px;
+    padding: 2px;
+    font-size: 0.65rem;
+    font-weight: 600;
+}
+
+.bento-toggle-pill span {
+    padding: 3px 8px;
+    border-radius: 12px;
+    color: #94a3b8;
+    cursor: pointer;
+}
+
+.bento-toggle-pill span.active {
+    background: #38bdf8;
+    color: #0f172a;
+    font-weight: 700;
+}
+
+.bento-dots-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0.25rem;
+    margin-bottom: 0.6rem;
+}
+
+.bento-dot-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.bento-dot-item .dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.bento-dot-item .dot.done {
+    background: #10b981;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+    border-color: #10b981;
+}
+
+.bento-dot-item .dot.active {
+    background: #38bdf8;
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+    border-color: #38bdf8;
+}
+
+.bento-dot-item small {
+    font-size: 0.62rem;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.bento-consistency-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: 0.6rem;
+}
+
+.bento-consistency-text strong {
+    display: block;
+    font-size: 0.78rem;
+    color: #f8fafc;
+}
+
+.bento-consistency-text span {
+    font-size: 0.68rem;
+    color: #94a3b8;
+}
+
+.bento-consistency-score {
+    text-align: right;
+}
+
+.bento-consistency-score span {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: #38bdf8;
+    display: block;
+    line-height: 1;
+}
+
+.bento-consistency-score small {
+    font-size: 0.62rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+}
+
+/* Floating iOS Dock */
+.bento-floating-dock {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 23, 42, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 36px;
+    padding: 6px 12px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    z-index: 9999;
+    max-width: 95vw;
+}
+
+.dock-item {
+    background: none;
+    border: none;
+    color: #94a3b8;
+    padding: 6px 12px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.dock-item:hover, .dock-item.active {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.dock-icon {
+    font-size: 1.15rem;
+    line-height: 1;
+}
+
+.dock-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+}
+
+/* Quick Add Modal Sheet */
+.bento-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    z-index: 10000;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.bento-modal-sheet {
+    background: #0f172a;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 28px 28px 0 0;
+    width: 100%;
+    max-width: 480px;
+    padding: 1.25rem 1.25rem 2.5rem 1.25rem;
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.6);
+    animation: slideUp 0.25s ease-out;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+.bento-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.bento-modal-header h3 {
+    font-family: 'Outfit', sans-serif;
+    color: #fff;
+    margin: 0;
+    font-size: 1.15rem;
+}
+
+.bento-modal-close {
+    background: rgba(255, 255, 255, 0.08);
+    border: none;
+    color: #94a3b8;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+#bento-quick-food-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 14px;
+    padding: 12px 14px;
+    color: #fff;
+    font-size: 0.95rem;
+    outline: none;
+    margin-bottom: 0.85rem;
+}
+
+#bento-quick-food-input:focus {
+    border-color: #10b981;
+    background: rgba(255, 255, 255, 0.09);
+}
+
+.bento-quick-presets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+}
+
+.bento-quick-presets button {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    color: #cbd5e1;
+    padding: 6px 10px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.bento-quick-presets button:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+}
+
+.bento-modal-submit {
+    width: 100%;
+    background: linear-gradient(135deg, #10b981, #059669);
+    border: none;
+    border-radius: 14px;
+    padding: 12px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+}
+
+
+/* ==========================================================================
+   BENTO MOBILE DESIGN SYSTEM (Longevity Athlete OS Pro)
+   ========================================================================== */
+
+/* Toggle Button in Header */
+.view-toggle-header-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: rgba(56, 189, 248, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    color: #38bdf8;
+    padding: 0.35rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.view-toggle-header-btn:hover {
+    background: rgba(56, 189, 248, 0.25);
+    transform: translateY(-1px);
+}
+
+/* Visibility Control */
+.bento-mobile-container {
+    display: none;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0.5rem 0.75rem 6.5rem 0.75rem;
+    flex-direction: column;
+    gap: 0.9rem;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    scroll-behavior: smooth;
+}
+
+body.mode-bento .bento-mobile-container {
+    display: flex;
+}
+
+body.mode-bento .desktop-full-container {
+    display: none !important;
+}
+
+body.mode-bento .context-command-bar,
+body.mode-bento .kpi-row-grid {
+    display: none !important;
+}
+
+/* Bento Top Bar */
+.bento-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.25rem 0.25rem 0.4rem 0.25rem;
+}
+
+.bento-context-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 9999px;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.72rem;
+    color: #94a3b8;
+    font-weight: 600;
+}
+
+.bento-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.bento-sync-btn, .bento-mode-toggle {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #cbd5e1;
+    border-radius: 9999px;
+    padding: 0.3rem 0.65rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.bento-sync-btn:active, .bento-mode-toggle:active {
+    transform: scale(0.96);
+}
+
+/* Core Bento Card */
+.bento-card {
+    background: rgba(18, 22, 31, 0.88);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 18px;
+    padding: 1rem 1.1rem;
+    position: relative;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    scroll-margin-top: 1rem;
+}
+
+.bento-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bento-card-eyebrow {
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #64748b;
+}
+
+/* Color Brand Helpers */
+.text-brand-sky { color: #38bdf8 !important; }
+.text-brand-emerald { color: #10b981 !important; }
+.text-brand-amber { color: #f59e0b !important; }
+.text-brand-purple { color: #a855f7 !important; }
+
+/* 1. HERO READINESS */
+.bento-hero-readiness {
+    border-color: rgba(16, 185, 129, 0.35);
+    box-shadow: 0 0 25px rgba(16, 185, 129, 0.12);
+}
+
+.bento-readiness-badge {
+    background: rgba(16, 185, 129, 0.18);
+    border: 1px solid rgba(16, 185, 129, 0.45);
+    color: #10b981;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 0.2rem 0.65rem;
+    border-radius: 9999px;
+    letter-spacing: 0.04em;
+}
+
+.bento-readiness-summary {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #e2e8f0;
+    line-height: 1.35;
+    background: rgba(255, 255, 255, 0.025);
+    border-left: 3px solid #10b981;
+    padding: 0.45rem 0.65rem;
+    border-radius: 0 8px 8px 0;
+}
+
+/* Prescriptions List */
+.bento-prescriptions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.bento-presc-item {
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 0.65rem 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.bento-presc-bike {
+    border-left: 3px solid #38bdf8;
+}
+
+.bento-presc-run {
+    border-left: 3px solid #10b981;
+}
+
+.bento-presc-head {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.bento-presc-icon {
+    font-size: 1.1rem;
+}
+
+.bento-presc-title {
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: #f8fafc;
+    flex: 1;
+}
+
+.bento-presc-badge {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 0.15rem 0.45rem;
+    border-radius: 6px;
+    color: #cbd5e1;
+}
+
+.bento-presc-body {
+    font-size: 0.78rem;
+    color: #cbd5e1;
+    line-height: 1.35;
+}
+
+.bento-presc-meta {
+    font-size: 0.7rem;
+    color: #94a3b8;
+}
+
+.bento-presc-row-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.bento-presc-mini {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 0.5rem 0.65rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.bento-mini-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: #e2e8f0;
+}
+
+.bento-mini-head small {
+    font-size: 0.65rem;
+    color: #94a3b8;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
+}
+
+.bento-mini-text {
+    font-size: 0.68rem;
+    color: #94a3b8;
+    line-height: 1.3;
+}
+
+/* 2. LOAD & TRAINING (CTL, ATL, TSB, ACWR) */
+.bento-badge-sky {
+    background: rgba(56, 189, 248, 0.15);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    color: #38bdf8;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 6px;
+}
+
+.bento-load-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.45rem;
+}
+
+.bento-load-box {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 0.55rem 0.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.15rem;
+}
+
+.bento-load-lbl {
+    font-size: 0.65rem;
+    color: #64748b;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.bento-load-val {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.bento-load-sub {
+    font-size: 0.62rem;
+    color: #94a3b8;
+}
+
+.bento-ctl-split-box {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 0.6rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.bento-split-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bento-split-item {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.76rem;
+}
+
+.bento-split-name {
+    color: #94a3b8;
+}
+
+.bento-split-badge {
+    font-size: 0.62rem;
+    font-weight: 700;
+    background: rgba(56, 189, 248, 0.12);
+    color: #38bdf8;
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
+}
+
+.bento-split-badge.badge-warning {
+    background: rgba(245, 158, 11, 0.15);
+    color: #fbbf24;
+}
+
+.bento-split-hint {
+    font-size: 0.68rem;
+    color: #f59e0b;
+    line-height: 1.3;
+}
+
+/* 3. BIOMETRICS & HEALTH */
+.bento-badge-emerald {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    color: #10b981;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 6px;
+}
+
+.bento-bio-trio {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.bento-bio-col {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 0.55rem 0.45rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.2rem;
+}
+
+.bento-bio-lbl {
+    font-size: 0.64rem;
+    color: #64748b;
+    font-weight: 700;
+}
+
+.bento-bio-val {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.bento-bio-val small {
+    font-size: 0.65rem;
+    opacity: 0.8;
+}
+
+.bento-bio-sub {
+    font-size: 0.62rem;
+    color: #94a3b8;
+}
+
+.bento-pillars-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.bento-pillar-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 6px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.68rem;
+    color: #cbd5e1;
+}
+
+.pillar-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.pillar-dot.dot-valid { background: #10b981; }
+.pillar-dot.dot-todo { background: #f59e0b; }
+
+/* 4. SAN MILLAN POLARIZATION */
+.bento-zones-bar-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.bento-zones-bar {
+    width: 100%;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+}
+
+.bar-z2 { background: #10b981; }
+.bar-z1 { background: #38bdf8; }
+.bar-z3 { background: #fbbf24; }
+.bar-z4z5 { background: #a855f7; }
+
+.bento-zones-legend {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.66rem;
+    color: #94a3b8;
+}
+
+.dot-z2 { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #10b981; margin-right: 3px; }
+.dot-z1 { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #38bdf8; margin-right: 3px; }
+.dot-z3 { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #fbbf24; margin-right: 3px; }
+.dot-z4z5 { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #a855f7; margin-right: 3px; }
+
+.bento-thresholds-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.bento-thresh-col {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 0.5rem 0.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.thresh-title {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: #cbd5e1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 0.2rem;
+}
+
+.thresh-line {
+    font-size: 0.66rem;
+    color: #94a3b8;
+}
+
+.thresh-line strong {
+    color: #f1f5f9;
+}
+
+/* 5. NUTRITION & WEIGHT */
+.bento-weight-strip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(245, 158, 11, 0.05);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    border-radius: 12px;
+    padding: 0.55rem 0.8rem;
+}
+
+.weight-main {
+    display: flex;
+    flex-direction: column;
+}
+
+.weight-label {
+    font-size: 0.64rem;
+    font-weight: 700;
+    color: #f59e0b;
+    text-transform: uppercase;
+}
+
+.weight-val {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #f8fafc;
+    line-height: 1;
+}
+
+.weight-val small {
+    font-size: 0.7rem;
+    opacity: 0.7;
+}
+
+.weight-target {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 0.7rem;
+    color: #94a3b8;
+    gap: 0.15rem;
+}
+
+.weight-delta {
+    font-weight: 700;
+    font-size: 0.74rem;
+}
+
+.bento-macro-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.4rem;
+}
+
+.bento-macro-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.bento-macro-label {
+    font-size: 0.65rem;
+    color: #64748b;
+    font-weight: 700;
+}
+
+.bento-macro-val {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #f8fafc;
+    line-height: 1;
+}
+
+.bento-macro-val small {
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: #64748b;
+}
+
+.bento-progress-track {
+    width: 100%;
+    height: 7px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 9999px;
+    overflow: hidden;
+    display: flex;
+    gap: 2px;
+}
+
+.bento-bar-carbs { background: #38bdf8; height: 100%; border-radius: 9999px; transition: width 0.3s ease; }
+.bento-bar-pro { background: #34d399; height: 100%; border-radius: 9999px; transition: width 0.3s ease; }
+.bento-bar-fat { background: #fbbf24; height: 100%; border-radius: 9999px; transition: width 0.3s ease; }
+
+.bento-hydration-row {
+    display: flex;
+    justify-content: space-between;
+    background: rgba(56, 189, 248, 0.05);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: 10px;
+    padding: 0.45rem 0.75rem;
+    font-size: 0.72rem;
+    color: #cbd5e1;
+}
+
+.bento-meals-stream {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.bento-meal-chip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 0.35rem 0.55rem;
+    font-size: 0.74rem;
+}
+
+.bento-meal-name {
+    color: #e2e8f0;
+    font-weight: 500;
+}
+
+.bento-meal-kcal {
+    font-weight: 700;
+    color: #38bdf8;
+    font-family: 'Outfit', sans-serif;
+}
+
+.bento-meal-macros {
+    font-size: 0.65rem;
+    color: #64748b;
+}
+
+.bento-add-btn {
+    background: #38bdf8;
+    color: #0b1120;
+    border: none;
+    border-radius: 9999px;
+    padding: 0.25rem 0.65rem;
+    font-size: 0.72rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.bento-add-btn:active {
+    transform: scale(0.95);
+}
+
+.bento-status-tag {
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    background: rgba(56, 189, 248, 0.15);
+    color: #38bdf8;
+}
+
+/* Quick Add Modal */
+.bento-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.bento-modal-sheet {
+    background: #111827;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px 20px 0 0;
+    width: 100%;
+    max-width: 480px;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+    animation: bentoSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes bentoSlideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+.bento-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bento-modal-header h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #f8fafc;
+}
+
+.bento-modal-close {
+    background: rgba(255, 255, 255, 0.06);
+    border: none;
+    color: #94a3b8;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.bento-modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.bento-modal-body input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    color: #fff;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.bento-modal-body input:focus {
+    border-color: #38bdf8;
+}
+
+.bento-quick-presets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.bento-quick-presets button {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #cbd5e1;
+    border-radius: 9999px;
+    padding: 0.35rem 0.65rem;
+    font-size: 0.75rem;
+    cursor: pointer;
+}
+
+.bento-modal-submit {
+    background: linear-gradient(135deg, #38bdf8, #0284c7);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 0.8rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(2, 132, 199, 0.35);
+}
+
+/* Floating Dock */
+.bento-floating-dock {
+    position: fixed;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 1.5rem);
+    max-width: 440px;
+    background: rgba(13, 17, 23, 0.85);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 9999px;
+    padding: 0.35rem 0.5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65);
+    z-index: 1000;
+}
+
+body.mode-desktop .bento-floating-dock {
+    display: none !important;
+}
+
+.dock-item {
+    background: transparent;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+    color: #64748b;
+    cursor: pointer;
+    padding: 0.25rem 0.55rem;
+    border-radius: 9999px;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dock-item.active {
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.12);
+}
+
+.dock-icon {
+    font-size: 1.15rem;
+    line-height: 1;
+}
+
+.dock-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+
+/* ==========================================================================
+   CONCISE TODAY & HERO TRAINING BENTO STYLES
+   ========================================================================== */
+
+/* Hero Training Card (Top Position) */
+.bento-hero-training {
+    border-color: rgba(56, 189, 248, 0.35) !important;
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.12) !important;
+}
+
+/* Concise Today Card */
+.bento-card-concise-today {
+    border-color: rgba(16, 185, 129, 0.28);
+    background: rgba(18, 22, 31, 0.92);
+}
+
+.bento-readiness-summary-concise {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #cbd5e1;
+    background: rgba(16, 185, 129, 0.08);
+    border-left: 3px solid #10b981;
+    padding: 0.35rem 0.6rem;
+    border-radius: 0 6px 6px 0;
+}
+
+.bento-concise-workouts {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.bento-concise-item {
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 0.5rem 0.65rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.bento-concise-item.presc-bike {
+    border-left: 3px solid #38bdf8;
+}
+
+.bento-concise-item.presc-run {
+    border-left: 3px solid #10b981;
+}
+
+.concise-head {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.concise-icon {
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.concise-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #f8fafc;
+    flex: 1;
+}
+
+.concise-tss {
+    font-size: 0.65rem;
+    font-weight: 800;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #94a3b8;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+}
+
+.concise-meta {
+    font-size: 0.68rem;
+    color: #94a3b8;
+    padding-left: 1.4rem;
+    line-height: 1.25;
+}
+
+.bento-concise-chips-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.45rem;
+    margin-top: 0.1rem;
+}
+
+.concise-chip {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 0.35rem 0.55rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.concise-chip span {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #e2e8f0;
+}
+
+.concise-chip small {
+    font-size: 0.62rem;
+    color: #64748b;
+    line-height: 1.2;
+}
+
+/* ==========================================================================
+   🎨 0xCal / iOS STYLE TINTED BENTO CARDS (Distinct Color Surfaces)
+   ========================================================================== */
+
+/* 1. STATO FORMA & CARICO (Athletic Sky Blue / Cyan Surface) */
+.bento-hero-training,
+#bento-sec-load {
+    background: linear-gradient(155deg, rgba(14, 165, 233, 0.15) 0%, rgba(13, 22, 38, 0.95) 75%) !important;
+    border: 1px solid rgba(56, 189, 248, 0.32) !important;
+    box-shadow: 0 10px 32px rgba(14, 165, 233, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+#bento-sec-load .bento-card-eyebrow {
+    color: #38bdf8 !important;
+}
+
+#bento-sec-load .bento-load-box {
+    background: rgba(14, 165, 233, 0.06) !important;
+    border: 1px solid rgba(56, 189, 248, 0.18) !important;
+}
+
+#bento-sec-load .bento-ctl-split-box {
+    background: rgba(14, 165, 233, 0.05) !important;
+    border: 1px solid rgba(56, 189, 248, 0.16) !important;
+}
+
+/* 2. BIOMETRICHE & SALUTE (Emerald Jade / Tono Vagale Surface) */
+.bento-card-health,
+#bento-sec-health {
+    background: linear-gradient(155deg, rgba(16, 185, 129, 0.15) 0%, rgba(10, 28, 22, 0.95) 75%) !important;
+    border: 1px solid rgba(16, 185, 129, 0.32) !important;
+    box-shadow: 0 10px 32px rgba(16, 185, 129, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+#bento-sec-health .bento-card-eyebrow {
+    color: #34d399 !important;
+}
+
+#bento-sec-health .bento-bio-col {
+    background: rgba(16, 185, 129, 0.07) !important;
+    border: 1px solid rgba(16, 185, 129, 0.18) !important;
+}
+
+#bento-sec-health .bento-pillar-chip {
+    background: rgba(16, 185, 129, 0.06) !important;
+    border: 1px solid rgba(16, 185, 129, 0.16) !important;
+}
+
+/* 3. COSA FARE OGGI (Electric Indigo / Deep Violet Focus Surface) */
+.bento-card-concise-today,
+#bento-sec-today {
+    background: linear-gradient(155deg, rgba(99, 102, 241, 0.16) 0%, rgba(20, 18, 38, 0.96) 75%) !important;
+    border: 1px solid rgba(129, 140, 248, 0.35) !important;
+    box-shadow: 0 10px 32px rgba(99, 102, 241, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+#bento-sec-today .bento-card-eyebrow {
+    color: #a5b4fc !important;
+}
+
+#bento-sec-today .bento-concise-item {
+    background: rgba(99, 102, 241, 0.07) !important;
+    border: 1px solid rgba(129, 140, 248, 0.18) !important;
+}
+
+#bento-sec-today .concise-chip {
+    background: rgba(99, 102, 241, 0.08) !important;
+    border: 1px solid rgba(129, 140, 248, 0.18) !important;
+}
+
+/* 4. POLARIZZAZIONE SAN MILLÁN (Teal & Forest Metabolic Surface) */
+.bento-card-zones,
+#bento-sec-zones {
+    background: linear-gradient(155deg, rgba(20, 184, 166, 0.14) 0%, rgba(12, 26, 30, 0.95) 75%) !important;
+    border: 1px solid rgba(45, 212, 191, 0.28) !important;
+    box-shadow: 0 10px 32px rgba(20, 184, 166, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+#bento-sec-zones .bento-card-eyebrow {
+    color: #2dd4bf !important;
+}
+
+#bento-sec-zones .bento-thresh-col {
+    background: rgba(20, 184, 166, 0.06) !important;
+    border: 1px solid rgba(45, 212, 191, 0.18) !important;
+}
+
+/* 5. NUTRIZIONE, PESO & ELETTROLITI (Warm Amber / Terracotta Fuel Surface) */
+#bento-sec-nutrition {
+    background: linear-gradient(155deg, rgba(245, 158, 11, 0.15) 0%, rgba(32, 22, 14, 0.96) 75%) !important;
+    border: 1px solid rgba(245, 158, 11, 0.32) !important;
+    box-shadow: 0 10px 32px rgba(245, 158, 11, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+#bento-sec-nutrition .bento-card-eyebrow {
+    color: #fbbf24 !important;
+}
+
+#bento-sec-nutrition .bento-weight-strip {
+    background: rgba(245, 158, 11, 0.12) !important;
+    border: 1px solid rgba(245, 158, 11, 0.35) !important;
+}
+
+#bento-sec-nutrition .bento-macro-item {
+    background: rgba(245, 158, 11, 0.06) !important;
+    border: 1px solid rgba(245, 158, 11, 0.15) !important;
+    padding: 0.4rem 0.5rem;
+    border-radius: 8px;
+}
+
+#bento-sec-nutrition .bento-hydration-row {
+    background: rgba(245, 158, 11, 0.07) !important;
+    border: 1px solid rgba(245, 158, 11, 0.22) !important;
+}
+
+#bento-sec-nutrition .bento-meal-chip {
+    background: rgba(245, 158, 11, 0.04) !important;
+    border: 1px solid rgba(245, 158, 11, 0.12) !important;
+}
