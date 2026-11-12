@@ -2658,6 +2658,7 @@ body.mode-bento .desktop-full-container {
     display: none !important;
 }
 
+body.mode-bento .app-header,
 body.mode-bento .context-command-bar,
 body.mode-bento .kpi-row-grid {
     display: none !important;
@@ -3387,6 +3388,7 @@ body.mode-bento .desktop-full-container {
     display: none !important;
 }
 
+body.mode-bento .app-header,
 body.mode-bento .context-command-bar,
 body.mode-bento .kpi-row-grid {
     display: none !important;
