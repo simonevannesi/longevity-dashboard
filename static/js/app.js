@@ -2284,16 +2284,24 @@ function updateBentoView() {
             if (smBadge && ui.under_lt1_str) smBadge.textContent = `🟢 Sotto LT1: ${ui.under_lt1_str}`;
 
             const barZ2 = document.getElementById('bento-bar-z2');
-            if (barZ2) barZ2.style.width = `${p7.z2_pct || 54.1}%`;
+            const txtZ2 = document.getElementById('bento-txt-z2');
+            if (barZ2 && p7.z2_pct != null) barZ2.style.width = `${p7.z2_pct}%`;
+            if (txtZ2 && p7.z2_pct != null) txtZ2.textContent = `${p7.z2_pct}%`;
 
             const barZ1 = document.getElementById('bento-bar-z1');
-            if (barZ1) barZ1.style.width = `${p7.z1_pct || 16.1}%`;
+            const txtZ1 = document.getElementById('bento-txt-z1');
+            if (barZ1 && p7.z1_pct != null) barZ1.style.width = `${p7.z1_pct}%`;
+            if (txtZ1 && p7.z1_pct != null) txtZ1.textContent = `${p7.z1_pct}%`;
 
             const barZ3 = document.getElementById('bento-bar-z3');
-            if (barZ3) barZ3.style.width = `${p7.z3_pct || 8.5}%`;
+            const txtZ3 = document.getElementById('bento-txt-z3');
+            if (barZ3 && p7.z3_pct != null) barZ3.style.width = `${p7.z3_pct}%`;
+            if (txtZ3 && p7.z3_pct != null) txtZ3.textContent = `${p7.z3_pct}%`;
 
             const barZ4Z5 = document.getElementById('bento-bar-z4z5');
-            if (barZ4Z5) barZ4Z5.style.width = `${p7.z4z5_pct || 21.3}%`;
+            const txtZ4Z5 = document.getElementById('bento-txt-z4z5');
+            if (barZ4Z5 && p7.z4z5_pct != null) barZ4Z5.style.width = `${p7.z4z5_pct}%`;
+            if (txtZ4Z5 && p7.z4z5_pct != null) txtZ4Z5.textContent = `${p7.z4z5_pct}%`;
         })
         .catch(err => console.error("Error fetching load distribution for Bento:", err));
 
