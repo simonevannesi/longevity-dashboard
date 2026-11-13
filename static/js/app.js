@@ -416,9 +416,10 @@ function renderDashboard(dataArray) {
     let desc = `HRV ${hrvStr} | FC ${rhrStr} (Parasimpatico OK)`;
 
     const isStop = (latest.readiness_zone === 'RED' || (hrvVal !== null && hrvVal < 35) || (rhrVal !== null && rhrVal >= 49));
-    // Physiological Check: RHR elevated (>= 47) triggers CAREFUL only if HRV is also suppressed (< 50ms or below 7d avg)
-    const isRhrTachy = (rhrVal !== null && rhrVal >= 47 && (hrvVal === null || hrvVal < 50 || (avgHrv7d && hrvVal < avgHrv7d)));
-    const isCareful = !isStop && (latest.readiness_zone === 'YELLOW' || (hrvVal !== null && hrvVal < 45) || isRhrTachy || (tsbVal !== null && tsbVal < -20) || (sleepScoreVal !== null && sleepScoreVal < 65));
+    // Physiological Check N=1: RHR elevated (>= 47) triggers CAREFUL only if HRV is also suppressed
+    const isRhrTachy = (rhrVal !== null && rhrVal >= 47 && (hrvVal === null || hrvVal < 42 || (avgHrv7d && hrvVal < avgHrv7d * 0.9)));
+    const isHrvSuppressed = (hrvVal !== null && avgHrv7d && hrvVal < avgHrv7d * 0.8) || (hrvVal !== null && hrvVal < 38);
+    const isCareful = !isStop && (latest.readiness_zone === 'YELLOW' || isHrvSuppressed || isRhrTachy || (tsbVal !== null && tsbVal < -20) || (sleepScoreVal !== null && sleepScoreVal < 60));
     const isGolden = !isStop && !isCareful && (hrvVal && avgHrv7d && hrvVal > (avgHrv7d * 1.15) && rhrVal && rhrVal <= 43);
 
     if (isStop) {
