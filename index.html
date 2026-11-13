@@ -27,7 +27,7 @@
               let clean = url.substring(5).split('?')[0];
               url = 'api/' + clean + '.json';
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot iPhone aggiornato al 13/11 22:24. Per scaricare nuovi dati Garmin/Strava usa la dash locale su PC o chiedi in chat.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot iPhone aggiornato al 13/11 23:07. Per scaricare nuovi dati Garmin/Strava usa la dash locale su PC o chiedi in chat.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -35,9 +35,9 @@
         window.addEventListener('DOMContentLoaded', function() {
           const syncBtns = document.querySelectorAll('.bento-sync-btn');
           syncBtns.forEach(b => {
-            b.innerHTML = '📸 13/11 22:24';
+            b.innerHTML = '📸 13/11 23:07';
             b.onclick = function() {
-              alert('Snapshot Mobile aggiornato al 13/11 22:24.\n\nGitHub Pages è una vista statica in sola lettura: per scaricare nuovi dati da Garmin/Strava serve il server PC o un aggiornamento via chat.');
+              alert('Snapshot Mobile aggiornato al 13/11 23:07.\n\nGitHub Pages è una vista statica in sola lettura: per scaricare nuovi dati da Garmin/Strava serve il server PC o un aggiornamento via chat.');
             };
           });
         });
@@ -141,11 +141,11 @@
                             <span class="bento-split-icon">🏃</span>
                             <span class="bento-split-name">Run CTL:</span>
                             <strong class="text-brand-emerald" id="bento-run-ctl">9.7</strong>
-                            <span class="bento-split-badge badge-warning">Adattamento Tendineo</span>
+                            <span class="bento-split-badge badge-silver" id="bento-chassis-badge">🛡️ TELAIO ADEGUATO</span>
                         </div>
                     </div>
-                    <div class="bento-split-hint">
-                        ⚠️ Con Run CTL a 9.0 il cuore regge ritmi alti ma i tendini richiedono massima progressività.
+                    <div class="bento-split-hint" id="bento-chassis-hint">
+                        Rapporto sano per 85 kg (Run CTL 9.7 su Bike CTL 20.8, ratio 46.6%). Il telaio sostiene l'impatto senza sovraccarico cronico.
                     </div>
                 </div>
             </div>
@@ -203,6 +203,18 @@
                     <span class="bento-card-eyebrow">🎯 COSA FARE OGGI</span>
                     <span class="bento-readiness-badge" id="bento-readiness-badge" style="color:#10b981; border-color:#10b98155; background:#10b98118;">READY</span>
                 </div>
+
+                <!-- Batteria Biologica N=1 (GOLD, SILVER, GIALLO, ROSSO) -->
+                <div class="bento-battery-row" id="bento-battery-box">
+                    <div class="bento-battery-header">
+                        <span class="bento-battery-lbl" id="bento-battery-badge" style="color: #94a3b8;">🥈 SILVER — READY COSTRUZIONE</span>
+                        <strong class="bento-battery-pct" id="bento-battery-pct" style="color: #94a3b8;">80%</strong>
+                    </div>
+                    <div class="bento-battery-track">
+                        <div class="bento-battery-fill" id="bento-battery-bar" style="width: 80%; background: #94a3b8;"></div>
+                    </div>
+                </div>
+
                 <div class="bento-readiness-summary-concise" id="bento-readiness-summary">
                     HRV 45 ms • FC 46 bpm • TSB +9.8
                 </div>
@@ -227,6 +239,16 @@
                             <span class="concise-tss" id="bento-run-target">0 TSS</span>
                         </div>
                         <div class="concise-meta" id="bento-run-meta">🛡️ Scarico tendini post-pista</div>
+                    </div>
+
+                    <!-- Piano B (Meteo Vento > 20 nodi / Domenica Impianti Chiusi) -->
+                    <div class="bento-concise-item presc-plan-b">
+                        <div class="concise-head">
+                            <span class="concise-icon">🌪️</span>
+                            <strong class="concise-title" id="bento-planb-title">PIANO B (Vento Forte / Meteo / Domenica Chiuso)</strong>
+                            <span class="concise-tss" id="bento-planb-target">45 TSS</span>
+                        </div>
+                        <div class="concise-meta" id="bento-planb-desc">🏃 Fondo Protetto o Rulli: 6-8 km sterrato compatto (VT1 5:15-5:25 /km) o 45' Agilità Indoor.</div>
                     </div>
 
                     <!-- Opzioni Rapide Hyrox / Nuoto -->
