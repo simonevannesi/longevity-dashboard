@@ -27,7 +27,7 @@
               let clean = url.substring(5).split('?')[0];
               url = 'api/' + clean + '.json';
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot iPhone aggiornato al 13/11 19:57. Per scaricare nuovi dati Garmin/Strava usa la dash locale su PC o chiedi in chat.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot iPhone aggiornato al 13/11 22:24. Per scaricare nuovi dati Garmin/Strava usa la dash locale su PC o chiedi in chat.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -35,9 +35,9 @@
         window.addEventListener('DOMContentLoaded', function() {
           const syncBtns = document.querySelectorAll('.bento-sync-btn');
           syncBtns.forEach(b => {
-            b.innerHTML = '📸 13/11 19:57';
+            b.innerHTML = '📸 13/11 22:24';
             b.onclick = function() {
-              alert('Snapshot Mobile aggiornato al 13/11 19:57.\n\nGitHub Pages è una vista statica in sola lettura: per scaricare nuovi dati da Garmin/Strava serve il server PC o un aggiornamento via chat.');
+              alert('Snapshot Mobile aggiornato al 13/11 22:24.\n\nGitHub Pages è una vista statica in sola lettura: per scaricare nuovi dati da Garmin/Strava serve il server PC o un aggiornamento via chat.');
             };
           });
         });
@@ -101,24 +101,24 @@
             <div class="bento-card bento-hero-training" id="bento-sec-load">
                 <div class="bento-card-header">
                     <span class="bento-card-eyebrow">⚡ STATO FORMA &amp; CARICO</span>
-                    <span class="bento-badge-sky" id="bento-acwr-badge">🛡️ ACWR 0.69</span>
+                    <span class="bento-badge-sky" id="bento-acwr-badge">🛡️ ACWR 0.78</span>
                 </div>
 
                 <!-- 4 Grid Metrics -->
                 <div class="bento-load-grid-4">
                     <div class="bento-load-box">
                         <span class="bento-load-lbl">CTL (Fitness)</span>
-                        <span class="bento-load-val text-brand-sky" id="bento-ctl-val">42.5</span>
+                        <span class="bento-load-val text-brand-sky" id="bento-ctl-val">44.8</span>
                         <span class="bento-load-sub">Target: 52.0</span>
                     </div>
                     <div class="bento-load-box">
                         <span class="bento-load-lbl">ATL (Fatica)</span>
-                        <span class="bento-load-val text-brand-amber" id="bento-atl-val">29.1</span>
+                        <span class="bento-load-val text-brand-amber" id="bento-atl-val">35.0</span>
                         <span class="bento-load-sub">Carico 7gg</span>
                     </div>
                     <div class="bento-load-box">
                         <span class="bento-load-lbl">TSB (Forma)</span>
-                        <span class="bento-load-val text-brand-emerald" id="bento-tsb-val">+13.4</span>
+                        <span class="bento-load-val text-brand-emerald" id="bento-tsb-val">+9.8</span>
                         <span class="bento-load-sub" id="bento-tsb-status">Freschezza</span>
                     </div>
                     <div class="bento-load-box">
@@ -204,7 +204,7 @@
                     <span class="bento-readiness-badge" id="bento-readiness-badge" style="color:#10b981; border-color:#10b98155; background:#10b98118;">READY</span>
                 </div>
                 <div class="bento-readiness-summary-concise" id="bento-readiness-summary">
-                    HRV 45 ms • FC 46 bpm • TSB +13.4
+                    HRV 45 ms • FC 46 bpm • TSB +9.8
                 </div>
 
                 <!-- Prescrizioni Ultra-Concise One-Liners -->
@@ -392,7 +392,7 @@
                         <span class="bar" style="height: 70%"></span>
                     </div>
                 </div>
-                <div class="readiness-subtitle" id="kpi-readiness-desc" style="color:#10b981;">Parasimpatico Stabile (HRV 45ms, Z=-1.4σ | RHR 46bpm | TSB +13). Motore Z2 pienamente disponibile.</div>
+                <div class="readiness-subtitle" id="kpi-readiness-desc" style="color:#10b981;">Parasimpatico Stabile (HRV 45ms, Z=-1.4σ | RHR 46bpm | TSB +10). Motore Z2 pienamente disponibile.</div>
             </div>
 
             <!-- 2. HRV Card -->
@@ -425,24 +425,24 @@
             <div class="kpi-card">
                 <div class="kpi-card-header">
                     <span>⚖️ Bilancio TSB</span>
-                    <span id="trend-tsb" class="trend-badge up">+0.0</span>
+                    <span id="trend-tsb" class="trend-badge up">+2.6</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-tsb"><span style="color:#3b82f6">+13</span> <span style="font-size:0.7em; opacity:0.8;">TSB</span></div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-tsb"><path d="M 0.0,6.4 L 2.1,3.0 L 4.1,3.1 L 6.2,10.4 L 8.3,9.4 L 10.3,11.9 L 12.4,10.9 L 14.5,9.3 L 16.6,17.0 L 18.6,17.5 L 20.7,15.4 L 22.8,15.4 L 24.8,23.0 L 26.9,20.9 L 29.0,17.2 L 31.0,12.5 L 33.1,8.6 L 35.2,13.0 L 37.2,9.1 L 39.3,9.1 L 41.4,11.5 L 43.4,9.6 L 45.5,10.0 L 47.6,9.4 L 49.7,17.1 L 51.7,12.8 L 53.8,10.1 L 55.9,11.2 L 57.9,7.9 L 60.0,9.4" stroke="#3b82f6"/></svg>
+                    <div class="metric-value" id="kpi-tsb"><span style="color:#3b82f6">+10</span> <span style="font-size:0.7em; opacity:0.8;">TSB</span></div>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-tsb"><path d="M 0.0,6.1 L 2.1,3.0 L 4.1,3.1 L 6.2,9.6 L 8.3,8.7 L 10.3,11.0 L 12.4,10.1 L 14.5,8.6 L 16.6,15.4 L 18.6,15.9 L 20.7,14.0 L 22.8,14.0 L 24.8,20.8 L 26.9,18.9 L 29.0,15.7 L 31.0,11.5 L 33.1,8.0 L 35.2,12.0 L 37.2,8.5 L 39.3,8.8 L 41.4,10.8 L 43.4,15.9 L 45.5,15.5 L 47.6,13.9 L 49.7,23.0 L 51.7,17.9 L 53.8,14.2 L 55.9,14.5 L 57.9,10.8 L 60.0,11.7" stroke="#3b82f6"/></svg>
                 </div>
-                <div class="metric-subtitle"><span>TSB / ACWR</span><span id="kpi-tsb-sub"><span style="color:#f59e0b; font-weight:600;">ACWR 0.69</span></span></div>
+                <div class="metric-subtitle"><span>TSB / ACWR</span><span id="kpi-tsb-sub"><span style="color:#f59e0b; font-weight:600;">ACWR 0.78</span></span></div>
             </div>
 
             <!-- 5. Total CTL Card -->
             <div class="kpi-card">
                 <div class="kpi-card-header">
                     <span>📊 Total CTL</span>
-                    <span id="trend-total-ctl" class="trend-badge down">-3.0</span>
+                    <span id="trend-total-ctl" class="trend-badge down">-3.1</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-total-ctl"><span style="color:#38bdf8">42.5</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span></div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-total-ctl"><path d="M 0.0,4.8 L 2.1,6.3 L 4.1,3.8 L 6.2,5.3 L 8.3,4.8 L 10.3,6.1 L 12.4,7.9 L 14.5,4.8 L 16.6,4.8 L 18.6,6.3 L 20.7,6.8 L 22.8,3.0 L 24.8,4.3 L 26.9,6.3 L 29.0,9.2 L 31.0,12.2 L 33.1,10.7 L 35.2,13.5 L 37.2,14.5 L 39.3,14.3 L 41.4,16.1 L 43.4,16.8 L 45.5,18.1 L 47.6,14.8 L 49.7,17.6 L 51.7,19.9 L 53.8,20.2 L 55.9,22.7 L 57.9,23.0 L 60.0,22.5" stroke="#38bdf8"/></svg>
+                    <div class="metric-value" id="kpi-total-ctl"><span style="color:#38bdf8">44.8</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span></div>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-total-ctl"><path d="M 0.0,5.5 L 2.1,7.6 L 4.1,4.1 L 6.2,6.2 L 8.3,5.5 L 10.3,7.3 L 12.4,9.8 L 14.5,5.5 L 16.6,5.5 L 18.6,7.6 L 20.7,8.4 L 22.8,3.0 L 24.8,4.8 L 26.9,7.6 L 29.0,11.6 L 31.0,15.9 L 33.1,13.7 L 35.2,17.6 L 37.2,19.1 L 39.3,18.4 L 41.4,15.1 L 43.4,15.9 L 45.5,18.0 L 47.6,10.9 L 49.7,14.8 L 51.7,18.4 L 53.8,18.7 L 55.9,22.6 L 57.9,23.0 L 60.0,21.9" stroke="#38bdf8"/></svg>
                 </div>
                 <div class="metric-subtitle"><span>Fitness Globale</span><span id="kpi-total-ctl-sub"></span></div>
             </div>
@@ -544,15 +544,15 @@
                             <div style="display: flex; flex-direction: column; gap: 0.35rem; flex: 1;">
                                 <div style="display: flex; justify-content: space-between; font-size: 0.75rem; background: rgba(255, 255, 255, 0.03); padding: 0.3rem 0.6rem; border-radius: 6px;">
                                     <span style="color: var(--text-muted);">CTL Attuale:</span>
-                                    <span style="font-weight: 700; color: #38bdf8;" id="prep-current-ctl">42.5 CTL</span>
+                                    <span style="font-weight: 700; color: #38bdf8;" id="prep-current-ctl">44.8 CTL</span>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; font-size: 0.75rem; background: rgba(255, 255, 255, 0.03); padding: 0.3rem 0.6rem; border-radius: 6px;">
                                     <span style="color: var(--text-muted);">CTL Target Gara:</span>
-                                    <span style="font-weight: 700; color: var(--accent-gold);" id="prep-target-ctl">46.1 CTL</span>
+                                    <span style="font-weight: 700; color: var(--accent-gold);" id="prep-target-ctl">48.4 CTL</span>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; font-size: 0.75rem; background: rgba(255, 255, 255, 0.03); padding: 0.3rem 0.6rem; border-radius: 6px;">
                                     <span style="color: var(--text-muted);">TSB Attuale (Freschezza):</span>
-                                    <span style="font-weight: 700; color: #38bdf8;" id="prep-current-tsb">+13.4 TSB (Freschezza Gara)</span>
+                                    <span style="font-weight: 700; color: #38bdf8;" id="prep-current-tsb">+9.8 TSB (Freschezza Gara)</span>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; font-size: 0.75rem; background: rgba(255, 255, 255, 0.03); padding: 0.3rem 0.6rem; border-radius: 6px;">
                                     <span style="color: var(--text-muted);">TSB Target Gara:</span>
@@ -562,7 +562,7 @@
                         </div>
 
                         <div style="font-size: 0.68rem; color: rgba(255, 255, 255, 0.6); line-height: 1.3; border-top: 1px dashed rgba(255, 255, 255, 0.1); padding-top: 0.35rem;" id="prep-explanation-text">
-                            ℹ️ <strong>Origine CTL Target (46.1 CTL):</strong> Basato sul benchmark della letteratura scientifica (50 CTL per Test Podistico 10k Olimpico (Fuerteventura)) ed aggiustato alla CTL massima realmente raggiungibile (46.1) in 12 giorni, considerando un Ramp Rate sicuro (+5 CTL/settimana) ed una finestra di Tapering di 7 giorni per far risalire il TSB a +10 (Freschezza Ottimale).
+                            ℹ️ <strong>Origine CTL Target (48.4 CTL):</strong> Basato sul benchmark della letteratura scientifica (50 CTL per Test Podistico 10k Olimpico (Fuerteventura)) ed aggiustato alla CTL massima realmente raggiungibile (48.4) in 12 giorni, considerando un Ramp Rate sicuro (+5 CTL/settimana) ed una finestra di Tapering di 7 giorni per far risalire il TSB a +10 (Freschezza Ottimale).
                         </div>
                     </div>
 
@@ -599,7 +599,7 @@
                     </div>
                 </div>
                 <div class="nutrition-status-badge status-deficit" id="nutrition-status-badge">
-                    DEFICIT: -2086 kcal
+                    DEFICIT: -1303 kcal
                 </div>
             </div>
 
@@ -645,37 +645,37 @@
                 <div class="nutrition-stat-box" id="box-intake">
                     <div class="nutri-stat-header">
                         <span>🍽️ INTROITO ALIMENTARE (IN)</span>
-                        <span class="nutri-stat-val" id="nutri-intake-val" style="color: #10b981;">708 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span></span>
+                        <span class="nutri-stat-val" id="nutri-intake-val" style="color: #10b981;">1,491 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span></span>
                     </div>
                     <div class="nutri-macros-bars">
                         <!-- Carbo -->
                         <div class="macro-bar-item">
                             <div class="macro-bar-label">
                                 <span>🌾 Carboidrati</span>
-                                <span id="nutri-carbs-text"><strong>61.9g</strong> / 186g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 124.1g • 33%)</span></span>
+                                <span id="nutri-carbs-text"><strong>91.4g</strong> / 186g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 94.6g • 49%)</span></span>
                             </div>
                             <div class="macro-bar-track">
-                                <div class="macro-bar-fill" id="nutri-carbs-fill" style="width: 33%; background: #38bdf8;"></div>
+                                <div class="macro-bar-fill" id="nutri-carbs-fill" style="width: 49%; background: #38bdf8;"></div>
                             </div>
                         </div>
                         <!-- Proteine -->
                         <div class="macro-bar-item">
                             <div class="macro-bar-label">
                                 <span>🥩 Proteine</span>
-                                <span id="nutri-protein-text"><strong>32.0g</strong> / 152g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 120.0g • 21%)</span></span>
+                                <span id="nutri-protein-text"><strong>90.5g</strong> / 152g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 61.5g • 60%)</span></span>
                             </div>
                             <div class="macro-bar-track">
-                                <div class="macro-bar-fill" id="nutri-protein-fill" style="width: 21%; background: #34d399;"></div>
+                                <div class="macro-bar-fill" id="nutri-protein-fill" style="width: 60%; background: #34d399;"></div>
                             </div>
                         </div>
                         <!-- Grassi -->
                         <div class="macro-bar-item">
                             <div class="macro-bar-label">
                                 <span>🥑 Grassi</span>
-                                <span id="nutri-fat-text"><strong>36.0g</strong> / 160g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 124.0g • 22%)</span></span>
+                                <span id="nutri-fat-text"><strong>83.7g</strong> / 160g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 76.3g • 52%)</span></span>
                             </div>
                             <div class="macro-bar-track">
-                                <div class="macro-bar-fill" id="nutri-fat-fill" style="width: 22%; background: #fbbf24;"></div>
+                                <div class="macro-bar-fill" id="nutri-fat-fill" style="width: 52%; background: #fbbf24;"></div>
                             </div>
                         </div>
                     </div>
@@ -711,7 +711,7 @@
                         <span class="nutri-multi-day-icon">🔬</span>
                         <div>
                             <span class="nutri-multi-day-title">ANALISI CARENZE &amp; SBILANCIAMENTI NUTRIZIONALI (ULTIMI 7 GG)</span>
-                            <span class="nutri-multi-day-sub" id="multi-period-label">Ultimi 7 giorni consolidati (6/11/2026 - 12/11/2026)</span>
+                            <span class="nutri-multi-day-sub" id="multi-period-label">Ultimi 7 giorni consolidati (7/11/2026 - 13/11/2026)</span>
                         </div>
                     </div>
                     <div class="nutri-multi-day-badge" id="multi-status-badge" style="background: #f59e0b22; color: #f59e0b; border: 1px solid #f59e0b55;">
@@ -728,10 +728,10 @@
                             <span class="nutri-imbalance-tag" id="multi-pro-tag" style="background: #10b98122; color: #10b981;">OTTIMALE LONGEVITÀ</span>
                         </div>
                         <div class="nutri-imbalance-val" id="multi-pro-val" style="color: #ef4444;">
-                            130.1 <span class="nutri-imbalance-unit">g / die (1.54 g/kg)</span>
+                            126.9 <span class="nutri-imbalance-unit">g / die (1.5 g/kg)</span>
                         </div>
                         <div class="nutri-imbalance-hint" id="multi-pro-hint">
-                            Target Longevità: <strong>152.1g</strong> (1.8 g/kg • 86%)
+                            Target Longevità: <strong>152.1g</strong> (1.8 g/kg • 83%)
                         </div>
                     </div>
 
@@ -742,10 +742,10 @@
                             <span class="nutri-imbalance-tag" id="multi-carbs-tag" style="background: #10b98122; color: #10b981;">RICARICA ADEGUATA</span>
                         </div>
                         <div class="nutri-imbalance-val" id="multi-carbs-val" style="color: #f59e0b;">
-                            179.9 <span class="nutri-imbalance-unit">g / die (81%)</span>
+                            167.9 <span class="nutri-imbalance-unit">g / die (76%)</span>
                         </div>
                         <div class="nutri-imbalance-hint" id="multi-carbs-hint">
-                            2,109 kcal bruciate in 5 sessioni
+                            2,438 kcal bruciate in 5 sessioni
                         </div>
                     </div>
 
@@ -756,7 +756,7 @@
                             <span class="nutri-imbalance-tag" id="multi-fat-tag" style="background: #10b98122; color: #10b981;">OMONEPOIESI OK</span>
                         </div>
                         <div class="nutri-imbalance-val" id="multi-fat-val" style="color: #10b981;">
-                            97.0 <span class="nutri-imbalance-unit">g / die (1.15 g/kg)</span>
+                            97.2 <span class="nutri-imbalance-unit">g / die (1.15 g/kg)</span>
                         </div>
                         <div class="nutri-imbalance-hint" id="multi-fat-hint">
                             Target Ormonale: <strong>84.5g</strong> (1.0 g/kg • 115%)
@@ -770,10 +770,10 @@
                             <span class="nutri-imbalance-tag" id="multi-energy-tag" style="background: #f59e0b22; color: #f59e0b;">CAUTELA IMMUNITÀ</span>
                         </div>
                         <div class="nutri-imbalance-val" id="multi-energy-val" style="color: #f59e0b;">
-                            -3,588 <span class="nutri-imbalance-unit">kcal (7d)</span>
+                            -4,358 <span class="nutri-imbalance-unit">kcal (7d)</span>
                         </div>
                         <div class="nutri-imbalance-hint" id="multi-energy-hint">
-                            Media: -513 kcal/die su 7 gg
+                            Media: -623 kcal/die su 7 gg
                         </div>
                     </div>
                 </div>
@@ -783,7 +783,7 @@
                     <span style="font-size: 1.25rem;">🩺</span>
                     <div>
                         <strong style="color: #38bdf8; display: block; margin-bottom: 2px;">Impatto Clinico su Salute, Massa Magra &amp; Biomarker Reali:</strong>
-                        <span id="multi-clinical-insight">Negli ultimi 7 giorni consolidati (6/11/2026 - 12/11/2026) hai sostenuto un carico biologico rilevante (5 sessioni: Motocross, Ciclismo e Corsa per 2,109 kcal spese) a fronte di un apporto proteico medio di soli 130.1g/die (1.54 g/kg vs target di longevità 1.80 g/kg • 86%). A 52 anni, la resistenza anabolica richiede almeno 1.6-1.8 g/kg per sostenere la sintesi proteica muscolare (MPS) e la riparazione tendineo-articolare, specialmente dopo le sollecitazioni eccentriche di corsa e motocross. Inoltre, l'introito glucidico (179.9g vs target 221g) e il deficit cumulato di -3,588 kcal hanno mantenuto la FC a riposo su una media di 45.3 bpm (sopra il baseline di 44 bpm) e possono spiegare derive cardiache anticipate ed eccesso di cortisolo notturno. Ai sensi della Regola 0.2, è prioritario proteggere il sistema immunitario ed evitare il catabolismo.</span>
+                        <span id="multi-clinical-insight">Negli ultimi 7 giorni consolidati (7/11/2026 - 13/11/2026) hai sostenuto un carico biologico rilevante (5 sessioni: Motocross, Ciclismo e Corsa per 2,438 kcal spese) a fronte di un apporto proteico medio di soli 126.9g/die (1.50 g/kg vs target di longevità 1.80 g/kg • 83%). A 52 anni, la resistenza anabolica richiede almeno 1.6-1.8 g/kg per sostenere la sintesi proteica muscolare (MPS) e la riparazione tendineo-articolare, specialmente dopo le sollecitazioni eccentriche di corsa e motocross. Inoltre, l'introito glucidico (167.9g vs target 221g) e il deficit cumulato di -4,358 kcal hanno mantenuto la FC a riposo su una media di 45.1 bpm (sopra il baseline di 44 bpm) e possono spiegare derive cardiache anticipate ed eccesso di cortisolo notturno. Ai sensi della Regola 0.2, è prioritario proteggere il sistema immunitario ed evitare il catabolismo.</span>
                     </div>
                 </div>
 
@@ -894,16 +894,16 @@
                     <div class="nutri-weight-col">
                         <span class="nutri-weight-label">Bilancio Medio / Proiezione 7d</span>
                         <div class="nutri-weight-val" id="nutri-net-7d-val" style="color: #38bdf8;">
-                            <span style="color:#38bdf8;">-3,220</span> <span class="nutri-weight-unit">kcal / sett</span>
+                            <span style="color:#38bdf8;">-4,060</span> <span class="nutri-weight-unit">kcal / sett</span>
                         </div>
-                        <span class="nutri-weight-hint" id="nutri-net-7d-hint">Media: -460 kcal/gg su 6 gg tracciati</span>
+                        <span class="nutri-weight-hint" id="nutri-net-7d-hint">Media: -580 kcal/gg su 7 gg tracciati</span>
                     </div>
 
                     <!-- Metric 2: Stima Variazione Peso Teorica -->
                     <div class="nutri-weight-col">
                         <span class="nutri-weight-label">Variazione Peso Stimata (7d)</span>
                         <div class="nutri-weight-val" id="nutri-weight-delta-val" style="color: #38bdf8;">
-                            <span style="color:#38bdf8;">-0.42 kg/sett</span>
+                            <span style="color:#38bdf8;">-0.53 kg/sett</span>
                         </div>
                         <span class="nutri-weight-hint" id="nutri-weight-delta-hint">Calo Stimato</span>
                     </div>
@@ -930,7 +930,7 @@
                 <!-- Validation Status Banner / Message -->
                 <div class="nutri-weight-msg" id="nutri-weight-msg-banner">
                     <span id="nutri-weight-msg-icon">ℹ️</span>
-                    <span id="nutri-weight-msg-text">Stima settimanale calcolata (-0.42 kg/sett). In attesa della prossima pesata per validare la formula.</span>
+                    <span id="nutri-weight-msg-text">Stima settimanale calcolata (-0.53 kg/sett). In attesa della prossima pesata per validare la formula.</span>
                 </div>
 
                 <!-- 📝 Form Espandibile per Dati Completi Bilancia Garmin -->
