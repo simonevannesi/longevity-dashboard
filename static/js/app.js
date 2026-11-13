@@ -2272,6 +2272,56 @@ function updateBentoView() {
         })
         .catch(err => console.error("Error fetching workout suggestions for Bento:", err));
 
+    // 3B. N=1 LEARNING & BIOLOGICAL BATTERY & PLAN B
+    fetch('/api/n1_learning')
+        .then(r => r.json())
+        .then(n1 => {
+            if (!n1) return;
+            const cur = n1.current_readiness;
+            if (cur) {
+                const bBadge = document.getElementById('bento-battery-badge');
+                if (bBadge && cur.battery_label) {
+                    bBadge.textContent = cur.battery_label;
+                    bBadge.style.color = cur.battery_color || cur.color;
+                }
+                const bPct = document.getElementById('bento-battery-pct');
+                if (bPct && cur.battery_pct != null) {
+                    bPct.textContent = `${cur.battery_pct}%`;
+                    bPct.style.color = cur.battery_color || cur.color;
+                }
+                const bBar = document.getElementById('bento-battery-bar');
+                if (bBar && cur.battery_pct != null) {
+                    bBar.style.width = `${cur.battery_pct}%`;
+                    bBar.style.backgroundColor = cur.battery_color || cur.color;
+                }
+            }
+
+            const gap = n1.engine_chassis_gap;
+            if (gap) {
+                const cBadge = document.getElementById('bento-chassis-badge');
+                if (cBadge && gap.badge) {
+                    cBadge.textContent = gap.badge;
+                    cBadge.style.color = gap.color;
+                    cBadge.style.borderColor = gap.color + '55';
+                }
+                const cHint = document.getElementById('bento-chassis-hint');
+                if (cHint && gap.text) {
+                    cHint.textContent = gap.text;
+                }
+            }
+
+            const pb = n1.tomorrow_guidance && n1.tomorrow_guidance.plan_b;
+            if (pb) {
+                const pbTitle = document.getElementById('bento-planb-title');
+                if (pbTitle && pb.title) pbTitle.textContent = pb.title;
+                const pbTarget = document.getElementById('bento-planb-target');
+                if (pbTarget && pb.target) pbTarget.textContent = pb.target;
+                const pbDesc = document.getElementById('bento-planb-desc');
+                if (pbDesc && pb.desc) pbDesc.textContent = `${pb.desc}${pb.target ? ' (' + pb.target + ')' : ''}`;
+            }
+        })
+        .catch(err => console.error("Error fetching N=1 learning for Bento:", err));
+
     // 4. POLARIZZAZIONE SAN MILLAN
     fetch('/api/load_distribution')
         .then(r => r.json())
