@@ -2094,21 +2094,20 @@ function toggleDashboardView(mode) {
 function initViewMode() {
     const params = new URLSearchParams(window.location.search);
     const view = params.get('view') || params.get('mode');
-    if (view === 'bento') {
-        toggleDashboardView('bento');
-        return;
-    }
     if (view === 'desktop') {
         toggleDashboardView('desktop');
         return;
     }
+    if (view === 'bento') {
+        toggleDashboardView('bento');
+        return;
+    }
 
     const saved = localStorage.getItem('longevity_view_mode');
-    const isMobile = window.innerWidth <= 768;
-    if (saved === 'bento' || (!saved && isMobile)) {
-        toggleDashboardView('bento');
-    } else {
+    if (saved === 'desktop') {
         toggleDashboardView('desktop');
+    } else {
+        toggleDashboardView('bento');
     }
 }
 
@@ -2294,6 +2293,17 @@ function updateBentoView() {
                     bBar.style.width = `${cur.battery_pct}%`;
                     bBar.style.backgroundColor = cur.battery_color || cur.color;
                 }
+                // Desktop Elements
+                const dBadge = document.getElementById('desktop-battery-badge');
+                if (dBadge && cur.battery_label) {
+                    dBadge.textContent = cur.battery_label;
+                    dBadge.style.color = cur.battery_color || cur.color;
+                }
+                const dPct = document.getElementById('desktop-battery-pct');
+                if (dPct && cur.battery_pct != null) {
+                    dPct.textContent = `${cur.battery_pct}%`;
+                    dPct.style.color = cur.battery_color || cur.color;
+                }
             }
 
             const gap = n1.engine_chassis_gap;
@@ -2303,6 +2313,11 @@ function updateBentoView() {
                     cBadge.textContent = gap.badge;
                     cBadge.style.color = gap.color;
                     cBadge.style.borderColor = gap.color + '55';
+                }
+                const dChassis = document.getElementById('desktop-chassis-badge');
+                if (dChassis && gap.badge) {
+                    dChassis.textContent = gap.badge;
+                    dChassis.style.color = gap.color;
                 }
                 const cHint = document.getElementById('bento-chassis-hint');
                 if (cHint && gap.text) {
@@ -2314,10 +2329,18 @@ function updateBentoView() {
             if (pb) {
                 const pbTitle = document.getElementById('bento-planb-title');
                 if (pbTitle && pb.title) pbTitle.textContent = pb.title;
+                const dPbTitle = document.getElementById('desktop-planb-title');
+                if (dPbTitle && pb.title) dPbTitle.textContent = `🌪️ ${pb.title}`;
+
                 const pbTarget = document.getElementById('bento-planb-target');
                 if (pbTarget && pb.target) pbTarget.textContent = pb.target;
+                const dPbTarget = document.getElementById('desktop-planb-target');
+                if (dPbTarget && pb.target) dPbTarget.textContent = pb.target;
+
                 const pbDesc = document.getElementById('bento-planb-desc');
                 if (pbDesc && pb.desc) pbDesc.textContent = `${pb.desc}${pb.target ? ' (' + pb.target + ')' : ''}`;
+                const dPbDesc = document.getElementById('desktop-planb-desc');
+                if (dPbDesc && pb.desc) dPbDesc.textContent = pb.desc;
             }
         })
         .catch(err => console.error("Error fetching N=1 learning for Bento:", err));
