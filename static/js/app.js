@@ -2293,6 +2293,14 @@ function updateBentoView() {
                     bBar.style.width = `${cur.battery_pct}%`;
                     bBar.style.backgroundColor = cur.battery_color || cur.color;
                 }
+                const dPill = document.getElementById('bento-decision-pill');
+                if (dPill && cur.decision_badge) {
+                    dPill.textContent = cur.decision_badge;
+                    dPill.style.color = cur.color;
+                    dPill.style.borderColor = cur.color + '55';
+                    dPill.style.backgroundColor = cur.color + '18';
+                }
+                window._currentReadinessTier = cur.tier || (cur.battery_label && cur.battery_label.includes('GOLD') ? 'GOLD' : (cur.battery_label && cur.battery_label.includes('ROSSO') ? 'ROSSO' : (cur.battery_label && cur.battery_label.includes('GIALLO') ? 'GIALLO' : 'SILVER')));
                 // Desktop Elements
                 const dBadge = document.getElementById('desktop-battery-badge');
                 if (dBadge && cur.battery_label) {
@@ -2510,6 +2518,71 @@ function submitQuickFood() {
     .catch(err => console.error("Error adding food from Bento modal:", err));
 }
 
+function pushWorkoutToGarmin(sport) {
+    sport = sport || 'bike';
+    const btn = document.getElementById(`btn-push-garmin-${sport}`);
+    const statusEl = document.getElementById('garmin-push-status');
+    const origText = btn ? btn.innerHTML : '';
+    
+    if (btn) {
+        btn.innerHTML = '⏳ Invio a Garmin...';
+        btn.disabled = true;
+    }
+    if (statusEl) {
+        statusEl.textContent = 'Connessione a Garmin Connect...';
+        statusEl.style.color = '#38bdf8';
+    }
+
+    const tier = window._currentReadinessTier || 'SILVER';
+    fetch('/api/garmin/push_workout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sport: sport, readiness_tier: tier })
+    })
+    .then(r => r.json())
+    .then(res => {
+        if (res.status === 'ok') {
+            if (btn) {
+                btn.innerHTML = '✅ Inviato a Garmin!';
+                btn.style.borderColor = '#10b981';
+                btn.style.color = '#10b981';
+            }
+            if (statusEl) {
+                statusEl.textContent = `Pronto su Garmin! (${res.workout_name || 'Workout'})`;
+                statusEl.style.color = '#10b981';
+            }
+            setTimeout(() => {
+                if (btn) {
+                    btn.innerHTML = origText;
+                    btn.disabled = false;
+                    btn.style.borderColor = '';
+                    btn.style.color = '';
+                }
+                if (statusEl) statusEl.textContent = '';
+            }, 6000);
+        } else {
+            if (btn) {
+                btn.innerHTML = '⚠️ Errore Invio';
+                btn.disabled = false;
+            }
+            if (statusEl) {
+                statusEl.textContent = res.message || 'Errore durante l\'invio';
+                statusEl.style.color = '#ef4444';
+            }
+        }
+    })
+    .catch(err => {
+        if (btn) {
+            btn.innerHTML = '⚠️ Errore Rete';
+            btn.disabled = false;
+        }
+        if (statusEl) {
+            statusEl.textContent = 'Errore di connessione al server.';
+            statusEl.style.color = '#ef4444';
+        }
+    });
+}
+
 // Hook into existing app flow
 window.updateBentoView = updateBentoView;
 window.toggleDashboardView = toggleDashboardView;
@@ -2518,3 +2591,5 @@ window.openQuickAddModal = openQuickAddModal;
 window.closeQuickAddModal = closeQuickAddModal;
 window.bentoAddPreset = bentoAddPreset;
 window.submitQuickFood = submitQuickFood;
+window.pushWorkoutToGarmin = pushWorkoutToGarmin;
+
