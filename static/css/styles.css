@@ -8,8 +8,9 @@
     --text-main: #f8fafc;
     --text-muted: #94a3b8;
     --accent-green: #10b981;
-    --accent-gold: #fbbf24;
-    --accent-yellow: #f59e0b;
+    --accent-gold: #ffd700;
+    --accent-silver: #94a3b8;
+    --accent-yellow: #facc15;
     --accent-red: #ef4444;
     --accent-blue: #3b82f6;
     --accent-cyan: #38bdf8;
@@ -4452,8 +4453,8 @@ body.mode-desktop .bento-floating-dock {
 }
 
 .bento-concise-item.presc-plan-b {
-    border-left: 3px solid #f59e0b;
-    background: rgba(245, 158, 11, 0.05);
+    border-left: 3px solid #facc15;
+    background: rgba(250, 204, 21, 0.05);
 }
 
 .bento-split-badge.badge-silver {
@@ -4462,7 +4463,7 @@ body.mode-desktop .bento-floating-dock {
     color: #94a3b8;
 }
 
-/* Strategic Decision Matrix Pill (Rest or Train) */
+/* Strategic Decision Matrix Pill (Rest or Train: GOLD, SILVER, YELLOW, RED) */
 .bento-decision-pill {
     font-size: 0.65rem;
     font-weight: 800;
@@ -4470,6 +4471,30 @@ body.mode-desktop .bento-floating-dock {
     border-radius: 4px;
     letter-spacing: 0.03em;
     text-transform: uppercase;
+}
+
+.pill-tier-gold {
+    color: #ffd700 !important;
+    background: rgba(255, 215, 0, 0.15) !important;
+    border: 1px solid rgba(255, 215, 0, 0.4) !important;
+}
+
+.pill-tier-silver {
+    color: #94a3b8 !important;
+    background: rgba(148, 163, 184, 0.15) !important;
+    border: 1px solid rgba(148, 163, 184, 0.4) !important;
+}
+
+.pill-tier-yellow {
+    color: #facc15 !important;
+    background: rgba(250, 204, 21, 0.15) !important;
+    border: 1px solid rgba(250, 204, 21, 0.4) !important;
+}
+
+.pill-tier-red {
+    color: #ef4444 !important;
+    background: rgba(239, 68, 68, 0.15) !important;
+    border: 1px solid rgba(239, 68, 68, 0.4) !important;
 }
 
 /* Garmin Push Workout Action */
