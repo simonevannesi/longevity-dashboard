@@ -24,15 +24,26 @@ function renderSparkline(svgId, values, color) {
     svg.innerHTML = `<path d="M ${points.join(' L ')}" stroke="${color}" />`;
 }
 
-function updateBadge(badgeId, delta, reverse = false) {
+function getTrendStatus(delta, threshold = 0.3, reverse = false) {
+    const val = reverse ? -delta : delta;
+    if (val > threshold) {
+        return { color: '#10b981', cls: 'up', status: 'improving' };
+    } else if (val < -threshold) {
+        return { color: '#ef4444', cls: 'down', status: 'declining' };
+    } else {
+        return { color: '#facc15', cls: 'neutral', status: 'steady' };
+    }
+}
+
+function updateBadge(badgeId, delta, threshold = 0.3, reverse = false) {
     const el = document.getElementById(badgeId);
     if (!el) return;
-    const sign = delta >= 0 ? '+' : '';
+    const sign = delta > 0 ? '+' : '';
     const formatted = `${sign}${delta.toFixed(1)}`;
     el.textContent = formatted;
     
-    const isGood = reverse ? delta <= 0 : delta >= 0;
-    el.className = `trend-badge ${isGood ? 'up' : 'down'}`;
+    const trend = getTrendStatus(delta, threshold, reverse);
+    el.className = `trend-badge ${trend.cls}`;
 }
 
 function renderLatestActivity(dataArray) {
@@ -465,8 +476,10 @@ function renderDashboard(dataArray) {
         readinessDescEl.style.color = color;
     }
     if (readinessCard) {
-        readinessCard.classList.remove('theme-ready', 'theme-golden', 'theme-careful', 'theme-stop');
-        const themeCls = zone === 'STOP' ? 'theme-stop' : (zone === 'CAREFUL' ? 'theme-careful' : (zone === 'GOLDEN DAY' ? 'theme-golden' : 'theme-ready'));
+        readinessCard.classList.remove('theme-ready', 'theme-golden', 'theme-careful', 'theme-stop', 'theme-gold', 'theme-silver', 'theme-yellow', 'theme-red');
+        const themeCls = (zone === 'ROSSO' || zone === 'STOP') ? 'theme-red' : 
+                         ((zone === 'GIALLO' || zone === 'CAREFUL') ? 'theme-yellow' : 
+                         ((zone === 'GOLD' || zone === 'GOLDEN DAY') ? 'theme-gold' : 'theme-silver'));
         readinessCard.classList.add(themeCls);
         readinessCard.style.borderColor = color;
         readinessCard.style.boxShadow = `0 0 20px ${color}33`;
@@ -478,42 +491,43 @@ function renderDashboard(dataArray) {
         });
     }
 
-    // 2. HRV Card
+    // 2. HRV Card (Threshold 0.5 ms)
     const hrvDelta = hrvVal !== null && avgHrv7d !== null ? (hrvVal - avgHrv7d) : 0;
-    const hrvColor = hrvDelta >= 0 ? '#10b981' : '#ef4444';
+    const hrvTrend = getTrendStatus(hrvDelta, 0.5);
+    const hrvColor = hrvTrend.color;
 
     const hrvEl = document.getElementById('kpi-hrv');
     if (hrvEl && hrvVal !== null) {
         hrvEl.innerHTML = `<span style="color:${hrvColor}">${Math.round(hrvVal)} <span style="font-size:0.7em; opacity:0.8;">ms</span></span>`;
     }
-    updateBadge('trend-hrv', hrvDelta);
+    updateBadge('trend-hrv', hrvDelta, 0.5);
     renderSparkline('spark-hrv', hrvSeries, hrvColor);
 
-    // 3. Sleep Score / RHR Card
+    // 3. Sleep Score / RHR Card (Threshold 1.5)
     const sleepSeries = getSeries('sleep score');
     const rhrSeries = getSeries('RHR');
     const validSleep7d = sleepSeries.slice(-7).filter(v => v !== null);
     const avgSleep7d = validSleep7d.length > 0 ? (validSleep7d.reduce((a,b)=>a+b, 0)/validSleep7d.length) : sleepScoreVal;
     const sleepDelta = sleepScoreVal !== null && avgSleep7d !== null ? (sleepScoreVal - avgSleep7d) : 0;
-    // Rule 1 & 2: Sleep score color must be based on physiological quality threshold, not just daily delta
-    const sleepColor = sleepScoreVal === null ? '#94a3b8' : (sleepScoreVal >= 75 ? '#10b981' : (sleepScoreVal >= 60 ? '#38bdf8' : (sleepScoreVal >= 50 ? '#f59e0b' : '#ef4444')));
+    const sleepTrend = getTrendStatus(sleepDelta, 1.5);
+    const sleepColor = sleepTrend.color;
 
     const sleepEl = document.getElementById('kpi-sleep');
     if (sleepEl) {
         const sStr = sleepScoreVal !== null ? Math.round(sleepScoreVal) : '---';
         const rStr = rhrVal !== null ? Math.round(rhrVal) : '---';
-        const rhrColor = rhrVal === null ? '#94a3b8' : (rhrVal >= 49 ? '#ef4444' : (rhrVal >= 47 ? '#f59e0b' : '#10b981'));
+        const rhrColor = rhrVal === null ? '#94a3b8' : (rhrVal <= 45 ? '#10b981' : (rhrVal <= 48 ? '#facc15' : '#ef4444'));
         sleepEl.innerHTML = `<span style="color:${sleepColor}">${sStr}</span> <span style="opacity:0.5;">/</span> <span style="color:${rhrColor}">${rStr} <span style="font-size:0.65em;">bpm</span></span>`;
     }
-    updateBadge('trend-sleep', sleepDelta);
+    updateBadge('trend-sleep', sleepDelta, 1.5);
     renderSparkline('spark-sleep', sleepSeries, sleepColor);
 
-    // 4. Bilancio TSB Card
+    // 4. Bilancio TSB Card (Threshold 1.0)
     const tsbSeries = getSeries('TSB');
     const tsb7dAgo = tsbSeries.length >= 7 && tsbSeries[tsbSeries.length - 7] !== null ? tsbSeries[tsbSeries.length - 7] : tsbVal;
     const tsbDelta = tsbVal !== null && tsb7dAgo !== null ? (tsbVal - tsb7dAgo) : 0;
-    const roundedTsb = tsbVal !== null ? Math.round(tsbVal) : 0;
-    const tsbColor = roundedTsb >= 5 ? '#3b82f6' : (roundedTsb >= -15 ? '#10b981' : (roundedTsb >= -25 ? '#f59e0b' : '#ef4444'));
+    const tsbTrend = getTrendStatus(tsbDelta, 1.0);
+    const tsbColor = tsbTrend.color;
 
     const tsbEl = document.getElementById('kpi-tsb');
     const tsbSubEl = document.getElementById('kpi-tsb-sub');
@@ -525,30 +539,32 @@ function renderDashboard(dataArray) {
     }
     if (tsbSubEl && acwrVal !== null) {
         const acwrNum = parseFloat(acwrVal);
-        const acwrColor = acwrNum > 1.5 ? '#ef4444' : (acwrNum >= 0.8 && acwrNum <= 1.3 ? '#10b981' : '#f59e0b');
+        const acwrColor = (acwrNum > 1.5 || acwrNum < 0.6) ? '#ef4444' : ((acwrNum >= 0.8 && acwrNum <= 1.3) ? '#10b981' : '#facc15');
         tsbSubEl.innerHTML = `<span style="color:${acwrColor}; font-weight:600;">ACWR ${acwrNum.toFixed(2)}</span>`;
     }
-    updateBadge('trend-tsb', tsbDelta);
+    updateBadge('trend-tsb', tsbDelta, 1.0);
     renderSparkline('spark-tsb', tsbSeries, tsbColor);
 
-    // 5. Total CTL Card (Brand Color #38bdf8, delta badge carries trend)
+    // 5. Total CTL Card (Threshold 0.3)
     const ctlSeries = getSeries('CTL');
     const ctl7dAgo = ctlSeries.length >= 7 && ctlSeries[ctlSeries.length - 7] !== null ? ctlSeries[ctlSeries.length - 7] : ctlVal;
     const ctlDelta = ctlVal !== null && ctl7dAgo !== null ? (ctlVal - ctl7dAgo) : 0;
-    const ctlColor = '#38bdf8';
+    const ctlTrend = getTrendStatus(ctlDelta, 0.3);
+    const ctlColor = ctlTrend.color;
 
     const totalCtlEl = document.getElementById('kpi-total-ctl');
     if (totalCtlEl && ctlVal !== null) {
         totalCtlEl.innerHTML = `<span style="color:${ctlColor}">${ctlVal.toFixed(1)}</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span>`;
     }
-    updateBadge('trend-total-ctl', ctlDelta);
+    updateBadge('trend-total-ctl', ctlDelta, 0.3);
     renderSparkline('spark-total-ctl', ctlSeries, ctlColor);
 
-    // 6. Bike CTL Card (Brand Color #60a5fa, delta badge carries trend)
+    // 6. Bike CTL Card (Threshold 0.3)
     const bikeCtlSeries = getSeries('bike_ctl');
     const bCtl7dAgo = bikeCtlSeries.length >= 7 && bikeCtlSeries[bikeCtlSeries.length - 7] !== null ? bikeCtlSeries[bikeCtlSeries.length - 7] : bikeCtlVal;
     const bCtlDelta = bikeCtlVal !== null && bCtl7dAgo !== null ? (bikeCtlVal - bCtl7dAgo) : 0;
-    const bCtlColor = '#60a5fa';
+    const bCtlTrend = getTrendStatus(bCtlDelta, 0.3);
+    const bCtlColor = bCtlTrend.color;
 
     const bikeCtlEl = document.getElementById('kpi-bike-ctl');
     if (bikeCtlEl && bikeCtlVal !== null) {
@@ -558,17 +574,18 @@ function renderDashboard(dataArray) {
     const bCtlSubEl = document.getElementById('kpi-bike-ctl-sub');
     if (bCtlSubEl && bikeCtlVal !== null && bAtlVal !== null && bikeCtlVal > 0) {
         const bAcwr = bAtlVal / bikeCtlVal;
-        const bAcwrColor = bAcwr > 1.5 ? '#ef4444' : (bAcwr >= 0.8 && bAcwr <= 1.3 ? '#10b981' : '#38bdf8');
+        const bAcwrColor = (bAcwr > 1.5 || bAcwr < 0.6) ? '#ef4444' : ((bAcwr >= 0.8 && bAcwr <= 1.3) ? '#10b981' : '#facc15');
         bCtlSubEl.innerHTML = `<span style="color:${bAcwrColor}; font-weight:600;">ACWR ${bAcwr.toFixed(2)}</span>`;
     }
-    updateBadge('trend-bike-ctl', bCtlDelta);
+    updateBadge('trend-bike-ctl', bCtlDelta, 0.3);
     renderSparkline('spark-bike-ctl', bikeCtlSeries, bCtlColor);
 
-    // 7. Run CTL Card (Brand Color #34d399, delta badge carries trend)
+    // 7. Run CTL Card (Threshold 0.3)
     const runCtlSeries = getSeries('run_ctl');
     const rCtl7dAgo = runCtlSeries.length >= 7 && runCtlSeries[runCtlSeries.length - 7] !== null ? runCtlSeries[runCtlSeries.length - 7] : runCtlVal;
     const rCtlDelta = runCtlVal !== null && rCtl7dAgo !== null ? (runCtlVal - rCtl7dAgo) : 0;
-    const rCtlColor = '#34d399';
+    const rCtlTrend = getTrendStatus(rCtlDelta, 0.3);
+    const rCtlColor = rCtlTrend.color;
 
     const runCtlEl = document.getElementById('kpi-run-ctl');
     if (runCtlEl && runCtlVal !== null) {
@@ -578,10 +595,10 @@ function renderDashboard(dataArray) {
     const rCtlSubEl = document.getElementById('kpi-run-ctl-sub');
     if (rCtlSubEl && runCtlVal !== null && rAtlVal !== null && runCtlVal > 0) {
         const rAcwr = rAtlVal / runCtlVal;
-        const rAcwrColor = rAcwr > 1.3 ? '#ef4444' : (rAcwr >= 0.8 && rAcwr <= 1.3 ? '#10b981' : '#38bdf8');
+        const rAcwrColor = (rAcwr > 1.3 || rAcwr < 0.6) ? '#ef4444' : ((rAcwr >= 0.8 && rAcwr <= 1.3) ? '#10b981' : '#facc15');
         rCtlSubEl.innerHTML = `<span style="color:${rAcwrColor}; font-weight:600;">ACWR ${rAcwr.toFixed(2)}</span>`;
     }
-    updateBadge('trend-run-ctl', rCtlDelta);
+    updateBadge('trend-run-ctl', rCtlDelta, 0.3);
     renderSparkline('spark-run-ctl', runCtlSeries, rCtlColor);
 
     // Render Latest Activity
