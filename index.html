@@ -29,12 +29,12 @@
         const _origFetch = window.fetch;
         window.fetch = function(url, opts) {
           if (typeof url === 'string') {
-            if (url === '/data') url = 'data.json?v=1794686090';
+            if (url === '/data') url = 'data.json?v=1794687063';
             else if (url.startsWith('/api/')) {
               let clean = url.substring(5).split('?')[0];
-              url = 'api/' + clean + '.json?v=1794686090';
+              url = 'api/' + clean + '.json?v=1794687063';
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot iPhone aggiornato al 14/11 20:54. Per scaricare nuovi dati Garmin/Strava usa la dash locale su PC o chiedi in chat.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot iPhone aggiornato al 14/11 21:11. Per scaricare nuovi dati Garmin/Strava usa la dash locale su PC o chiedi in chat.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -42,9 +42,9 @@
         window.addEventListener('DOMContentLoaded', function() {
           const syncBtns = document.querySelectorAll('.bento-sync-btn');
           syncBtns.forEach(b => {
-            b.innerHTML = '📸 14/11 20:54';
+            b.innerHTML = '📸 14/11 21:11';
             b.onclick = function() {
-              alert('Snapshot Mobile aggiornato al 14/11 20:54.\n\nGitHub Pages è una vista statica in sola lettura: per scaricare nuovi dati da Garmin/Strava serve il server PC o un aggiornamento via chat.');
+              alert('Snapshot Mobile aggiornato al 14/11 21:11.\n\nGitHub Pages è una vista statica in sola lettura: per scaricare nuovi dati da Garmin/Strava serve il server PC o un aggiornamento via chat.');
             };
           });
         });
@@ -766,7 +766,7 @@
                         <span class="nutri-multi-day-icon">🔬</span>
                         <div>
                             <span class="nutri-multi-day-title">ANALISI CARENZE &amp; SBILANCIAMENTI NUTRIZIONALI (ULTIMI 7 GG)</span>
-                            <span class="nutri-multi-day-sub" id="multi-period-label">Ultimi 7 giorni consolidati (7/11/2026 - 13/11/2026)</span>
+                            <span class="nutri-multi-day-sub" id="multi-period-label">Ultimi 7 giorni consolidati (8/11/2026 - 14/11/2026)</span>
                         </div>
                     </div>
                     <div class="nutri-multi-day-badge" id="multi-status-badge" style="background: #f59e0b22; color: #f59e0b; border: 1px solid #f59e0b55;">
@@ -780,13 +780,13 @@
                     <div class="nutri-imbalance-col" id="multi-card-pro">
                         <div class="nutri-imbalance-label-row">
                             <span class="nutri-imbalance-label">🥩 Proteine Medie (7d)</span>
-                            <span class="nutri-imbalance-tag" id="multi-pro-tag" style="background: #10b98122; color: #10b981;">OTTIMALE LONGEVITÀ</span>
+                            <span class="nutri-imbalance-tag" id="multi-pro-tag" style="background: #f59e0b22; color: #f59e0b;">ATTENZIONE RECUPERO</span>
                         </div>
                         <div class="nutri-imbalance-val" id="multi-pro-val" style="color: #ef4444;">
-                            126.9 <span class="nutri-imbalance-unit">g / die (1.5 g/kg)</span>
+                            118.5 <span class="nutri-imbalance-unit">g / die (1.4 g/kg)</span>
                         </div>
                         <div class="nutri-imbalance-hint" id="multi-pro-hint">
-                            Target Longevità: <strong>152.1g</strong> (1.8 g/kg • 83%)
+                            Target Longevità: <strong>152.1g</strong> (1.8 g/kg • 78%)
                         </div>
                     </div>
 
@@ -797,10 +797,10 @@
                             <span class="nutri-imbalance-tag" id="multi-carbs-tag" style="background: #10b98122; color: #10b981;">RICARICA ADEGUATA</span>
                         </div>
                         <div class="nutri-imbalance-val" id="multi-carbs-val" style="color: #f59e0b;">
-                            167.9 <span class="nutri-imbalance-unit">g / die (76%)</span>
+                            156.3 <span class="nutri-imbalance-unit">g / die (84%)</span>
                         </div>
                         <div class="nutri-imbalance-hint" id="multi-carbs-hint">
-                            2,438 kcal bruciate in 5 sessioni
+                            2,147 kcal bruciate in 5 sessioni
                         </div>
                     </div>
 
@@ -811,10 +811,10 @@
                             <span class="nutri-imbalance-tag" id="multi-fat-tag" style="background: #10b98122; color: #10b981;">OMONEPOIESI OK</span>
                         </div>
                         <div class="nutri-imbalance-val" id="multi-fat-val" style="color: #10b981;">
-                            97.2 <span class="nutri-imbalance-unit">g / die (1.15 g/kg)</span>
+                            92.5 <span class="nutri-imbalance-unit">g / die (1.09 g/kg)</span>
                         </div>
                         <div class="nutri-imbalance-hint" id="multi-fat-hint">
-                            Target Ormonale: <strong>84.5g</strong> (1.0 g/kg • 115%)
+                            Target Ormonale: <strong>84.5g</strong> (1.0 g/kg • 109%)
                         </div>
                     </div>
 
@@ -825,10 +825,10 @@
                             <span class="nutri-imbalance-tag" id="multi-energy-tag" style="background: #f59e0b22; color: #f59e0b;">CAUTELA IMMUNITÀ</span>
                         </div>
                         <div class="nutri-imbalance-val" id="multi-energy-val" style="color: #f59e0b;">
-                            -4,416 <span class="nutri-imbalance-unit">kcal (7d)</span>
+                            -4,958 <span class="nutri-imbalance-unit">kcal (7d)</span>
                         </div>
                         <div class="nutri-imbalance-hint" id="multi-energy-hint">
-                            Media: -631 kcal/die su 7 gg
+                            Media: -708 kcal/die su 7 gg
                         </div>
                     </div>
                 </div>
@@ -838,7 +838,7 @@
                     <span style="font-size: 1.25rem;">🩺</span>
                     <div>
                         <strong style="color: #38bdf8; display: block; margin-bottom: 2px;">Impatto Clinico su Salute, Massa Magra &amp; Biomarker Reali:</strong>
-                        <span id="multi-clinical-insight">Negli ultimi 7 giorni consolidati (7/11/2026 - 13/11/2026) hai sostenuto un carico biologico rilevante (5 sessioni: Motocross, Ciclismo e Corsa per 2,438 kcal spese) a fronte di un apporto proteico medio di soli 126.9g/die (1.50 g/kg vs target di longevità 1.80 g/kg • 83%). A 52 anni, la resistenza anabolica richiede almeno 1.6-1.8 g/kg per sostenere la sintesi proteica muscolare (MPS) e la riparazione tendineo-articolare, specialmente dopo le sollecitazioni eccentriche di corsa e motocross. Inoltre, l'introito glucidico (167.9g vs target 221g) e il deficit cumulato di -4,416 kcal hanno mantenuto la FC a riposo su una media di 45.1 bpm (sopra il baseline di 44 bpm) e possono spiegare derive cardiache anticipate ed eccesso di cortisolo notturno. Ai sensi della Regola 0.2, è prioritario proteggere il sistema immunitario ed evitare il catabolismo.</span>
+                        <span id="multi-clinical-insight">Negli ultimi 7 giorni consolidati (8/11/2026 - 14/11/2026) hai sostenuto un carico biologico rilevante (5 sessioni: Motocross, Ciclismo e Corsa per 2,147 kcal spese) a fronte di un apporto proteico medio di soli 118.5g/die (1.40 g/kg vs target di longevità 1.80 g/kg • 78%). A 52 anni, la resistenza anabolica richiede almeno 1.6-1.8 g/kg per sostenere la sintesi proteica muscolare (MPS) e la riparazione tendineo-articolare, specialmente dopo le sollecitazioni eccentriche di corsa e motocross. Inoltre, l'introito glucidico (156.3g vs target 186g) e il deficit cumulato di -4,958 kcal hanno mantenuto la FC a riposo su una media di 44.9 bpm (sopra il baseline di 44 bpm) e possono spiegare derive cardiache anticipate ed eccesso di cortisolo notturno. Ai sensi della Regola 0.2, è prioritario proteggere il sistema immunitario ed evitare il catabolismo.</span>
                     </div>
                 </div>
 
@@ -949,16 +949,16 @@
                     <div class="nutri-weight-col">
                         <span class="nutri-weight-label">Bilancio Medio / Proiezione 7d</span>
                         <div class="nutri-weight-val" id="nutri-net-7d-val" style="color: #38bdf8;">
-                            <span style="color:#38bdf8;">-3,395</span> <span class="nutri-weight-unit">kcal / sett</span>
+                            <span style="color:#38bdf8;">-4,025</span> <span class="nutri-weight-unit">kcal / sett</span>
                         </div>
-                        <span class="nutri-weight-hint" id="nutri-net-7d-hint">Media: -485 kcal/gg su 6 gg tracciati</span>
+                        <span class="nutri-weight-hint" id="nutri-net-7d-hint">Media: -575 kcal/gg su 7 gg tracciati</span>
                     </div>
 
                     <!-- Metric 2: Stima Variazione Peso Teorica -->
                     <div class="nutri-weight-col">
                         <span class="nutri-weight-label">Variazione Peso Stimata (7d)</span>
                         <div class="nutri-weight-val" id="nutri-weight-delta-val" style="color: #38bdf8;">
-                            <span style="color:#38bdf8;">-0.44 kg/sett</span>
+                            <span style="color:#38bdf8;">-0.52 kg/sett</span>
                         </div>
                         <span class="nutri-weight-hint" id="nutri-weight-delta-hint">Calo Stimato</span>
                     </div>
@@ -985,7 +985,7 @@
                 <!-- Validation Status Banner / Message -->
                 <div class="nutri-weight-msg" id="nutri-weight-msg-banner">
                     <span id="nutri-weight-msg-icon">ℹ️</span>
-                    <span id="nutri-weight-msg-text">Stima settimanale calcolata (-0.44 kg/sett). In attesa della prossima pesata per validare la formula.</span>
+                    <span id="nutri-weight-msg-text">Stima settimanale calcolata (-0.52 kg/sett). In attesa della prossima pesata per validare la formula.</span>
                 </div>
 
                 <!-- 📝 Form Espandibile per Dati Completi Bilancia Garmin -->
