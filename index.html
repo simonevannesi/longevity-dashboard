@@ -29,12 +29,12 @@
         const _origFetch = window.fetch;
         window.fetch = function(url, opts) {
           if (typeof url === 'string') {
-            if (url === '/data') url = 'data.json?v=1794679362';
+            if (url === '/data') url = 'data.json?v=1794680311';
             else if (url.startsWith('/api/')) {
               let clean = url.substring(5).split('?')[0];
-              url = 'api/' + clean + '.json?v=1794679362';
+              url = 'api/' + clean + '.json?v=1794680311';
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot iPhone aggiornato al 14/11 19:02. Per scaricare nuovi dati Garmin/Strava usa la dash locale su PC o chiedi in chat.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot iPhone aggiornato al 14/11 19:18. Per scaricare nuovi dati Garmin/Strava usa la dash locale su PC o chiedi in chat.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -42,9 +42,9 @@
         window.addEventListener('DOMContentLoaded', function() {
           const syncBtns = document.querySelectorAll('.bento-sync-btn');
           syncBtns.forEach(b => {
-            b.innerHTML = '📸 14/11 19:02';
+            b.innerHTML = '📸 14/11 19:18';
             b.onclick = function() {
-              alert('Snapshot Mobile aggiornato al 14/11 19:02.\n\nGitHub Pages è una vista statica in sola lettura: per scaricare nuovi dati da Garmin/Strava serve il server PC o un aggiornamento via chat.');
+              alert('Snapshot Mobile aggiornato al 14/11 19:18.\n\nGitHub Pages è una vista statica in sola lettura: per scaricare nuovi dati da Garmin/Strava serve il server PC o un aggiornamento via chat.');
             };
           });
         });
@@ -654,7 +654,7 @@
                     </div>
                 </div>
                 <div class="nutrition-status-badge status-deficit" id="nutrition-status-badge">
-                    DEFICIT: -1117 kcal
+                    DEFICIT: -1165 kcal
                 </div>
             </div>
 
@@ -678,7 +678,7 @@
                 <div class="nutrition-stat-box" id="box-tdee">
                     <div class="nutri-stat-header">
                         <span>⚡ SPESA TOTALE (OUT)</span>
-                        <span class="nutri-stat-val" id="nutri-tdee-val">2,153 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span></span>
+                        <span class="nutri-stat-val" id="nutri-tdee-val">2,201 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span></span>
                     </div>
                     <div class="nutri-breakdown-list">
                         <div class="nutri-breakdown-item">
@@ -727,10 +727,10 @@
                         <div class="macro-bar-item">
                             <div class="macro-bar-label">
                                 <span>🥑 Grassi</span>
-                                <span id="nutri-fat-text"><strong>58.5g</strong> / 89g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 30.5g • 66%)</span></span>
+                                <span id="nutri-fat-text"><strong>58.5g</strong> / 94g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 35.5g • 62%)</span></span>
                             </div>
                             <div class="macro-bar-track">
-                                <div class="macro-bar-fill" id="nutri-fat-fill" style="width: 66%; background: #fbbf24;"></div>
+                                <div class="macro-bar-fill" id="nutri-fat-fill" style="width: 62%; background: #fbbf24;"></div>
                             </div>
                         </div>
                     </div>
@@ -1488,7 +1488,7 @@
                     <div class="weather-win-item">
                         <div class="weather-win-header">Pomeriggio (12:00 - 18:00)</div>
                         <div class="weather-win-temp" id="w-afternoon-temp">⛅ 24°C</div>
-                        <div class="weather-win-detail" id="w-afternoon-detail">Vento 11 km/h | Pioggia 0%</div>
+                        <div class="weather-win-detail" id="w-afternoon-detail">Vento 14 km/h | Pioggia 0%</div>
                     </div>
                 </div>
 
