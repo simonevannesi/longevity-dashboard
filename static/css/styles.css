@@ -4462,3 +4462,53 @@ body.mode-desktop .bento-floating-dock {
     color: #94a3b8;
 }
 
+/* Strategic Decision Matrix Pill (Rest or Train) */
+.bento-decision-pill {
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 0.12rem 0.45rem;
+    border-radius: 4px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+/* Garmin Push Workout Action */
+.concise-actions-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.35rem;
+    padding-left: 1.4rem;
+}
+
+.bento-garmin-push-btn {
+    background: rgba(56, 189, 248, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    color: #38bdf8;
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.bento-garmin-push-btn:hover {
+    background: rgba(56, 189, 248, 0.25);
+    border-color: #38bdf8;
+    color: #ffffff;
+}
+
+.bento-garmin-push-btn:active {
+    transform: scale(0.97);
+}
+
+.garmin-push-status {
+    font-size: 0.68rem;
+    font-weight: 600;
+}
+
+
