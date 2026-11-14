@@ -247,66 +247,98 @@ body {
     color: var(--accent-green);
 }
 
-/* Dynamic State Themes */
+/* Dynamic State Themes (Strict Tier-Based: GOLD, SILVER, YELLOW, RED) */
+.readiness-card.theme-silver,
+.readiness-card.status-silver,
 .readiness-card.theme-ready,
 .readiness-card.status-ready {
-    border-color: #10b981 !important;
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.25) !important;
+    border-color: #94a3b8 !important;
+    box-shadow: 0 0 20px rgba(148, 163, 184, 0.25) !important;
 }
+.readiness-card.theme-silver .readiness-title,
+.readiness-card.theme-silver .readiness-subtitle,
+.readiness-card.status-silver .readiness-title,
+.readiness-card.status-silver .readiness-subtitle,
 .readiness-card.theme-ready .readiness-title,
 .readiness-card.theme-ready .readiness-subtitle,
 .readiness-card.status-ready .readiness-title,
 .readiness-card.status-ready .readiness-subtitle {
-    color: #10b981 !important;
+    color: #cbd5e1 !important;
 }
+.readiness-card.theme-silver .mini-histogram .bar,
+.readiness-card.status-silver .mini-histogram .bar,
 .readiness-card.theme-ready .mini-histogram .bar,
 .readiness-card.status-ready .mini-histogram .bar {
-    background-color: #10b981 !important;
+    background-color: #94a3b8 !important;
 }
 
+.readiness-card.theme-gold,
+.readiness-card.status-gold,
 .readiness-card.theme-golden,
 .readiness-card.status-golden {
-    border-color: #fbbf24 !important;
-    box-shadow: 0 0 20px rgba(251, 191, 36, 0.3) !important;
+    border-color: #ffd700 !important;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3) !important;
 }
+.readiness-card.theme-gold .readiness-title,
+.readiness-card.theme-gold .readiness-subtitle,
+.readiness-card.status-gold .readiness-title,
+.readiness-card.status-gold .readiness-subtitle,
 .readiness-card.theme-golden .readiness-title,
 .readiness-card.theme-golden .readiness-subtitle,
 .readiness-card.status-golden .readiness-title,
 .readiness-card.status-golden .readiness-subtitle {
-    color: #fbbf24 !important;
+    color: #ffd700 !important;
 }
+.readiness-card.theme-gold .mini-histogram .bar,
+.readiness-card.status-gold .mini-histogram .bar,
 .readiness-card.theme-golden .mini-histogram .bar,
 .readiness-card.status-golden .mini-histogram .bar {
-    background-color: #fbbf24 !important;
+    background-color: #ffd700 !important;
 }
 
+.readiness-card.theme-yellow,
+.readiness-card.status-yellow,
 .readiness-card.theme-careful,
 .readiness-card.status-careful {
-    border-color: #f59e0b !important;
-    box-shadow: 0 0 20px rgba(245, 158, 11, 0.25) !important;
+    border-color: #facc15 !important;
+    box-shadow: 0 0 20px rgba(250, 204, 21, 0.25) !important;
 }
+.readiness-card.theme-yellow .readiness-title,
+.readiness-card.theme-yellow .readiness-subtitle,
+.readiness-card.status-yellow .readiness-title,
+.readiness-card.status-yellow .readiness-subtitle,
 .readiness-card.theme-careful .readiness-title,
 .readiness-card.theme-careful .readiness-subtitle,
 .readiness-card.status-careful .readiness-title,
 .readiness-card.status-careful .readiness-subtitle {
-    color: #f59e0b !important;
+    color: #facc15 !important;
 }
+.readiness-card.theme-yellow .mini-histogram .bar,
+.readiness-card.status-yellow .mini-histogram .bar,
 .readiness-card.theme-careful .mini-histogram .bar,
 .readiness-card.status-careful .mini-histogram .bar {
-    background-color: #f59e0b !important;
+    background-color: #facc15 !important;
 }
 
+.readiness-card.theme-red,
+.readiness-card.status-red,
 .readiness-card.theme-stop,
 .readiness-card.status-stop {
     border-color: #ef4444 !important;
     box-shadow: 0 0 20px rgba(239, 68, 68, 0.25) !important;
 }
+.readiness-card.theme-red .readiness-title,
+.readiness-card.theme-red .readiness-subtitle,
+.readiness-card.status-red .readiness-title,
+.readiness-card.status-red .readiness-subtitle,
 .readiness-card.theme-stop .readiness-title,
 .readiness-card.theme-stop .readiness-subtitle,
 .readiness-card.status-stop .readiness-title,
 .readiness-card.status-stop .readiness-subtitle {
     color: #ef4444 !important;
 }
+.readiness-card.theme-red .mini-histogram .bar,
+.readiness-card.status-red .mini-histogram .bar,
 .readiness-card.theme-stop .mini-histogram .bar,
 .readiness-card.status-stop .mini-histogram .bar {
     background-color: #ef4444 !important;
@@ -365,8 +397,8 @@ body {
 }
 
 .trend-badge.neutral {
-    color: #38bdf8;
-    background: rgba(56, 189, 248, 0.15);
+    color: #facc15;
+    background: rgba(250, 204, 21, 0.15);
 }
 
 .metric-subtitle {
