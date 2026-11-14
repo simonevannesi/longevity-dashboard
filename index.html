@@ -29,12 +29,12 @@
         const _origFetch = window.fetch;
         window.fetch = function(url, opts) {
           if (typeof url === 'string') {
-            if (url === '/data') url = 'data.json?v=1794651222';
+            if (url === '/data') url = 'data.json?v=1794652205';
             else if (url.startsWith('/api/')) {
               let clean = url.substring(5).split('?')[0];
-              url = 'api/' + clean + '.json?v=1794651222';
+              url = 'api/' + clean + '.json?v=1794652205';
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot iPhone aggiornato al 14/11 11:13. Per scaricare nuovi dati Garmin/Strava usa la dash locale su PC o chiedi in chat.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot iPhone aggiornato al 14/11 11:30. Per scaricare nuovi dati Garmin/Strava usa la dash locale su PC o chiedi in chat.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -42,9 +42,9 @@
         window.addEventListener('DOMContentLoaded', function() {
           const syncBtns = document.querySelectorAll('.bento-sync-btn');
           syncBtns.forEach(b => {
-            b.innerHTML = '📸 14/11 11:13';
+            b.innerHTML = '📸 14/11 11:30';
             b.onclick = function() {
-              alert('Snapshot Mobile aggiornato al 14/11 11:13.\n\nGitHub Pages è una vista statica in sola lettura: per scaricare nuovi dati da Garmin/Strava serve il server PC o un aggiornamento via chat.');
+              alert('Snapshot Mobile aggiornato al 14/11 11:30.\n\nGitHub Pages è una vista statica in sola lettura: per scaricare nuovi dati da Garmin/Strava serve il server PC o un aggiornamento via chat.');
             };
           });
         });
