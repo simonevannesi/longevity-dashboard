@@ -29,12 +29,12 @@
         const _origFetch = window.fetch;
         window.fetch = function(url, opts) {
           if (typeof url === 'string') {
-            if (url === '/data') url = 'data.json?v=1794652205';
+            if (url === '/data') url = 'data.json?v=1794652797';
             else if (url.startsWith('/api/')) {
               let clean = url.substring(5).split('?')[0];
-              url = 'api/' + clean + '.json?v=1794652205';
+              url = 'api/' + clean + '.json?v=1794652797';
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot iPhone aggiornato al 14/11 11:30. Per scaricare nuovi dati Garmin/Strava usa la dash locale su PC o chiedi in chat.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot iPhone aggiornato al 14/11 11:39. Per scaricare nuovi dati Garmin/Strava usa la dash locale su PC o chiedi in chat.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -42,9 +42,9 @@
         window.addEventListener('DOMContentLoaded', function() {
           const syncBtns = document.querySelectorAll('.bento-sync-btn');
           syncBtns.forEach(b => {
-            b.innerHTML = '📸 14/11 11:30';
+            b.innerHTML = '📸 14/11 11:39';
             b.onclick = function() {
-              alert('Snapshot Mobile aggiornato al 14/11 11:30.\n\nGitHub Pages è una vista statica in sola lettura: per scaricare nuovi dati da Garmin/Strava serve il server PC o un aggiornamento via chat.');
+              alert('Snapshot Mobile aggiornato al 14/11 11:39.\n\nGitHub Pages è una vista statica in sola lettura: per scaricare nuovi dati da Garmin/Strava serve il server PC o un aggiornamento via chat.');
             };
           });
         });
@@ -213,10 +213,11 @@
                     <span class="bento-readiness-badge" id="bento-readiness-badge" style="color:#ef4444; border-color:#ef444455; background:#ef444418;">SILVER</span>
                 </div>
 
-                <!-- Batteria Biologica N=1 (GOLD, SILVER, GIALLO, ROSSO) -->
+                <!-- Batteria Biologica N=1 & Matrice Decisionale (Rest or Train) -->
                 <div class="bento-battery-row" id="bento-battery-box">
                     <div class="bento-battery-header">
-                        <span class="bento-battery-lbl" id="bento-battery-badge" style="color: #94a3b8;">🥈 SILVER — READY COSTRUZIONE</span>
+                        <span class="bento-battery-lbl" id="bento-battery-badge" style="color: #94a3b8;">🥈 SILVER — BUILD VOLUME Z2</span>
+                        <span class="bento-decision-pill" id="bento-decision-pill" style="color: #94a3b8; background: #94a3b818; border: 1px solid #94a3b855;">🧱 BUILD — VOLUME Z2</span>
                         <strong class="bento-battery-pct" id="bento-battery-pct" style="color: #94a3b8;">80%</strong>
                     </div>
                     <div class="bento-battery-track">
@@ -238,6 +239,12 @@
                             <span class="concise-tss" id="bento-bike-target">80 TSS</span>
                         </div>
                         <div class="concise-meta" id="bento-bike-meta">Uscita bici su strada 55-65 km (2h00-2h15) Z2 pura (180-210 W). Zero impatto articolare.</div>
+                        <div class="concise-actions-row">
+                            <button class="bento-garmin-push-btn" id="btn-push-garmin-bike" onclick="pushWorkoutToGarmin('bike')">
+                                📡 Invia Workout a Garmin Connect
+                            </button>
+                            <span class="garmin-push-status" id="garmin-push-status"></span>
+                        </div>
                     </div>
 
                     <!-- Corsa One-Liner -->
@@ -425,7 +432,7 @@
                 </div>
                 <div class="readiness-subtitle" id="kpi-readiness-desc" style="color:#94a3b8;">Parasimpatico Stabile (HRV 49ms, Z=-0.3σ | RHR 45bpm | TSB +10). Motore Z2 centrale 100% aperto (60-85 TSS).</div>
                 <div id="desktop-battery-box" style="margin-top: 0.35rem; padding-top: 0.35rem; border-top: 1px dashed rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: space-between;">
-                    <span id="desktop-battery-badge" style="font-size: 0.72rem; font-weight: 800; color: #94a3b8;">🥈 SILVER — READY COSTRUZIONE</span>
+                    <span id="desktop-battery-badge" style="font-size: 0.72rem; font-weight: 800; color: #94a3b8;">🥈 SILVER — BUILD VOLUME Z2</span>
                     <strong id="desktop-battery-pct" style="font-size: 0.75rem; color: #94a3b8;">80%</strong>
                 </div>
             </div>
