@@ -29,12 +29,12 @@
         const _origFetch = window.fetch;
         window.fetch = function(url, opts) {
           if (typeof url === 'string') {
-            if (url === '/data') url = 'data.json?v=1794656377';
+            if (url === '/data') url = 'data.json?v=1794657190';
             else if (url.startsWith('/api/')) {
               let clean = url.substring(5).split('?')[0];
-              url = 'api/' + clean + '.json?v=1794656377';
+              url = 'api/' + clean + '.json?v=1794657190';
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot iPhone aggiornato al 14/11 12:39. Per scaricare nuovi dati Garmin/Strava usa la dash locale su PC o chiedi in chat.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot iPhone aggiornato al 14/11 12:53. Per scaricare nuovi dati Garmin/Strava usa la dash locale su PC o chiedi in chat.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -42,9 +42,9 @@
         window.addEventListener('DOMContentLoaded', function() {
           const syncBtns = document.querySelectorAll('.bento-sync-btn');
           syncBtns.forEach(b => {
-            b.innerHTML = '📸 14/11 12:39';
+            b.innerHTML = '📸 14/11 12:53';
             b.onclick = function() {
-              alert('Snapshot Mobile aggiornato al 14/11 12:39.\n\nGitHub Pages è una vista statica in sola lettura: per scaricare nuovi dati da Garmin/Strava serve il server PC o un aggiornamento via chat.');
+              alert('Snapshot Mobile aggiornato al 14/11 12:53.\n\nGitHub Pages è una vista statica in sola lettura: per scaricare nuovi dati da Garmin/Strava serve il server PC o un aggiornamento via chat.');
             };
           });
         });
@@ -414,7 +414,7 @@
         <!-- 7 KPI Cards Grid: STRICTLY 1 SINGLE ROW ON ALL SCREENS -->
         <div class="kpi-row-grid">
             <!-- 1. Readiness Card -->
-            <div class="kpi-card readiness-card theme-ready" id="card-readiness" style="border-color:#94a3b8; box-shadow:0 0 20px #94a3b833;">
+            <div class="kpi-card readiness-card theme-silver" id="card-readiness" style="border-color:#94a3b8; box-shadow:0 0 20px #94a3b833;">
                 <div class="kpi-card-header">
                     <span>✓ Readiness</span>
                     <span style="font-size:0.65rem; opacity:0.8;" id="readiness-date-badge">OGGI</span>
@@ -457,8 +457,8 @@
                     <span id="trend-sleep" class="trend-badge down">-3.0</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-sleep"><span style="color:#10b981">78</span> <span style="opacity:0.5;">/</span> <span style="color:#10b981">45 <span style="font-size:0.65em;">bpm</span></span></div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-sleep"><path d="M 0.0,7.8 L 2.1,10.9 L 4.1,9.1 L 8.3,3.0 L 10.3,8.5 L 12.4,10.3 L 14.5,10.3 L 16.6,9.1 L 18.6,6.6 L 20.7,7.8 L 22.8,8.5 L 24.8,6.6 L 26.9,9.7 L 29.0,10.9 L 31.0,8.5 L 33.1,10.9 L 35.2,14.5 L 37.2,7.2 L 39.3,15.7 L 41.4,9.7 L 43.4,23.0 L 45.5,17.5 L 47.6,7.8 L 49.7,18.2 L 51.7,9.1 L 53.8,8.5 L 55.9,11.5 L 57.9,12.1 L 60.0,13.3" stroke="#10b981"/></svg>
+                    <div class="metric-value" id="kpi-sleep"><span style="color:#ef4444">78</span> <span style="opacity:0.5;">/</span> <span style="color:#10b981">45 <span style="font-size:0.65em;">bpm</span></span></div>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-sleep"><path d="M 0.0,7.8 L 2.1,10.9 L 4.1,9.1 L 8.3,3.0 L 10.3,8.5 L 12.4,10.3 L 14.5,10.3 L 16.6,9.1 L 18.6,6.6 L 20.7,7.8 L 22.8,8.5 L 24.8,6.6 L 26.9,9.7 L 29.0,10.9 L 31.0,8.5 L 33.1,10.9 L 35.2,14.5 L 37.2,7.2 L 39.3,15.7 L 41.4,9.7 L 43.4,23.0 L 45.5,17.5 L 47.6,7.8 L 49.7,18.2 L 51.7,9.1 L 53.8,8.5 L 55.9,11.5 L 57.9,12.1 L 60.0,13.3" stroke="#ef4444"/></svg>
                 </div>
                 <div class="metric-subtitle"><span>Score / FC Riposo</span><span id="kpi-sleep-sub"></span></div>
             </div>
@@ -470,10 +470,10 @@
                     <span id="trend-tsb" class="trend-badge up">+4.9</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-tsb"><span style="color:#3b82f6">+10</span> <span style="font-size:0.7em; opacity:0.8;">TSB</span></div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-tsb"><path d="M 0.0,3.0 L 2.1,3.1 L 4.1,10.4 L 6.2,9.4 L 8.3,11.9 L 10.3,10.9 L 12.4,9.3 L 14.5,17.0 L 16.6,17.5 L 18.6,15.4 L 20.7,15.4 L 22.8,23.0 L 24.8,20.9 L 26.9,17.2 L 29.0,12.5 L 31.0,8.6 L 33.1,13.0 L 35.2,9.1 L 37.2,9.1 L 39.3,11.5 L 41.4,9.6 L 43.4,10.0 L 45.5,9.4 L 47.6,17.1 L 49.7,12.8 L 51.7,10.1 L 53.8,11.2 L 55.9,7.9 L 57.9,9.4 L 60.0,12.6" stroke="#3b82f6"/></svg>
+                    <div class="metric-value" id="kpi-tsb"><span style="color:#10b981">+10</span> <span style="font-size:0.7em; opacity:0.8;">TSB</span></div>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-tsb"><path d="M 0.0,3.0 L 2.1,3.1 L 4.1,10.4 L 6.2,9.4 L 8.3,11.9 L 10.3,10.9 L 12.4,9.3 L 14.5,17.0 L 16.6,17.5 L 18.6,15.4 L 20.7,15.4 L 22.8,23.0 L 24.8,20.9 L 26.9,17.2 L 29.0,12.5 L 31.0,8.6 L 33.1,13.0 L 35.2,9.1 L 37.2,9.1 L 39.3,11.5 L 41.4,9.6 L 43.4,10.0 L 45.5,9.4 L 47.6,17.1 L 49.7,12.8 L 51.7,10.1 L 53.8,11.2 L 55.9,7.9 L 57.9,9.4 L 60.0,12.6" stroke="#10b981"/></svg>
                 </div>
-                <div class="metric-subtitle"><span>TSB / ACWR</span><span id="kpi-tsb-sub"><span style="color:#f59e0b; font-weight:600;">ACWR 0.76</span></span></div>
+                <div class="metric-subtitle"><span>TSB / ACWR</span><span id="kpi-tsb-sub"><span style="color:#facc15; font-weight:600;">ACWR 0.76</span></span></div>
             </div>
 
             <!-- 5. Total CTL Card -->
@@ -483,8 +483,8 @@
                     <span id="trend-total-ctl" class="trend-badge down">-1.9</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-total-ctl"><span style="color:#38bdf8">42.5</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span></div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-total-ctl"><path d="M 0.0,6.3 L 2.1,3.8 L 4.1,5.3 L 6.2,4.8 L 8.3,6.1 L 10.3,7.9 L 12.4,4.8 L 14.5,4.8 L 16.6,6.3 L 18.6,6.8 L 20.7,3.0 L 22.8,4.3 L 24.8,6.3 L 26.9,9.2 L 29.0,12.2 L 31.0,10.7 L 33.1,13.5 L 35.2,14.5 L 37.2,14.3 L 39.3,16.1 L 41.4,16.8 L 43.4,18.1 L 45.5,14.8 L 47.6,17.6 L 49.7,19.9 L 51.7,20.2 L 53.8,22.7 L 55.9,23.0 L 57.9,22.5 L 60.0,22.5" stroke="#38bdf8"/></svg>
+                    <div class="metric-value" id="kpi-total-ctl"><span style="color:#ef4444">42.5</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span></div>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-total-ctl"><path d="M 0.0,6.3 L 2.1,3.8 L 4.1,5.3 L 6.2,4.8 L 8.3,6.1 L 10.3,7.9 L 12.4,4.8 L 14.5,4.8 L 16.6,6.3 L 18.6,6.8 L 20.7,3.0 L 22.8,4.3 L 24.8,6.3 L 26.9,9.2 L 29.0,12.2 L 31.0,10.7 L 33.1,13.5 L 35.2,14.5 L 37.2,14.3 L 39.3,16.1 L 41.4,16.8 L 43.4,18.1 L 45.5,14.8 L 47.6,17.6 L 49.7,19.9 L 51.7,20.2 L 53.8,22.7 L 55.9,23.0 L 57.9,22.5 L 60.0,22.5" stroke="#ef4444"/></svg>
                 </div>
                 <div class="metric-subtitle"><span>Fitness Globale</span><span id="kpi-total-ctl-sub"></span></div>
             </div>
@@ -496,8 +496,8 @@
                     <span id="trend-bike-ctl" class="trend-badge down">-1.2</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-bike-ctl"><span style="color:#60a5fa">20.8</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span></div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-bike-ctl"><path d="M 0.0,3.0 L 2.1,4.6 L 4.1,6.1 L 6.2,4.6 L 8.3,6.1 L 10.3,7.4 L 12.4,3.7 L 14.5,5.2 L 16.6,6.6 L 18.6,8.1 L 20.7,3.7 L 22.8,5.2 L 24.8,6.8 L 26.9,8.1 L 29.0,9.7 L 31.0,11.0 L 33.1,12.3 L 35.2,13.7 L 37.2,12.3 L 39.3,13.4 L 41.4,14.8 L 43.4,16.1 L 45.5,17.2 L 47.6,18.6 L 49.7,19.7 L 51.7,20.8 L 53.8,21.9 L 55.9,23.0 L 57.9,21.2 L 60.0,21.2" stroke="#60a5fa"/></svg>
+                    <div class="metric-value" id="kpi-bike-ctl"><span style="color:#ef4444">20.8</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span></div>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-bike-ctl"><path d="M 0.0,3.0 L 2.1,4.6 L 4.1,6.1 L 6.2,4.6 L 8.3,6.1 L 10.3,7.4 L 12.4,3.7 L 14.5,5.2 L 16.6,6.6 L 18.6,8.1 L 20.7,3.7 L 22.8,5.2 L 24.8,6.8 L 26.9,8.1 L 29.0,9.7 L 31.0,11.0 L 33.1,12.3 L 35.2,13.7 L 37.2,12.3 L 39.3,13.4 L 41.4,14.8 L 43.4,16.1 L 45.5,17.2 L 47.6,18.6 L 49.7,19.7 L 51.7,20.8 L 53.8,21.9 L 55.9,23.0 L 57.9,21.2 L 60.0,21.2" stroke="#ef4444"/></svg>
                 </div>
                 <div class="metric-subtitle"><span>Carico Bici</span><span id="kpi-bike-ctl-sub"><span style="color:#38bdf8; font-weight:600;">ACWR 0.54</span></span></div>
             </div>
@@ -509,8 +509,8 @@
                     <span id="trend-run-ctl" class="trend-badge up">+0.9</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-run-ctl"><span style="color:#34d399">9.7</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span></div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-run-ctl"><path d="M 0.0,20.3 L 2.1,23.0 L 4.1,17.7 L 6.2,20.3 L 8.3,15.0 L 10.3,17.7 L 12.4,20.3 L 14.5,8.3 L 16.6,11.0 L 18.6,13.7 L 20.7,16.3 L 22.8,9.7 L 24.8,12.3 L 26.9,15.0 L 29.0,17.7 L 31.0,17.7 L 33.1,20.3 L 35.2,12.3 L 37.2,15.0 L 39.3,17.7 L 41.4,8.3 L 43.4,12.3 L 45.5,15.0 L 47.6,17.7 L 49.7,20.3 L 51.7,9.7 L 53.8,13.7 L 55.9,3.0 L 57.9,5.7 L 60.0,5.7" stroke="#34d399"/></svg>
+                    <div class="metric-value" id="kpi-run-ctl"><span style="color:#10b981">9.7</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span></div>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-run-ctl"><path d="M 0.0,20.3 L 2.1,23.0 L 4.1,17.7 L 6.2,20.3 L 8.3,15.0 L 10.3,17.7 L 12.4,20.3 L 14.5,8.3 L 16.6,11.0 L 18.6,13.7 L 20.7,16.3 L 22.8,9.7 L 24.8,12.3 L 26.9,15.0 L 29.0,17.7 L 31.0,17.7 L 33.1,20.3 L 35.2,12.3 L 37.2,15.0 L 39.3,17.7 L 41.4,8.3 L 43.4,12.3 L 45.5,15.0 L 47.6,17.7 L 49.7,20.3 L 51.7,9.7 L 53.8,13.7 L 55.9,3.0 L 57.9,5.7 L 60.0,5.7" stroke="#10b981"/></svg>
                 </div>
                 <div class="metric-subtitle">
                     <span id="desktop-chassis-badge" style="color: #94a3b8; font-weight: 700; font-size: 0.68rem;">🛡️ TELAIO ADEGUATO AL MOTORE</span>
