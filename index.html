@@ -29,12 +29,12 @@
         const _origFetch = window.fetch;
         window.fetch = function(url, opts) {
           if (typeof url === 'string') {
-            if (url === '/data') url = 'data.json?v=1794754526';
+            if (url === '/data') url = 'data.json?v=1794755479';
             else if (url.startsWith('/api/')) {
               let clean = url.substring(5).split('?')[0];
-              url = 'api/' + clean + '.json?v=1794754526';
+              url = 'api/' + clean + '.json?v=1794755479';
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 15/11 15:55.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 15/11 16:11.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
