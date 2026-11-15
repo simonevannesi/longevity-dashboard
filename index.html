@@ -29,12 +29,12 @@
         const _origFetch = window.fetch;
         window.fetch = function(url, opts) {
           if (typeof url === 'string') {
-            if (url === '/data') url = 'data.json?v=1794765969';
+            if (url === '/data') url = 'data.json?v=1794766753';
             else if (url.startsWith('/api/')) {
               let clean = url.substring(5).split('?')[0];
-              url = 'api/' + clean + '.json?v=1794765969';
+              url = 'api/' + clean + '.json?v=1794766753';
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 15/11 19:06.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 15/11 19:19.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -1098,7 +1098,7 @@
 
             <div class="activity-note-box" id="act-note-box">
                 <span>⚡</span>
-                <span id="act-note">Nessuna nota aggiuntiva per questa sessione.</span>
+                <span id="act-note">Test DFA a1 Bici: LT1 (0.75) confermata a 150 bpm (a1=0.82 @ 148.4 bpm, a1=0.73 @ 150.8 bpm, a1=0.69 @ 150.3 bpm)</span>
             </div>
         </section>
 
@@ -1110,7 +1110,7 @@
                     <div>
                         <div class="zones-title-row">
                             <span class="zones-title-text">Zone di Allenamento Dinamiche — Setup Garmin</span>
-                            <span class="zones-rolling-badge" id="zones-rolling-badge">LT1 DFA α1: 151.2 bpm • 232 W (Salita fino a 240 W)</span>
+                            <span class="zones-rolling-badge" id="zones-rolling-badge">LT1 DFA α1: 151.3 bpm • 232 W (Salita fino a 240 W)</span>
                         </div>
                         <div class="zones-header-sub">
                             Calibrate su test DFA α1 a inizio allenamento • Bici (Watt &amp; FC) • Corsa (Passo &amp; FC)
