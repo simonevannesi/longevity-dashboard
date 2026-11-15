@@ -29,12 +29,12 @@
         const _origFetch = window.fetch;
         window.fetch = function(url, opts) {
           if (typeof url === 'string') {
-            if (url === '/data') url = 'data.json?v=1794769779';
+            if (url === '/data') url = 'data.json?v=1794770098';
             else if (url.startsWith('/api/')) {
               let clean = url.substring(5).split('?')[0];
-              url = 'api/' + clean + '.json?v=1794769779';
+              url = 'api/' + clean + '.json?v=1794770098';
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 15/11 20:09.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 15/11 20:14.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -625,8 +625,8 @@
                         <button type="button" id="btn-nutri-today" onclick="loadNutritionData()" style="display: none; background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.4); color: #10b981; border-radius: 5px; cursor: pointer; font-size: 0.65rem; font-weight: 700; padding: 0.1rem 0.4rem; margin-left: 0.15rem;">Oggi</button>
                     </div>
                 </div>
-                <div class="nutrition-status-badge status-in_attesa" id="nutrition-status-badge">
-                    IN ATTESA DI LOG CIBO
+                <div class="nutrition-status-badge status-deficit" id="nutrition-status-badge">
+                    DEFICIT: -1330 kcal
                 </div>
             </div>
 
@@ -672,37 +672,37 @@
                 <div class="nutrition-stat-box" id="box-intake">
                     <div class="nutri-stat-header">
                         <span>🍽️ INTROITO ALIMENTARE (IN)</span>
-                        <span class="nutri-stat-val" id="nutri-intake-val" style="color: #10b981;">0 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span></span>
+                        <span class="nutri-stat-val" id="nutri-intake-val" style="color: #10b981;">1,390 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span></span>
                     </div>
                     <div class="nutri-macros-bars">
                         <!-- Carbo -->
                         <div class="macro-bar-item">
                             <div class="macro-bar-label">
                                 <span>🌾 Carboidrati</span>
-                                <span id="nutri-carbs-text"><strong>0g</strong> / 186g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 186g • 0%)</span></span>
+                                <span id="nutri-carbs-text"><strong>101.9g</strong> / 186g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 84.1g • 55%)</span></span>
                             </div>
                             <div class="macro-bar-track">
-                                <div class="macro-bar-fill" id="nutri-carbs-fill" style="width: 0%; background: #38bdf8;"></div>
+                                <div class="macro-bar-fill" id="nutri-carbs-fill" style="width: 55%; background: #38bdf8;"></div>
                             </div>
                         </div>
                         <!-- Proteine -->
                         <div class="macro-bar-item">
                             <div class="macro-bar-label">
                                 <span>🥩 Proteine</span>
-                                <span id="nutri-protein-text"><strong>0g</strong> / 152g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 152g • 0%)</span></span>
+                                <span id="nutri-protein-text"><strong>71.0g</strong> / 152g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 81.0g • 47%)</span></span>
                             </div>
                             <div class="macro-bar-track">
-                                <div class="macro-bar-fill" id="nutri-protein-fill" style="width: 0%; background: #34d399;"></div>
+                                <div class="macro-bar-fill" id="nutri-protein-fill" style="width: 47%; background: #34d399;"></div>
                             </div>
                         </div>
                         <!-- Grassi -->
                         <div class="macro-bar-item">
                             <div class="macro-bar-label">
                                 <span>🥑 Grassi</span>
-                                <span id="nutri-fat-text"><strong>0g</strong> / 152g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 152g • 0%)</span></span>
+                                <span id="nutri-fat-text"><strong>76.2g</strong> / 152g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 75.8g • 50%)</span></span>
                             </div>
                             <div class="macro-bar-track">
-                                <div class="macro-bar-fill" id="nutri-fat-fill" style="width: 0%; background: #fbbf24;"></div>
+                                <div class="macro-bar-fill" id="nutri-fat-fill" style="width: 50%; background: #fbbf24;"></div>
                             </div>
                         </div>
                     </div>
