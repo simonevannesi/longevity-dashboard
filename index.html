@@ -29,12 +29,12 @@
         const _origFetch = window.fetch;
         window.fetch = function(url, opts) {
           if (typeof url === 'string') {
-            if (url === '/data') url = 'data.json?v=1794759294';
+            if (url === '/data') url = 'data.json?v=1794760248';
             else if (url.startsWith('/api/')) {
               let clean = url.substring(5).split('?')[0];
-              url = 'api/' + clean + '.json?v=1794759294';
+              url = 'api/' + clean + '.json?v=1794760248';
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 15/11 17:14.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 15/11 17:30.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -650,7 +650,7 @@
                 <div class="nutrition-stat-box" id="box-tdee">
                     <div class="nutri-stat-header">
                         <span>⚡ SPESA TOTALE (OUT)</span>
-                        <span class="nutri-stat-val" id="nutri-tdee-val">2,183 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span></span>
+                        <span class="nutri-stat-val" id="nutri-tdee-val">2,138 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span></span>
                     </div>
                     <div class="nutri-breakdown-list">
                         <div class="nutri-breakdown-item">
@@ -699,7 +699,7 @@
                         <div class="macro-bar-item">
                             <div class="macro-bar-label">
                                 <span>🥑 Grassi</span>
-                                <span id="nutri-fat-text"><strong>0g</strong> / 92g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 92g • 0%)</span></span>
+                                <span id="nutri-fat-text"><strong>0g</strong> / 87g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 87g • 0%)</span></span>
                             </div>
                             <div class="macro-bar-track">
                                 <div class="macro-bar-fill" id="nutri-fat-fill" style="width: 0%; background: #fbbf24;"></div>
