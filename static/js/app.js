@@ -852,29 +852,57 @@ function loadWorkoutSuggestions() {
 }
 
 function triggerManualSync() {
-    const btn = document.getElementById('btn-manual-sync');
-    const txt = document.getElementById('sync-text');
-    if (txt) txt.textContent = "⏳ Sincronizzazione in corso...";
-    if (btn) btn.style.opacity = "0.7";
+    const headerBtn = document.getElementById('btn-manual-sync');
+    const headerTxt = document.getElementById('sync-text');
+    const bentoBtn = document.getElementById('btn-bento-sync');
+    const bentoTxt = document.getElementById('bento-sync-text');
+    const bentoIcon = document.getElementById('bento-sync-icon');
 
-    fetch('/sync')
-        .then(res => res.json())
-        .then(data => {
-            loadData();
-            if (txt) txt.textContent = "✅ Dati Aggiornati!";
-            if (btn) btn.style.opacity = "1.0";
-            setTimeout(() => {
-                if (txt) txt.textContent = "🔄 Aggiorna Dati (Strava & Garmin)";
-            }, 3500);
-        })
-        .catch(err => {
-            console.error("Error manual sync:", err);
-            if (txt) txt.textContent = "❌ Errore Sync";
-            if (btn) btn.style.opacity = "1.0";
-            setTimeout(() => {
-                if (txt) txt.textContent = "🔄 Aggiorna Dati (Strava & Garmin)";
-            }, 3500);
-        });
+    if (headerTxt) headerTxt.textContent = "⏳ Sincronizzazione...";
+    if (headerBtn) headerBtn.style.opacity = "0.7";
+    if (bentoTxt) bentoTxt.textContent = "Sincronizzo...";
+    if (bentoIcon) bentoIcon.classList.add('spin-anim');
+    if (bentoBtn) bentoBtn.style.opacity = "0.75";
+
+    const isLocalServer = (
+        window.location.hostname === 'localhost' ||
+        window.location.hostname === '127.0.0.1' ||
+        window.location.port === '8080'
+    );
+
+    if (isLocalServer) {
+        fetch('/sync')
+            .then(res => res.json())
+            .then(data => {
+                loadData();
+                if (headerTxt) headerTxt.textContent = "✅ Dati Aggiornati!";
+                if (headerBtn) headerBtn.style.opacity = "1.0";
+                if (bentoTxt) bentoTxt.textContent = "Aggiornato! ✓";
+                if (bentoIcon) bentoIcon.classList.remove('spin-anim');
+                if (bentoBtn) bentoBtn.style.opacity = "1.0";
+                setTimeout(() => {
+                    if (headerTxt) headerTxt.textContent = "🔄 Aggiorna";
+                    if (bentoTxt) bentoTxt.textContent = "Aggiorna";
+                }, 3000);
+            })
+            .catch(err => {
+                console.error("Error manual sync:", err);
+                if (headerTxt) headerTxt.textContent = "❌ Errore Sync";
+                if (headerBtn) headerBtn.style.opacity = "1.0";
+                if (bentoTxt) bentoTxt.textContent = "Ricarico...";
+                if (bentoIcon) bentoIcon.classList.remove('spin-anim');
+                if (bentoBtn) bentoBtn.style.opacity = "1.0";
+                setTimeout(() => window.location.reload(), 500);
+            });
+    } else {
+        // GitHub Pages / Static Mode: force reload with cache busting query param
+        if (bentoTxt) bentoTxt.textContent = "Ricarico...";
+        setTimeout(() => {
+            const url = new URL(window.location.href);
+            url.searchParams.set('v', Date.now().toString());
+            window.location.href = url.toString();
+        }, 300);
+    }
 }
 
 /* ==========================================================================
@@ -2334,15 +2362,29 @@ function updateBentoView() {
             const gap = n1.engine_chassis_gap;
             if (gap) {
                 const cBadge = document.getElementById('bento-chassis-badge');
-                if (cBadge && gap.badge) {
-                    cBadge.textContent = gap.badge;
+                if (cBadge) {
                     cBadge.style.color = gap.color;
                     cBadge.style.borderColor = gap.color + '55';
+                    cBadge.style.backgroundColor = gap.color + '18';
+                }
+                const cDot = document.getElementById('bento-ratio-dot');
+                if (cDot && gap.color) {
+                    cDot.style.backgroundColor = gap.color;
+                }
+                const cRatio = document.getElementById('bento-chassis-ratio');
+                if (cRatio && (gap.ratio_label || gap.ratio_pct != null)) {
+                    cRatio.textContent = gap.ratio_label || `${Math.round(gap.ratio_pct)}%`;
+                }
+                const cStatus = document.getElementById('bento-chassis-status');
+                if (cStatus) {
+                    cStatus.textContent = `(${gap.short_status || gap.label || 'Equilibrato'})`;
                 }
                 const dChassis = document.getElementById('desktop-chassis-badge');
                 if (dChassis && gap.badge) {
-                    dChassis.textContent = gap.badge;
+                    dChassis.textContent = `⚖️ Telaio/Motore: ${gap.ratio_label || Math.round(gap.ratio_pct) + '%'} (${gap.short_status || 'Equilibrato'})`;
                     dChassis.style.color = gap.color;
+                    dChassis.style.borderColor = gap.color + '55';
+                    dChassis.style.backgroundColor = gap.color + '15';
                 }
                 const cHint = document.getElementById('bento-chassis-hint');
                 if (cHint && gap.text) {
