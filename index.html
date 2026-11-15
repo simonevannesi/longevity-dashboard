@@ -29,25 +29,16 @@
         const _origFetch = window.fetch;
         window.fetch = function(url, opts) {
           if (typeof url === 'string') {
-            if (url === '/data') url = 'data.json?v=1794733798';
+            if (url === '/data') url = 'data.json?v=1794734686';
             else if (url.startsWith('/api/')) {
               let clean = url.substring(5).split('?')[0];
-              url = 'api/' + clean + '.json?v=1794733798';
+              url = 'api/' + clean + '.json?v=1794734686';
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot iPhone aggiornato al 15/11 10:09. Per scaricare nuovi dati Garmin/Strava usa la dash locale su PC o chiedi in chat.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 15/11 10:24.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
         };
-        window.addEventListener('DOMContentLoaded', function() {
-          const syncBtns = document.querySelectorAll('.bento-sync-btn');
-          syncBtns.forEach(b => {
-            b.innerHTML = '📸 15/11 10:09';
-            b.onclick = function() {
-              alert('Snapshot Mobile aggiornato al 15/11 10:09.\n\nGitHub Pages è una vista statica in sola lettura: per scaricare nuovi dati da Garmin/Strava serve il server PC o un aggiornamento via chat.');
-            };
-          });
-        });
       }
     </script>
 
@@ -101,113 +92,16 @@
                     <span>📍 Fuerteventura (Canarie) • 📅 <strong>15/11/2026</strong> • 🍁 Fase 1</span>
                 </div>
                 <div class="bento-top-actions">
-                    <button class="bento-sync-btn" onclick="triggerManualSync()" title="Sincronizza Strava e Garmin">🔄 Sync</button>
+                    <button class="bento-sync-btn" id="btn-bento-sync" onclick="triggerManualSync()" title="Aggiorna Dati Strava e Garmin">
+                        <span class="bento-sync-icon" id="bento-sync-icon">🔄</span>
+                        <span id="bento-sync-text">Aggiorna</span>
+                    </button>
                     <button class="bento-mode-toggle" onclick="toggleDashboardView('desktop')" title="Passa a Vista Desktop Completa">💻 Desktop</button>
                 </div>
             </div>
 
-            <!-- 1. STATO FORMA & CARICO (IN ALTO COME HERO) -->
-            <div class="bento-card bento-hero-training" id="bento-sec-load">
-                <div class="bento-card-header">
-                    <span class="bento-card-eyebrow">⚡ STATO FORMA &amp; CARICO</span>
-                    <span class="bento-badge-sky" id="bento-acwr-badge">🛡️ ACWR 0.82</span>
-                </div>
-
-                <!-- 4 Grid Metrics -->
-                <div class="bento-load-grid-4">
-                    <div class="bento-load-box">
-                        <span class="bento-load-lbl">CTL (Fitness)</span>
-                        <span class="bento-load-val text-brand-sky" id="bento-ctl-val">42.7</span>
-                        <span class="bento-load-sub">Target: 52.0</span>
-                    </div>
-                    <div class="bento-load-box">
-                        <span class="bento-load-lbl">ATL (Fatica)</span>
-                        <span class="bento-load-val text-brand-amber" id="bento-atl-val">34.9</span>
-                        <span class="bento-load-sub">Carico 7gg</span>
-                    </div>
-                    <div class="bento-load-box">
-                        <span class="bento-load-lbl">TSB (Forma)</span>
-                        <span class="bento-load-val text-brand-emerald" id="bento-tsb-val">+7.8</span>
-                        <span class="bento-load-sub" id="bento-tsb-status">Freschezza</span>
-                    </div>
-                    <div class="bento-load-box">
-                        <span class="bento-load-lbl">Ramp Rate</span>
-                        <span class="bento-load-val text-brand-purple" id="bento-ramprate-val">+1.2</span>
-                        <span class="bento-load-sub">CTL/sett</span>
-                    </div>
-                </div>
-
-                <!-- Dicotomia CTL Bike vs Run (Cruciale per Simone) -->
-                <div class="bento-ctl-split-box">
-                    <div class="bento-split-row">
-                        <div class="bento-split-item">
-                            <span class="bento-split-icon">🚴</span>
-                            <span class="bento-split-name">Bike CTL:</span>
-                            <strong class="text-brand-sky" id="bento-bike-ctl">21.5</strong>
-                            <span class="bento-split-badge">Base Solida</span>
-                        </div>
-                        <div class="bento-split-item">
-                            <span class="bento-split-icon">🏃</span>
-                            <span class="bento-split-name">Run CTL:</span>
-                            <strong class="text-brand-emerald" id="bento-run-ctl">9.4</strong>
-                            <span class="bento-split-badge badge-silver" id="bento-chassis-badge" style="color:#94a3b8; border-color:#94a3b855;">🛡️ TELAIO ADEGUATO AL MOTORE</span>
-                        </div>
-                    </div>
-                    <div class="bento-split-hint" id="bento-chassis-hint">
-                        Rapporto sano per 85 kg (Run CTL 9.4 su Bike CTL 21.5, ratio 43.7%). Il telaio sostiene l'impatto senza sovraccarico cronico.
-                    </div>
-                </div>
-            </div>
-
-            <!-- 2. BIOMETRICHE & SALUTE (SUBITO SOTTO) -->
-            <div class="bento-card bento-card-health" id="bento-sec-health">
-                <div class="bento-card-header">
-                    <span class="bento-card-eyebrow">🩺 BIOMETRICHE &amp; SALUTE LONGEVITÀ</span>
-                    <span class="bento-badge-emerald" id="bento-health-status" style="color:#10b981; border-color:#10b98155;">Vagale Ottimale</span>
-                </div>
-
-                <!-- Trio Biometrico del Mattino -->
-                <div class="bento-bio-trio">
-                    <div class="bento-bio-col">
-                        <span class="bento-bio-lbl">🫀 HRV rMSSD</span>
-                        <div class="bento-bio-val text-brand-emerald" id="bento-hrv-val">56 <small>ms</small></div>
-                        <span class="bento-bio-sub" id="bento-hrv-sub">Media 7g: 52.0 ms</span>
-                    </div>
-                    <div class="bento-bio-col">
-                        <span class="bento-bio-lbl">💓 FC Riposo (RHR)</span>
-                        <div class="bento-bio-val text-brand-sky" id="bento-rhr-val">44 <small>bpm</small></div>
-                        <span class="bento-bio-sub">Bradicardia sana</span>
-                    </div>
-                    <div class="bento-bio-col">
-                        <span class="bento-bio-lbl">🌙 Sonno &amp; Recupero</span>
-                        <div class="bento-bio-val text-brand-purple" id="bento-sleep-val">9.6 <small>h</small></div>
-                        <span class="bento-bio-sub" id="bento-sleep-sub">Score: 80 • Ricarica Ottimale</span>
-                    </div>
-                </div>
-
-                <!-- Pilastri Clinici Attia / Brecka -->
-                <div class="bento-pillars-summary">
-                    <div class="bento-pillar-chip">
-                        <span class="pillar-dot dot-valid"></span>
-                        <span>Cardiovascolare (ApoB &amp; Lp(a))</span>
-                    </div>
-                    <div class="bento-pillar-chip">
-                        <span class="pillar-dot dot-valid"></span>
-                        <span>Metabolico (Glicemia &amp; FatMax)</span>
-                    </div>
-                    <div class="bento-pillar-chip">
-                        <span class="pillar-dot dot-todo"></span>
-                        <span>Ormonale (Testosterone / MPS)</span>
-                    </div>
-                    <div class="bento-pillar-chip">
-                        <span class="pillar-dot dot-valid"></span>
-                        <span>Prevenzione Fototipo IV &amp; Colon</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3. ALLENAMENTO PER OGGI (MOLTO PIÙ CONCISO & CHIRURGICO) -->
-            <div class="bento-card bento-card-concise-today" id="bento-sec-today">
+            <!-- 1. HERO CARD ABOVE-THE-FOLD: COSA FARE OGGI & READINESS BIOLOGICA -->
+            <div class="bento-card bento-card-concise-today bento-hero-today" id="bento-sec-today">
                 <div class="bento-card-header">
                     <span class="bento-card-eyebrow">🎯 COSA FARE OGGI</span>
                     <span class="bento-readiness-badge" id="bento-readiness-badge" style="color:#94a3b8; border-color:#94a3b855; background:#94a3b818;">SILVER</span>
@@ -226,7 +120,7 @@
                 </div>
 
                 <div class="bento-readiness-summary-concise" id="bento-readiness-summary">
-                    HRV 56 ms • FC 44 bpm • TSB +7.8
+                    HRV 56 ms • FC 44 bpm • TSB +6.0
                 </div>
 
                 <!-- Prescrizioni Ultra-Concise One-Liners -->
@@ -277,6 +171,102 @@
                             <span>🏊 Nuoto 1.5k</span>
                             <small id="bento-swim-desc">Vasca Z1 Decompressione L4-S1</small>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. STATO FORMA & CARICO -->
+            <div class="bento-card bento-hero-training" id="bento-sec-load">
+                <div class="bento-card-header">
+                    <span class="bento-card-eyebrow">⚡ STATO FORMA &amp; CARICO</span>
+                    <span class="bento-badge-sky" id="bento-acwr-badge">🛡️ ACWR 0.87</span>
+                </div>
+
+                <!-- 4 Grid Metrics -->
+                <div class="bento-load-grid-4">
+                    <div class="bento-load-box">
+                        <span class="bento-load-lbl">CTL (Fitness)</span>
+                        <span class="bento-load-val text-brand-sky" id="bento-ctl-val">44.7</span>
+                        <span class="bento-load-sub">Target: 52.0</span>
+                    </div>
+                    <div class="bento-load-box">
+                        <span class="bento-load-lbl">ATL (Fatica)</span>
+                        <span class="bento-load-val text-brand-amber" id="bento-atl-val">38.7</span>
+                        <span class="bento-load-sub">Carico 7gg</span>
+                    </div>
+                    <div class="bento-load-box">
+                        <span class="bento-load-lbl">TSB (Forma)</span>
+                        <span class="bento-load-val text-brand-emerald" id="bento-tsb-val">+6.0</span>
+                        <span class="bento-load-sub" id="bento-tsb-status">Freschezza</span>
+                    </div>
+                    <div class="bento-load-box">
+                        <span class="bento-load-lbl">Ramp Rate</span>
+                        <span class="bento-load-val text-brand-purple" id="bento-ramprate-val">+1.2</span>
+                        <span class="bento-load-sub">CTL/sett</span>
+                    </div>
+                </div>
+
+                <!-- Rapporto Telaio / Motore (Run CTL vs Bike CTL) Sintetico e Professionale -->
+                <div class="bento-ratio-strip">
+                    <div class="ratio-strip-left">
+                        <span class="ratio-icon">⚖️</span>
+                        <span class="ratio-title">Telaio / Motore:</span>
+                        <span class="ratio-detail"><span id="bento-run-ctl">9.4</span> Run / <span id="bento-bike-ctl">21.5</span> Bike</span>
+                    </div>
+                    <div class="ratio-strip-right">
+                        <span class="bento-ratio-pill" id="bento-chassis-badge" style="color: #10b981; border: 1px solid #10b98166; background: #10b98118;">
+                            <span class="pulse-dot-sm" id="bento-ratio-dot" style="background: #10b981;"></span>
+                            <strong id="bento-chassis-ratio">44%</strong>
+                            <small id="bento-chassis-status">(Equilibrato)</small>
+                        </span>
+                    </div>
+                    <div id="bento-chassis-hint" style="display: none;"></div>
+                </div>
+            </div>
+
+            <!-- 3. BIOMETRICHE & SALUTE LONGEVITÀ -->
+            <div class="bento-card bento-card-health" id="bento-sec-health">
+                <div class="bento-card-header">
+                    <span class="bento-card-eyebrow">🩺 BIOMETRICHE &amp; SALUTE LONGEVITÀ</span>
+                    <span class="bento-badge-emerald" id="bento-health-status" style="color:#10b981; border-color:#10b98155;">Vagale Ottimale</span>
+                </div>
+
+                <!-- Trio Biometrico del Mattino -->
+                <div class="bento-bio-trio">
+                    <div class="bento-bio-col">
+                        <span class="bento-bio-lbl">🫀 HRV rMSSD</span>
+                        <div class="bento-bio-val text-brand-emerald" id="bento-hrv-val">56 <small>ms</small></div>
+                        <span class="bento-bio-sub" id="bento-hrv-sub">Media 7g: 52.0 ms</span>
+                    </div>
+                    <div class="bento-bio-col">
+                        <span class="bento-bio-lbl">💓 FC Riposo (RHR)</span>
+                        <div class="bento-bio-val text-brand-sky" id="bento-rhr-val">44 <small>bpm</small></div>
+                        <span class="bento-bio-sub">Bradicardia sana</span>
+                    </div>
+                    <div class="bento-bio-col">
+                        <span class="bento-bio-lbl">🌙 Sonno &amp; Recupero</span>
+                        <div class="bento-bio-val text-brand-purple" id="bento-sleep-val">9.6 <small>h</small></div>
+                        <span class="bento-bio-sub" id="bento-sleep-sub">Score: 80 • Ricarica Ottimale</span>
+                    </div>
+                </div>
+
+                <!-- Pilastri Clinici Attia / Brecka -->
+                <div class="bento-pillars-summary">
+                    <div class="bento-pillar-chip">
+                        <span class="pillar-dot dot-valid"></span>
+                        <span>Cardiovascolare (ApoB &amp; Lp(a))</span>
+                    </div>
+                    <div class="bento-pillar-chip">
+                        <span class="pillar-dot dot-valid"></span>
+                        <span>Metabolico (Glicemia &amp; FatMax)</span>
+                    </div>
+                    <div class="bento-pillar-chip">
+                        <span class="pillar-dot dot-todo"></span>
+                        <span>Ormonale (Testosterone / MPS)</span>
+                    </div>
+                    <div class="bento-pillar-chip">
+                        <span class="pillar-dot dot-valid"></span>
+                        <span>Prevenzione Fototipo IV &amp; Colon</span>
                     </div>
                 </div>
             </div>
@@ -430,7 +420,7 @@
                         <span class="bar" style="height: 70%"></span>
                     </div>
                 </div>
-                <div class="readiness-subtitle" id="kpi-readiness-desc" style="color:#94a3b8;">Parasimpatico Stabile (HRV 56ms, Z=+1.3σ | RHR 44bpm | TSB +8). Motore Z2 centrale 100% aperto (60-85 TSS).</div>
+                <div class="readiness-subtitle" id="kpi-readiness-desc" style="color:#94a3b8;">Parasimpatico Stabile (HRV 56ms, Z=+1.3σ | RHR 44bpm | TSB +6). Motore Z2 centrale 100% aperto (60-85 TSS).</div>
                 <div id="desktop-battery-box" style="margin-top: 0.35rem; padding-top: 0.35rem; border-top: 1px dashed rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: space-between;">
                     <span id="desktop-battery-badge" style="font-size: 0.72rem; font-weight: 800; color: #94a3b8;">🥈 SILVER — BUILD VOLUME Z2</span>
                     <strong id="desktop-battery-pct" style="font-size: 0.75rem; color: #94a3b8;">80%</strong>
@@ -467,24 +457,24 @@
             <div class="kpi-card">
                 <div class="kpi-card-header">
                     <span>⚖️ Bilancio TSB</span>
-                    <span id="trend-tsb" class="trend-badge down">-2.0</span>
+                    <span id="trend-tsb" class="trend-badge up">+3.2</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-tsb"><span style="color:#ef4444">+8</span> <span style="font-size:0.7em; opacity:0.8;">TSB</span></div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-tsb"><path d="M 0.0,3.0 L 2.1,10.4 L 4.1,9.4 L 6.2,11.9 L 8.3,10.9 L 10.3,9.3 L 12.4,16.9 L 14.5,17.5 L 16.6,15.3 L 18.6,15.3 L 20.7,23.0 L 22.8,20.9 L 24.8,17.2 L 26.9,12.4 L 29.0,8.5 L 31.0,13.0 L 33.1,9.1 L 35.2,9.1 L 37.2,11.4 L 39.3,9.5 L 41.4,9.9 L 43.4,9.4 L 45.5,17.1 L 47.6,12.7 L 49.7,10.0 L 51.7,11.1 L 53.8,7.9 L 55.9,9.4 L 57.9,12.5 L 60.0,14.6" stroke="#ef4444"/></svg>
+                    <div class="metric-value" id="kpi-tsb"><span style="color:#10b981">+6</span> <span style="font-size:0.7em; opacity:0.8;">TSB</span></div>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-tsb"><path d="M 0.0,3.0 L 2.1,9.7 L 4.1,8.8 L 6.2,11.1 L 8.3,10.1 L 10.3,8.7 L 12.4,15.6 L 14.5,16.1 L 16.6,14.2 L 18.6,14.2 L 20.7,21.1 L 22.8,19.2 L 24.8,15.9 L 26.9,11.6 L 29.0,8.0 L 31.0,12.1 L 33.1,8.5 L 35.2,8.5 L 37.2,10.6 L 39.3,16.0 L 41.4,15.1 L 43.4,13.6 L 45.5,23.0 L 47.6,17.7 L 49.7,14.3 L 51.7,14.4 L 53.8,10.5 L 55.9,11.3 L 57.9,13.6 L 60.0,15.0" stroke="#10b981"/></svg>
                 </div>
-                <div class="metric-subtitle"><span>TSB / ACWR</span><span id="kpi-tsb-sub"><span style="color:#10b981; font-weight:600;">ACWR 0.82</span></span></div>
+                <div class="metric-subtitle"><span>TSB / ACWR</span><span id="kpi-tsb-sub"><span style="color:#10b981; font-weight:600;">ACWR 0.87</span></span></div>
             </div>
 
             <!-- 5. Total CTL Card -->
             <div class="kpi-card">
                 <div class="kpi-card-header">
                     <span>📊 Total CTL</span>
-                    <span id="trend-total-ctl" class="trend-badge down">-0.8</span>
+                    <span id="trend-total-ctl" class="trend-badge down">-1.0</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-total-ctl"><span style="color:#ef4444">42.7</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span></div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-total-ctl"><path d="M 0.0,3.8 L 2.1,5.3 L 4.1,4.8 L 6.2,6.1 L 8.3,7.9 L 10.3,4.8 L 12.4,4.8 L 14.5,6.3 L 16.6,6.8 L 18.6,3.0 L 20.7,4.3 L 22.8,6.3 L 24.8,9.2 L 26.9,12.2 L 29.0,10.7 L 31.0,13.5 L 33.1,14.5 L 35.2,14.3 L 37.2,16.1 L 39.3,16.8 L 41.4,18.1 L 43.4,14.8 L 45.5,17.6 L 47.6,19.9 L 49.7,20.2 L 51.7,22.7 L 53.8,23.0 L 55.9,22.5 L 57.9,22.0 L 60.0,22.0" stroke="#ef4444"/></svg>
+                    <div class="metric-value" id="kpi-total-ctl"><span style="color:#ef4444">44.7</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span></div>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-total-ctl"><path d="M 0.0,4.0 L 2.1,6.1 L 4.1,5.4 L 6.2,7.1 L 8.3,9.6 L 10.3,5.4 L 12.4,5.4 L 14.5,7.5 L 16.6,8.2 L 18.6,3.0 L 20.7,4.7 L 22.8,7.5 L 24.8,11.3 L 26.9,15.4 L 29.0,13.3 L 31.0,17.1 L 33.1,18.5 L 35.2,18.2 L 37.2,15.1 L 39.3,16.1 L 41.4,17.8 L 43.4,10.9 L 45.5,15.1 L 47.6,18.2 L 49.7,18.9 L 51.7,22.7 L 53.8,23.0 L 55.9,22.3 L 57.9,21.6 L 60.0,21.6" stroke="#ef4444"/></svg>
                 </div>
                 <div class="metric-subtitle"><span>Fitness Globale</span><span id="kpi-total-ctl-sub"></span></div>
             </div>
@@ -513,7 +503,7 @@
                     <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-run-ctl"><path d="M 0.0,23.0 L 2.1,17.7 L 4.1,20.3 L 6.2,15.0 L 8.3,17.7 L 10.3,20.3 L 12.4,8.3 L 14.5,11.0 L 16.6,13.7 L 18.6,16.3 L 20.7,9.7 L 22.8,12.3 L 24.8,15.0 L 26.9,17.7 L 29.0,17.7 L 31.0,20.3 L 33.1,12.3 L 35.2,15.0 L 37.2,17.7 L 39.3,8.3 L 41.4,12.3 L 43.4,15.0 L 45.5,17.7 L 47.6,20.3 L 49.7,9.7 L 51.7,13.7 L 53.8,3.0 L 55.9,5.7 L 57.9,9.7 L 60.0,9.7" stroke="#10b981"/></svg>
                 </div>
                 <div class="metric-subtitle">
-                    <span id="desktop-chassis-badge" style="color: #94a3b8; font-weight: 700; font-size: 0.68rem;">🛡️ TELAIO ADEGUATO AL MOTORE</span>
+                    <span id="desktop-chassis-badge" style="color: #10b981; font-weight: 700; font-size: 0.68rem;">⚖️ Telaio/Motore: 44% (Equilibrato)</span>
                     <span id="kpi-run-ctl-sub"><span style="color:#10b981; font-weight:600;">ACWR 1.11</span></span>
                 </div>
             </div>
@@ -599,15 +589,15 @@
                             <div style="display: flex; flex-direction: column; gap: 0.35rem; flex: 1;">
                                 <div style="display: flex; justify-content: space-between; font-size: 0.75rem; background: rgba(255, 255, 255, 0.03); padding: 0.3rem 0.6rem; border-radius: 6px;">
                                     <span style="color: var(--text-muted);">CTL Attuale:</span>
-                                    <span style="font-weight: 700; color: #38bdf8;" id="prep-current-ctl">42.7 CTL</span>
+                                    <span style="font-weight: 700; color: #38bdf8;" id="prep-current-ctl">44.7 CTL</span>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; font-size: 0.75rem; background: rgba(255, 255, 255, 0.03); padding: 0.3rem 0.6rem; border-radius: 6px;">
                                     <span style="color: var(--text-muted);">CTL Target Gara:</span>
-                                    <span style="font-weight: 700; color: var(--accent-gold);" id="prep-target-ctl">44.8 CTL</span>
+                                    <span style="font-weight: 700; color: var(--accent-gold);" id="prep-target-ctl">46.8 CTL</span>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; font-size: 0.75rem; background: rgba(255, 255, 255, 0.03); padding: 0.3rem 0.6rem; border-radius: 6px;">
                                     <span style="color: var(--text-muted);">TSB Attuale (Freschezza):</span>
-                                    <span style="font-weight: 700; color: #38bdf8;" id="prep-current-tsb">+7.8 TSB (Tapering Ottimale)</span>
+                                    <span style="font-weight: 700; color: #38bdf8;" id="prep-current-tsb">+6.0 TSB (Tapering Ottimale)</span>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; font-size: 0.75rem; background: rgba(255, 255, 255, 0.03); padding: 0.3rem 0.6rem; border-radius: 6px;">
                                     <span style="color: var(--text-muted);">TSB Target Gara:</span>
@@ -617,7 +607,7 @@
                         </div>
 
                         <div style="font-size: 0.68rem; color: rgba(255, 255, 255, 0.6); line-height: 1.3; border-top: 1px dashed rgba(255, 255, 255, 0.1); padding-top: 0.35rem;" id="prep-explanation-text">
-                            ℹ️ <strong>Origine CTL Target (44.8 CTL):</strong> Basato sul benchmark della letteratura scientifica (50 CTL per Test Podistico 10k Olimpico (Fuerteventura)) ed aggiustato alla CTL massima realmente raggiungibile (44.8) in 10 giorni, considerando un Ramp Rate sicuro (+5 CTL/settimana) ed una finestra di Tapering di 7 giorni per far risalire il TSB a +10 (Freschezza Ottimale).
+                            ℹ️ <strong>Origine CTL Target (46.8 CTL):</strong> Basato sul benchmark della letteratura scientifica (50 CTL per Test Podistico 10k Olimpico (Fuerteventura)) ed aggiustato alla CTL massima realmente raggiungibile (46.8) in 10 giorni, considerando un Ramp Rate sicuro (+5 CTL/settimana) ed una finestra di Tapering di 7 giorni per far risalire il TSB a +10 (Freschezza Ottimale).
                         </div>
                     </div>
 
