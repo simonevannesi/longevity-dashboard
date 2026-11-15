@@ -2251,14 +2251,44 @@ function updateBentoView() {
     const hrv7 = hrvRows.slice(-7);
     const avgHrv7d = hrv7.length > 0 ? (hrv7.reduce((a,b)=>a+b, 0) / hrv7.length) : hrv;
 
+    // Altini 30-day Baseline & Normal Range (SWC = 0.75 * SD)
+    const hrv30 = hrvRows.slice(-30);
+    const avgHrv30d = hrv30.length > 0 ? (hrv30.reduce((a,b)=>a+b, 0) / hrv30.length) : 50.6;
+    const stdHrv30d = hrv30.length > 1 ? Math.sqrt(hrv30.map(x => Math.pow(x - avgHrv30d, 2)).reduce((a,b)=>a+b, 0) / (hrv30.length - 1)) : 4.2;
+    const swc = 0.75 * stdHrv30d;
+    const hrvLow = Math.round(avgHrv30d - swc);
+    const hrvHigh = Math.round(avgHrv30d + swc);
+
+    // RHR 30-day Baseline
+    const rhrRows = dashList.map(d => parseFloat(d['RHR'])).filter(v => !isNaN(v) && v > 0);
+    const rhr30 = rhrRows.slice(-30);
+    const avgRhr30d = rhr30.length > 0 ? (rhr30.reduce((a,b)=>a+b, 0) / rhr30.length) : 45.0;
+    const deltaRhr = rhr - avgRhr30d;
+
     const hrvEl = document.getElementById('bento-hrv-val');
     if (hrvEl && hrv > 0) hrvEl.innerHTML = `${Math.round(hrv)} <small>ms</small>`;
 
     const hrvSubEl = document.getElementById('bento-hrv-sub');
-    if (hrvSubEl && avgHrv7d > 0) hrvSubEl.textContent = `Media 7g: ${avgHrv7d.toFixed(1)} ms`;
+    if (hrvSubEl && hrv > 0) {
+        if (hrv > hrvHigh) {
+            const zScore = ((hrv - avgHrv30d) / stdHrv30d).toFixed(1);
+            hrvSubEl.textContent = `Norma: ${hrvLow}–${hrvHigh} ms (+${zScore}σ)`;
+        } else if (hrv < hrvLow) {
+            const zScore = ((hrv - avgHrv30d) / stdHrv30d).toFixed(1);
+            hrvSubEl.textContent = `Norma: ${hrvLow}–${hrvHigh} ms (${zScore}σ Cautela)`;
+        } else {
+            hrvSubEl.textContent = `Norma: ${hrvLow}–${hrvHigh} ms (Omeostasi OK)`;
+        }
+    }
 
     const rhrEl = document.getElementById('bento-rhr-val');
     if (rhrEl && rhr > 0) rhrEl.innerHTML = `${Math.round(rhr)} <small>bpm</small>`;
+
+    const rhrSubEl = document.getElementById('bento-rhr-sub');
+    if (rhrSubEl && rhr > 0) {
+        const dStr = deltaRhr > 0 ? `+${deltaRhr.toFixed(0)}` : `${deltaRhr.toFixed(0)}`;
+        rhrSubEl.textContent = `Baseline: ${Math.round(avgRhr30d)} bpm (${dStr} bpm)`;
+    }
 
     const sleepEl = document.getElementById('bento-sleep-val');
     if (sleepEl && sleepHours > 0) {
@@ -2267,15 +2297,35 @@ function updateBentoView() {
 
     const sleepSubEl = document.getElementById('bento-sleep-sub');
     if (sleepSubEl && sleepScore > 0) {
-        const descScore = sleepScore >= 75 ? 'Ricarica Ottimale' : (sleepScore >= 60 ? 'Sonno Discreto' : 'Sonno Breve / Cautela');
-        sleepSubEl.textContent = `Score: ${Math.round(sleepScore)} • ${descScore}`;
+        const descScore = sleepScore >= 75 ? 'Ricarica Piena' : (sleepScore >= 60 ? 'Sonno Discreto' : 'Sonno Breve / Cautela');
+        sleepSubEl.textContent = `Score ${Math.round(sleepScore)} • ${descScore}`;
+    }
+
+    const snaStatusEl = document.getElementById('bento-sna-status');
+    if (snaStatusEl) {
+        if (hrv > hrvHigh && rhr <= avgRhr30d) {
+            snaStatusEl.textContent = 'Parasimpatico Dominante (Supercompensazione)';
+            snaStatusEl.className = 'text-brand-emerald';
+        } else if (hrv < hrvLow || rhr >= avgRhr30d + 2) {
+            snaStatusEl.textContent = 'Simpatico Attivo (Fatica da Riassorbire)';
+            snaStatusEl.className = 'text-brand-amber';
+        } else {
+            snaStatusEl.textContent = 'Parasimpatico Stabile (Equilibrio Omeostatico)';
+            snaStatusEl.className = 'text-brand-sky';
+        }
+    }
+
+    const trend7gEl = document.getElementById('bento-trend-7g');
+    if (trend7gEl && avgHrv7d > 0) {
+        trend7gEl.textContent = `${avgHrv7d.toFixed(1)} ms`;
     }
 
     const healthStatusEl = document.getElementById('bento-health-status');
     if (healthStatusEl) {
-        const isTachy = rhr >= 47;
-        const hStatusTxt = isTachy ? 'Fatica Autonomica' : 'Vagale Ottimale';
-        const hStatusCol = isTachy ? '#f59e0b' : '#10b981';
+        const isTachy = rhr >= 48 || (hrv < hrvLow - 5);
+        const isCareful = rhr >= 47 || hrv < hrvLow;
+        const hStatusTxt = isTachy ? 'Stress Severo' : (isCareful ? 'Fatica Autonomica' : 'Vagale Ottimale');
+        const hStatusCol = isTachy ? '#ef4444' : (isCareful ? '#facc15' : '#10b981');
         healthStatusEl.textContent = hStatusTxt;
         healthStatusEl.style.color = hStatusCol;
         healthStatusEl.style.borderColor = hStatusCol + '55';
