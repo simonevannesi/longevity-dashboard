@@ -35,7 +35,7 @@
               let clean = url.substring(5).split('?')[0];
               url = 'api/' + clean + '.json?v=' + _rt_ts;
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 16/11 21:59.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 16/11 22:15.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -306,7 +306,7 @@
                 <div class="bento-weight-strip">
                     <div class="weight-main">
                         <span class="weight-label">Peso Odierno</span>
-                        <div class="weight-val" id="bento-weight-val">84.5 <small>kg</small></div>
+                        <div class="weight-val" id="bento-weight-val">84.2 <small>kg</small></div>
                     </div>
                     <div class="weight-target">
                         <span>Target Longevità: <strong>82–83 kg</strong></span>
@@ -381,7 +381,7 @@
             <span class="context-pill location-pill" id="pill-location">🏠 <strong>HOME BASE (CASA)</strong></span>
             <span class="context-pill season-pill" id="pill-season">🍂 FASE 1: BASE Z2 &amp; HYROX</span>
             <span class="context-pill target-pill" id="pill-target-ctl">🎯 TARGET LONGEVITY: <strong>52 CTL</strong></span>
-            <span class="context-pill weight-pill" id="pill-weight">⚖️ TARGET PESO: <strong>82–83 kg</strong> (Attuale: 84.5 kg)</span>
+            <span class="context-pill weight-pill" id="pill-weight">⚖️ TARGET PESO: <strong>82–83 kg</strong> (Attuale: 84.2 kg)</span>
         </div>
 
         <!-- 7 KPI Cards Grid: STRICTLY 1 SINGLE ROW ON ALL SCREENS -->
@@ -626,8 +626,8 @@
                         <button type="button" id="btn-nutri-today" onclick="loadNutritionData()" style="display: none; background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.4); color: #10b981; border-radius: 5px; cursor: pointer; font-size: 0.65rem; font-weight: 700; padding: 0.1rem 0.4rem; margin-left: 0.15rem;">Oggi</button>
                     </div>
                 </div>
-                <div class="nutrition-status-badge status-in_attesa" id="nutrition-status-badge">
-                    IN ATTESA DI LOG CIBO
+                <div class="nutrition-status-badge status-deficit" id="nutrition-status-badge">
+                    DEFICIT: -197 kcal
                 </div>
             </div>
 
@@ -651,16 +651,16 @@
                 <div class="nutrition-stat-box" id="box-tdee">
                     <div class="nutri-stat-header">
                         <span>⚡ SPESA TOTALE (OUT)</span>
-                        <span class="nutri-stat-val" id="nutri-tdee-val">2,702 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span></span>
+                        <span class="nutri-stat-val" id="nutri-tdee-val">2,693 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span></span>
                     </div>
                     <div class="nutri-breakdown-list">
                         <div class="nutri-breakdown-item">
                             <span>🛌 Metabolismo Basale (BMR)</span>
-                            <strong id="nutri-bmr-val">2,083 kcal</strong>
+                            <strong id="nutri-bmr-val">2,075 kcal</strong>
                         </div>
                         <div class="nutri-breakdown-item">
                             <span id="nutri-workout-desc">🏃 Corsa (33 min) • 140 bpm (FC Attiva)</span>
-                            <strong style="color: #60a5fa;" id="nutri-workout-val">+293 kcal</strong>
+                            <strong style="color: #60a5fa;" id="nutri-workout-val">+292 kcal</strong>
                         </div>
                         <div class="nutri-breakdown-item">
                             <span>🚶 NEAT &amp; Quotidiano</span>
@@ -673,37 +673,37 @@
                 <div class="nutrition-stat-box" id="box-intake">
                     <div class="nutri-stat-header">
                         <span>🍽️ INTROITO ALIMENTARE (IN)</span>
-                        <span class="nutri-stat-val" id="nutri-intake-val" style="color: #10b981;">0 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span></span>
+                        <span class="nutri-stat-val" id="nutri-intake-val" style="color: #10b981;">2,496 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span></span>
                     </div>
                     <div class="nutri-macros-bars">
                         <!-- Carbo -->
                         <div class="macro-bar-item">
                             <div class="macro-bar-label">
                                 <span>🌾 Carboidrati</span>
-                                <span id="nutri-carbs-text"><strong>0g</strong> / 186g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 186g • 0%)</span></span>
+                                <span id="nutri-carbs-text"><strong>247.0g</strong> / 185g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(+62.0g surplus • 134%)</span></span>
                             </div>
                             <div class="macro-bar-track">
-                                <div class="macro-bar-fill" id="nutri-carbs-fill" style="width: 0%; background: #38bdf8;"></div>
+                                <div class="macro-bar-fill" id="nutri-carbs-fill" style="width: 100%; background: #38bdf8;"></div>
                             </div>
                         </div>
                         <!-- Proteine -->
                         <div class="macro-bar-item">
                             <div class="macro-bar-label">
                                 <span>🥩 Proteine</span>
-                                <span id="nutri-protein-text"><strong>0g</strong> / 152g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 152g • 0%)</span></span>
+                                <span id="nutri-protein-text"><strong>121.3g</strong> / 152g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 30.7g • 80%)</span></span>
                             </div>
                             <div class="macro-bar-track">
-                                <div class="macro-bar-fill" id="nutri-protein-fill" style="width: 0%; background: #34d399;"></div>
+                                <div class="macro-bar-fill" id="nutri-protein-fill" style="width: 80%; background: #34d399;"></div>
                             </div>
                         </div>
                         <!-- Grassi -->
                         <div class="macro-bar-item">
                             <div class="macro-bar-label">
                                 <span>🥑 Grassi</span>
-                                <span id="nutri-fat-text"><strong>0g</strong> / 150g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 150g • 0%)</span></span>
+                                <span id="nutri-fat-text"><strong>113.2g</strong> / 149g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 35.8g • 76%)</span></span>
                             </div>
                             <div class="macro-bar-track">
-                                <div class="macro-bar-fill" id="nutri-fat-fill" style="width: 0%; background: #fbbf24;"></div>
+                                <div class="macro-bar-fill" id="nutri-fat-fill" style="width: 76%; background: #fbbf24;"></div>
                             </div>
                         </div>
                     </div>
@@ -739,7 +739,7 @@
                         <span class="nutri-multi-day-icon">🔬</span>
                         <div>
                             <span class="nutri-multi-day-title">ANALISI CARENZE &amp; SBILANCIAMENTI NUTRIZIONALI (ULTIMI 7 GG)</span>
-                            <span class="nutri-multi-day-sub" id="multi-period-label">Ultimi 7 giorni consolidati (9/11/2026 - 15/11/2026)</span>
+                            <span class="nutri-multi-day-sub" id="multi-period-label">Ultimi 7 giorni consolidati (10/11/2026 - 16/11/2026)</span>
                         </div>
                     </div>
                     <div class="nutri-multi-day-badge" id="multi-status-badge" style="background: #f59e0b22; color: #f59e0b; border: 1px solid #f59e0b55;">
@@ -756,10 +756,10 @@
                             <span class="nutri-imbalance-tag" id="multi-pro-tag" style="background: #f59e0b22; color: #f59e0b;">ATTENZIONE RECUPERO</span>
                         </div>
                         <div class="nutri-imbalance-val" id="multi-pro-val" style="color: #ef4444;">
-                            122.8 <span class="nutri-imbalance-unit">g / die (1.45 g/kg)</span>
+                            118.0 <span class="nutri-imbalance-unit">g / die (1.4 g/kg)</span>
                         </div>
                         <div class="nutri-imbalance-hint" id="multi-pro-hint">
-                            Target Longevità: <strong>152.1g</strong> (1.8 g/kg • 81%)
+                            Target Longevità: <strong>151.6g</strong> (1.8 g/kg • 78%)
                         </div>
                     </div>
 
@@ -770,10 +770,10 @@
                             <span class="nutri-imbalance-tag" id="multi-carbs-tag" style="background: #10b98122; color: #10b981;">RICARICA ADEGUATA</span>
                         </div>
                         <div class="nutri-imbalance-val" id="multi-carbs-val" style="color: #f59e0b;">
-                            176.1 <span class="nutri-imbalance-unit">g / die (95%)</span>
+                            184.5 <span class="nutri-imbalance-unit">g / die (100%)</span>
                         </div>
                         <div class="nutri-imbalance-hint" id="multi-carbs-hint">
-                            2,683 kcal bruciate in 6 sessioni
+                            2,913 kcal bruciate in 6 sessioni
                         </div>
                     </div>
 
@@ -784,10 +784,10 @@
                             <span class="nutri-imbalance-tag" id="multi-fat-tag" style="background: #10b98122; color: #10b981;">OMONEPOIESI OK</span>
                         </div>
                         <div class="nutri-imbalance-val" id="multi-fat-val" style="color: #10b981;">
-                            95.7 <span class="nutri-imbalance-unit">g / die (1.13 g/kg)</span>
+                            97.5 <span class="nutri-imbalance-unit">g / die (1.16 g/kg)</span>
                         </div>
                         <div class="nutri-imbalance-hint" id="multi-fat-hint">
-                            Target Ormonale: <strong>84.5g</strong> (1.0 g/kg • 113%)
+                            Target Ormonale: <strong>84.2g</strong> (1.0 g/kg • 116%)
                         </div>
                     </div>
 
@@ -798,10 +798,10 @@
                             <span class="nutri-imbalance-tag" id="multi-energy-tag" style="background: #f59e0b22; color: #f59e0b;">CAUTELA IMMUNITÀ</span>
                         </div>
                         <div class="nutri-imbalance-val" id="multi-energy-val" style="color: #f59e0b;">
-                            -4,474 <span class="nutri-imbalance-unit">kcal (7d)</span>
+                            -4,512 <span class="nutri-imbalance-unit">kcal (7d)</span>
                         </div>
                         <div class="nutri-imbalance-hint" id="multi-energy-hint">
-                            Media: -639 kcal/die su 7 gg
+                            Media: -645 kcal/die su 7 gg
                         </div>
                     </div>
                 </div>
@@ -811,7 +811,7 @@
                     <span style="font-size: 1.25rem;">🩺</span>
                     <div>
                         <strong style="color: #38bdf8; display: block; margin-bottom: 2px;">Impatto Clinico su Salute, Massa Magra &amp; Biomarker Reali:</strong>
-                        <span id="multi-clinical-insight">Negli ultimi 7 giorni consolidati (9/11/2026 - 15/11/2026) hai sostenuto un carico biologico rilevante (6 sessioni: Motocross, Ciclismo e Corsa per 2,683 kcal spese) a fronte di un apporto proteico medio di soli 122.8g/die (1.45 g/kg vs target di longevità 1.80 g/kg • 81%). A 52 anni, la resistenza anabolica richiede almeno 1.6-1.8 g/kg per sostenere la sintesi proteica muscolare (MPS) e la riparazione tendineo-articolare, specialmente dopo le sollecitazioni eccentriche di corsa e motocross. Inoltre, l'introito glucidico (176.1g vs target 186g) e il deficit cumulato di -4,474 kcal hanno mantenuto la FC a riposo su una media di 44.7 bpm (sopra il baseline di 44 bpm) e possono spiegare derive cardiache anticipate ed eccesso di cortisolo notturno. Ai sensi della Regola 0.2, è prioritario proteggere il sistema immunitario ed evitare il catabolismo.</span>
+                        <span id="multi-clinical-insight">Negli ultimi 7 giorni consolidati (10/11/2026 - 16/11/2026) hai sostenuto un carico biologico rilevante (6 sessioni: Motocross, Ciclismo e Corsa per 2,913 kcal spese) a fronte di un apporto proteico medio di soli 118.0g/die (1.40 g/kg vs target di longevità 1.80 g/kg • 78%). A 52 anni, la resistenza anabolica richiede almeno 1.6-1.8 g/kg per sostenere la sintesi proteica muscolare (MPS) e la riparazione tendineo-articolare, specialmente dopo le sollecitazioni eccentriche di corsa e motocross. Inoltre, l'introito glucidico (184.5g vs target 185g) e il deficit cumulato di -4,512 kcal hanno mantenuto la FC a riposo su una media di 44.3 bpm (sopra il baseline di 44 bpm) e possono spiegare derive cardiache anticipate ed eccesso di cortisolo notturno. Ai sensi della Regola 0.2, è prioritario proteggere il sistema immunitario ed evitare il catabolismo.</span>
                     </div>
                 </div>
 
@@ -835,8 +835,8 @@
                             <span class="nutri-weight-sub">Bioimpedenziometria, Longevità Fisiologica &amp; Validazione Termodinamica</span>
                         </div>
                     </div>
-                    <div class="nutri-weight-badge" id="nutri-weight-badge" style="background: #38bdf822; color: #38bdf8; border: 1px solid #38bdf855;">
-                        <span id="nutri-weight-badge-txt">IN VALIDAZIONE</span>
+                    <div class="nutri-weight-badge" id="nutri-weight-badge" style="background: #10b98122; color: #10b981; border: 1px solid #10b98155;">
+                        <span id="nutri-weight-badge-txt">CONCORDANTE (Formula Calibrata)</span>
                     </div>
                 </div>
 
@@ -922,16 +922,16 @@
                     <div class="nutri-weight-col">
                         <span class="nutri-weight-label">Bilancio Medio / Proiezione 7d</span>
                         <div class="nutri-weight-val" id="nutri-net-7d-val" style="color: #38bdf8;">
-                            <span style="color:#38bdf8;">-4,564</span> <span class="nutri-weight-unit">kcal / sett</span>
+                            <span style="color:#38bdf8;">-4,109</span> <span class="nutri-weight-unit">kcal / sett</span>
                         </div>
-                        <span class="nutri-weight-hint" id="nutri-net-7d-hint">Media: -652 kcal/gg su 6 gg tracciati</span>
+                        <span class="nutri-weight-hint" id="nutri-net-7d-hint">Media: -587 kcal/gg su 7 gg tracciati</span>
                     </div>
 
                     <!-- Metric 2: Stima Variazione Peso Teorica -->
                     <div class="nutri-weight-col">
                         <span class="nutri-weight-label">Variazione Peso Stimata (7d)</span>
                         <div class="nutri-weight-val" id="nutri-weight-delta-val" style="color: #38bdf8;">
-                            <span style="color:#38bdf8;">-0.59 kg/sett</span>
+                            <span style="color:#38bdf8;">-0.53 kg/sett</span>
                         </div>
                         <span class="nutri-weight-hint" id="nutri-weight-delta-hint">Calo Stimato</span>
                     </div>
@@ -951,14 +951,14 @@
                                 📊 Dettagli
                             </button>
                         </div>
-                        <span class="nutri-weight-hint" id="nutri-weight-real-hint">Precedente: 84.7 kg (14/10/2026) • Media Ponderata: 84.49 kg</span>
+                        <span class="nutri-weight-hint" id="nutri-weight-real-hint">Precedente: 84.5 kg (05/11/2026) • Media Ponderata: 84.44 kg</span>
                     </div>
                 </div>
 
                 <!-- Validation Status Banner / Message -->
                 <div class="nutri-weight-msg" id="nutri-weight-msg-banner">
                     <span id="nutri-weight-msg-icon">ℹ️</span>
-                    <span id="nutri-weight-msg-text">Stima settimanale calcolata (-0.59 kg/sett). In attesa della prossima pesata per validare la formula.</span>
+                    <span id="nutri-weight-msg-text">Calcoli calorici (BMR + HR + Cibo) calibrati: il trend reale consolidato (-0.19 kg/sett, media ponderata 84.44 kg) concorda con la stima termodinamica del deficit (-0.53 kg/sett) entro 0.34 kg.</span>
                 </div>
 
                 <!-- 📝 Form Espandibile per Dati Completi Bilancia Garmin -->
