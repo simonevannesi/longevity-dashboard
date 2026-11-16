@@ -35,7 +35,7 @@
               let clean = url.substring(5).split('?')[0];
               url = 'api/' + clean + '.json?v=' + _rt_ts;
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 16/11 10:15.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 16/11 10:19.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -515,7 +515,7 @@
                         <span>🏃 Combo Municipale 3 (Sessione Chiave 10k: Ripetute Medie)</span>
                         <span style="color:#38bdf8; font-size:0.75rem;">Opzione Alternativa</span>
                     </div>
-                    <div class="workout-subcard-desc">Bici 5km andata -> Pista Tartan: 1.6km WU + 4x1000m @ 4:42-4:45 /km (rec. 2'30" attivo) + 1km CD -> Vasca: 800m Z1 -> Bici 5km ritorno.</div>
+                    <div class="workout-subcard-desc">Bici 5km andata -> Pista Tartan: 1.6km WU + 4x1000m in progressione (1° @ 4:35, 2° @ 4:25, 3°-4° @ 4:15-4:20 /km, rec. 2'30" attivo) + 1km CD -> Vasca: 800m Z1 -> Bici 5km ritorno.</div>
                     <div class="workout-subcard-meta">👟 Pista Tartan Corralejo • Target: 60 TSS</div>
                 </div>
 
