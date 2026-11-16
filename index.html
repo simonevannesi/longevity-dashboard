@@ -29,12 +29,13 @@
         const _origFetch = window.fetch;
         window.fetch = function(url, opts) {
           if (typeof url === 'string') {
-            if (url === '/data') url = 'data.json?v=1794780339';
+            const _rt_ts = Date.now();
+            if (url === '/data') url = 'data.json?v=' + _rt_ts;
             else if (url.startsWith('/api/')) {
               let clean = url.substring(5).split('?')[0];
-              url = 'api/' + clean + '.json?v=1794780339';
+              url = 'api/' + clean + '.json?v=' + _rt_ts;
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 15/11 23:05.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 16/11 09:53.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -89,7 +90,7 @@
             <div class="bento-top-bar">
                 <div class="bento-context-pill">
                     <span class="pulse-dot"></span>
-                    <span>📍 Fuerteventura (Canarie) • 📅 <strong>15/11/2026</strong> • 🍁 Fase 1</span>
+                    <span>📍 Fuerteventura (Canarie) • 📅 <strong>16/11/2026</strong> • 🍁 Fase 1</span>
                 </div>
                 <div class="bento-top-actions">
                     <button class="bento-sync-btn" id="btn-bento-sync" onclick="triggerManualSync()" title="Aggiorna Dati Strava e Garmin">
@@ -120,7 +121,7 @@
                 </div>
 
                 <div class="bento-readiness-summary-concise" id="bento-readiness-summary">
-                    HRV 56 ms • FC 44 bpm • TSB +5.7
+                    HRV 56 ms • FC 42 bpm • TSB +5.0
                 </div>
 
                 <!-- Prescrizioni Ultra-Concise One-Liners (Coerenza Totale con Programma Pista) -->
@@ -128,11 +129,11 @@
                     <!-- Slot 1: Allenamento del Giorno (Primary Focus) -->
                     <div class="bento-concise-item presc-bike" id="bento-slot-primary">
                         <div class="concise-head">
-                            <span class="concise-icon" id="bento-workout-icon">🏊‍♂️</span>
-                            <strong class="concise-title" id="bento-bike-title">Nuoto Z1 in Mare: Decompressione L4-S1</strong>
-                            <span class="concise-tss" id="bento-bike-target">20 TSS</span>
+                            <span class="concise-icon" id="bento-workout-icon">🏃‍♂️</span>
+                            <strong class="concise-title" id="bento-bike-title">🏃 Focus Primario: 4x1000m in Pista Tartan</strong>
+                            <span class="concise-tss" id="bento-bike-target">60 TSS</span>
                         </div>
-                        <div class="concise-meta" id="bento-bike-meta">🌊 800-1200m sciolti (stile/dorso, FC < 120 bpm) • Drenaggio gambe</div>
+                        <div class="concise-meta" id="bento-bike-meta">🎯 1.6km WU + 4x1000m @ 4:42-4:45 /km (rec. 2'30" attivo) + 1km CD • FC < 160 bpm</div>
                         <div class="concise-actions-row" id="bento-bike-actions" style="display: none;">
                             <button class="bento-garmin-push-btn" id="btn-push-garmin-bike" onclick="pushWorkoutToGarmin('bike')">
                                 📡 Invia Workout a Garmin Connect
@@ -141,24 +142,24 @@
                         </div>
                     </div>
 
-                    <!-- Slot 2: Focus Strategico Domani & Coerenza Carico -->
-                    <div class="bento-concise-item presc-run" style="border-left: 3px solid #facc15; background: rgba(250, 204, 21, 0.04);">
+                    <!-- Slot 2: Focus Strategico & Cross-Training -->
+                    <div class="bento-concise-item presc-run" style="border-left: 3px solid #38bdf8; background: rgba(56, 189, 248, 0.04);">
                         <div class="concise-head">
-                            <span class="concise-icon">⚡</span>
-                            <strong class="concise-title" id="bento-run-title" style="color: #facc15;">DOMANI LUNEDÌ: 4x1000m in Pista Tartan</strong>
-                            <span class="concise-tss" id="bento-run-target" style="color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4); background: rgba(239, 68, 68, 0.12);">🛑 ZERO CORSA OGGI</span>
+                            <span class="concise-icon" id="bento-slot2-icon">🏊‍♂️</span>
+                            <strong class="concise-title" id="bento-run-title">🏊 Vasca Decompressione (800m Z1) + Bici Transfer</strong>
+                            <span class="concise-tss" id="bento-run-target" style="color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.12);">25 TSS</span>
                         </div>
-                        <div class="concise-meta" id="bento-run-meta">⚡ Sessione chiave 10k: serbatoi di glicogeno pieni e tendini al 100%</div>
+                        <div class="concise-meta" id="bento-run-meta">🌊 Decompressione discale L4-S1 in acqua e pedalata agile (85-90 rpm) per lavaggio metabolico</div>
                     </div>
 
-                    <!-- Slot 3: Piano B (Unico e Coerente: solo se mare mosso) -->
+                    <!-- Slot 3: Piano B (Unico e Coerente) -->
                     <div class="bento-concise-item presc-plan-b">
                         <div class="concise-head">
                             <span class="concise-icon">🌪️</span>
-                            <strong class="concise-title" id="bento-planb-title">🚲 Rulli Indoor / Cyclette Z1 Agile (Alternativa al Nuoto)</strong>
-                            <span class="concise-tss" id="bento-planb-target">30-40 min @ < 130W (FC < 115 bpm, 15 TSS)</span>
+                            <strong class="concise-title" id="bento-planb-title">🏃 Fondo Protetto o Rulli Indoor (Piano B Meteo)</strong>
+                            <span class="concise-tss" id="bento-planb-target">6-8 km sterrato compatto (VT1 5:15-5:25 /km) o 45' Agilità Indoor</span>
                         </div>
-                        <div class="concise-meta" id="bento-planb-desc">Se mare mosso o vento: solo pedalata leggera e sciolta. ZERO CORSA oggi per preservare al 100% tendini e glicogeno per i 4x1000m di domani in pista.</div>
+                        <div class="concise-meta" id="bento-planb-desc">Alternativa in caso di vento forte (> 20 nodi), maltempo o impianti comunali chiusi.</div>
                     </div>
                 </div>
             </div>
@@ -174,17 +175,17 @@
                 <div class="bento-load-grid-4">
                     <div class="bento-load-box">
                         <span class="bento-load-lbl">CTL (Fitness)</span>
-                        <span class="bento-load-val text-brand-sky" id="bento-ctl-val">45.4</span>
+                        <span class="bento-load-val text-brand-sky" id="bento-ctl-val">43.0</span>
                         <span class="bento-load-sub">Target: 52.0</span>
                     </div>
                     <div class="bento-load-box">
                         <span class="bento-load-lbl">ATL (Fatica)</span>
-                        <span class="bento-load-val text-brand-amber" id="bento-atl-val">39.7</span>
+                        <span class="bento-load-val text-brand-amber" id="bento-atl-val">38.0</span>
                         <span class="bento-load-sub">Carico 7gg</span>
                     </div>
                     <div class="bento-load-box">
                         <span class="bento-load-lbl">TSB (Forma)</span>
-                        <span class="bento-load-val text-brand-emerald" id="bento-tsb-val">+5.7</span>
+                        <span class="bento-load-val text-brand-emerald" id="bento-tsb-val">+5.0</span>
                         <span class="bento-load-sub" id="bento-tsb-status">Freschezza</span>
                     </div>
                     <div class="bento-load-box">
@@ -199,7 +200,7 @@
                     <div class="ratio-strip-left">
                         <span class="ratio-icon">⚖️</span>
                         <span class="ratio-title">Telaio / Motore:</span>
-                        <span class="ratio-detail"><span id="bento-run-ctl">9.2</span> Run / <span id="bento-bike-ctl">22.6</span> Bike</span>
+                        <span class="ratio-detail"><span id="bento-run-ctl">9.2</span> Run / <span id="bento-bike-ctl">22.3</span> Bike</span>
                     </div>
                     <div class="ratio-strip-right">
                         <span class="bento-ratio-pill" id="bento-chassis-badge" style="color: #10b981; border: 1px solid #10b98166; background: #10b98118;">
@@ -228,13 +229,13 @@
                     </div>
                     <div class="bento-bio-col">
                         <span class="bento-bio-lbl">💓 FC Riposo (RHR)</span>
-                        <div class="bento-bio-val text-brand-sky" id="bento-rhr-val">44 <small>bpm</small></div>
-                        <span class="bento-bio-sub" id="bento-rhr-sub">Baseline: 45 bpm (-1 bpm)</span>
+                        <div class="bento-bio-val text-brand-sky" id="bento-rhr-val">42 <small>bpm</small></div>
+                        <span class="bento-bio-sub" id="bento-rhr-sub">Baseline: 45 bpm (-3 bpm)</span>
                     </div>
                     <div class="bento-bio-col">
                         <span class="bento-bio-lbl">🌙 Sonno &amp; Ricarica</span>
-                        <div class="bento-bio-val text-brand-purple" id="bento-sleep-val">9.6 <small>h</small></div>
-                        <span class="bento-bio-sub" id="bento-sleep-sub">Score 80 • Ricarica Piena</span>
+                        <div class="bento-bio-val text-brand-purple" id="bento-sleep-val">11.2 <small>h</small></div>
+                        <span class="bento-bio-sub" id="bento-sleep-sub">Score 86 • Ricarica Piena</span>
                     </div>
                 </div>
 
@@ -247,7 +248,7 @@
                     </div>
                     <div class="autonomic-item">
                         <span class="autonomic-lbl">Media 7g:</span>
-                        <strong class="text-brand-sky" id="bento-trend-7g">52.0 ms</strong>
+                        <strong class="text-brand-sky" id="bento-trend-7g">52.7 ms</strong>
                         <small style="color: #64748b; font-size: 0.68rem;">(vs Base 30g 50.6 ms)</small>
                     </div>
                 </div>
@@ -257,22 +258,22 @@
             <div class="bento-card bento-card-zones" id="bento-sec-zones">
                 <div class="bento-card-header">
                     <span class="bento-card-eyebrow">📊 POLARIZZAZIONE SAN MILLÁN (7 GIORNI)</span>
-                    <span class="bento-badge-emerald" id="bento-sanmillan-badge">🟢 Target Sotto LT1: 90.9%</span>
+                    <span class="bento-badge-emerald" id="bento-sanmillan-badge">🟢 Target Sotto LT1: 90.6%</span>
                 </div>
 
                 <!-- Stacked Polarization Bar -->
                 <div class="bento-zones-bar-wrap">
                     <div class="bento-zones-bar">
-                        <div class="bar-z2" id="bento-bar-z2" style="width: 72.2%;" title="Z2 FatMax: 72.2%"></div>
-                        <div class="bar-z1" id="bento-bar-z1" style="width: 18.7%;" title="Z1 Rec: 18.7%"></div>
-                        <div class="bar-z3" id="bento-bar-z3" style="width: 7.1%;" title="Z3 Grigia: 7.1%"></div>
-                        <div class="bar-z4z5" id="bento-bar-z4z5" style="width: 2.0%;" title="Z4/Z5: 2.0%"></div>
+                        <div class="bar-z2" id="bento-bar-z2" style="width: 74.4%;" title="Z2 FatMax: 74.4%"></div>
+                        <div class="bar-z1" id="bento-bar-z1" style="width: 16.2%;" title="Z1 Rec: 16.2%"></div>
+                        <div class="bar-z3" id="bento-bar-z3" style="width: 7.3%;" title="Z3 Grigia: 7.3%"></div>
+                        <div class="bar-z4z5" id="bento-bar-z4z5" style="width: 2.1%;" title="Z4/Z5: 2.1%"></div>
                     </div>
                     <div class="bento-zones-legend">
-                        <span><span class="dot-z2"></span> Z2 FatMax: <strong id="bento-txt-z2">72.2%</strong></span>
-                        <span><span class="dot-z1"></span> Z1 Rec: <strong id="bento-txt-z1">18.7%</strong></span>
-                        <span><span class="dot-z3"></span> Z3 Grigia: <strong id="bento-txt-z3">7.1%</strong></span>
-                        <span><span class="dot-z4z5"></span> Z4/Z5: <strong id="bento-txt-z4z5">2.0%</strong></span>
+                        <span><span class="dot-z2"></span> Z2 FatMax: <strong id="bento-txt-z2">74.4%</strong></span>
+                        <span><span class="dot-z1"></span> Z1 Rec: <strong id="bento-txt-z1">16.2%</strong></span>
+                        <span><span class="dot-z3"></span> Z3 Grigia: <strong id="bento-txt-z3">7.3%</strong></span>
+                        <span><span class="dot-z4z5"></span> Z4/Z5: <strong id="bento-txt-z4z5">2.1%</strong></span>
                     </div>
                 </div>
 
@@ -402,7 +403,7 @@
                         <span class="bar" style="height: 70%"></span>
                     </div>
                 </div>
-                <div class="readiness-subtitle" id="kpi-readiness-desc" style="color:#94a3b8;">Parasimpatico Stabile (HRV 56ms, Z=+1.3σ | RHR 44bpm | TSB +6). Motore Z2 centrale 100% aperto (60-85 TSS).</div>
+                <div class="readiness-subtitle" id="kpi-readiness-desc" style="color:#94a3b8;">Parasimpatico Stabile (HRV 56ms, Z=+1.2σ | RHR 42bpm | TSB +5). Motore Z2 centrale 100% aperto (60-85 TSS).</div>
                 <div id="desktop-battery-box" style="margin-top: 0.35rem; padding-top: 0.35rem; border-top: 1px dashed rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: space-between;">
                     <span id="desktop-battery-badge" style="font-size: 0.72rem; font-weight: 800; color: #94a3b8;">🥈 SILVER — BUILD VOLUME Z2</span>
                     <strong id="desktop-battery-pct" style="font-size: 0.75rem; color: #94a3b8;">80%</strong>
@@ -413,11 +414,11 @@
             <div class="kpi-card">
                 <div class="kpi-card-header">
                     <span>⚡ HRV</span>
-                    <span id="trend-hrv" class="trend-badge up">+4.0</span>
+                    <span id="trend-hrv" class="trend-badge up">+3.3</span>
                 </div>
                 <div class="compact-val-row">
                     <div class="metric-value" id="kpi-hrv"><span style="color:#10b981">56 <span style="font-size:0.7em; opacity:0.8;">ms</span></span></div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-hrv"><path d="M 0.0,19.0 L 2.1,16.3 L 6.2,12.3 L 8.3,8.3 L 10.3,16.3 L 12.4,15.0 L 14.5,15.0 L 16.6,5.7 L 18.6,3.0 L 20.7,13.7 L 22.8,11.0 L 24.8,16.3 L 26.9,5.7 L 29.0,15.0 L 31.0,19.0 L 33.1,15.0 L 35.2,17.7 L 37.2,20.3 L 39.3,21.7 L 41.4,19.0 L 43.4,16.3 L 45.5,23.0 L 47.6,13.7 L 49.7,15.0 L 51.7,4.3 L 53.8,8.3 L 55.9,21.7 L 57.9,16.3 L 60.0,7.0" stroke="#10b981"/></svg>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-hrv"><path d="M 0.0,16.3 L 4.1,12.3 L 6.2,8.3 L 8.3,16.3 L 10.3,15.0 L 12.4,15.0 L 14.5,5.7 L 16.6,3.0 L 18.6,13.7 L 20.7,11.0 L 22.8,16.3 L 24.8,5.7 L 26.9,15.0 L 29.0,19.0 L 31.0,15.0 L 33.1,17.7 L 35.2,20.3 L 37.2,21.7 L 39.3,19.0 L 41.4,16.3 L 43.4,23.0 L 45.5,13.7 L 47.6,15.0 L 49.7,4.3 L 51.7,8.3 L 53.8,21.7 L 55.9,16.3 L 57.9,7.0 L 60.0,7.0" stroke="#10b981"/></svg>
                 </div>
                 <div class="metric-subtitle"><span>Supino rMSSD</span><span id="kpi-hrv-sub"></span></div>
             </div>
@@ -426,11 +427,11 @@
             <div class="kpi-card">
                 <div class="kpi-card-header">
                     <span>🌙 Sonno / RHR</span>
-                    <span id="trend-sleep" class="trend-badge neutral">0.0</span>
+                    <span id="trend-sleep" class="trend-badge up">+3.7</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-sleep"><span style="color:#facc15">80</span> <span style="opacity:0.5;">/</span> <span style="color:#10b981">44 <span style="font-size:0.65em;">bpm</span></span></div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-sleep"><path d="M 0.0,10.9 L 2.1,9.1 L 6.2,3.0 L 8.3,8.5 L 10.3,10.3 L 12.4,10.3 L 14.5,9.1 L 16.6,6.6 L 18.6,7.8 L 20.7,8.5 L 22.8,6.6 L 24.8,9.7 L 26.9,10.9 L 29.0,8.5 L 31.0,10.9 L 33.1,14.5 L 35.2,7.2 L 37.2,15.7 L 39.3,9.7 L 41.4,23.0 L 43.4,17.5 L 45.5,7.8 L 47.6,18.2 L 49.7,9.1 L 51.7,8.5 L 53.8,11.5 L 55.9,12.1 L 57.9,13.3 L 60.0,12.1" stroke="#facc15"/></svg>
+                    <div class="metric-value" id="kpi-sleep"><span style="color:#10b981">86</span> <span style="opacity:0.5;">/</span> <span style="color:#10b981">42 <span style="font-size:0.65em;">bpm</span></span></div>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-sleep"><path d="M 0.0,9.1 L 4.1,3.0 L 6.2,8.5 L 8.3,10.3 L 10.3,10.3 L 12.4,9.1 L 14.5,6.6 L 16.6,7.8 L 18.6,8.5 L 20.7,6.6 L 22.8,9.7 L 24.8,10.9 L 26.9,8.5 L 29.0,10.9 L 31.0,14.5 L 33.1,7.2 L 35.2,15.7 L 37.2,9.7 L 39.3,23.0 L 41.4,17.5 L 43.4,7.8 L 45.5,18.2 L 47.6,9.1 L 49.7,8.5 L 51.7,11.5 L 53.8,12.1 L 55.9,13.3 L 57.9,12.1 L 60.0,8.5" stroke="#10b981"/></svg>
                 </div>
                 <div class="metric-subtitle"><span>Score / FC Riposo</span><span id="kpi-sleep-sub"></span></div>
             </div>
@@ -439,11 +440,11 @@
             <div class="kpi-card">
                 <div class="kpi-card-header">
                     <span>⚖️ Bilancio TSB</span>
-                    <span id="trend-tsb" class="trend-badge up">+3.2</span>
+                    <span id="trend-tsb" class="trend-badge down">-7.7</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-tsb"><span style="color:#10b981">+6</span> <span style="font-size:0.7em; opacity:0.8;">TSB</span></div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-tsb"><path d="M 0.0,3.0 L 2.1,9.6 L 4.1,8.7 L 6.2,10.9 L 8.3,10.0 L 10.3,8.6 L 12.4,15.5 L 14.5,16.0 L 16.6,14.0 L 18.6,14.0 L 20.7,20.9 L 22.8,19.0 L 24.8,15.7 L 26.9,11.5 L 29.0,7.9 L 31.0,12.0 L 33.1,8.4 L 35.2,8.4 L 37.2,10.5 L 39.3,15.8 L 41.4,15.5 L 43.4,13.8 L 45.5,23.0 L 47.6,17.8 L 49.7,14.1 L 51.7,14.5 L 53.8,10.7 L 55.9,11.6 L 57.9,13.8 L 60.0,15.1" stroke="#10b981"/></svg>
+                    <div class="metric-value" id="kpi-tsb"><span style="color:#ef4444">+5</span> <span style="font-size:0.7em; opacity:0.8;">TSB</span></div>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-tsb"><path d="M 0.0,6.3 L 2.1,5.0 L 4.1,8.3 L 6.2,7.0 L 8.3,4.9 L 10.3,15.0 L 12.4,15.7 L 14.5,12.9 L 16.6,12.9 L 18.6,23.0 L 20.7,20.2 L 22.8,15.3 L 24.8,9.0 L 26.9,3.9 L 29.0,9.8 L 31.0,4.6 L 33.1,4.6 L 35.2,7.7 L 37.2,5.2 L 39.3,5.7 L 41.4,5.0 L 43.4,15.2 L 45.5,9.4 L 47.6,5.8 L 49.7,7.3 L 51.7,3.0 L 53.8,5.0 L 55.9,9.2 L 57.9,11.9 L 60.0,15.3" stroke="#ef4444"/></svg>
                 </div>
                 <div class="metric-subtitle"><span>TSB / ACWR</span><span id="kpi-tsb-sub"><span style="color:#10b981; font-weight:600;">ACWR 0.88</span></span></div>
             </div>
@@ -455,8 +456,8 @@
                     <span id="trend-total-ctl" class="trend-badge down">-0.4</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-total-ctl"><span style="color:#ef4444">45.4</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span></div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-total-ctl"><path d="M 0.0,4.1 L 2.1,6.2 L 4.1,5.5 L 6.2,7.3 L 8.3,9.8 L 10.3,5.5 L 12.4,5.5 L 14.5,7.6 L 16.6,8.4 L 18.6,3.0 L 20.7,4.8 L 22.8,7.6 L 24.8,11.6 L 26.9,15.9 L 29.0,13.7 L 31.0,17.6 L 33.1,19.1 L 35.2,18.7 L 37.2,15.5 L 39.3,16.2 L 41.4,18.4 L 43.4,11.2 L 45.5,15.1 L 47.6,18.4 L 49.7,19.1 L 51.7,22.6 L 53.8,23.0 L 55.9,22.3 L 57.9,21.9 L 60.0,19.8" stroke="#ef4444"/></svg>
+                    <div class="metric-value" id="kpi-total-ctl"><span style="color:#ef4444">43.0</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span></div>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-total-ctl"><path d="M 0.0,5.3 L 2.1,4.8 L 4.1,6.1 L 6.2,7.9 L 8.3,4.8 L 10.3,4.8 L 12.4,6.3 L 14.5,6.8 L 16.6,3.0 L 18.6,4.3 L 20.7,6.3 L 22.8,9.2 L 24.8,12.2 L 26.9,10.7 L 29.0,13.5 L 31.0,14.5 L 33.1,14.3 L 35.2,16.1 L 37.2,16.8 L 39.3,18.1 L 41.4,14.8 L 43.4,17.6 L 45.5,19.9 L 47.6,20.2 L 49.7,22.7 L 51.7,23.0 L 53.8,22.5 L 55.9,22.0 L 57.9,21.2 L 60.0,21.2" stroke="#ef4444"/></svg>
                 </div>
                 <div class="metric-subtitle"><span>Fitness Globale</span><span id="kpi-total-ctl-sub"></span></div>
             </div>
@@ -465,24 +466,24 @@
             <div class="kpi-card">
                 <div class="kpi-card-header">
                     <span>🚴 Bike CTL</span>
-                    <span id="trend-bike-ctl" class="trend-badge up">+1.1</span>
+                    <span id="trend-bike-ctl" class="trend-badge up">+1.3</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-bike-ctl"><span style="color:#10b981">22.6</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span></div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-bike-ctl"><path d="M 0.0,3.9 L 2.1,5.5 L 4.1,3.9 L 6.2,5.5 L 8.3,6.9 L 10.3,3.0 L 12.4,4.6 L 14.5,6.0 L 16.6,7.6 L 18.6,3.0 L 20.7,4.6 L 22.8,6.2 L 24.8,7.6 L 26.9,9.2 L 29.0,10.6 L 31.0,12.0 L 33.1,13.3 L 35.2,12.0 L 37.2,13.1 L 39.3,14.5 L 41.4,15.9 L 43.4,17.0 L 45.5,18.4 L 47.6,19.6 L 49.7,20.7 L 51.7,21.9 L 53.8,23.0 L 55.9,21.2 L 57.9,19.6 L 60.0,17.0" stroke="#10b981"/></svg>
+                    <div class="metric-value" id="kpi-bike-ctl"><span style="color:#10b981">22.3</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span></div>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-bike-ctl"><path d="M 0.0,5.5 L 2.1,3.9 L 4.1,5.5 L 6.2,6.9 L 8.3,3.0 L 10.3,4.6 L 12.4,6.0 L 14.5,7.6 L 16.6,3.0 L 18.6,4.6 L 20.7,6.2 L 22.8,7.6 L 24.8,9.2 L 26.9,10.6 L 29.0,12.0 L 31.0,13.3 L 33.1,12.0 L 35.2,13.1 L 37.2,14.5 L 39.3,15.9 L 41.4,17.0 L 43.4,18.4 L 45.5,19.6 L 47.6,20.7 L 49.7,21.9 L 51.7,23.0 L 53.8,21.2 L 55.9,19.6 L 57.9,17.7 L 60.0,17.7" stroke="#10b981"/></svg>
                 </div>
-                <div class="metric-subtitle"><span>Carico Bici</span><span id="kpi-bike-ctl-sub"><span style="color:#10b981; font-weight:600;">ACWR 1.07</span></span></div>
+                <div class="metric-subtitle"><span>Carico Bici</span><span id="kpi-bike-ctl-sub"><span style="color:#10b981; font-weight:600;">ACWR 1.00</span></span></div>
             </div>
 
             <!-- 7. Run CTL Card -->
             <div class="kpi-card">
                 <div class="kpi-card-header">
                     <span>🏃 Run CTL</span>
-                    <span id="trend-run-ctl" class="trend-badge up">+0.6</span>
+                    <span id="trend-run-ctl" class="trend-badge neutral">-0.2</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-run-ctl"><span style="color:#10b981">9.2</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span></div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-run-ctl"><path d="M 0.0,23.0 L 2.1,17.7 L 4.1,20.3 L 6.2,15.0 L 8.3,17.7 L 10.3,20.3 L 12.4,8.3 L 14.5,11.0 L 16.6,13.7 L 18.6,16.3 L 20.7,9.7 L 22.8,12.3 L 24.8,15.0 L 26.9,17.7 L 29.0,17.7 L 31.0,20.3 L 33.1,12.3 L 35.2,15.0 L 37.2,17.7 L 39.3,8.3 L 41.4,12.3 L 43.4,15.0 L 45.5,17.7 L 47.6,20.3 L 49.7,9.7 L 51.7,13.7 L 53.8,3.0 L 55.9,5.7 L 57.9,9.7 L 60.0,12.3" stroke="#10b981"/></svg>
+                    <div class="metric-value" id="kpi-run-ctl"><span style="color:#facc15">9.2</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span></div>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-run-ctl"><path d="M 0.0,19.9 L 2.1,23.0 L 4.1,16.8 L 6.2,19.9 L 8.3,23.0 L 10.3,9.2 L 12.4,12.2 L 14.5,15.3 L 16.6,18.4 L 18.6,10.7 L 20.7,13.8 L 22.8,16.8 L 24.8,19.9 L 26.9,19.9 L 29.0,23.0 L 31.0,13.8 L 33.1,16.8 L 35.2,19.9 L 37.2,9.2 L 39.3,13.8 L 41.4,16.8 L 43.4,19.9 L 45.5,23.0 L 47.6,10.7 L 49.7,15.3 L 51.7,3.0 L 53.8,6.1 L 55.9,10.7 L 57.9,13.8 L 60.0,13.8" stroke="#facc15"/></svg>
                 </div>
                 <div class="metric-subtitle">
                     <span id="desktop-chassis-badge" style="color: #10b981; font-weight: 700; font-size: 0.68rem;">⚖️ Telaio/Motore: 41% (Equilibrato)</span>
@@ -497,34 +498,34 @@
             <div class="dashboard-card" id="card-workout-suggestions">
                 <div class="dash-card-header">
                     <span>🎯 Programmazione Allenamento di Oggi</span>
-                    <span style="font-size:0.72rem; color:var(--accent-gold);">🏊 JOLLY NUOTO IN MARE (DECOMPRESSIONE SPINALE Z1/Z2)</span>
+                    <span style="font-size:0.72rem; color:var(--accent-gold);">🎯 COMBO MUNICIPALE 3 (SESSIONE CHIAVE 10K: RIPETUTE MEDIE)</span>
                 </div>
 
                 <div class="workout-subcard" style="border-left: 3px solid #60a5fa;">
                     <div class="workout-subcard-title">
-                        <span>🏊 Focus Primario: Nuoto in Mare / Vasca Z1 (Decompressione)</span>
+                        <span>🚲 Bici Transfer: 5 km Andata + 5 km Ritorno (Muletto Z1)</span>
                         <span style="color:#10b981; font-size:0.75rem;">Consigliato</span>
                     </div>
-                    <div class="workout-subcard-desc">Nuoto in acque libere o piscina: 800-1200m Z1/Z2 sciolti (stile/dorso, passo ~1:35-1:40/100m, FC < 120 bpm). Decompressione lombare L4-S1, zero impatto ortopedico, drenaggio metabolico.</div>
-                    <div class="workout-subcard-meta">🌊 Decompressione L4-S1 • Drenaggio metabolico post-bici • Target: 20 TSS</div>
+                    <div class="workout-subcard-desc">Transfer verso il Centro Municipale: pedalata agile (85-90 rpm, FC < 120 bpm, solo battiti).</div>
+                    <div class="workout-subcard-meta">🚲 Muletto (solo battiti): 5km A/R • FC < 120 bpm (15 TSS)</div>
                 </div>
 
                 <div class="workout-subcard" style="border-left: 3px solid #34d399;">
                     <div class="workout-subcard-title">
-                        <span>🛑 Corsa: ZERO CORSA OGGI (Domani Pista 4x1000m)</span>
+                        <span>🏃 Combo Municipale 3 (Sessione Chiave 10k: Ripetute Medie)</span>
                         <span style="color:#38bdf8; font-size:0.75rem;">Opzione Alternativa</span>
                     </div>
-                    <div class="workout-subcard-desc">Domani Lunedì 16 hai in programma le ripetute chiave 4x1000m in pista tartan: oggi è tassativamente vietata qualsiasi corsa per arrivare con tendini e glicogeno al 100%.</div>
-                    <div class="workout-subcard-meta">⚡ Domani: 4x1000m @ 4:40-4:45 /km</div>
+                    <div class="workout-subcard-desc">Bici 5km andata -> Pista Tartan: 1.6km WU + 4x1000m @ 4:42-4:45 /km (rec. 2'30" attivo) + 1km CD -> Vasca: 800m Z1 -> Bici 5km ritorno.</div>
+                    <div class="workout-subcard-meta">👟 Pista Tartan Corralejo • Target: 60 TSS</div>
                 </div>
 
                 <!-- Piano B (Meteo / Vento / Domenica Chiuso) -->
                 <div class="workout-subcard" style="border-left: 3px solid #f59e0b; background: rgba(245, 158, 11, 0.05);" id="card-desktop-planb">
                     <div class="workout-subcard-title">
-                        <span id="desktop-planb-title">🌪️ 🚲 Rulli Indoor / Cyclette Z1 Agile (Alternativa al Nuoto)</span>
-                        <span style="color:#f59e0b; font-size:0.75rem;" id="desktop-planb-target">30-40 min @ < 130W (FC < 115 bpm, 15 TSS)</span>
+                        <span id="desktop-planb-title">🌪️ 🏃 Fondo Protetto o Rulli Indoor (Piano B Meteo)</span>
+                        <span style="color:#f59e0b; font-size:0.75rem;" id="desktop-planb-target">6-8 km sterrato compatto (VT1 5:15-5:25 /km) o 45' Agilità Indoor</span>
                     </div>
-                    <div class="workout-subcard-desc" id="desktop-planb-desc">Se mare mosso o vento: solo pedalata leggera e sciolta. ZERO CORSA oggi per preservare al 100% tendini e glicogeno per i 4x1000m di domani in pista.</div>
+                    <div class="workout-subcard-desc" id="desktop-planb-desc">Alternativa in caso di vento forte (> 20 nodi), maltempo o impianti comunali chiusi.</div>
                     <div class="workout-subcard-meta">Alternativa in caso di vento > 20 nodi o impianti comunali chiusi</div>
                 </div>
             </div>
@@ -533,7 +534,7 @@
             <div class="dashboard-card" id="card-race-calendar">
                 <div class="dash-card-header">
                     <span>📅 Calendario Gare &amp; Preparazione Target</span>
-                    <span style="font-size:0.72rem; color:var(--accent-gold);" id="race-target-badge">🎯 Test Podistico 10k Olimpico (Fuerteventura) (95%)</span>
+                    <span style="font-size:0.72rem; color:var(--accent-gold);" id="race-target-badge">🎯 Test Podistico 10k Olimpico (Fuerteventura) (96%)</span>
                 </div>
 
                 <div style="display: flex; flex-direction: column; gap: 0.6rem;">
@@ -541,7 +542,7 @@
                     <div style="background: rgba(251, 191, 36, 0.08); border: 1px solid rgba(251, 191, 36, 0.25); border-radius: 10px; padding: 0.75rem;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
                             <span style="font-weight: 800; font-size: 0.9rem; color: var(--accent-gold);" id="target-race-name">🚴 Test Podistico 10k Olimpico (Fuerteventura)</span>
-                            <span style="font-size: 0.75rem; font-weight: 700; color: #ffffff;" id="target-race-countdown">25/11 (tra 10 gg)</span>
+                            <span style="font-size: 0.75rem; font-weight: 700; color: #ffffff;" id="target-race-countdown">25/11 (tra 9 gg)</span>
                         </div>
                         <!-- Contagiri Gauge & Indice Preparazione -->
                         <div class="gauge-wrapper-mobile" style="display: flex; align-items: center; justify-content: space-around; gap: 1rem; margin: 0.5rem 0;">
@@ -552,7 +553,7 @@
                                     <circle cx="50" cy="50" r="40" stroke="rgba(255, 255, 255, 0.1)" stroke-width="8" fill="transparent" />
                                     <!-- Anello Progresso Sfumato -->
                                     <circle id="prep-gauge-circle" cx="50" cy="50" r="40" stroke="url(#gauge-grad)" stroke-width="8" fill="transparent"
-                                            stroke-dasharray="251.2" stroke-dashoffset="12.6" stroke-linecap="round" style="transition: stroke-dashoffset 1s ease-in-out;" />
+                                            stroke-dasharray="251.2" stroke-dashoffset="10.0" stroke-linecap="round" style="transition: stroke-dashoffset 1s ease-in-out;" />
                                     <defs>
                                         <linearGradient id="gauge-grad" x1="0%" y1="0%" x2="100%" y2="100%">
                                             <stop offset="0%" stop-color="#38bdf8" />
@@ -562,7 +563,7 @@
                                     </defs>
                                 </svg>
                                 <div style="position: absolute; text-align: center;">
-                                    <div style="font-family: 'Outfit', sans-serif; font-size: 1.45rem; font-weight: 900; color: #ffffff; line-height: 1;" id="prep-pct-text">95%</div>
+                                    <div style="font-family: 'Outfit', sans-serif; font-size: 1.45rem; font-weight: 900; color: #ffffff; line-height: 1;" id="prep-pct-text">96%</div>
                                     <div style="font-size: 0.62rem; color: #10b981; font-weight: 700; margin-top: 2px;" id="prep-stage-text">TAPERING</div>
                                 </div>
                             </div>
@@ -571,15 +572,15 @@
                             <div style="display: flex; flex-direction: column; gap: 0.35rem; flex: 1;">
                                 <div style="display: flex; justify-content: space-between; font-size: 0.75rem; background: rgba(255, 255, 255, 0.03); padding: 0.3rem 0.6rem; border-radius: 6px;">
                                     <span style="color: var(--text-muted);">CTL Attuale:</span>
-                                    <span style="font-weight: 700; color: #38bdf8;" id="prep-current-ctl">45.4 CTL</span>
+                                    <span style="font-weight: 700; color: #38bdf8;" id="prep-current-ctl">43.0 CTL</span>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; font-size: 0.75rem; background: rgba(255, 255, 255, 0.03); padding: 0.3rem 0.6rem; border-radius: 6px;">
                                     <span style="color: var(--text-muted);">CTL Target Gara:</span>
-                                    <span style="font-weight: 700; color: var(--accent-gold);" id="prep-target-ctl">47.5 CTL</span>
+                                    <span style="font-weight: 700; color: var(--accent-gold);" id="prep-target-ctl">44.4 CTL</span>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; font-size: 0.75rem; background: rgba(255, 255, 255, 0.03); padding: 0.3rem 0.6rem; border-radius: 6px;">
                                     <span style="color: var(--text-muted);">TSB Attuale (Freschezza):</span>
-                                    <span style="font-weight: 700; color: #38bdf8;" id="prep-current-tsb">+5.7 TSB (Tapering Ottimale)</span>
+                                    <span style="font-weight: 700; color: #38bdf8;" id="prep-current-tsb">+5.0 TSB (Tapering Ottimale)</span>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; font-size: 0.75rem; background: rgba(255, 255, 255, 0.03); padding: 0.3rem 0.6rem; border-radius: 6px;">
                                     <span style="color: var(--text-muted);">TSB Target Gara:</span>
@@ -589,7 +590,7 @@
                         </div>
 
                         <div style="font-size: 0.68rem; color: rgba(255, 255, 255, 0.6); line-height: 1.3; border-top: 1px dashed rgba(255, 255, 255, 0.1); padding-top: 0.35rem;" id="prep-explanation-text">
-                            ℹ️ <strong>Origine CTL Target (47.5 CTL):</strong> Basato sul benchmark della letteratura scientifica (50 CTL per Test Podistico 10k Olimpico (Fuerteventura)) ed aggiustato alla CTL massima realmente raggiungibile (47.5) in 10 giorni, considerando un Ramp Rate sicuro (+5 CTL/settimana) ed una finestra di Tapering di 7 giorni per far risalire il TSB a +10 (Freschezza Ottimale).
+                            ℹ️ <strong>Origine CTL Target (44.4 CTL):</strong> Basato sul benchmark della letteratura scientifica (50 CTL per Test Podistico 10k Olimpico (Fuerteventura)) ed aggiustato alla CTL massima realmente raggiungibile (44.4) in 9 giorni, considerando un Ramp Rate sicuro (+5 CTL/settimana) ed una finestra di Tapering di 7 giorni per far risalire il TSB a +10 (Freschezza Ottimale).
                         </div>
                     </div>
 
@@ -607,7 +608,7 @@
                     </div>
 
                     <!-- Lista Altri Eventi Calendario -->
-                    <div style="display: flex; flex-direction: column; gap: 0.4rem; max-height: 260px; overflow-y: auto; padding-right: 2px;" id="upcoming-events-list"><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏃 Firenze Marathon (Sotto Casa!)</span><span style="color: var(--text-muted);">29/11 (tra 14 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏋️ HYROX Milano (Allianz MiCo)</span><span style="color: var(--text-muted);">05/12 (tra 20 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏋️ HYROX Verona (Veronafiere)</span><span style="color: var(--text-muted);">30/01 (tra 76 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>⛰️ Brunello Crossing Montalcino (Trail Val d'Orcia)</span><span style="color: var(--text-muted);">14/02 (tra 91 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🚴 Granfondo Strade Bianche Siena (Edizione 2027)</span><span style="color: var(--text-muted);">07/03 (tra 112 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏍️ Campionato Regionale Motocross Toscana FMI (Round 1)</span><span style="color: var(--text-muted);">07/03 (tra 112 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏃🚴🏃 Duathlon Classico del Litorale Pisano (No Draft)</span><span style="color: var(--text-muted);">29/03 (tra 134 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏃🚴🏃 Duathlon Sprint della Lunigiana (Aulla)</span><span style="color: var(--text-muted);">11/04 (tra 147 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏋️ HYROX Rimini (Rimini Wellness)</span><span style="color: var(--text-muted);">29/05 (tra 195 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏊🏃 8° Swimrun del Bilancino (Circuito Nazionale FITRI)</span><span style="color: var(--text-muted);">06/06 (tra 203 gg)</span></div></div>
+                    <div style="display: flex; flex-direction: column; gap: 0.4rem; max-height: 260px; overflow-y: auto; padding-right: 2px;" id="upcoming-events-list"><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏃 Firenze Marathon (Sotto Casa!)</span><span style="color: var(--text-muted);">29/11 (tra 13 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏋️ HYROX Milano (Allianz MiCo)</span><span style="color: var(--text-muted);">05/12 (tra 19 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏋️ HYROX Verona (Veronafiere)</span><span style="color: var(--text-muted);">30/01 (tra 75 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>⛰️ Brunello Crossing Montalcino (Trail Val d'Orcia)</span><span style="color: var(--text-muted);">14/02 (tra 90 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🚴 Granfondo Strade Bianche Siena (Edizione 2027)</span><span style="color: var(--text-muted);">07/03 (tra 111 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏍️ Campionato Regionale Motocross Toscana FMI (Round 1)</span><span style="color: var(--text-muted);">07/03 (tra 111 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏃🚴🏃 Duathlon Classico del Litorale Pisano (No Draft)</span><span style="color: var(--text-muted);">29/03 (tra 133 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏃🚴🏃 Duathlon Sprint della Lunigiana (Aulla)</span><span style="color: var(--text-muted);">11/04 (tra 146 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏋️ HYROX Rimini (Rimini Wellness)</span><span style="color: var(--text-muted);">29/05 (tra 194 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏊🏃 8° Swimrun del Bilancino (Circuito Nazionale FITRI)</span><span style="color: var(--text-muted);">06/06 (tra 202 gg)</span></div></div>
                 </div>
             </div>
         </div>
@@ -625,8 +626,8 @@
                         <button type="button" id="btn-nutri-today" onclick="loadNutritionData()" style="display: none; background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.4); color: #10b981; border-radius: 5px; cursor: pointer; font-size: 0.65rem; font-weight: 700; padding: 0.1rem 0.4rem; margin-left: 0.15rem;">Oggi</button>
                     </div>
                 </div>
-                <div class="nutrition-status-badge status-deficit" id="nutrition-status-badge">
-                    DEFICIT: -1038 kcal
+                <div class="nutrition-status-badge status-in_attesa" id="nutrition-status-badge">
+                    IN ATTESA DI LOG CIBO
                 </div>
             </div>
 
@@ -650,7 +651,7 @@
                 <div class="nutrition-stat-box" id="box-tdee">
                     <div class="nutri-stat-header">
                         <span>⚡ SPESA TOTALE (OUT)</span>
-                        <span class="nutri-stat-val" id="nutri-tdee-val">2,720 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span></span>
+                        <span class="nutri-stat-val" id="nutri-tdee-val">2,183 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span></span>
                     </div>
                     <div class="nutri-breakdown-list">
                         <div class="nutri-breakdown-item">
@@ -658,8 +659,8 @@
                             <strong id="nutri-bmr-val">2,083 kcal</strong>
                         </div>
                         <div class="nutri-breakdown-item">
-                            <span id="nutri-workout-desc">🚴 Ciclismo (59 min) • 141 bpm (FC Attiva)</span>
-                            <strong style="color: #60a5fa;" id="nutri-workout-val">+537 kcal</strong>
+                            <span id="nutri-workout-desc">🛌 Riposo / Nessuna Attività</span>
+                            <strong style="color: #60a5fa;" id="nutri-workout-val">+0 kcal</strong>
                         </div>
                         <div class="nutri-breakdown-item">
                             <span>🚶 NEAT &amp; Quotidiano</span>
@@ -672,37 +673,37 @@
                 <div class="nutrition-stat-box" id="box-intake">
                     <div class="nutri-stat-header">
                         <span>🍽️ INTROITO ALIMENTARE (IN)</span>
-                        <span class="nutri-stat-val" id="nutri-intake-val" style="color: #10b981;">1,682 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span></span>
+                        <span class="nutri-stat-val" id="nutri-intake-val" style="color: #10b981;">0 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span></span>
                     </div>
                     <div class="nutri-macros-bars">
                         <!-- Carbo -->
                         <div class="macro-bar-item">
                             <div class="macro-bar-label">
                                 <span>🌾 Carboidrati</span>
-                                <span id="nutri-carbs-text"><strong>146.7g</strong> / 186g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 39.3g • 79%)</span></span>
+                                <span id="nutri-carbs-text"><strong>0g</strong> / 186g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 186g • 0%)</span></span>
                             </div>
                             <div class="macro-bar-track">
-                                <div class="macro-bar-fill" id="nutri-carbs-fill" style="width: 79%; background: #38bdf8;"></div>
+                                <div class="macro-bar-fill" id="nutri-carbs-fill" style="width: 0%; background: #38bdf8;"></div>
                             </div>
                         </div>
                         <!-- Proteine -->
                         <div class="macro-bar-item">
                             <div class="macro-bar-label">
                                 <span>🥩 Proteine</span>
-                                <span id="nutri-protein-text"><strong>91.7g</strong> / 152g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 60.3g • 60%)</span></span>
+                                <span id="nutri-protein-text"><strong>0g</strong> / 152g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 152g • 0%)</span></span>
                             </div>
                             <div class="macro-bar-track">
-                                <div class="macro-bar-fill" id="nutri-protein-fill" style="width: 60%; background: #34d399;"></div>
+                                <div class="macro-bar-fill" id="nutri-protein-fill" style="width: 0%; background: #34d399;"></div>
                             </div>
                         </div>
                         <!-- Grassi -->
                         <div class="macro-bar-item">
                             <div class="macro-bar-label">
                                 <span>🥑 Grassi</span>
-                                <span id="nutri-fat-text"><strong>80.8g</strong> / 152g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 71.2g • 53%)</span></span>
+                                <span id="nutri-fat-text"><strong>0g</strong> / 92g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 92g • 0%)</span></span>
                             </div>
                             <div class="macro-bar-track">
-                                <div class="macro-bar-fill" id="nutri-fat-fill" style="width: 53%; background: #fbbf24;"></div>
+                                <div class="macro-bar-fill" id="nutri-fat-fill" style="width: 0%; background: #fbbf24;"></div>
                             </div>
                         </div>
                     </div>
@@ -712,7 +713,7 @@
                 <div class="nutrition-stat-box" id="box-fluids">
                     <div class="nutri-stat-header">
                         <span>💧 SUDORE &amp; IDRATAZIONE</span>
-                        <span class="nutri-stat-val" id="nutri-sweat-val" style="color: #38bdf8;">0.9 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">L</span></span>
+                        <span class="nutri-stat-val" id="nutri-sweat-val" style="color: #38bdf8;">0.0 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">L</span></span>
                     </div>
                     <div class="nutri-breakdown-list">
                         <div class="nutri-breakdown-item">
@@ -721,11 +722,11 @@
                         </div>
                         <div class="nutri-breakdown-item">
                             <span>🥤 Reintegro Acqua Target</span>
-                            <strong style="color: #38bdf8;" id="nutri-water-target">2.7 L / giorno</strong>
+                            <strong style="color: #38bdf8;" id="nutri-water-target">2.5 L / giorno</strong>
                         </div>
                         <div class="nutri-breakdown-item">
                             <span>💊 Victory Salt Caps (Regola 7.D)</span>
-                            <strong style="color: #fbbf24;" id="nutri-salt-caps">1 Capsule</strong>
+                            <strong style="color: #fbbf24;" id="nutri-salt-caps">0 Capsule</strong>
                         </div>
                     </div>
                 </div>
@@ -772,7 +773,7 @@
                             176.1 <span class="nutri-imbalance-unit">g / die (95%)</span>
                         </div>
                         <div class="nutri-imbalance-hint" id="multi-carbs-hint">
-                            2,680 kcal bruciate in 6 sessioni
+                            2,683 kcal bruciate in 6 sessioni
                         </div>
                     </div>
 
@@ -797,10 +798,10 @@
                             <span class="nutri-imbalance-tag" id="multi-energy-tag" style="background: #f59e0b22; color: #f59e0b;">CAUTELA IMMUNITÀ</span>
                         </div>
                         <div class="nutri-imbalance-val" id="multi-energy-val" style="color: #f59e0b;">
-                            -4,454 <span class="nutri-imbalance-unit">kcal (7d)</span>
+                            -4,474 <span class="nutri-imbalance-unit">kcal (7d)</span>
                         </div>
                         <div class="nutri-imbalance-hint" id="multi-energy-hint">
-                            Media: -636 kcal/die su 7 gg
+                            Media: -639 kcal/die su 7 gg
                         </div>
                     </div>
                 </div>
@@ -810,7 +811,7 @@
                     <span style="font-size: 1.25rem;">🩺</span>
                     <div>
                         <strong style="color: #38bdf8; display: block; margin-bottom: 2px;">Impatto Clinico su Salute, Massa Magra &amp; Biomarker Reali:</strong>
-                        <span id="multi-clinical-insight">Negli ultimi 7 giorni consolidati (9/11/2026 - 15/11/2026) hai sostenuto un carico biologico rilevante (6 sessioni: Motocross, Ciclismo e Corsa per 2,680 kcal spese) a fronte di un apporto proteico medio di soli 122.8g/die (1.45 g/kg vs target di longevità 1.80 g/kg • 81%). A 52 anni, la resistenza anabolica richiede almeno 1.6-1.8 g/kg per sostenere la sintesi proteica muscolare (MPS) e la riparazione tendineo-articolare, specialmente dopo le sollecitazioni eccentriche di corsa e motocross. Inoltre, l'introito glucidico (176.1g vs target 186g) e il deficit cumulato di -4,454 kcal hanno mantenuto la FC a riposo su una media di 44.7 bpm (sopra il baseline di 44 bpm) e possono spiegare derive cardiache anticipate ed eccesso di cortisolo notturno. Ai sensi della Regola 0.2, è prioritario proteggere il sistema immunitario ed evitare il catabolismo.</span>
+                        <span id="multi-clinical-insight">Negli ultimi 7 giorni consolidati (9/11/2026 - 15/11/2026) hai sostenuto un carico biologico rilevante (6 sessioni: Motocross, Ciclismo e Corsa per 2,683 kcal spese) a fronte di un apporto proteico medio di soli 122.8g/die (1.45 g/kg vs target di longevità 1.80 g/kg • 81%). A 52 anni, la resistenza anabolica richiede almeno 1.6-1.8 g/kg per sostenere la sintesi proteica muscolare (MPS) e la riparazione tendineo-articolare, specialmente dopo le sollecitazioni eccentriche di corsa e motocross. Inoltre, l'introito glucidico (176.1g vs target 186g) e il deficit cumulato di -4,474 kcal hanno mantenuto la FC a riposo su una media di 44.7 bpm (sopra il baseline di 44 bpm) e possono spiegare derive cardiache anticipate ed eccesso di cortisolo notturno. Ai sensi della Regola 0.2, è prioritario proteggere il sistema immunitario ed evitare il catabolismo.</span>
                     </div>
                 </div>
 
@@ -921,16 +922,16 @@
                     <div class="nutri-weight-col">
                         <span class="nutri-weight-label">Bilancio Medio / Proiezione 7d</span>
                         <div class="nutri-weight-val" id="nutri-net-7d-val" style="color: #38bdf8;">
-                            <span style="color:#38bdf8;">-4,074</span> <span class="nutri-weight-unit">kcal / sett</span>
+                            <span style="color:#38bdf8;">-4,564</span> <span class="nutri-weight-unit">kcal / sett</span>
                         </div>
-                        <span class="nutri-weight-hint" id="nutri-net-7d-hint">Media: -582 kcal/gg su 7 gg tracciati</span>
+                        <span class="nutri-weight-hint" id="nutri-net-7d-hint">Media: -652 kcal/gg su 6 gg tracciati</span>
                     </div>
 
                     <!-- Metric 2: Stima Variazione Peso Teorica -->
                     <div class="nutri-weight-col">
                         <span class="nutri-weight-label">Variazione Peso Stimata (7d)</span>
                         <div class="nutri-weight-val" id="nutri-weight-delta-val" style="color: #38bdf8;">
-                            <span style="color:#38bdf8;">-0.53 kg/sett</span>
+                            <span style="color:#38bdf8;">-0.59 kg/sett</span>
                         </div>
                         <span class="nutri-weight-hint" id="nutri-weight-delta-hint">Calo Stimato</span>
                     </div>
@@ -957,7 +958,7 @@
                 <!-- Validation Status Banner / Message -->
                 <div class="nutri-weight-msg" id="nutri-weight-msg-banner">
                     <span id="nutri-weight-msg-icon">ℹ️</span>
-                    <span id="nutri-weight-msg-text">Stima settimanale calcolata (-0.53 kg/sett). In attesa della prossima pesata per validare la formula.</span>
+                    <span id="nutri-weight-msg-text">Stima settimanale calcolata (-0.59 kg/sett). In attesa della prossima pesata per validare la formula.</span>
                 </div>
 
                 <!-- 📝 Form Espandibile per Dati Completi Bilancia Garmin -->
@@ -1061,7 +1062,7 @@
             <div class="activity-stats-grid">
                 <div class="act-stat-item " id="card-act-dist">
                     <div class="act-stat-label">Distanza & Tempo</div>
-                    <div class="act-stat-val" id="act-dist">30.4 km</div>
+                    <div class="act-stat-val" id="act-dist">30.4 km (+242 m d+)</div>
                     <div class="act-stat-sub" id="act-dur">59 min | Vel: 30.7 km/h</div>
                 </div>
 
@@ -1073,13 +1074,13 @@
 
                 <div class="act-stat-item " id="card-act-tss">
                     <div class="act-stat-label">Carico Allenamento</div>
-                    <div class="act-stat-val" id="act-tss">68.8 hrTSS</div>
+                    <div class="act-stat-val" id="act-tss">56.6 hrTSS</div>
                     <div class="act-stat-sub" id="act-if">Pure hrTSS (Termoregolato)</div>
                 </div>
 
                 <div class="act-stat-item " id="card-act-hr">
                     <div class="act-stat-label">FC Media (Movimento)</div>
-                    <div class="act-stat-val" id="act-hr">141 bpm</div>
+                    <div class="act-stat-val" id="act-hr">142 bpm</div>
                     <div class="act-stat-sub" id="act-hrmax">Max: 154 bpm</div>
                 </div>
 
@@ -1092,7 +1093,7 @@
                 <div class="act-stat-item " id="card-act-pahr">
                     <div class="act-stat-label">Disaccoppiamento (Pa:Hr)</div>
                     <div class="act-stat-val" id="act-pahr">N/D</div>
-                    <div class="act-stat-sub" id="act-temp">Non Steady-State</div>
+                    <div class="act-stat-sub" id="act-temp">Non Steady-State • Temp: 23°C</div>
                 </div>
             </div>
 
@@ -1385,61 +1386,61 @@
             <div class="dashboard-card" id="card-load-distribution">
                 <div class="dash-card-header">
                     <span>📊 Distribuzione Carico 30g (San Millán) & Torta 7g</span>
-                    <span style="font-size:0.72rem; color:var(--accent-green);" id="dist-target-badge" style="color:#f59e0b;">⚠️ Deriva in Z3 Tempo (7.1% vs ≤5% No Z3)</span>
+                    <span style="font-size:0.72rem; color:var(--accent-green);" id="dist-target-badge" style="color:#f59e0b;">⚠️ Deriva in Z3 Tempo (7.3% vs ≤5% No Z3)</span>
                 </div>
 
                 <!-- KPI Pill Bar Sotto LT1 vs No Z3 vs Z4/Z5 -->
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; font-size:0.75rem; background:rgba(255,255,255,0.03); padding:8px 12px; border-radius:8px; border:1px solid rgba(255,255,255,0.07); flex-wrap:wrap; gap:6px;">
-                    <span>🎯 Sotto LT1 (Z1+Z2): <strong id="dist-under-lt1-badge" style="color:#10b981;">90.9% (Target 80-90%)</strong></span>
-                    <span>⚡ No Z3: <strong id="dist-z3-badge" style="color:#f59e0b;">7.1% (Target ≤5%)</strong></span>
-                    <span>🔥 Z4-Z5: <strong id="dist-z4z5-badge" style="color:#8b5cf6;">2.0% (Target 10-15%)</strong></span>
+                    <span>🎯 Sotto LT1 (Z1+Z2): <strong id="dist-under-lt1-badge" style="color:#10b981;">90.6% (Target 80-90%)</strong></span>
+                    <span>⚡ No Z3: <strong id="dist-z3-badge" style="color:#f59e0b;">7.3% (Target ≤5%)</strong></span>
+                    <span>🔥 Z4-Z5: <strong id="dist-z4z5-badge" style="color:#8b5cf6;">2.1% (Target 10-15%)</strong></span>
                 </div>
 
                 <div class="dist-bar-group">
                     <div class="dist-bar-item">
                         <div class="dist-bar-label">
                             <span>🟢 Z2 Aerobico / FatMax (Target San Millán: 70-80%)</span>
-                            <span style="color:#10b981;" id="dist-z2-text">72.2% (Mese 69.1% → 🟢 +3.1% 7g)</span>
+                            <span style="color:#10b981;" id="dist-z2-text">74.4% (Mese 69.1% → 🟢 +5.3% 7g)</span>
                         </div>
                         <div class="dist-bar-track">
-                            <div class="dist-bar-fill" id="dist-z2-bar" style="width: 72.2%; background: #10b981;"></div>
+                            <div class="dist-bar-fill" id="dist-z2-bar" style="width: 74.4%; background: #10b981;"></div>
                         </div>
                     </div>
 
                     <div class="dist-bar-item">
                         <div class="dist-bar-label">
                             <span>🔵 Z1 Recupero Attivo (Target San Millán: 10-15%)</span>
-                            <span style="color:#38bdf8;" id="dist-z1-text">18.7% (Mese 23.1% → 🟢 -4.4% 7g)</span>
+                            <span style="color:#38bdf8;" id="dist-z1-text">16.2% (Mese 23.1% → 🟢 -6.9% 7g)</span>
                         </div>
                         <div class="dist-bar-track">
-                            <div class="dist-bar-fill" id="dist-z1-bar" style="width: 18.7%; background: #38bdf8;"></div>
+                            <div class="dist-bar-fill" id="dist-z1-bar" style="width: 16.2%; background: #38bdf8;"></div>
                         </div>
                     </div>
 
                     <div class="dist-bar-item">
                         <div class="dist-bar-label">
                             <span>🟡 Z3 Tempo / Zona Grigia (Target: ≤5% "No Z3")</span>
-                            <span style="color:#f59e0b;" id="dist-z3-text">7.1% (Mese 4.8% → 🟡 Deriva Z3 Moderata)</span>
+                            <span style="color:#f59e0b;" id="dist-z3-text">7.3% (Mese 4.8% → 🟡 Deriva Z3 Moderata)</span>
                         </div>
                         <div class="dist-bar-track">
-                            <div class="dist-bar-fill" id="dist-z3-bar" style="width: 7.1%; background: #f59e0b;"></div>
+                            <div class="dist-bar-fill" id="dist-z3-bar" style="width: 7.3%; background: #f59e0b;"></div>
                         </div>
                     </div>
 
                     <div class="dist-bar-item">
                         <div class="dist-bar-label">
                             <span>🟣 Z4-Z5 Soglia & VO2Max (Target San Millán: 10-15%)</span>
-                            <span style="color:#8b5cf6;" id="dist-z4z5-text">2.0% (Mese 2.9% → 🟢 Controllo Ottimale)</span>
+                            <span style="color:#8b5cf6;" id="dist-z4z5-text">2.1% (Mese 2.9% → 🟢 Controllo Ottimale)</span>
                         </div>
                         <div class="dist-bar-track">
-                            <div class="dist-bar-fill" id="dist-z4z5-bar" style="width: 2.0%; background: #8b5cf6;"></div>
+                            <div class="dist-bar-fill" id="dist-z4z5-bar" style="width: 2.1%; background: #8b5cf6;"></div>
                         </div>
                     </div>
                 </div>
 
                 <div class="dist-pie-direction" id="dist-feedback">
                     <span>🔄</span>
-                    <span id="dist-feedback-text"><strong>Attenzione alla Zona Grigia (Z3 Tempo al 7.1%):</strong> San Millán raccomanda 'No Z3' (≤5%). Il tempo passato tra LT1 e LT2 spegne l'ossidazione dei grassi, attiva la glicolisi e genera fatica simpatica senza i benefici mitocondriali della Z2 né i picchi di gittata cardiaca della Z4/Z5. Rallenta nelle uscite aerobiche per rimanere sotto LT1.</span>
+                    <span id="dist-feedback-text"><strong>Attenzione alla Zona Grigia (Z3 Tempo al 7.3%):</strong> San Millán raccomanda 'No Z3' (≤5%). Il tempo passato tra LT1 e LT2 spegne l'ossidazione dei grassi, attiva la glicolisi e genera fatica simpatica senza i benefici mitocondriali della Z2 né i picchi di gittata cardiaca della Z4/Z5. Rallenta nelle uscite aerobiche per rimanere sotto LT1.</span>
                 </div>
             </div>
 
@@ -1454,12 +1455,12 @@
                     <div class="weather-win-item">
                         <div class="weather-win-header">Mattina (8:00 - 12:00)</div>
                         <div class="weather-win-temp" id="w-morning-temp">☀️ 21°C</div>
-                        <div class="weather-win-detail" id="w-morning-detail">Vento 8 km/h | Pioggia 0%</div>
+                        <div class="weather-win-detail" id="w-morning-detail">Vento 13 km/h | Pioggia 0%</div>
                     </div>
 
                     <div class="weather-win-item">
                         <div class="weather-win-header">Pomeriggio (12:00 - 18:00)</div>
-                        <div class="weather-win-temp" id="w-afternoon-temp">⛅ 24°C</div>
+                        <div class="weather-win-temp" id="w-afternoon-temp">⛅ 23°C</div>
                         <div class="weather-win-detail" id="w-afternoon-detail">Vento 12 km/h | Pioggia 0%</div>
                     </div>
                 </div>
