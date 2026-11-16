@@ -35,7 +35,7 @@
               let clean = url.substring(5).split('?')[0];
               url = 'api/' + clean + '.json?v=' + _rt_ts;
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 16/11 23:39.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 16/11 23:55.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -627,7 +627,7 @@
                     </div>
                 </div>
                 <div class="nutrition-status-badge status-deficit" id="nutrition-status-badge">
-                    DEFICIT: -197 kcal
+                    DEFICIT: -221 kcal
                 </div>
             </div>
 
@@ -651,7 +651,7 @@
                 <div class="nutrition-stat-box" id="box-tdee">
                     <div class="nutri-stat-header">
                         <span>⚡ SPESA TOTALE (OUT)</span>
-                        <span class="nutri-stat-val" id="nutri-tdee-val">2,693 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span></span>
+                        <span class="nutri-stat-val" id="nutri-tdee-val">2,717 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span></span>
                     </div>
                     <div class="nutri-breakdown-list">
                         <div class="nutri-breakdown-item">
@@ -700,10 +700,10 @@
                         <div class="macro-bar-item">
                             <div class="macro-bar-label">
                                 <span>🥑 Grassi</span>
-                                <span id="nutri-fat-text"><strong>113.2g</strong> / 149g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 35.8g • 76%)</span></span>
+                                <span id="nutri-fat-text"><strong>113.2g</strong> / 152g target <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(mancano 38.8g • 74%)</span></span>
                             </div>
                             <div class="macro-bar-track">
-                                <div class="macro-bar-fill" id="nutri-fat-fill" style="width: 76%; background: #fbbf24;"></div>
+                                <div class="macro-bar-fill" id="nutri-fat-fill" style="width: 74%; background: #fbbf24;"></div>
                             </div>
                         </div>
                     </div>
@@ -798,10 +798,10 @@
                             <span class="nutri-imbalance-tag" id="multi-energy-tag" style="background: #f59e0b22; color: #f59e0b;">CAUTELA IMMUNITÀ</span>
                         </div>
                         <div class="nutri-imbalance-val" id="multi-energy-val" style="color: #f59e0b;">
-                            -4,512 <span class="nutri-imbalance-unit">kcal (7d)</span>
+                            -4,536 <span class="nutri-imbalance-unit">kcal (7d)</span>
                         </div>
                         <div class="nutri-imbalance-hint" id="multi-energy-hint">
-                            Media: -645 kcal/die su 7 gg
+                            Media: -648 kcal/die su 7 gg
                         </div>
                     </div>
                 </div>
@@ -811,7 +811,7 @@
                     <span style="font-size: 1.25rem;">🩺</span>
                     <div>
                         <strong style="color: #38bdf8; display: block; margin-bottom: 2px;">Impatto Clinico su Salute, Massa Magra &amp; Biomarker Reali:</strong>
-                        <span id="multi-clinical-insight">Negli ultimi 7 giorni consolidati (10/11/2026 - 16/11/2026) hai sostenuto un carico biologico rilevante (6 sessioni: Motocross, Ciclismo e Corsa per 2,913 kcal spese) a fronte di un apporto proteico medio di soli 118.0g/die (1.40 g/kg vs target di longevità 1.80 g/kg • 78%). A 52 anni, la resistenza anabolica richiede almeno 1.6-1.8 g/kg per sostenere la sintesi proteica muscolare (MPS) e la riparazione tendineo-articolare, specialmente dopo le sollecitazioni eccentriche di corsa e motocross. Inoltre, l'introito glucidico (184.5g vs target 185g) e il deficit cumulato di -4,512 kcal hanno mantenuto la FC a riposo su una media di 44.3 bpm (sopra il baseline di 44 bpm) e possono spiegare derive cardiache anticipate ed eccesso di cortisolo notturno. Ai sensi della Regola 0.2, è prioritario proteggere il sistema immunitario ed evitare il catabolismo.</span>
+                        <span id="multi-clinical-insight">Negli ultimi 7 giorni consolidati (10/11/2026 - 16/11/2026) hai sostenuto un carico biologico rilevante (6 sessioni: Motocross, Ciclismo e Corsa per 2,913 kcal spese) a fronte di un apporto proteico medio di soli 118.0g/die (1.40 g/kg vs target di longevità 1.80 g/kg • 78%). A 52 anni, la resistenza anabolica richiede almeno 1.6-1.8 g/kg per sostenere la sintesi proteica muscolare (MPS) e la riparazione tendineo-articolare, specialmente dopo le sollecitazioni eccentriche di corsa e motocross. Inoltre, l'introito glucidico (184.5g vs target 185g) e il deficit cumulato di -4,536 kcal hanno mantenuto la FC a riposo su una media di 44.3 bpm (sopra il baseline di 44 bpm) e possono spiegare derive cardiache anticipate ed eccesso di cortisolo notturno. Ai sensi della Regola 0.2, è prioritario proteggere il sistema immunitario ed evitare il catabolismo.</span>
                     </div>
                 </div>
 
