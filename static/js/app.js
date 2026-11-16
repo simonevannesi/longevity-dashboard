@@ -2344,17 +2344,35 @@ function updateBentoView() {
                 rSumm.textContent = `HRV ${Math.round(hrv)} ms • FC ${Math.round(rhr)} bpm • TSB ${tsb >= 0 ? '+' : ''}${tsb.toFixed(1)}`;
             }
 
+            const wIcon = document.getElementById('bento-workout-icon');
             const bTitle = document.getElementById('bento-bike-title');
-            if (bTitle) bTitle.textContent = w.bento_bike_title || w.bike_title || 'Bici Z1/Z2';
+            const bt = (w.bento_bike_title || w.bike_title || '').toLowerCase();
+            if (bTitle) bTitle.textContent = w.bento_bike_title || w.bike_title || 'Focus Programma';
+            if (wIcon && bt) {
+                if (bt.includes('pista') || bt.includes('corsa') || bt.includes('4x1000')) wIcon.textContent = '🏃‍♂️';
+                else if (bt.includes('nuoto')) wIcon.textContent = '🏊‍♂️';
+                else if (bt.includes('bici') || bt.includes('ciclismo')) wIcon.textContent = '🚴';
+            }
             const bTarget = document.getElementById('bento-bike-target');
-            if (bTarget) bTarget.textContent = w.bento_bike_target || (w.bike_meta && w.bike_meta.includes('TSS') ? w.bike_meta.match(/\d+\s*TSS/)?.[0] || '15 TSS' : '15 TSS');
+            if (bTarget) bTarget.textContent = w.bento_bike_target || (w.bike_meta && w.bike_meta.includes('TSS') ? w.bike_meta.match(/\d+\s*TSS/)?.[0] || '60 TSS' : '60 TSS');
             const bMeta = document.getElementById('bento-bike-meta');
             if (bMeta) bMeta.textContent = w.bento_bike_meta || w.bike_meta || 'Focus cadenza & recupero';
 
             const rTitle = document.getElementById('bento-run-title');
-            if (rTitle) rTitle.textContent = w.bento_run_title || w.run_title || 'Corsa Programmo';
+            if (rTitle) rTitle.textContent = w.bento_run_title || w.run_title || 'Cross-Training & Decompressione';
             const rTarget = document.getElementById('bento-run-target');
-            if (rTarget) rTarget.textContent = w.bento_run_target || (w.run_meta && w.run_meta.includes('TSS') ? w.run_meta.match(/\d+\s*TSS/)?.[0] || '45 TSS' : '45 TSS');
+            if (rTarget) {
+                rTarget.textContent = w.bento_run_target || '25 TSS';
+                if (w.bento_run_target && w.bento_run_target.includes('ZERO CORSA')) {
+                    rTarget.style.color = '#ef4444';
+                    rTarget.style.borderColor = 'rgba(239, 68, 68, 0.4)';
+                    rTarget.style.backgroundColor = 'rgba(239, 68, 68, 0.12)';
+                } else {
+                    rTarget.style.color = '#38bdf8';
+                    rTarget.style.borderColor = 'rgba(56, 189, 248, 0.4)';
+                    rTarget.style.backgroundColor = 'rgba(56, 189, 248, 0.12)';
+                }
+            }
             const rMeta = document.getElementById('bento-run-meta');
             if (rMeta) rMeta.textContent = w.bento_run_meta || w.run_meta || 'Setup Fuerteventura';
 
