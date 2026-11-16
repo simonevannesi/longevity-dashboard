@@ -35,7 +35,7 @@
               let clean = url.substring(5).split('?')[0];
               url = 'api/' + clean + '.json?v=' + _rt_ts;
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 16/11 20:35.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 16/11 20:49.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -129,11 +129,11 @@
                     <!-- Slot 1: Allenamento del Giorno (Primary Focus) -->
                     <div class="bento-concise-item presc-bike" id="bento-slot-primary">
                         <div class="concise-head">
-                            <span class="concise-icon" id="bento-workout-icon">🏃‍♂️</span>
-                            <strong class="concise-title" id="bento-bike-title">🏃 Focus Primario: 4x1000m in Pista Tartan</strong>
-                            <span class="concise-tss" id="bento-bike-target">60 TSS</span>
+                            <span class="concise-icon" id="bento-workout-icon">🏊‍♂️</span>
+                            <strong class="concise-title" id="bento-bike-title">Nuoto Z1 in Mare: Decompressione L4-S1</strong>
+                            <span class="concise-tss" id="bento-bike-target">55.4 TSS</span>
                         </div>
-                        <div class="concise-meta" id="bento-bike-meta">🎯 1.6km WU + 4x1000m in progressione (1° @ 4:35 -> 2° @ 4:25 -> 3°-4° @ 4:15-4:20 /km, rec. 2'30") + 1km CD • LT2 Target</div>
+                        <div class="concise-meta" id="bento-bike-meta">🌊 800-1200m sciolti (stile/dorso, FC < 120 bpm) • Drenaggio gambe</div>
                         <div class="concise-actions-row" id="bento-bike-actions" style="display: none;">
                             <button class="bento-garmin-push-btn" id="btn-push-garmin-bike" onclick="pushWorkoutToGarmin('bike')">
                                 📡 Invia Workout a Garmin Connect
@@ -146,10 +146,10 @@
                     <div class="bento-concise-item presc-run" style="border-left: 3px solid #38bdf8; background: rgba(56, 189, 248, 0.04);">
                         <div class="concise-head">
                             <span class="concise-icon" id="bento-slot2-icon">🏊‍♂️</span>
-                            <strong class="concise-title" id="bento-run-title">🏊 Vasca Decompressione (800m Z1) + Bici Transfer</strong>
-                            <span class="concise-tss" id="bento-run-target" style="color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.12);">25 TSS</span>
+                            <strong class="concise-title" id="bento-run-title">DOMANI LUNEDÌ: 4x1000m in Pista Tartan</strong>
+                            <span class="concise-tss" id="bento-run-target" style="color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.12);">🛑 ZERO CORSA OGGI</span>
                         </div>
-                        <div class="concise-meta" id="bento-run-meta">🌊 Decompressione discale L4-S1 in acqua e pedalata agile (85-90 rpm) per lavaggio metabolico</div>
+                        <div class="concise-meta" id="bento-run-meta">⚡ Sessione chiave 10k: serbatoi di glicogeno pieni e tendini al 100%</div>
                     </div>
 
                     <!-- Slot 3: Piano B (Unico e Coerente) -->
@@ -498,25 +498,25 @@
             <div class="dashboard-card" id="card-workout-suggestions">
                 <div class="dash-card-header">
                     <span>🎯 Programmazione Allenamento di Oggi</span>
-                    <span style="font-size:0.72rem; color:var(--accent-gold);">🎯 COMBO MUNICIPALE 3 (SESSIONE CHIAVE 10K: RIPETUTE MEDIE)</span>
+                    <span style="font-size:0.72rem; color:var(--accent-gold);">🏊 PISTA TARTAN 4X1000M + NUOTO CON MUTA (COMPLETATA)</span>
                 </div>
 
                 <div class="workout-subcard" style="border-left: 3px solid #60a5fa;">
                     <div class="workout-subcard-title">
-                        <span>🚲 Bici Transfer: 5 km Andata + 5 km Ritorno (Muletto Z1)</span>
+                        <span>🏊 Focus Primario: Nuoto in Mare / Vasca Z1 (Decompressione)</span>
                         <span style="color:#10b981; font-size:0.75rem;">Consigliato</span>
                     </div>
-                    <div class="workout-subcard-desc">Transfer verso il Centro Municipale: pedalata agile (85-90 rpm, FC < 120 bpm, solo battiti).</div>
-                    <div class="workout-subcard-meta">🚲 Muletto (solo battiti): 5km A/R • FC < 120 bpm (15 TSS)</div>
+                    <div class="workout-subcard-desc">WU 1.5km + 4x1000m (4:21 @ 144bpm -> 4:15 @ 146bpm -> 4:09 @ 152bpm -> 3:58 @ 156bpm) + Vasca 800m con muta (lap 250m @ 1:34.8/100m @ 129bpm).</div>
+                    <div class="workout-subcard-meta">🌊 Decompressione L4-S1 • Drenaggio metabolico post-bici • Target: 55.4 TSS</div>
                 </div>
 
                 <div class="workout-subcard" style="border-left: 3px solid #34d399;">
                     <div class="workout-subcard-title">
-                        <span>🏃 Combo Municipale 3 (Sessione Chiave 10k: Ripetute Medie)</span>
+                        <span>🛑 Corsa: ZERO CORSA OGGI (Domani Pista 4x1000m)</span>
                         <span style="color:#38bdf8; font-size:0.75rem;">Opzione Alternativa</span>
                     </div>
-                    <div class="workout-subcard-desc">Bici 5km andata -> Pista Tartan: 1.6km WU + 4x1000m in progressione (1° @ 4:35, 2° @ 4:25, 3°-4° @ 4:15-4:20 /km, rec. 2'30" attivo) + 1km CD -> Vasca: 800m Z1 -> Bici 5km ritorno.</div>
-                    <div class="workout-subcard-meta">👟 Pista Tartan Corralejo • Target: 60 TSS</div>
+                    <div class="workout-subcard-desc">Domani Lunedì 16 hai in programma le ripetute chiave 4x1000m in pista tartan: oggi è tassativamente vietata qualsiasi corsa per arrivare con tendini e glicogeno al 100%.</div>
+                    <div class="workout-subcard-meta">⚡ Domani: 4x1000m @ 4:40-4:45 /km</div>
                 </div>
 
                 <!-- Piano B (Meteo / Vento / Domenica Chiuso) -->
@@ -534,14 +534,14 @@
             <div class="dashboard-card" id="card-race-calendar">
                 <div class="dash-card-header">
                     <span>📅 Calendario Gare &amp; Preparazione Target</span>
-                    <span style="font-size:0.72rem; color:var(--accent-gold);" id="race-target-badge">🎯 Test Podistico 10k Olimpico (Fuerteventura) (97%)</span>
+                    <span style="font-size:0.72rem; color:var(--accent-gold);" id="race-target-badge">🎯 Test Triathlon Olimpico Solitaria (Fuerteventura) (97%)</span>
                 </div>
 
                 <div style="display: flex; flex-direction: column; gap: 0.6rem;">
                     <!-- Prossima Gara Target Highlight -->
                     <div style="background: rgba(251, 191, 36, 0.08); border: 1px solid rgba(251, 191, 36, 0.25); border-radius: 10px; padding: 0.75rem;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
-                            <span style="font-weight: 800; font-size: 0.9rem; color: var(--accent-gold);" id="target-race-name">🚴 Test Podistico 10k Olimpico (Fuerteventura)</span>
+                            <span style="font-weight: 800; font-size: 0.9rem; color: var(--accent-gold);" id="target-race-name">🚴 Test Triathlon Olimpico Solitaria (Fuerteventura)</span>
                             <span style="font-size: 0.75rem; font-weight: 700; color: #ffffff;" id="target-race-countdown">25/11 (tra 9 gg)</span>
                         </div>
                         <!-- Contagiri Gauge & Indice Preparazione -->
@@ -590,7 +590,7 @@
                         </div>
 
                         <div style="font-size: 0.68rem; color: rgba(255, 255, 255, 0.6); line-height: 1.3; border-top: 1px dashed rgba(255, 255, 255, 0.1); padding-top: 0.35rem;" id="prep-explanation-text">
-                            ℹ️ <strong>Origine CTL Target (46.7 CTL):</strong> Basato sul benchmark della letteratura scientifica (50 CTL per Test Podistico 10k Olimpico (Fuerteventura)) ed aggiustato alla CTL massima realmente raggiungibile (46.7) in 9 giorni, considerando un Ramp Rate sicuro (+5 CTL/settimana) ed una finestra di Tapering di 7 giorni per far risalire il TSB a +10 (Freschezza Ottimale).
+                            ℹ️ <strong>Origine CTL Target (46.7 CTL):</strong> Basato sul benchmark della letteratura scientifica (60 CTL per Test Triathlon Olimpico Solitaria (Fuerteventura)) ed aggiustato alla CTL massima realmente raggiungibile (46.7) in 9 giorni, considerando un Ramp Rate sicuro (+5 CTL/settimana) ed una finestra di Tapering di 7 giorni per far risalire il TSB a +10 (Freschezza Ottimale).
                         </div>
                     </div>
 
