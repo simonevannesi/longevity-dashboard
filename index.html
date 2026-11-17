@@ -35,7 +35,7 @@
               let clean = url.substring(5).split('?')[0];
               url = 'api/' + clean + '.json?v=' + _rt_ts;
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 17/11 19:08.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 17/11 19:22.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -513,7 +513,7 @@
             <div class="dashboard-card" id="card-race-calendar">
                 <div class="dash-card-header">
                     <span>📅 Calendario Gare &amp; Preparazione Target</span>
-                    <span style="font-size:0.72rem; color:var(--accent-gold);" id="race-target-badge">🎯 Test Triathlon Olimpico Solitaria (Fuerteventura) (98%)</span>
+                    <span style="font-size:0.72rem; color:var(--accent-gold);" id="race-target-badge">🎯 Test Triathlon Olimpico Solitaria (Fuerteventura) (96%)</span>
                 </div>
 
                 <div style="display: flex; flex-direction: column; gap: 0.6rem;">
@@ -521,7 +521,7 @@
                     <div style="background: rgba(251, 191, 36, 0.08); border: 1px solid rgba(251, 191, 36, 0.25); border-radius: 10px; padding: 0.75rem;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
                             <span style="font-weight: 800; font-size: 0.9rem; color: var(--accent-gold);" id="target-race-name">🚴 Test Triathlon Olimpico Solitaria (Fuerteventura)</span>
-                            <span style="font-size: 0.75rem; font-weight: 700; color: #ffffff;" id="target-race-countdown">25/11 (tra 8 gg)</span>
+                            <span style="font-size: 0.75rem; font-weight: 700; color: #ffffff;" id="target-race-countdown">26/11 (tra 9 gg)</span>
                         </div>
                         <!-- Contagiri Gauge & Indice Preparazione -->
                         <div class="gauge-wrapper-mobile" style="display: flex; align-items: center; justify-content: space-around; gap: 1rem; margin: 0.5rem 0;">
@@ -532,7 +532,7 @@
                                     <circle cx="50" cy="50" r="40" stroke="rgba(255, 255, 255, 0.1)" stroke-width="8" fill="transparent" />
                                     <!-- Anello Progresso Sfumato -->
                                     <circle id="prep-gauge-circle" cx="50" cy="50" r="40" stroke="url(#gauge-grad)" stroke-width="8" fill="transparent"
-                                            stroke-dasharray="251.2" stroke-dashoffset="5.0" stroke-linecap="round" style="transition: stroke-dashoffset 1s ease-in-out;" />
+                                            stroke-dasharray="251.2" stroke-dashoffset="10.0" stroke-linecap="round" style="transition: stroke-dashoffset 1s ease-in-out;" />
                                     <defs>
                                         <linearGradient id="gauge-grad" x1="0%" y1="0%" x2="100%" y2="100%">
                                             <stop offset="0%" stop-color="#38bdf8" />
@@ -542,7 +542,7 @@
                                     </defs>
                                 </svg>
                                 <div style="position: absolute; text-align: center;">
-                                    <div style="font-family: 'Outfit', sans-serif; font-size: 1.45rem; font-weight: 900; color: #ffffff; line-height: 1;" id="prep-pct-text">98%</div>
+                                    <div style="font-family: 'Outfit', sans-serif; font-size: 1.45rem; font-weight: 900; color: #ffffff; line-height: 1;" id="prep-pct-text">96%</div>
                                     <div style="font-size: 0.62rem; color: #10b981; font-weight: 700; margin-top: 2px;" id="prep-stage-text">TAPERING</div>
                                 </div>
                             </div>
@@ -555,7 +555,7 @@
                                 </div>
                                 <div style="display: flex; justify-content: space-between; font-size: 0.75rem; background: rgba(255, 255, 255, 0.03); padding: 0.3rem 0.6rem; border-radius: 6px;">
                                     <span style="color: var(--text-muted);">CTL Target Gara:</span>
-                                    <span style="font-weight: 700; color: var(--accent-gold);" id="prep-target-ctl">45.6 CTL</span>
+                                    <span style="font-weight: 700; color: var(--accent-gold);" id="prep-target-ctl">46.3 CTL</span>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; font-size: 0.75rem; background: rgba(255, 255, 255, 0.03); padding: 0.3rem 0.6rem; border-radius: 6px;">
                                     <span style="color: var(--text-muted);">TSB Attuale (Freschezza):</span>
@@ -569,7 +569,7 @@
                         </div>
 
                         <div style="font-size: 0.68rem; color: rgba(255, 255, 255, 0.6); line-height: 1.3; border-top: 1px dashed rgba(255, 255, 255, 0.1); padding-top: 0.35rem;" id="prep-explanation-text">
-                            ℹ️ <strong>Origine CTL Target (45.6 CTL):</strong> Basato sul benchmark della letteratura scientifica (60 CTL per Test Triathlon Olimpico Solitaria (Fuerteventura)) ed aggiustato alla CTL massima realmente raggiungibile (45.6) in 8 giorni, considerando un Ramp Rate sicuro (+5 CTL/settimana) ed una finestra di Tapering di 7 giorni per far risalire il TSB a +10 (Freschezza Ottimale).
+                            ℹ️ <strong>Origine CTL Target (46.3 CTL):</strong> Basato sul benchmark della letteratura scientifica (60 CTL per Test Triathlon Olimpico Solitaria (Fuerteventura)) ed aggiustato alla CTL massima realmente raggiungibile (46.3) in 9 giorni, considerando un Ramp Rate sicuro (+5 CTL/settimana) ed una finestra di Tapering di 7 giorni per far risalire il TSB a +10 (Freschezza Ottimale).
                         </div>
                     </div>
 
