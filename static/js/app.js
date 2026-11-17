@@ -1754,6 +1754,45 @@ function updateBentoView() {
         }
     }
 
+    // 0B. BANNER SESSIONE COMPLETATA OGGI
+    const completedBanner = document.getElementById('bento-completed-workout');
+    if (completedBanner && last) {
+        const dDay = last['day'], dMonth = last['month'], dYear = last['year'];
+        const now = new Date();
+        const isToday = parseInt(dDay) === now.getDate() && parseInt(dMonth) === (now.getMonth() + 1) && parseInt(dYear) === now.getFullYear();
+        const trainType = String(last['Train type'] || '').trim();
+        const durMin = parseFloat(last['durata min'] || 0);
+        const tssVal = parseFloat(last['TSS'] || last['hrTSS'] || 0);
+        
+        if (isToday && trainType && trainType.toLowerCase() !== 'nan' && trainType.toLowerCase() !== 'none' && (durMin > 0 || tssVal > 0)) {
+            completedBanner.style.display = 'block';
+            const sLow = trainType.toLowerCase();
+            let cIcon = '🚴';
+            let cName = 'Ciclismo';
+            if (sLow.includes('run') || sLow.includes('corsa')) { cIcon = '🏃'; cName = 'Corsa'; }
+            else if (sLow.includes('swim') || sLow.includes('nuoto')) { cIcon = '🏊'; cName = 'Nuoto'; }
+            else if (sLow.includes('mx') || sLow.includes('motocross')) { cIcon = '🏍️'; cName = 'Motocross'; }
+
+            const setTxt = (id, txt) => { const el = document.getElementById(id); if (el) el.textContent = txt; };
+            setTxt('bento-completed-icon', cIcon);
+            setTxt('bento-completed-title', `${cName} Completato`);
+            setTxt('bento-completed-tss', `${tssVal.toFixed(1)} TSS`);
+            
+            const distVal = parseFloat(last['distanza'] || last['dist_km'] || 0);
+            const hrVal = parseFloat(last['HR media'] || last['hr_media'] || 0);
+            const eleVal = parseFloat(last['dislivello'] || 0);
+            
+            let metaParts = [];
+            if (distVal > 0) metaParts.push(`${distVal.toFixed(1)} km`);
+            if (durMin > 0) metaParts.push(`${Math.round(durMin)} min`);
+            if (hrVal > 0) metaParts.push(`FC ${Math.round(hrVal)} bpm`);
+            if (eleVal > 0) metaParts.push(`+${Math.round(eleVal)}m D+`);
+            setTxt('bento-completed-meta', metaParts.join(' • '));
+        } else {
+            completedBanner.style.display = 'none';
+        }
+    }
+
     // 1. CARICO & TRAINING (CTL, ATL, TSB, ACWR, Dicotomia Bici/Corsa)
     const ctl = parseFloat(last['CTL'] || 0);
     const atl = parseFloat(last['ATL'] || (ctl - (parseFloat(last['TSB'] || 0))));
