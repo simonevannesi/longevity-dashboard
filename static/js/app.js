@@ -906,32 +906,9 @@ function triggerManualSync() {
 }
 
 /* ==========================================================================
-   🥗 NUTRITION & DAILY CALORIC BALANCE MODULE
+   ⚖️ PESO CORPOREO, SPESA ENERGETICA & IDRATAZIONE MODULE
    ========================================================================== */
 let currentNutritionDate = null;
-let nutritionFoodsLoaded = false;
-let cachedFoods = [];
-
-function loadNutritionFoods() {
-    if (nutritionFoodsLoaded) return;
-    fetch('/api/nutrition/foods')
-        .then(res => res.json())
-        .then(foods => {
-            cachedFoods = Array.isArray(foods) ? foods : [];
-            const datalist = document.getElementById('food-datalist');
-            if (!datalist) return;
-            datalist.innerHTML = '';
-            cachedFoods.forEach(f => {
-                const opt = document.createElement('option');
-                opt.value = f.name;
-                const portionInfo = (f.unit && f.unit !== 'porzione (100g)') ? ` [${f.unit}]` : '';
-                opt.textContent = `${f.category}${portionInfo} (${f.kcal} kcal/100g • C:${f.carbs}g P:${f.protein}g F:${f.fat}g)`;
-                datalist.appendChild(opt);
-            });
-            nutritionFoodsLoaded = true;
-        })
-        .catch(err => console.error("Error loading food database:", err));
-}
 
 function renderNutritionCard(data) {
     if (!data) return;
@@ -968,192 +945,40 @@ function renderNutritionCard(data) {
     const badge = document.getElementById('nutrition-status-badge');
     if (badge) {
         badge.className = 'nutrition-status-badge';
-        const stLow = (data.status || 'deficit').toLowerCase();
-        badge.classList.add(`status-${stLow}`);
-        badge.textContent = data.status_label || `${data.status}: ${data.net_balance} kcal`;
-    }
-
-    // Allerta Glicogeno Sotto-Soglia / Finestra FatMax (Miglioria 1)
-    const glyAlert = data.glycogen_alert;
-    const glyBox = document.getElementById('nutri-glycogen-alert-box');
-    if (glyBox) {
-        if (glyAlert && glyAlert.active) {
-            glyBox.style.display = 'flex';
-            const col = glyAlert.badge_color || '#38bdf8';
-            glyBox.style.background = col + '18';
-            glyBox.style.borderColor = col + '55';
-            const tEl = document.getElementById('glycogen-alert-title');
-            if (tEl) {
-                tEl.textContent = glyAlert.badge || '🔥 FINESTRA FATMAX';
-                tEl.style.color = col;
-            }
-            const bEl = document.getElementById('glycogen-alert-badge');
-            if (bEl) {
-                bEl.textContent = `-${glyAlert.deficit_g}g Carbo`;
-                bEl.style.color = col;
-                bEl.style.borderColor = col + '66';
-                bEl.style.background = col + '22';
-            }
-            const txtEl = document.getElementById('glycogen-alert-text');
-            if (txtEl) txtEl.innerHTML = glyAlert.message || '';
-        } else {
-            glyBox.style.display = 'none';
-        }
+        badge.textContent = 'TARGET 82–83 KG';
     }
 
     // Colonna 1: Spesa
     const tdeeEl = document.getElementById('nutri-tdee-val');
-    if (tdeeEl) tdeeEl.innerHTML = `${data.tdee.toLocaleString()} <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span>`;
-    setEl('nutri-bmr-val', `${data.bmr.toLocaleString()} kcal`);
-    setEl('nutri-workout-desc', `${data.workout_icon} ${data.workout_desc}`);
-    setEl('nutri-workout-val', `+${data.workout_burn} kcal`);
-    setEl('nutri-neat-val', `+${data.neat} kcal`);
+    if (tdeeEl) tdeeEl.innerHTML = `${(data.tdee || 0).toLocaleString()} <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span>`;
+    setEl('nutri-bmr-val', `${(data.bmr || 0).toLocaleString()} kcal`);
+    setEl('nutri-workout-desc', `${data.workout_icon || '🛌'} ${data.workout_desc || 'Nessuna Attività'}`);
+    setEl('nutri-workout-val', `+${data.workout_burn || 0} kcal`);
+    setEl('nutri-neat-val', `+${data.neat || 300} kcal`);
 
-    // Colonna 2: Introito & Macro con Target
-    const intakeEl = document.getElementById('nutri-intake-val');
-    if (intakeEl) intakeEl.innerHTML = `${data.intake_kcal.toLocaleString()} <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span>`;
-    
-    // Carboidrati
-    const carbsEl = document.getElementById('nutri-carbs-text');
-    const carbsDiffTxt = data.carbs_left > 0 ? `mancano ${data.carbs_left}g` : (data.carbs_left < 0 ? `+${Math.abs(data.carbs_left)}g surplus` : 'target raggiunto');
-    const carbsTargetLabel = data.target_carbs_g ? ` / ${data.target_carbs_g}g target` : '';
-    const carbsPctLabel = data.carbs_target_pct !== undefined ? `${data.carbs_target_pct}%` : `${data.carbs_pct}%`;
-    if (carbsEl) carbsEl.innerHTML = `<strong>${data.carbs_g}g</strong>${carbsTargetLabel} <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(${carbsDiffTxt} • ${carbsPctLabel})</span>`;
-    const carbsFill = document.getElementById('nutri-carbs-fill');
-    if (carbsFill) {
-        const carbsBarPct = data.carbs_target_pct !== undefined ? Math.min(100, data.carbs_target_pct) : Math.min(100, data.carbs_pct * 1.6);
-        carbsFill.style.width = `${carbsBarPct}%`;
-    }
-
-    // Proteine
-    const proEl = document.getElementById('nutri-protein-text');
-    const proDiffTxt = data.protein_left > 0 ? `mancano ${data.protein_left}g` : (data.protein_left < 0 ? `+${Math.abs(data.protein_left)}g surplus` : 'target raggiunto');
-    const proTargetLabel = data.target_protein_g ? ` / ${data.target_protein_g}g target` : '';
-    const proPctLabel = data.protein_target_pct !== undefined ? `${data.protein_target_pct}%` : `${data.protein_pct}%`;
-    if (proEl) proEl.innerHTML = `<strong>${data.protein_g}g</strong>${proTargetLabel} <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(${proDiffTxt} • ${proPctLabel})</span>`;
-    const proFill = document.getElementById('nutri-protein-fill');
-    if (proFill) {
-        const proBarPct = data.protein_target_pct !== undefined ? Math.min(100, data.protein_target_pct) : Math.min(100, data.protein_pct * 2.5);
-        proFill.style.width = `${proBarPct}%`;
-    }
-
-    // Grassi
-    const fatEl = document.getElementById('nutri-fat-text');
-    const fatDiffTxt = data.fat_left > 0 ? `mancano ${data.fat_left}g` : (data.fat_left < 0 ? `+${Math.abs(data.fat_left)}g surplus` : 'target raggiunto');
-    const fatTargetLabel = data.target_fat_g ? ` / ${data.target_fat_g}g target` : '';
-    const fatPctLabel = data.fat_target_pct !== undefined ? `${data.fat_target_pct}%` : `${data.fat_pct}%`;
-    if (fatEl) fatEl.innerHTML = `<strong>${data.fat_g}g</strong>${fatTargetLabel} <span style="font-size:0.7rem; color:var(--text-muted); font-weight:500;">(${fatDiffTxt} • ${fatPctLabel})</span>`;
-    const fatFill = document.getElementById('nutri-fat-fill');
-    if (fatFill) {
-        const fatBarPct = data.fat_target_pct !== undefined ? Math.min(100, data.fat_target_pct) : Math.min(100, data.fat_pct * 2.0);
-        fatFill.style.width = `${fatBarPct}%`;
-    }
-
-    // Colonna 3: Sudore & Liquidi
+    // Colonna 2: Sudore & Liquidi
     const sweatEl = document.getElementById('nutri-sweat-val');
-    if (sweatEl) sweatEl.innerHTML = `${data.sweat_liters} <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">L</span>`;
-    setEl('nutri-sweat-sub', `${data.sweat_liters} L (${data.workout_burn > 0 ? 'Sessione Attiva' : 'Riposo'})`);
-    setEl('nutri-water-target', `${data.water_target_liters} L / giorno`);
-    setEl('nutri-salt-caps', `${data.salt_caps} ${data.salt_caps === 1 ? 'Capsula' : 'Capsule'}`);
+    if (sweatEl) sweatEl.innerHTML = `${data.sweat_liters || 0.0} <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">L</span>`;
+    setEl('nutri-sweat-sub', `${data.sweat_liters || 0.0} L (${(data.workout_burn || 0) > 0 ? 'Sessione Attiva' : 'Riposo'})`);
+    setEl('nutri-water-target', `${data.water_target_liters || 2.5} L / giorno`);
+    setEl('nutri-salt-caps', `${data.salt_caps || 0} ${(data.salt_caps || 0) === 1 ? 'Capsula' : 'Capsule'}`);
 
-    // Items List
-    const itemsList = document.getElementById('nutri-items-list');
-    setEl('nutri-items-count', `${(data.items || []).length} alimenti`);
-
-    if (itemsList) {
-        if (!data.items || data.items.length === 0) {
-            itemsList.innerHTML = `<div class="nutri-empty-placeholder">Nessun alimento registrato per oggi. Scrivi ad es. <strong>"1 uovo"</strong> o <strong>"1 cappuccino"</strong> sopra per iniziare a tracciare macro e bilancio calorico.</div>`;
-        } else {
-            itemsList.innerHTML = '';
-            data.items.forEach(it => {
-                const row = document.createElement('div');
-                row.className = 'nutri-item-row';
-                const isOnlyKcal = (it.portion_label === 'Solo kcal' || (!it.grams && !it.carbs && !it.protein && !it.fat));
-                const portionText = isOnlyKcal
-                    ? '🔥 Solo kcal'
-                    : (it.portion_label ? (it.portion_label.includes('g') ? it.portion_label : `${it.portion_label} • ${it.grams}g`) : `${it.grams}g`);
-                row.innerHTML = `
-                    <div class="nutri-item-info">
-                        <span class="nutri-item-name">${it.name}</span>
-                        <span class="nutri-item-grams">(${portionText})</span>
-                    </div>
-                    <div class="nutri-item-macros">
-                        <span class="nutri-item-kcal">${it.kcal} kcal</span>
-                        <span style="color:#38bdf8;">C:${it.carbs}g</span>
-                        <span style="color:#34d399;">P:${it.protein}g</span>
-                        <span style="color:#fbbf24;">F:${it.fat}g</span>
-                        <button class="nutri-item-del-btn" title="Rimuovi alimento" onclick="deleteNutritionItem('${it.id}')">🗑️</button>
-                    </div>
-                `;
-                itemsList.appendChild(row);
-            });
-        }
-    }
-
-    // Top 10 Cibi Più Usati (1-Click Quick Add)
-    const topFoodsBar = document.getElementById('nutri-top-foods-bar');
-    if (topFoodsBar && Array.isArray(data.top_foods)) {
-        topFoodsBar.innerHTML = `<span style="font-size: 0.68rem; color: var(--text-muted); font-weight: 600; margin-right: 0.2rem;">⭐ Top 10 Più Usati (1-Click):</span>`;
-        data.top_foods.forEach(tf => {
-            const btn = document.createElement('button');
-            btn.type = 'button';
-            btn.className = 'race-filter-btn';
-            btn.style.fontSize = '0.68rem';
-            btn.style.padding = '0.2rem 0.5rem';
-            btn.title = `Usato ${tf.count} volte • Clicca per aggiungere subito`;
-            btn.textContent = tf.label;
-            btn.onclick = () => quickAddFood(tf.name, tf.amount, tf.unit_type);
-            topFoodsBar.appendChild(btn);
-        });
-    }
-
-    // Stima Variazione Peso & Validazione Formula (Wishnofsky ~7.700 kcal = 1 kg)
+    // Stima Variazione Peso & Trend EWMA
     const wEst = data.weekly_weight_estimate;
     if (wEst) {
-        const net7dEl = document.getElementById('nutri-net-7d-val');
-        if (net7dEl) {
-            const pNet = wEst.projected_7d_net || 0;
-            const sign = pNet > 0 ? '+' : '';
-            net7dEl.innerHTML = `${sign}${pNet.toLocaleString()} <span class="nutri-weight-unit">kcal / sett</span>`;
-            net7dEl.style.color = wEst.projected_color || '#38bdf8';
+        setEl('nutri-weight-real-val', `${wEst.current_weight || 84.8} kg`);
+        if (wEst.prev_weight) {
+            setEl('nutri-weight-real-hint', `Precedente: ${wEst.prev_weight} kg (${wEst.prev_weight_date || ''})`);
+        } else {
+            setEl('nutri-weight-real-hint', 'Peso Baseline Registrato');
         }
-        const avgNet = wEst.avg_daily_net || 0;
-        const avgSign = avgNet > 0 ? '+' : '';
-        setEl('nutri-net-7d-hint', `Media: ${avgSign}${avgNet.toLocaleString()} kcal/gg su ${wEst.tracked_days_count || 0} gg tracciati`);
 
         const deltaEl = document.getElementById('nutri-weight-delta-val');
         if (deltaEl) {
-            deltaEl.innerHTML = `${wEst.projected_delta_str || '0.00 kg/sett'} <span class="nutri-weight-unit"></span>`;
-            deltaEl.style.color = wEst.projected_color || '#38bdf8';
+            deltaEl.innerHTML = `${wEst.weighted_avg_weight || wEst.current_weight || 84.8} <span class="nutri-weight-unit">kg</span>`;
+            deltaEl.style.color = '#38bdf8';
         }
-        setEl('nutri-weight-delta-hint', wEst.projected_label || 'Stima Variazione Peso');
-
-        setEl('nutri-weight-real-val', `${wEst.current_weight || 85.2} kg`);
-        if (wEst.prev_weight) {
-            const avgStr = wEst.weighted_avg_weight ? ` • Media Ponderata: ${wEst.weighted_avg_weight} kg` : '';
-            setEl('nutri-weight-real-hint', `Precedente: ${wEst.prev_weight} kg (${wEst.prev_weight_date || ''})${avgStr}`);
-        } else {
-            setEl('nutri-weight-real-hint', 'Peso Baseline di Partenza (Giorno 1)');
-        }
-
-        const badgeEl = document.getElementById('nutri-weight-badge');
-        const bCol = wEst.validation_badge_color || '#38bdf8';
-        if (badgeEl) {
-            badgeEl.style.borderColor = bCol + '66';
-            badgeEl.style.color = bCol;
-            badgeEl.style.background = bCol + '22';
-        }
-        setEl('nutri-weight-badge-txt', wEst.validation_title || 'IN VALIDAZIONE');
-
-        setEl('nutri-weight-msg-text', wEst.validation_message || '');
-        const msgBanner = document.getElementById('nutri-weight-msg-banner');
-        if (msgBanner) {
-            msgBanner.style.borderColor = bCol + '44';
-        }
-        const msgIcon = document.getElementById('nutri-weight-msg-icon');
-        if (msgIcon) {
-            msgIcon.textContent = wEst.validation_status === 'CONCORDANTE' ? '✅' : (wEst.validation_status === 'IN_VALIDAZIONE' ? 'ℹ️' : '⚠️');
-        }
+        setEl('nutri-weight-delta-hint', 'Target Longevità: 82–83 kg (~12% BF)');
     }
 
     // 🥩 Body Composition (Garmin Index) 6-Card Grid
@@ -1209,108 +1034,6 @@ function renderNutritionCard(data) {
         if (m.water_pct) setInp('nutri-bc-input-water', m.water_pct.val);
         if (m.bone_mass) setInp('nutri-bc-input-bone', m.bone_mass.val);
         if (m.bmi) setInp('nutri-bc-input-bmi', m.bmi.val);
-    }
-
-    // 🔬 Analisi Multi-Giorno Carenze & Sbilanciamenti Nutrizionali
-    const mAnalysis = data.multi_day_analysis;
-    const boxMulti = document.getElementById('box-multi-day-analysis');
-    if (boxMulti && mAnalysis) {
-        if (mAnalysis.status === 'IN_ATTESA_DATI') {
-            boxMulti.style.display = 'none';
-        } else {
-            boxMulti.style.display = 'flex';
-            setEl('multi-period-label', mAnalysis.period_label || 'Monitoraggio Longevità: Sintesi Proteica, Immunità & Glicogeno');
-            
-            // Overall Status Badge
-            const sBadge = document.getElementById('multi-status-badge');
-            const sCol = mAnalysis.status_color || '#ef4444';
-            if (sBadge) {
-                sBadge.style.color = sCol;
-                sBadge.style.borderColor = sCol + '66';
-                sBadge.style.background = sCol + '22';
-            }
-            setEl('multi-status-badge-txt', mAnalysis.status_badge || 'ANALISI MULTI-GIORNO');
-
-            // 1. Proteine
-            const p = mAnalysis.protein;
-            if (p) {
-                const pTag = document.getElementById('multi-pro-tag');
-                if (pTag) {
-                    pTag.style.color = p.color;
-                    pTag.style.background = p.color + '22';
-                    pTag.textContent = p.badge;
-                }
-                const pVal = document.getElementById('multi-pro-val');
-                if (pVal) {
-                    pVal.style.color = p.color;
-                    pVal.innerHTML = `${p.avg_g} <span class="nutri-imbalance-unit">g / die (${p.avg_per_kg} g/kg)</span>`;
-                }
-                const elHint = document.getElementById('multi-pro-hint');
-                if (elHint) elHint.innerHTML = `Target Longevità: <strong>${p.target_g}g</strong> (${p.target_per_kg} g/kg • ${p.pct}%)`;
-            }
-
-            // 2. Carboidrati
-            const c = mAnalysis.carbs;
-            if (c) {
-                const cTag = document.getElementById('multi-carbs-tag');
-                if (cTag) {
-                    cTag.style.color = c.color;
-                    cTag.style.background = c.color + '22';
-                    cTag.textContent = c.badge;
-                }
-                const cVal = document.getElementById('multi-carbs-val');
-                if (cVal) {
-                    cVal.style.color = c.color;
-                    cVal.innerHTML = `${c.avg_g} <span class="nutri-imbalance-unit">g / die (${c.pct}%)</span>`;
-                }
-                const cHint = document.getElementById('multi-carbs-hint');
-                if (cHint) cHint.textContent = `${c.workout_burn.toLocaleString()} kcal bruciate in ${c.workout_count} sessioni`;
-            }
-
-            // 3. Grassi
-            const f = mAnalysis.fat;
-            if (f) {
-                const fTag = document.getElementById('multi-fat-tag');
-                if (fTag) {
-                    fTag.style.color = f.color;
-                    fTag.style.background = f.color + '22';
-                    fTag.textContent = f.badge;
-                }
-                const fVal = document.getElementById('multi-fat-val');
-                if (fVal) {
-                    fVal.style.color = f.color;
-                    fVal.innerHTML = `${f.avg_g} <span class="nutri-imbalance-unit">g / die (${f.avg_per_kg} g/kg)</span>`;
-                }
-                const fHint = document.getElementById('multi-fat-hint');
-                if (fHint) fHint.innerHTML = `Target Ormonale: <strong>${f.target_g}g</strong> (${f.target_per_kg} g/kg • ${f.pct}%)`;
-            }
-
-            // 4. Bilancio Energetico
-            const e = mAnalysis.energy;
-            if (e) {
-                const eTag = document.getElementById('multi-energy-tag');
-                if (eTag) {
-                    eTag.style.color = e.color;
-                    eTag.style.background = e.color + '22';
-                    eTag.textContent = e.badge;
-                }
-                const eVal = document.getElementById('multi-energy-val');
-                if (eVal) {
-                    eVal.style.color = e.color;
-                    const sign = e.total_deficit > 0 ? '+' : '';
-                    eVal.innerHTML = `${sign}${e.total_deficit.toLocaleString()} <span class="nutri-imbalance-unit">kcal (7d)</span>`;
-                }
-                const eHint = document.getElementById('multi-energy-hint');
-                if (eHint) eHint.textContent = e.hint || `Media: ${e.avg_daily_deficit} kcal/die`;
-            }
-
-            // Box Clinical Insight & Prescription
-            const elInsight = document.getElementById('multi-clinical-insight');
-            if (elInsight) elInsight.textContent = mAnalysis.clinical_insight || '';
-
-            const elPresc = document.getElementById('multi-prescription');
-            if (elPresc) elPresc.innerHTML = mAnalysis.prescription || '';
-        }
     }
 }
 
@@ -1426,177 +1149,7 @@ function logCurrentWeight() {
     });
 }
 
-function addNutritionItem() {
-    const foodInput = document.getElementById('nutri-food-input');
-    const gramsInput = document.getElementById('nutri-grams-input');
-    const unitSelect = document.getElementById('nutri-unit-select');
-
-    let rawName = foodInput ? foodInput.value.trim() : '';
-    const hasGramsVal = gramsInput && gramsInput.value && parseFloat(gramsInput.value) > 0;
-    let unitType = unitSelect ? unitSelect.value : 'auto';
-
-    // Se l'utente non ha scritto il nome ma ha messo le calorie nella casella quantità, accetta come Calorie Libere
-    if (!rawName && hasGramsVal) {
-        rawName = 'Calorie Libere / Pasto Stimato';
-        unitType = 'kcal';
-    } else if (!rawName) {
-        if (foodInput) foodInput.focus();
-        return;
-    }
-
-    let amount = hasGramsVal ? parseFloat(gramsInput.value) : 1;
-
-    if (isNaN(amount) || amount <= 0) {
-        amount = 1;
-    }
-
-    const btn = document.getElementById('nutri-btn-add');
-    if (btn) btn.disabled = true;
-
-    fetch('/api/nutrition/add', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            date: currentNutritionDate,
-            name: rawName,
-            amount: amount,
-            unit_type: unitType
-        })
-    })
-    .then(res => res.json())
-    .then(data => {
-        renderNutritionCard(data);
-        if (foodInput) foodInput.value = '';
-        if (gramsInput) gramsInput.value = '';
-        if (unitSelect) unitSelect.value = 'auto';
-        if (gramsInput) gramsInput.placeholder = 'Quantità';
-        if (foodInput) foodInput.focus();
-    })
-    .catch(err => console.error("Error adding food item:", err))
-    .finally(() => {
-        if (btn) btn.disabled = false;
-    });
-}
-
-function quickAddFood(name, amount, unitType) {
-    fetch('/api/nutrition/add', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            date: currentNutritionDate,
-            name: name,
-            amount: amount,
-            unit_type: unitType || 'auto'
-        })
-    })
-    .then(res => res.json())
-    .then(data => renderNutritionCard(data))
-    .catch(err => console.error("Error quick adding food:", err));
-}
-
-function deleteNutritionItem(itemId) {
-    if (!itemId) return;
-    fetch('/api/nutrition/delete', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            date: currentNutritionDate,
-            id: itemId
-        })
-    })
-    .then(res => res.json())
-    .then(data => renderNutritionCard(data))
-    .catch(err => console.error("Error deleting food item:", err));
-}
-
-function setupNutritionInputs() {
-    loadNutritionFoods();
-    const foodInput = document.getElementById('nutri-food-input');
-    const gramsInput = document.getElementById('nutri-grams-input');
-    const unitSelect = document.getElementById('nutri-unit-select');
-
-    if (foodInput && !foodInput.dataset.bound) {
-        foodInput.dataset.bound = "true";
-        
-        // Smart automatic unit switching when typing or picking food
-        foodInput.addEventListener('input', () => {
-            const val = foodInput.value.trim().toLowerCase();
-            if (!val) return;
-            // Se contiene kcal / cal, imposta unitSelect a 'kcal'
-            if (/\b(kcal|cal|kal|calorie)\b/i.test(val) || /^\d+$/.test(val)) {
-                if (unitSelect) unitSelect.value = 'kcal';
-                if (gramsInput) gramsInput.placeholder = 'Solo kcal';
-                return;
-            }
-            // Cerca match in cachedFoods
-            const match = cachedFoods.find(f => 
-                f.name.toLowerCase() === val || 
-                (f.aliases && f.aliases.some(a => a.toLowerCase() === val || val.includes(a.toLowerCase())))
-            );
-            if (match) {
-                if (match.unit && match.unit !== 'porzione (100g)') {
-                    if (unitSelect) unitSelect.value = 'piece';
-                    if (gramsInput && !gramsInput.value) gramsInput.value = '1';
-                    if (gramsInput) gramsInput.placeholder = `1 = ${match.unit}`;
-                } else {
-                    if (unitSelect) unitSelect.value = 'grams';
-                    if (gramsInput && (!gramsInput.value || gramsInput.value === '1')) gramsInput.value = '';
-                    if (gramsInput) gramsInput.placeholder = 'Grammi (es. 100)';
-                }
-            }
-        });
-
-        foodInput.addEventListener('keypress', e => {
-            if (e.key === 'Enter') {
-                if (gramsInput && !gramsInput.value && !/\d/.test(foodInput.value)) {
-                    gramsInput.focus();
-                } else {
-                    addNutritionItem();
-                }
-            }
-        });
-    }
-
-    if (gramsInput && !gramsInput.dataset.bound) {
-        gramsInput.dataset.bound = "true";
-        gramsInput.addEventListener('input', () => {
-            const v = parseFloat(gramsInput.value);
-            if (!isNaN(v) && unitSelect) {
-                // Se l'utente ha scelto esplicitamente 'kcal' o il campo alimento è vuoto, mantieni 'kcal'
-                if (unitSelect.value === 'kcal') return;
-                if (foodInput && !foodInput.value.trim()) {
-                    unitSelect.value = 'kcal';
-                    return;
-                }
-                // Se l'utente digita >= 15 (es. 30, 50, 100, 150) passa in automatico a Grammi (g)
-                if (v >= 15) {
-                    unitSelect.value = 'grams';
-                } else if (v > 0 && v < 15) {
-                    unitSelect.value = 'piece';
-                }
-            }
-        });
-        gramsInput.addEventListener('keypress', e => {
-            if (e.key === 'Enter') addNutritionItem();
-        });
-    }
-
-    if (unitSelect && !unitSelect.dataset.bound) {
-        unitSelect.dataset.bound = "true";
-        unitSelect.addEventListener('change', () => {
-            if (unitSelect.value === 'piece') {
-                if (gramsInput && !gramsInput.value) gramsInput.value = '1';
-                if (gramsInput) gramsInput.placeholder = 'Es. 1 o 2';
-            } else if (unitSelect.value === 'grams') {
-                if (gramsInput && gramsInput.value === '1') gramsInput.value = '100';
-                if (gramsInput) gramsInput.placeholder = 'Grammi (es. 100)';
-            } else if (unitSelect.value === 'kcal') {
-                if (gramsInput && gramsInput.value === '1') gramsInput.value = '';
-                if (gramsInput) gramsInput.placeholder = 'Kcal (es. 600)';
-            }
-        });
-    }
-
+function setupWeightInput() {
     const weightInput = document.getElementById('nutri-weight-input');
     if (weightInput && !weightInput.dataset.bound) {
         weightInput.dataset.bound = "true";
@@ -1618,7 +1171,7 @@ function loadData() {
     loadRacePrep();
     loadWorkoutSuggestions();
     loadNutritionData();
-    setupNutritionInputs();
+    setupWeightInput();
     loadClinicalHealthData();
     loadTrainingZones();
     loadLoadDistribution();
@@ -2168,7 +1721,8 @@ function switchBentoTab(tab, event) {
         'load': 'bento-sec-load',
         'health': 'bento-sec-health',
         'zones': 'bento-sec-zones',
-        'nutrition': 'bento-sec-nutrition'
+        'weight': 'bento-sec-weight',
+        'nutrition': 'bento-sec-weight'
     };
 
     const targetId = secMap[tab];
@@ -2541,50 +2095,6 @@ function updateBentoView() {
     }
 }
 
-function openQuickAddModal() {
-    const m = document.getElementById('bento-quick-add-modal');
-    if (m) m.style.display = 'flex';
-    const inp = document.getElementById('bento-quick-food-input');
-    if (inp) {
-        inp.value = '';
-        setTimeout(() => inp.focus(), 100);
-    }
-}
-
-function closeQuickAddModal() {
-    const m = document.getElementById('bento-quick-add-modal');
-    if (m) m.style.display = 'none';
-}
-
-function bentoAddPreset(foodQuery) {
-    const inp = document.getElementById('bento-quick-food-input');
-    if (inp) inp.value = foodQuery;
-    submitQuickFood();
-}
-
-function submitQuickFood() {
-    const inp = document.getElementById('bento-quick-food-input');
-    if (!inp || !inp.value.trim()) return;
-    const foodQuery = inp.value.trim();
-    closeQuickAddModal();
-
-    fetch('/api/nutrition/add', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            date: window.currentNutritionDate || '',
-            food_name: foodQuery,
-            amount: 1,
-            unit_type: 'auto'
-        })
-    })
-    .then(r => r.json())
-    .then(res => {
-        loadNutritionData(window.currentNutritionDate);
-    })
-    .catch(err => console.error("Error adding food from Bento modal:", err));
-}
-
 function pushWorkoutToGarmin(sport) {
     sport = sport || 'bike';
     const btn = document.getElementById(`btn-push-garmin-${sport}`);
@@ -2654,9 +2164,6 @@ function pushWorkoutToGarmin(sport) {
 window.updateBentoView = updateBentoView;
 window.toggleDashboardView = toggleDashboardView;
 window.switchBentoTab = switchBentoTab;
-window.openQuickAddModal = openQuickAddModal;
-window.closeQuickAddModal = closeQuickAddModal;
-window.bentoAddPreset = bentoAddPreset;
-window.submitQuickFood = submitQuickFood;
 window.pushWorkoutToGarmin = pushWorkoutToGarmin;
+
 
