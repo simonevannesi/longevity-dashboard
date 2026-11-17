@@ -35,7 +35,7 @@
               let clean = url.substring(5).split('?')[0];
               url = 'api/' + clean + '.json?v=' + _rt_ts;
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 17/11 18:58.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 17/11 19:06.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -122,6 +122,21 @@
 
                 <div class="bento-readiness-summary-concise" id="bento-readiness-summary">
                     HRV 52 ms • FC 42 bpm • TSB +2.1
+                </div>
+
+                <!-- Banner Sessione Completata Oggi (se presente) -->
+                <div class="bento-completed-workout-banner" id="bento-completed-workout" style="display: none; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 12px; padding: 0.65rem 0.85rem; margin-bottom: 0.75rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+                        <span style="font-size: 0.72rem; font-weight: 800; color: #10b981; letter-spacing: 0.5px;">✅ SESSIONE COMPLETATA OGGI</span>
+                        <span id="bento-completed-tss" style="font-size: 0.72rem; font-weight: 700; color: #10b981; background: rgba(16, 185, 129, 0.2); padding: 0.1rem 0.4rem; border-radius: 6px;">-- TSS</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.6rem;">
+                        <span style="font-size: 1.4rem;" id="bento-completed-icon">🚴</span>
+                        <div>
+                            <strong style="font-size: 0.88rem; color: #f8fafc;" id="bento-completed-title">Sessione Svolta</strong>
+                            <div style="font-size: 0.72rem; color: #94a3b8;" id="bento-completed-meta">Distanza • Tempo • FC media</div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Prescrizioni Ultra-Concise One-Liners (Coerenza Totale con Programma Pista) -->
