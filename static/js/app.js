@@ -2513,7 +2513,7 @@ function updateBentoView() {
         })
         .catch(err => console.error("Error fetching load distribution for Bento:", err));
 
-    // 5. NUTRIZIONE & PESO
+    // 5. PESO CORPOREO & IDRATAZIONE
     const wVal = document.getElementById('bento-weight-val');
     const kg = parseFloat(last['kg']);
     if (wVal && !isNaN(kg) && kg > 0) {
@@ -2521,55 +2521,16 @@ function updateBentoView() {
     }
 
     if (nutri) {
-        const statusTag = document.getElementById('bento-status-tag');
-        if (statusTag) {
-            statusTag.textContent = nutri.status_label || (nutri.status ? nutri.status.toUpperCase() : 'IN CORSO');
-            if (nutri.status_color) {
-                statusTag.style.color = nutri.status_color;
-                statusTag.style.background = nutri.status_color + '22';
-            }
+        const bmrEl = document.getElementById('bento-bmr-val');
+        if (bmrEl) bmrEl.innerHTML = `${Math.round(nutri.bmr || 2082).toLocaleString()} <small>kcal</small>`;
+
+        const wBurnEl = document.getElementById('bento-workout-val');
+        if (wBurnEl) {
+            wBurnEl.innerHTML = nutri.workout_burn ? `+${nutri.workout_burn} <small>kcal</small>` : '-- <small>kcal</small>';
         }
 
-        const kVal = document.getElementById('bento-kcal-val');
-        if (kVal) {
-            const inK = Math.round(nutri.intake_kcal || 0);
-            const tarK = Math.round(nutri.target_tdee || 2200);
-            kVal.innerHTML = `${inK}<small> / ${tarK}</small>`;
-        }
-
-        const cVal = document.getElementById('bento-carbs-val');
-        if (cVal) {
-            const inC = Math.round(nutri.carbs_g || 0);
-            const tarC = Math.round(nutri.target_carbs_g || 180);
-            cVal.innerHTML = `${inC}<small> / ${tarC}g</small>`;
-        }
-
-        const pVal = document.getElementById('bento-pro-val');
-        if (pVal) {
-            const inP = Math.round(nutri.protein_g || 0);
-            const tarP = Math.round(nutri.target_protein_g || 150);
-            pVal.innerHTML = `${inP}<small> / ${tarP}g</small>`;
-        }
-
-        const fVal = document.getElementById('bento-fat-val');
-        if (fVal) {
-            const inF = Math.round(nutri.fat_g || 0);
-            const tarF = Math.round(nutri.target_fat_g || 90);
-            fVal.innerHTML = `${inF}<small> / ${tarF}g</small>`;
-        }
-
-        // Progress bar proportions
-        const totCal = (nutri.intake_kcal > 0) ? nutri.intake_kcal : 1;
-        const cPct = Math.min(100, Math.round(((nutri.carbs_g * 4) / totCal) * 100));
-        const pPct = Math.min(100 - cPct, Math.round(((nutri.protein_g * 4) / totCal) * 100));
-        const fPct = Math.min(100 - cPct - pPct, Math.round(((nutri.fat_g * 9) / totCal) * 100));
-
-        const bC = document.getElementById('bento-bar-carbs');
-        if (bC) bC.style.width = `${cPct}%`;
-        const bP = document.getElementById('bento-bar-pro');
-        if (bP) bP.style.width = `${pPct}%`;
-        const bF = document.getElementById('bento-bar-fat');
-        if (bF) bF.style.width = `${fPct}%`;
+        const tdeeEl = document.getElementById('bento-tdee-val');
+        if (tdeeEl) tdeeEl.innerHTML = `${Math.round(nutri.tdee || 2705).toLocaleString()} <small>kcal</small>`;
 
         // Water & Salt
         const wWater = document.getElementById('bento-water-val');
@@ -2577,27 +2538,6 @@ function updateBentoView() {
 
         const wSalt = document.getElementById('bento-salt-val');
         if (wSalt && nutri.salt_caps !== undefined) wSalt.textContent = `${nutri.salt_caps} Caps`;
-
-        // Meals Stream
-        const stream = document.getElementById('bento-meals-stream');
-        if (stream) {
-            const items = nutri.items || [];
-            if (items.length === 0) {
-                stream.innerHTML = '<div style="color:#64748b; font-size:0.75rem; text-align:center; padding:0.6rem;">Nessun pasto loggato oggi</div>';
-            } else {
-                stream.innerHTML = items.map(it => `
-                    <div class="bento-meal-chip">
-                        <span class="bento-meal-name">
-                            🍽️ ${it.name} <small style="color:#64748b; font-weight:normal;">(${it.portion_label || it.grams + 'g'})</small>
-                        </span>
-                        <div style="text-align:right;">
-                            <span class="bento-meal-kcal">${Math.round(it.kcal)} kcal</span>
-                            <div class="bento-meal-macros">${Math.round(it.carbs)}C • ${Math.round(it.protein)}P • ${Math.round(it.fat)}F</div>
-                        </div>
-                    </div>
-                `).join('');
-            }
-        }
     }
 }
 
