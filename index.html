@@ -35,7 +35,7 @@
               let clean = url.substring(5).split('?')[0];
               url = 'api/' + clean + '.json?v=' + _rt_ts;
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 18/11 12:51.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 18/11 12:56.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -144,11 +144,11 @@
                     <!-- Slot 1: Allenamento del Giorno (Primary Focus) -->
                     <div class="bento-concise-item presc-bike" id="bento-slot-primary">
                         <div class="concise-head">
-                            <span class="concise-icon" id="bento-workout-icon">🏊‍♂️</span>
-                            <strong class="concise-title" id="bento-bike-title">Nuoto Z1 in Mare: Decompressione L4-S1</strong>
-                            <span class="concise-tss" id="bento-bike-target">28 TSS</span>
+                            <span class="concise-icon" id="bento-workout-icon">🚴</span>
+                            <strong class="concise-title" id="bento-bike-title">🚴 Ciclismo Z2 Agile</strong>
+                            <span class="concise-tss" id="bento-bike-target">55 TSS</span>
                         </div>
-                        <div class="concise-meta" id="bento-bike-meta">🌊 800-1200m sciolti (stile/dorso, FC < 120 bpm) • Drenaggio gambe</div>
+                        <div class="concise-meta" id="bento-bike-meta">Bici 1h15' - max 1h30' Z2 pura (FC 125-135 bpm, 160-190W) con 4 brevi variazioni di cadenza da 30" a 100 rpm. ZERO corsa oggi per preservare tendini e schiena.</div>
                         <div class="concise-actions-row" id="bento-bike-actions" style="display: none;">
                             <button class="bento-garmin-push-btn" id="btn-push-garmin-bike" onclick="pushWorkoutToGarmin('bike')">
                                 📡 Invia Workout a Garmin Connect
@@ -161,20 +161,20 @@
                     <div class="bento-concise-item presc-run" style="border-left: 3px solid #38bdf8; background: rgba(56, 189, 248, 0.04);">
                         <div class="concise-head">
                             <span class="concise-icon" id="bento-slot2-icon">🏊‍♂️</span>
-                            <strong class="concise-title" id="bento-run-title">DOMANI LUNEDÌ: 4x1000m in Pista Tartan</strong>
+                            <strong class="concise-title" id="bento-run-title">Domani: Test Nuoto Specifico Passo Gara (Piscina 50m Corralejo)</strong>
                             <span class="concise-tss" id="bento-run-target" style="color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.12);">🛑 ZERO CORSA OGGI</span>
                         </div>
-                        <div class="concise-meta" id="bento-run-meta">⚡ Sessione chiave 10k: serbatoi di glicogeno pieni e tendini al 100%</div>
+                        <div class="concise-meta" id="bento-run-meta">🛡️ Zero impatto podistico • Preservazione tendinea e discale L4-S1</div>
                     </div>
 
                     <!-- Slot 3: Piano B (Unico e Coerente) -->
                     <div class="bento-concise-item presc-plan-b">
                         <div class="concise-head">
                             <span class="concise-icon">🌪️</span>
-                            <strong class="concise-title" id="bento-planb-title">🚲 Rulli Indoor / Cyclette Z1 Agile (Alternativa al Nuoto)</strong>
-                            <span class="concise-tss" id="bento-planb-target">30-40 min @ < 130W (FC < 115 bpm, 15 TSS)</span>
+                            <strong class="concise-title" id="bento-planb-title">🏃 Fondo Protetto o Rulli Indoor (Piano B Meteo)</strong>
+                            <span class="concise-tss" id="bento-planb-target">6-8 km sterrato compatto (VT1 5:15-5:25 /km) o 45' Agilità Indoor</span>
                         </div>
-                        <div class="concise-meta" id="bento-planb-desc">Se mare mosso o vento: solo pedalata leggera e sciolta. ZERO CORSA oggi per preservare al 100% tendini e glicogeno per i 4x1000m di domani in pista.</div>
+                        <div class="concise-meta" id="bento-planb-desc">Alternativa in caso di vento forte (> 20 nodi), maltempo o impianti comunali chiusi.</div>
                     </div>
                 </div>
             </div>
@@ -477,34 +477,34 @@
             <div class="dashboard-card" id="card-workout-suggestions">
                 <div class="dash-card-header">
                     <span>🎯 Programmazione Allenamento di Oggi</span>
-                    <span style="font-size:0.72rem; color:var(--accent-gold);">🏊 NUOTO SPECIFICO PASSO GARA (PISCINA 50M CORRALEJO)</span>
+                    <span style="font-size:0.72rem; color:var(--accent-gold);">🚴 CICLISMO Z2 AGILE</span>
                 </div>
 
                 <div class="workout-subcard" style="border-left: 3px solid #60a5fa;">
                     <div class="workout-subcard-title">
-                        <span>🏊 Focus Primario: Nuoto in Mare / Vasca Z1 (Decompressione)</span>
+                        <span>🚴 Ciclismo Z2 Agile</span>
                         <span style="color:#10b981; font-size:0.75rem;">Consigliato</span>
                     </div>
-                    <div class="workout-subcard-desc">1800m tot: 400m WU + 3x300m con muta @ passo gara (1:34-1:36 /100m, rec. 45", FC < 132 bpm) + 4x50m allunghi sciolti + 300m dorso/stile defaticamento.</div>
-                    <div class="workout-subcard-meta">🌊 Decompressione L4-S1 • Drenaggio metabolico post-bici • Target: 28 TSS</div>
+                    <div class="workout-subcard-desc">Bici 1h15' - max 1h30' Z2 pura (FC 125-135 bpm, 160-190W) con 4 brevi variazioni di cadenza da 30" a 100 rpm. ZERO corsa oggi per preservare tendini e schiena.</div>
+                    <div class="workout-subcard-meta">🚴 Focus Aerobico • Target: 55 TSS</div>
                 </div>
 
                 <div class="workout-subcard" style="border-left: 3px solid #34d399;">
                     <div class="workout-subcard-title">
-                        <span>🛑 Corsa: ZERO CORSA OGGI (Domani Pista 4x1000m)</span>
+                        <span>🛑 Corsa: Riposo Podistico (0 TSS)</span>
                         <span style="color:#38bdf8; font-size:0.75rem;">Opzione Alternativa</span>
                     </div>
-                    <div class="workout-subcard-desc">Domani Lunedì 16 hai in programma le ripetute chiave 4x1000m in pista tartan: oggi è tassativamente vietata qualsiasi corsa per arrivare con tendini e glicogeno al 100%.</div>
-                    <div class="workout-subcard-meta">⚡ Domani: 4x1000m @ 4:40-4:45 /km</div>
+                    <div class="workout-subcard-desc">Giornata dedicata al lavoro aerobico in sella a zero impatto articolare. Domani in programma: Test Nuoto Specifico Passo Gara (Piscina 50m Corralejo).</div>
+                    <div class="workout-subcard-meta">🛡️ Domani: Test Nuoto Specifico Passo Gara (Piscina 50m Corralejo)</div>
                 </div>
 
                 <!-- Piano B (Meteo / Vento / Domenica Chiuso) -->
                 <div class="workout-subcard" style="border-left: 3px solid #f59e0b; background: rgba(245, 158, 11, 0.05);" id="card-desktop-planb">
                     <div class="workout-subcard-title">
-                        <span id="desktop-planb-title">🌪️ 🚲 Rulli Indoor / Cyclette Z1 Agile (Alternativa al Nuoto)</span>
-                        <span style="color:#f59e0b; font-size:0.75rem;" id="desktop-planb-target">30-40 min @ < 130W (FC < 115 bpm, 15 TSS)</span>
+                        <span id="desktop-planb-title">🌪️ 🏃 Fondo Protetto o Rulli Indoor (Piano B Meteo)</span>
+                        <span style="color:#f59e0b; font-size:0.75rem;" id="desktop-planb-target">6-8 km sterrato compatto (VT1 5:15-5:25 /km) o 45' Agilità Indoor</span>
                     </div>
-                    <div class="workout-subcard-desc" id="desktop-planb-desc">Se mare mosso o vento: solo pedalata leggera e sciolta. ZERO CORSA oggi per preservare al 100% tendini e glicogeno per i 4x1000m di domani in pista.</div>
+                    <div class="workout-subcard-desc" id="desktop-planb-desc">Alternativa in caso di vento forte (> 20 nodi), maltempo o impianti comunali chiusi.</div>
                     <div class="workout-subcard-meta">Alternativa in caso di vento > 20 nodi o impianti comunali chiusi</div>
                 </div>
             </div>
@@ -1237,13 +1237,13 @@
                     <div class="weather-win-item">
                         <div class="weather-win-header">Mattina (8:00 - 12:00)</div>
                         <div class="weather-win-temp" id="w-morning-temp">☀️ 22°C</div>
-                        <div class="weather-win-detail" id="w-morning-detail">Vento 5 km/h | Pioggia 0%</div>
+                        <div class="weather-win-detail" id="w-morning-detail">Vento 6 km/h | Pioggia 0%</div>
                     </div>
 
                     <div class="weather-win-item">
                         <div class="weather-win-header">Pomeriggio (12:00 - 18:00)</div>
                         <div class="weather-win-temp" id="w-afternoon-temp">⛅ 24°C</div>
-                        <div class="weather-win-detail" id="w-afternoon-detail">Vento 9 km/h | Pioggia 0%</div>
+                        <div class="weather-win-detail" id="w-afternoon-detail">Vento 10 km/h | Pioggia 0%</div>
                     </div>
                 </div>
 
