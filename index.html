@@ -35,7 +35,7 @@
               let clean = url.substring(5).split('?')[0];
               url = 'api/' + clean + '.json?v=' + _rt_ts;
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 19/11 23:43.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 20/11 00:00.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -90,7 +90,7 @@
             <div class="bento-top-bar">
                 <div class="bento-context-pill">
                     <span class="pulse-dot"></span>
-                    <span>📍 Fuerteventura (Canarie) • 📅 <strong>19/11/2026</strong> • 🍁 Fase 1</span>
+                    <span>📍 Fuerteventura (Canarie) • 📅 <strong>19/11/2026 (Ieri)</strong> • 🍁 Fase 1</span>
                 </div>
                 <div class="bento-top-actions">
                     <button class="bento-sync-btn" id="btn-bento-sync" onclick="triggerManualSync()" title="Aggiorna Dati Strava e Garmin">
@@ -144,11 +144,11 @@
                     <!-- Slot 1: Allenamento del Giorno (Primary Focus) -->
                     <div class="bento-concise-item presc-bike" id="bento-slot-primary">
                         <div class="concise-head">
-                            <span class="concise-icon" id="bento-workout-icon">🏊‍♂️</span>
-                            <strong class="concise-title" id="bento-bike-title">🏊 Test Nuoto Specifico Passo Gara (Piscina 50m Corralejo)</strong>
-                            <span class="concise-tss" id="bento-bike-target">28 TSS</span>
+                            <span class="concise-icon" id="bento-workout-icon">🏃‍♂️</span>
+                            <strong class="concise-title" id="bento-bike-title">🏃 Scarico Attivo & Mobilità Spinale</strong>
+                            <span class="concise-tss" id="bento-bike-target">15 TSS</span>
                         </div>
-                        <div class="concise-meta" id="bento-bike-meta">1.800m - 2.000m tot: 400m WU + 1.000m continui con muta a ritmo gara (1:33 - 1:36 /100m, FC < 132 bpm) + 400m dorso/stile Z1 sciolti.</div>
+                        <div class="concise-meta" id="bento-bike-meta">30' camminata o mobilità articolare dolce. ZERO corsa d'impatto. Esercizi d'anca e decompressione lombare a gambe sollevate a parete.</div>
                         <div class="concise-actions-row" id="bento-bike-actions" style="display: none;">
                             <button class="bento-garmin-push-btn" id="btn-push-garmin-bike" onclick="pushWorkoutToGarmin('bike')">
                                 📡 Invia Workout a Garmin Connect
@@ -161,10 +161,10 @@
                     <div class="bento-concise-item presc-run" style="border-left: 3px solid #38bdf8; background: rgba(56, 189, 248, 0.04);">
                         <div class="concise-head">
                             <span class="concise-icon" id="bento-slot2-icon">🏊‍♂️</span>
-                            <strong class="concise-title" id="bento-run-title">Domani: Scarico Attivo & Mobilità Spinale</strong>
-                            <span class="concise-tss" id="bento-run-target" style="color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.12);">🛑 ZERO CORSA OGGI</span>
+                            <strong class="concise-title" id="bento-run-title">Bici: Opzionale Z1 Sciogligambe</strong>
+                            <span class="concise-tss" id="bento-run-target" style="color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.12);">0 TSS</span>
                         </div>
-                        <div class="concise-meta" id="bento-run-meta">🌊 Decompressione discale L4-S1 • Drenaggio metabolico</div>
+                        <div class="concise-meta" id="bento-run-meta">Recupero attivo a bassissima intensità</div>
                     </div>
 
                     <!-- Slot 3: Piano B (Unico e Coerente) -->
@@ -334,18 +334,18 @@
                     </div>
                     <div class="bento-macro-item">
                         <span class="bento-macro-label">Spesa Workout (WKO)</span>
-                        <span class="bento-macro-val" id="bento-workout-val" style="color: #38bdf8;">+230 <small>kcal</small></span>
+                        <span class="bento-macro-val" id="bento-workout-val" style="color: #38bdf8;">-- <small>kcal</small></span>
                     </div>
                     <div class="bento-macro-item">
                         <span class="bento-macro-label">TDEE Attivo</span>
-                        <span class="bento-macro-val" id="bento-tdee-val" style="color: #f8fafc;">2,550 <small>kcal</small></span>
+                        <span class="bento-macro-val" id="bento-tdee-val" style="color: #f8fafc;">2,230 <small>kcal</small></span>
                     </div>
                 </div>
 
                 <!-- Idratazione & Capsule di Sale (Regola 7.E) -->
                 <div class="bento-hydration-row" style="margin-top: 0.75rem;">
                     <div class="hydration-item">
-                        <span>💧 Acqua Target: <strong id="bento-water-val">2.0 L</strong></span>
+                        <span>💧 Acqua Target: <strong id="bento-water-val">2.5 L</strong></span>
                     </div>
                     <div class="hydration-item">
                         <span>🧂 Capsule Sale (Victory): <strong id="bento-salt-val">0 Caps</strong></span>
@@ -477,25 +477,25 @@
             <div class="dashboard-card" id="card-workout-suggestions">
                 <div class="dash-card-header">
                     <span>🎯 Programmazione Allenamento di Oggi</span>
-                    <span style="font-size:0.72rem; color:var(--accent-gold);">🏊 TEST NUOTO SPECIFICO PASSO GARA (PISCINA 50M CORRALEJO)</span>
+                    <span style="font-size:0.72rem; color:var(--accent-gold);">🎯 SCARICO ATTIVO & MOBILITÀ SPINALE</span>
                 </div>
 
                 <div class="workout-subcard" style="border-left: 3px solid #60a5fa;">
                     <div class="workout-subcard-title">
-                        <span>🏊 Test Nuoto Specifico Passo Gara (Piscina 50m Corralejo)</span>
+                        <span>🚲 Bici: Opzionale Z1 Sciogligambe</span>
                         <span style="color:#10b981; font-size:0.75rem;">Consigliato</span>
                     </div>
-                    <div class="workout-subcard-desc">1.800m - 2.000m tot: 400m WU + 1.000m continui con muta a ritmo gara (1:33 - 1:36 /100m, FC < 132 bpm) + 400m dorso/stile Z1 sciolti.</div>
-                    <div class="workout-subcard-meta">🌊 Decompressione L4-S1 • Target: 28 TSS</div>
+                    <div class="workout-subcard-desc">Pedalata leggera di recupero se desiderata.</div>
+                    <div class="workout-subcard-meta">Zero stress</div>
                 </div>
 
                 <div class="workout-subcard" style="border-left: 3px solid #34d399;">
                     <div class="workout-subcard-title">
-                        <span>🛑 Corsa: Riposo Podistico (0 TSS)</span>
+                        <span>🏃 Scarico Attivo & Mobilità Spinale</span>
                         <span style="color:#38bdf8; font-size:0.75rem;">Opzione Alternativa</span>
                     </div>
-                    <div class="workout-subcard-desc">Focus esclusivo sull'assetto e il ritmo in acqua. Domani in programma: Scarico Attivo & Mobilità Spinale.</div>
-                    <div class="workout-subcard-meta">🛡️ Domani: Scarico Attivo & Mobilità Spinale</div>
+                    <div class="workout-subcard-desc">30' camminata o mobilità articolare dolce. ZERO corsa d'impatto. Esercizi d'anca e decompressione lombare a gambe sollevate a parete.</div>
+                    <div class="workout-subcard-meta">👟 Setup Fuerteventura • Target: 15 TSS</div>
                 </div>
 
                 <!-- Piano B (Meteo / Vento / Domenica Chiuso) -->
@@ -521,7 +521,7 @@
                     <div style="background: rgba(251, 191, 36, 0.08); border: 1px solid rgba(251, 191, 36, 0.25); border-radius: 10px; padding: 0.75rem;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
                             <span style="font-weight: 800; font-size: 0.9rem; color: var(--accent-gold);" id="target-race-name">🚴 Test Triathlon Olimpico Solitaria (Fuerteventura)</span>
-                            <span style="font-size: 0.75rem; font-weight: 700; color: #ffffff;" id="target-race-countdown">26/11 (tra 7 gg)</span>
+                            <span style="font-size: 0.75rem; font-weight: 700; color: #ffffff;" id="target-race-countdown">26/11 (tra 6 gg)</span>
                         </div>
                         <!-- Contagiri Gauge & Indice Preparazione -->
                         <div class="gauge-wrapper-mobile" style="display: flex; align-items: center; justify-content: space-around; gap: 1rem; margin: 0.5rem 0;">
@@ -569,7 +569,7 @@
                         </div>
 
                         <div style="font-size: 0.68rem; color: rgba(255, 255, 255, 0.6); line-height: 1.3; border-top: 1px dashed rgba(255, 255, 255, 0.1); padding-top: 0.35rem;" id="prep-explanation-text">
-                            ℹ️ <strong>Origine CTL Target (42.7 CTL):</strong> Basato sul benchmark della letteratura scientifica (60 CTL per Test Triathlon Olimpico Solitaria (Fuerteventura)) ed aggiustato alla CTL massima realmente raggiungibile (42.7) in 7 giorni, considerando un Ramp Rate sicuro (+5 CTL/settimana) ed una finestra di Tapering di 7 giorni per far risalire il TSB a +10 (Freschezza Ottimale).
+                            ℹ️ <strong>Origine CTL Target (42.7 CTL):</strong> Basato sul benchmark della letteratura scientifica (60 CTL per Test Triathlon Olimpico Solitaria (Fuerteventura)) ed aggiustato alla CTL massima realmente raggiungibile (42.7) in 6 giorni, considerando un Ramp Rate sicuro (+5 CTL/settimana) ed una finestra di Tapering di 7 giorni per far risalire il TSB a +10 (Freschezza Ottimale).
                         </div>
                     </div>
 
@@ -587,7 +587,7 @@
                     </div>
 
                     <!-- Lista Altri Eventi Calendario -->
-                    <div style="display: flex; flex-direction: column; gap: 0.4rem; max-height: 260px; overflow-y: auto; padding-right: 2px;" id="upcoming-events-list"><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏃 Firenze Marathon (Sotto Casa!)</span><span style="color: var(--text-muted);">29/11 (tra 10 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏋️ HYROX Milano (Allianz MiCo)</span><span style="color: var(--text-muted);">05/12 (tra 16 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏋️ HYROX Verona (Veronafiere)</span><span style="color: var(--text-muted);">30/01 (tra 72 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>⛰️ Brunello Crossing Montalcino (Trail Val d'Orcia)</span><span style="color: var(--text-muted);">14/02 (tra 87 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🚴 Granfondo Strade Bianche Siena (Edizione 2027)</span><span style="color: var(--text-muted);">07/03 (tra 108 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏍️ Campionato Regionale Motocross Toscana FMI (Round 1)</span><span style="color: var(--text-muted);">07/03 (tra 108 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏃🚴🏃 Duathlon Classico del Litorale Pisano (No Draft)</span><span style="color: var(--text-muted);">29/03 (tra 130 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏃🚴🏃 Duathlon Sprint della Lunigiana (Aulla)</span><span style="color: var(--text-muted);">11/04 (tra 143 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏋️ HYROX Rimini (Rimini Wellness)</span><span style="color: var(--text-muted);">29/05 (tra 191 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏊🏃 8° Swimrun del Bilancino (Circuito Nazionale FITRI)</span><span style="color: var(--text-muted);">06/06 (tra 199 gg)</span></div></div>
+                    <div style="display: flex; flex-direction: column; gap: 0.4rem; max-height: 260px; overflow-y: auto; padding-right: 2px;" id="upcoming-events-list"><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏃 Firenze Marathon (Sotto Casa!)</span><span style="color: var(--text-muted);">29/11 (tra 9 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏋️ HYROX Milano (Allianz MiCo)</span><span style="color: var(--text-muted);">05/12 (tra 15 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏋️ HYROX Verona (Veronafiere)</span><span style="color: var(--text-muted);">30/01 (tra 71 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>⛰️ Brunello Crossing Montalcino (Trail Val d'Orcia)</span><span style="color: var(--text-muted);">14/02 (tra 86 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🚴 Granfondo Strade Bianche Siena (Edizione 2027)</span><span style="color: var(--text-muted);">07/03 (tra 107 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏍️ Campionato Regionale Motocross Toscana FMI (Round 1)</span><span style="color: var(--text-muted);">07/03 (tra 107 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏃🚴🏃 Duathlon Classico del Litorale Pisano (No Draft)</span><span style="color: var(--text-muted);">29/03 (tra 129 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏃🚴🏃 Duathlon Sprint della Lunigiana (Aulla)</span><span style="color: var(--text-muted);">11/04 (tra 142 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏋️ HYROX Rimini (Rimini Wellness)</span><span style="color: var(--text-muted);">29/05 (tra 190 gg)</span></div><div style="display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px;"><span>🏊🏃 8° Swimrun del Bilancino (Circuito Nazionale FITRI)</span><span style="color: var(--text-muted);">06/06 (tra 198 gg)</span></div></div>
                 </div>
             </div>
         </div>
@@ -600,7 +600,7 @@
                     <span style="font-weight: 800; font-size: 1.05rem; letter-spacing: -0.3px;">Peso Corporeo, Spesa Energetica &amp; Idratazione</span>
                     <div style="display: inline-flex; align-items: center; gap: 0.25rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 0.15rem 0.4rem; margin-left: 0.25rem;">
                         <button type="button" onclick="shiftNutritionDate(-1)" title="Giorno precedente" style="background: none; border: none; color: #38bdf8; cursor: pointer; font-size: 0.78rem; font-weight: 800; padding: 0.1rem 0.35rem;">◀</button>
-                        <span style="font-size: 0.75rem; color: #f8fafc; font-weight: 700; min-width: 110px; text-align: center;" id="nutrition-date-label">19/11/2026</span>
+                        <span style="font-size: 0.75rem; color: #f8fafc; font-weight: 700; min-width: 110px; text-align: center;" id="nutrition-date-label">20/11/2026</span>
                         <button type="button" onclick="shiftNutritionDate(1)" title="Giorno successivo" style="background: none; border: none; color: #38bdf8; cursor: pointer; font-size: 0.78rem; font-weight: 800; padding: 0.1rem 0.35rem;">▶</button>
                         <button type="button" id="btn-nutri-today" onclick="loadNutritionData()" style="display: none; background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.4); color: #10b981; border-radius: 5px; cursor: pointer; font-size: 0.65rem; font-weight: 700; padding: 0.1rem 0.4rem; margin-left: 0.15rem;">Oggi</button>
                     </div>
@@ -616,7 +616,7 @@
                 <div class="nutrition-stat-box" id="box-tdee">
                     <div class="nutri-stat-header">
                         <span>⚡ SPESA TOTALE (OUT)</span>
-                        <span class="nutri-stat-val" id="nutri-tdee-val">2,550 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span></span>
+                        <span class="nutri-stat-val" id="nutri-tdee-val">2,230 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span></span>
                     </div>
                     <div class="nutri-breakdown-list">
                         <div class="nutri-breakdown-item">
@@ -624,8 +624,8 @@
                             <strong id="nutri-bmr-val">2,090 kcal</strong>
                         </div>
                         <div class="nutri-breakdown-item">
-                            <span id="nutri-workout-desc">🏊 Nuoto (31 min) • 1.900m @ 1:37/100m • 110 bpm (FC Attiva)</span>
-                            <strong style="color: #60a5fa;" id="nutri-workout-val">+230 kcal</strong>
+                            <span id="nutri-workout-desc">🛌 Riposo / Nessuna Attività</span>
+                            <strong style="color: #60a5fa;" id="nutri-workout-val">+0 kcal</strong>
                         </div>
                         <div class="nutri-breakdown-item">
                             <span>🚶 NEAT &amp; Quotidiano</span>
@@ -638,7 +638,7 @@
                 <div class="nutrition-stat-box" id="box-fluids">
                     <div class="nutri-stat-header">
                         <span>💧 SUDORE &amp; IDRATAZIONE</span>
-                        <span class="nutri-stat-val" id="nutri-sweat-val" style="color: #38bdf8;">0.4 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">L</span></span>
+                        <span class="nutri-stat-val" id="nutri-sweat-val" style="color: #38bdf8;">0.0 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">L</span></span>
                     </div>
                     <div class="nutri-breakdown-list">
                         <div class="nutri-breakdown-item">
@@ -647,7 +647,7 @@
                         </div>
                         <div class="nutri-breakdown-item">
                             <span>🥤 Reintegro Acqua Target</span>
-                            <strong style="color: #38bdf8;" id="nutri-water-target">2.0 L / giorno</strong>
+                            <strong style="color: #38bdf8;" id="nutri-water-target">2.5 L / giorno</strong>
                         </div>
                         <div class="nutri-breakdown-item">
                             <span>💊 Victory Salt Caps (Regola 7.D)</span>
