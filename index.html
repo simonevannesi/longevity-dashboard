@@ -35,7 +35,7 @@
               let clean = url.substring(5).split('?')[0];
               url = 'api/' + clean + '.json?v=' + _rt_ts;
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 20/11 18:58.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 20/11 19:01.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -318,7 +318,7 @@
                 <div class="bento-weight-strip">
                     <div class="weight-main">
                         <span class="weight-label">Peso Odierno</span>
-                        <div class="weight-val" id="bento-weight-val">84.8 <small>kg</small></div>
+                        <div class="weight-val" id="bento-weight-val">84.2 <small>kg</small></div>
                     </div>
                     <div class="weight-target">
                         <span>Target Longevità: <strong>82–83 kg</strong> (~12% BF)</span>
@@ -330,15 +330,15 @@
                 <div class="bento-macro-row" style="grid-template-columns: 1fr 1fr 1fr; margin-top: 0.6rem;">
                     <div class="bento-macro-item">
                         <span class="bento-macro-label">BMR Basale</span>
-                        <span class="bento-macro-val" id="bento-bmr-val" style="color: #94a3b8;">2,090 <small>kcal</small></span>
+                        <span class="bento-macro-val" id="bento-bmr-val" style="color: #94a3b8;">2,075 <small>kcal</small></span>
                     </div>
                     <div class="bento-macro-item">
                         <span class="bento-macro-label">Spesa Workout (WKO)</span>
-                        <span class="bento-macro-val" id="bento-workout-val" style="color: #38bdf8;">+474 <small>kcal</small></span>
+                        <span class="bento-macro-val" id="bento-workout-val" style="color: #38bdf8;">+472 <small>kcal</small></span>
                     </div>
                     <div class="bento-macro-item">
                         <span class="bento-macro-label">TDEE Attivo</span>
-                        <span class="bento-macro-val" id="bento-tdee-val" style="color: #f8fafc;">2,667 <small>kcal</small></span>
+                        <span class="bento-macro-val" id="bento-tdee-val" style="color: #f8fafc;">2,650 <small>kcal</small></span>
                     </div>
                 </div>
 
@@ -360,7 +360,7 @@
             <span class="context-pill location-pill" id="pill-location">🏠 <strong>HOME BASE (CASA)</strong></span>
             <span class="context-pill season-pill" id="pill-season">🍂 FASE 1: BASE Z2 &amp; HYROX</span>
             <span class="context-pill target-pill" id="pill-target-ctl">🎯 TARGET LONGEVITY: <strong>52 CTL</strong></span>
-            <span class="context-pill weight-pill" id="pill-weight">⚖️ TARGET PESO: <strong>82–83 kg</strong> (Attuale: 84.8 kg)</span>
+            <span class="context-pill weight-pill" id="pill-weight">⚖️ TARGET PESO: <strong>82–83 kg</strong> (Attuale: 84.2 kg)</span>
         </div>
 
         <!-- 7 KPI Cards Grid: STRICTLY 1 SINGLE ROW ON ALL SCREENS -->
@@ -616,16 +616,16 @@
                 <div class="nutrition-stat-box" id="box-tdee">
                     <div class="nutri-stat-header">
                         <span>⚡ SPESA TOTALE (OUT)</span>
-                        <span class="nutri-stat-val" id="nutri-tdee-val">2,667 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span></span>
+                        <span class="nutri-stat-val" id="nutri-tdee-val">2,650 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span></span>
                     </div>
                     <div class="nutri-breakdown-list">
                         <div class="nutri-breakdown-item">
                             <span>🛌 Metabolismo Basale (BMR)</span>
-                            <strong id="nutri-bmr-val">2,090 kcal</strong>
+                            <strong id="nutri-bmr-val">2,075 kcal</strong>
                         </div>
                         <div class="nutri-breakdown-item">
                             <span id="nutri-workout-desc">🚴 Ciclismo (66 min) • 120 bpm (FC Attiva)</span>
-                            <strong style="color: #60a5fa;" id="nutri-workout-val">+474 kcal</strong>
+                            <strong style="color: #60a5fa;" id="nutri-workout-val">+472 kcal</strong>
                         </div>
                         <div class="nutri-breakdown-item">
                             <span>🚶 NEAT &amp; Quotidiano</span>
