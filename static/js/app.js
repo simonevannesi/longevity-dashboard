@@ -752,17 +752,28 @@ function loadRacePrep() {
                     filtered.forEach(u => {
                         const distLabel = u.distances ? ` • ${u.distances}` : '';
                         const locLabel = u.location ? ` [${u.location}]` : '';
+                        const titleHtml = u.website
+                            ? `<a href="${u.website}" target="_blank" rel="noopener" style="color:inherit; text-decoration:none; border-bottom:1px dotted rgba(255,255,255,0.25);"><strong>${u.name}</strong></a>`
+                            : `<strong>${u.name}</strong>`;
                         html += `
-                        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px; border-left: 2px solid rgba(255,255,255,0.08);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; padding: 0.35rem 0.5rem; background: rgba(255,255,255,0.02); border-radius: 6px; border-left: 2px solid ${u.discipline === 'Pista FIDAL' ? '#38bdf8' : 'rgba(255,255,255,0.08)'};">
                             <div>
-                                <span>${u.icon || '💡'} <strong>${u.name}</strong></span>
+                                <span>${u.icon || '💡'} ${titleHtml}</span>
                                 <span style="font-size:0.7rem; color:var(--text-muted);">${locLabel}${distLabel}</span>
                             </div>
                             <span style="color: var(--text-muted); font-size:0.74rem; font-weight:600; white-space:nowrap; margin-left:0.5rem;">${u.date_fmt} (${u.days_left} gg)</span>
                         </div>`;
                     });
                 } else if (!html) {
-                    html = `<div style="text-align:center; padding:0.6rem; font-size:0.75rem; color:var(--text-muted);">Nessun evento in programma per questa disciplina nei prossimi 240 giorni.</div>`;
+                    html = `<div style="text-align:center; padding:0.6rem; font-size:0.75rem; color:var(--text-muted);">Nessun evento in programma per questa disciplina nei prossimi 365 giorni.</div>`;
+                }
+
+                if (discipline === 'Pista FIDAL') {
+                    html += `
+                    <div style="margin-top:0.35rem; padding:0.4rem 0.6rem; background:rgba(56,189,248,0.08); border-radius:6px; font-size:0.72rem; display:flex; justify-content:space-between; align-items:center;">
+                        <span style="color:#94a3b8;">🔄 Sync automatico attivo con calendario ufficiale FIDAL Toscana</span>
+                        <a href="https://toscana.fidal.it/calendario.php" target="_blank" rel="noopener" style="color:#38bdf8; font-weight:700; text-decoration:none;">Apri FIDAL Toscana ↗</a>
+                    </div>`;
                 }
 
                 upcomingList.innerHTML = html;
