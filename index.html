@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/styles.css?v=20261113_2358">
+    <link rel="stylesheet" href="static/css/styles.css?v=1795273749">
 
     <!-- iPhone PWA & iOS Safari Bookmark Optimization -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +35,7 @@
               let clean = url.substring(5).split('?')[0];
               url = 'api/' + clean + '.json?v=' + _rt_ts;
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 21/11 15:51.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 21/11 16:09.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -105,15 +105,14 @@
             <div class="bento-card bento-card-concise-today bento-hero-today" id="bento-sec-today">
                 <div class="bento-card-header">
                     <span class="bento-card-eyebrow">🎯 COSA FARE OGGI</span>
-                    <span class="bento-readiness-badge" id="bento-readiness-badge" style="color:#94a3b8; border-color:#94a3b855; background:#94a3b818;">SILVER</span>
+                    <span class="bento-readiness-badge" id="bento-readiness-badge" style="display: none;">SILVER</span>
                 </div>
 
-                <!-- Batteria Biologica N=1 & Matrice Decisionale (Rest or Train) -->
+                <!-- Batteria Biologica N=1 (Pulita: solo SILVER DAY / GOLD DAY + %) -->
                 <div class="bento-battery-row" id="bento-battery-box">
-                    <div class="bento-battery-header">
-                        <span class="bento-battery-lbl" id="bento-battery-badge" style="color: #94a3b8;">🥈 SILVER — BUILD VOLUME Z2</span>
-                        <span class="bento-decision-pill" id="bento-decision-pill" style="color: #94a3b8; background: #94a3b818; border: 1px solid #94a3b855;">🧱 BUILD — VOLUME Z2</span>
-                        <strong class="bento-battery-pct" id="bento-battery-pct" style="color: #94a3b8;">80%</strong>
+                    <div class="bento-battery-header" style="justify-content: space-between; align-items: center;">
+                        <span class="bento-battery-lbl" id="bento-battery-badge" style="color: #94a3b8; font-size: 0.95rem; font-weight: 800; letter-spacing: 0.5px;">🥈 SILVER DAY</span>
+                        <strong class="bento-battery-pct" id="bento-battery-pct" style="color: #94a3b8; font-size: 0.95rem;">80%</strong>
                     </div>
                     <div class="bento-battery-track">
                         <div class="bento-battery-fill" id="bento-battery-bar" style="width: 80%; background: #94a3b8;"></div>
@@ -139,13 +138,13 @@
                     </div>
                 </div>
 
-                <!-- Prescrizioni Ultra-Concise One-Liners (Coerenza Totale con Programma Pista) -->
+                <!-- Prescrizioni Pulite: Oggi + Piano A Domani -->
                 <div class="bento-concise-workouts">
-                    <!-- Slot 1: Allenamento del Giorno (Primary Focus) -->
+                    <!-- Slot 1: Allenamento di Oggi -->
                     <div class="bento-concise-item presc-bike" id="bento-slot-primary">
                         <div class="concise-head">
                             <span class="concise-icon" id="bento-workout-icon">🏃‍♂️</span>
-                            <strong class="concise-title" id="bento-bike-title">🚴 Richiamo Corsa Tartan (Mattina Centro) + Bici Agile</strong>
+                            <strong class="concise-title" id="bento-bike-title">Richiamo Corsa Tartan (Mattina Centro) + Bici Agile</strong>
                             <span class="concise-tss" id="bento-bike-target">40 TSS</span>
                         </div>
                         <div class="concise-meta" id="bento-bike-meta">Mattina prima che il centro chiuda: Pista Tartan 25'-30' (max 4.5-5 km: 1.5km WU + 2.5km Z2 @ 5:25-5:35 + 4 allunghi 60m agili + CD). Opzionale sbracciata 500m Z1 in vasca prima di chiudere. Pomeriggio: 30' Bici agile Z1.</div>
@@ -157,24 +156,14 @@
                         </div>
                     </div>
 
-                    <!-- Slot 2: Focus Strategico & Cross-Training -->
+                    <!-- Slot 2: Piano A Domani -->
                     <div class="bento-concise-item presc-run" style="border-left: 3px solid #38bdf8; background: rgba(56, 189, 248, 0.04);">
                         <div class="concise-head">
-                            <span class="concise-icon" id="bento-slot2-icon">🏊‍♂️</span>
-                            <strong class="concise-title" id="bento-run-title">Domani: Ciclismo su Strada Ritmo Gara (Centro Chiuso)</strong>
-                            <span class="concise-tss" id="bento-run-target" style="color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.12);">🛑 ZERO CORSA OGGI</span>
+                            <span class="concise-icon" id="bento-slot2-icon">🚴</span>
+                            <strong class="concise-title" id="bento-run-title">Piano A Domani: Ciclismo su Strada Ritmo Gara (Centro Chiuso)</strong>
+                            <span class="concise-tss" id="bento-run-target" style="color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.12);">35 TSS</span>
                         </div>
-                        <div class="concise-meta" id="bento-run-meta">🛡️ Zero impatto podistico • Preservazione tendinea e discale L4-S1</div>
-                    </div>
-
-                    <!-- Slot 3: Piano B (Unico e Coerente) -->
-                    <div class="bento-concise-item presc-plan-b">
-                        <div class="concise-head">
-                            <span class="concise-icon">🌪️</span>
-                            <strong class="concise-title" id="bento-planb-title">🏃 Fondo Protetto o Rulli Indoor (Piano B Meteo)</strong>
-                            <span class="concise-tss" id="bento-planb-target">6-8 km sterrato compatto (VT1 5:15-5:25 /km) o 45' Agilità Indoor</span>
-                        </div>
-                        <div class="concise-meta" id="bento-planb-desc">Alternativa in caso di vento forte (> 20 nodi), maltempo o impianti comunali chiusi.</div>
+                        <div class="concise-meta" id="bento-run-meta">Zero dipendenza dal centro (chiuso). Bici su strada 50'-1h00': 35' Z2 fluida + 2 richiami da 3' @ 215-225W (ritmo gara olimpico, FC 145-150 bpm, rec. 3' Z1) + 10' defat agile. Test assetto e vento.</div>
                     </div>
                 </div>
             </div>
@@ -382,9 +371,9 @@
                         <span class="bar" style="height: 70%"></span>
                     </div>
                 </div>
-                <div class="readiness-subtitle" id="kpi-readiness-desc" style="color:#94a3b8;">Parasimpatico Stabile (HRV 58ms, Z=+1.4σ | RHR 42bpm | TSB +6). Motore Z2 centrale 100% aperto (60-85 TSS).</div>
+                <div class="readiness-subtitle" id="kpi-readiness-desc" style="color:#94a3b8;">Parasimpatico Stabile (HRV 58ms, Z=+1.4σ | RHR 42bpm | TSB +6).</div>
                 <div id="desktop-battery-box" style="margin-top: 0.35rem; padding-top: 0.35rem; border-top: 1px dashed rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: space-between;">
-                    <span id="desktop-battery-badge" style="font-size: 0.72rem; font-weight: 800; color: #94a3b8;">🥈 SILVER — BUILD VOLUME Z2</span>
+                    <span id="desktop-battery-badge" style="font-size: 0.72rem; font-weight: 800; color: #94a3b8;">🥈 SILVER DAY</span>
                     <strong id="desktop-battery-pct" style="font-size: 0.75rem; color: #94a3b8;">80%</strong>
                 </div>
             </div>
@@ -477,25 +466,25 @@
             <div class="dashboard-card" id="card-workout-suggestions">
                 <div class="dash-card-header">
                     <span>🎯 Programmazione Allenamento di Oggi</span>
-                    <span style="font-size:0.72rem; color:var(--accent-gold);">🚴 RICHIAMO CORSA TARTAN (MATTINA CENTRO) + BICI AGILE</span>
+                    <span style="font-size:0.72rem; color:var(--accent-gold);">🏃 RICHIAMO CORSA TARTAN (MATTINA CENTRO) + BICI AGILE</span>
                 </div>
 
                 <div class="workout-subcard" style="border-left: 3px solid #60a5fa;">
                     <div class="workout-subcard-title">
-                        <span>🚴 Richiamo Corsa Tartan (Mattina Centro) + Bici Agile</span>
+                        <span>🚲 Bici: Opzionale Z1 Sciogligambe</span>
                         <span style="color:#10b981; font-size:0.75rem;">Consigliato</span>
                     </div>
-                    <div class="workout-subcard-desc">Mattina prima che il centro chiuda: Pista Tartan 25'-30' (max 4.5-5 km: 1.5km WU + 2.5km Z2 @ 5:25-5:35 + 4 allunghi 60m agili + CD). Opzionale sbracciata 500m Z1 in vasca prima di chiudere. Pomeriggio: 30' Bici agile Z1.</div>
-                    <div class="workout-subcard-meta">🚴 Focus Aerobico • Target: 40 TSS</div>
+                    <div class="workout-subcard-desc">Pedalata agile di scarico se desiderata.</div>
+                    <div class="workout-subcard-meta">Zero stress</div>
                 </div>
 
                 <div class="workout-subcard" style="border-left: 3px solid #34d399;">
                     <div class="workout-subcard-title">
-                        <span>🛑 Corsa: Riposo Podistico (0 TSS)</span>
+                        <span>🏃 Richiamo Corsa Tartan (Mattina Centro) + Bici Agile</span>
                         <span style="color:#38bdf8; font-size:0.75rem;">Opzione Alternativa</span>
                     </div>
-                    <div class="workout-subcard-desc">Giornata dedicata al lavoro aerobico in sella a zero impatto articolare. Domani in programma: Ciclismo su Strada Ritmo Gara (Centro Chiuso).</div>
-                    <div class="workout-subcard-meta">🛡️ Domani: Ciclismo su Strada Ritmo Gara (Centro Chiuso)</div>
+                    <div class="workout-subcard-desc">Mattina prima che il centro chiuda: Pista Tartan 25'-30' (max 4.5-5 km: 1.5km WU + 2.5km Z2 @ 5:25-5:35 + 4 allunghi 60m agili + CD). Opzionale sbracciata 500m Z1 in vasca prima di chiudere. Pomeriggio: 30' Bici agile Z1.</div>
+                    <div class="workout-subcard-meta">👟 Target: 40 TSS</div>
                 </div>
 
                 <!-- Piano B (Meteo / Vento / Domenica Chiuso) -->
@@ -1697,6 +1686,6 @@
         </button>
     </nav>
 
-    <script src="static/js/app.js?v=20261113_2358"></script>
+    <script src="static/js/app.js?v=1795273749"></script>
 </body>
 </html>
