@@ -35,7 +35,7 @@
               let clean = url.substring(5).split('?')[0];
               url = 'api/' + clean + '.json?v=' + _rt_ts;
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 21/11 13:03.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 21/11 13:20.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -1243,7 +1243,7 @@
                     <div class="weather-win-item">
                         <div class="weather-win-header">Pomeriggio (12:00 - 18:00)</div>
                         <div class="weather-win-temp" id="w-afternoon-temp">⛅ 24°C</div>
-                        <div class="weather-win-detail" id="w-afternoon-detail">Vento 15 km/h | Pioggia 0%</div>
+                        <div class="weather-win-detail" id="w-afternoon-detail">Vento 10 km/h | Pioggia 0%</div>
                     </div>
                 </div>
 
