@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/styles.css?v=1795284670">
+    <link rel="stylesheet" href="static/css/styles.css?v=1795285674">
 
     <!-- iPhone PWA & iOS Safari Bookmark Optimization -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,7 +35,7 @@
               let clean = url.substring(5).split('?')[0];
               url = 'api/' + clean + '.json?v=' + _rt_ts;
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 21/11 19:11.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 21/11 19:27.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -1690,6 +1690,6 @@
         </button>
     </nav>
 
-    <script src="static/js/app.js?v=1795284670"></script>
+    <script src="static/js/app.js?v=1795285674"></script>
 </body>
 </html>
