@@ -1740,17 +1740,17 @@ function updateBentoView() {
     const last = dashList[dashList.length - 1];
     const nutri = window.currentNutritionData;
 
-    // 0. TOP CONTEXT PILL (DATE & LOCATION)
+    // 0. TOP CONTEXT PILL (DATE & LOCATION) - preserva location SSR
     const contextPill = document.querySelector('.bento-context-pill span:last-child');
     if (contextPill && last) {
         const dDay = last['day'];
         const dMonth = last['month'];
         const dYear = last['year'];
         if (dDay && dMonth && dYear) {
-            const today = new Date();
-            const isToday = parseInt(dDay) === today.getDate() && parseInt(dMonth) === (today.getMonth() + 1) && parseInt(dYear) === today.getFullYear();
-            const dateStr = isToday ? `${dDay}/${dMonth}/${dYear} (OGGI)` : `${dDay}/${dMonth}/${dYear}`;
-            contextPill.innerHTML = `📍 Lido di Camaiore • 📅 <strong>${dateStr}</strong> • 🍁 Fase 1`;
+            const curTxt = contextPill.textContent || '';
+            const locMatch = curTxt.match(/📍\s*([^•]+)/);
+            const locName = locMatch ? locMatch[1].trim() : 'Fuerteventura';
+            contextPill.innerHTML = `📍 ${locName} • <strong>${dDay}/${dMonth}/${dYear}</strong>`;
         }
     }
 
