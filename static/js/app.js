@@ -2070,6 +2070,22 @@ function updateBentoView() {
                 const dPbDesc = document.getElementById('desktop-planb-desc');
                 if (dPbDesc && pb.desc) dPbDesc.textContent = pb.desc;
             }
+
+            // N=1 Physiology Drift Alert (visibile solo se scatta un cambiamento significativo)
+            const physBox = document.getElementById('bento-phys-alert');
+            const pAlerts = n1.physiology_alerts || [];
+            if (physBox) {
+                if (pAlerts.length > 0) {
+                    const topAl = pAlerts[0];
+                    const isWarn = topAl.type === 'warning';
+                    physBox.style.display = 'block';
+                    physBox.style.borderLeftColor = isWarn ? '#f59e0b' : '#10b981';
+                    physBox.style.background = isWarn ? 'rgba(245, 158, 11, 0.12)' : 'rgba(16, 185, 129, 0.10)';
+                    physBox.innerHTML = `<strong>${isWarn ? '⚠️' : '🧬'} ${topAl.title}</strong><br><span style="color:#94a3b8;">${topAl.action}</span>`;
+                } else {
+                    physBox.style.display = 'none';
+                }
+            }
         })
         .catch(err => console.error("Error fetching N=1 learning for Bento:", err));
 
