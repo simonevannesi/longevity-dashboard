@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/styles.css?v=1795359958">
+    <link rel="stylesheet" href="static/css/styles.css?v=1795361381">
 
     <!-- iPhone PWA & iOS Safari Bookmark Optimization -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -30,12 +30,18 @@
         window.fetch = function(url, opts) {
           if (typeof url === 'string') {
             const _rt_ts = Date.now();
+            if (opts && opts.method && opts.method.toUpperCase() === 'POST') {
+              return Promise.resolve(new Response(JSON.stringify({
+                status: 'info',
+                message: 'Azione interattiva disponibile solo dalla Dashboard locale su PC (la versione mobile GitHub Pages è in sola lettura).'
+              }), {headers: {'Content-Type': 'application/json'}}));
+            }
             if (url === '/data') url = 'data.json?v=' + _rt_ts;
             else if (url.startsWith('/api/')) {
               let clean = url.substring(5).split('?')[0];
               url = 'api/' + clean + '.json?v=' + _rt_ts;
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 22/11 16:05.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 22/11 16:29.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -188,7 +194,7 @@
                     </div>
                     <div class="bento-load-box">
                         <span class="bento-load-lbl">ATL (Fatica)</span>
-                        <span class="bento-load-val text-brand-amber" id="bento-atl-val">49.8</span>
+                        <span class="bento-load-val text-brand-amber" id="bento-atl-val">49.9</span>
                         <span class="bento-load-sub">Carico 7gg</span>
                     </div>
                     <div class="bento-load-box">
@@ -233,12 +239,12 @@
                     <div class="bento-bio-col">
                         <span class="bento-bio-lbl">🫀 HRV rMSSD</span>
                         <div class="bento-bio-val text-brand-emerald" id="bento-hrv-val">55 <small>ms</small></div>
-                        <span class="bento-bio-sub" id="bento-hrv-sub">Norma: 47–54 ms (+1.0σ)</span>
+                        <span class="bento-bio-sub" id="bento-hrv-sub">Norma: 48–55 ms (Omeostasi OK)</span>
                     </div>
                     <div class="bento-bio-col">
                         <span class="bento-bio-lbl">💓 FC Riposo (RHR)</span>
                         <div class="bento-bio-val text-brand-sky" id="bento-rhr-val">42 <small>bpm</small></div>
-                        <span class="bento-bio-sub" id="bento-rhr-sub">Baseline: 45 bpm (-3 bpm)</span>
+                        <span class="bento-bio-sub" id="bento-rhr-sub">Baseline: 44 bpm (-2 bpm)</span>
                     </div>
                     <div class="bento-bio-col">
                         <span class="bento-bio-lbl">🌙 Sonno &amp; Ricarica</span>
@@ -331,7 +337,7 @@
                     </div>
                     <div class="bento-macro-item">
                         <span class="bento-macro-label">TDEE Attivo</span>
-                        <span class="bento-macro-val" id="bento-tdee-val" style="color: #f8fafc;">2,247 <small>kcal</small></span>
+                        <span class="bento-macro-val" id="bento-tdee-val" style="color: #f8fafc;">2,298 <small>kcal</small></span>
                     </div>
                 </div>
 
@@ -610,7 +616,7 @@
                 <div class="nutrition-stat-box" id="box-tdee">
                     <div class="nutri-stat-header">
                         <span>⚡ SPESA TOTALE (OUT)</span>
-                        <span class="nutri-stat-val" id="nutri-tdee-val">2,247 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span></span>
+                        <span class="nutri-stat-val" id="nutri-tdee-val">2,298 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span></span>
                     </div>
                     <div class="nutri-breakdown-list">
                         <div class="nutri-breakdown-item">
@@ -949,7 +955,7 @@
                             <span id="dec-target-summary" style="color: #fbbf24; font-weight: 800;">160 – 190 W (Z2 Bassa-Media) • FC 121 – 147 bpm</span>
                         </div>
                         <div id="dec-recommendation-text" style="color: rgba(255,255,255,0.85); line-height: 1.4; font-size: 0.78rem;">
-                            Disaccoppiamento cardio-meccanico a +12.1% (hrTSS term. 122.2 vs TSS 109.0) con Pa:Hr . Il cuore lavora con un costo metabolico superiore alla potenza meccanica erogata. Nella prossima sessione Z2 concentrati nella parte medio-bassa (160 – 190 W (Z2 Bassa-Media), FC < 147 bpm) a cadenza agile (78–85 rpm) e idratazione elettrolitica per prevenire deriva precoce.
+                            Disaccoppiamento cardio-meccanico a +12.1% (hrTSS term. 122.2 vs TSS 109.0). Il cuore lavora con un costo metabolico superiore alla potenza meccanica erogata. Nella prossima sessione Z2 concentrati nella parte medio-bassa (160 – 190 W (Z2 Bassa-Media), FC < 147 bpm) a cadenza agile (78–85 rpm) e idratazione elettrolitica per prevenire deriva precoce.
                         </div>
                     </div>
                 </div>
@@ -1691,6 +1697,6 @@
         </button>
     </nav>
 
-    <script src="static/js/app.js?v=1795359958"></script>
+    <script src="static/js/app.js?v=1795361381"></script>
 </body>
 </html>
