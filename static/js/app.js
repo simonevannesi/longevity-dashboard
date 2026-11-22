@@ -1848,22 +1848,49 @@ function updateBentoView() {
             if (hrVal > 0) metaParts.push(`FC ${Math.round(hrVal)} bpm`);
             if (eleVal > 0) metaParts.push(`+${Math.round(eleVal)}m D+`);
             setTxt('bento-completed-meta', metaParts.join(' • '));
+            // Nascondi Slot 1 per evitare doppione verticale quando oggi hai già completato la sessione
+            const slot1 = document.getElementById('bento-slot-primary');
+            if (slot1) slot1.style.display = 'none';
         } else {
             completedBanner.style.display = 'none';
+            const slot1 = document.getElementById('bento-slot-primary');
+            if (slot1) slot1.style.display = 'flex';
         }
     }
 
-    // 1. CARICO & TRAINING (CTL, ATL, TSB, ACWR, Dicotomia Bici/Corsa)
+    // 0C. COUNTDOWN GARA TARGET IN TESTATA BENTO
+    fetch('/api/race_prep')
+        .then(r => r.json())
+        .then(rp => {
+            const pill = document.getElementById('bento-race-countdown');
+            const tr = rp && rp.target_race;
+            if (pill && tr && tr.days_left != null && tr.days_left >= 0) {
+                let rNm = String(tr.name || 'Gara Target').replace(/^Test\s+/i, '').split('(')[0].trim();
+                if (rNm.length > 22) rNm = rNm.slice(0, 20).trimEnd() + '…';
+                const dLbl = tr.days_left === 0 ? 'OGGI!' : `-${tr.days_left} gg`;
+                pill.textContent = `🏁 ${rNm} • ${dLbl}`;
+                pill.style.display = 'inline-flex';
+            }
+        })
+        .catch(() => {});
+
+    // 1. CARICO & TRAINING (CTL, ATL, TSB, Ramp Rate 7g, ACWR — colori EWMA coerenti col Desktop)
     const ctl = parseFloat(last['CTL'] || 0);
     const atl = parseFloat(last['ATL'] || (ctl - (parseFloat(last['TSB'] || 0))));
     const tsb = parseFloat(last['TSB'] || 0);
     const bikeCtl = parseFloat(last['bike_ctl'] || last['ctl_bike'] || last['Bike CTL'] || 23.7);
     const runCtl = parseFloat(last['run_ctl'] || last['ctl_run'] || last['Run CTL'] || 9.5);
-    const bikeAtl = parseFloat(last['bike_atl'] || last['atl_bike'] || last['Bike ATL'] || 0);
-    const acwr = (ctl > 0) ? (atl / ctl) : 1.0;
+    const acwr = (ctl > 0) ? Math.round((atl / ctl) * 100) / 100 : 1.0;
+
+    const ctlAll = dashList.map(d => parseFloat(d['CTL'])).filter(v => !isNaN(v));
+    const ctlEwma30 = calcEwma(ctlAll, 30);
+    const ctlSt = evalEwmaPctStatus(ctl, ctlEwma30, 5.0, 10.0, false);
 
     const ctlEl = document.getElementById('bento-ctl-val');
-    if (ctlEl) ctlEl.textContent = ctl.toFixed(1);
+    if (ctlEl) {
+        ctlEl.textContent = ctl.toFixed(1);
+        ctlEl.style.color = ctlSt.color;
+    }
 
     const atlEl = document.getElementById('bento-atl-val');
     if (atlEl) atlEl.textContent = atl.toFixed(1);
@@ -1871,18 +1898,27 @@ function updateBentoView() {
     const tsbEl = document.getElementById('bento-tsb-val');
     if (tsbEl) {
         tsbEl.textContent = `${tsb >= 0 ? '+' : ''}${tsb.toFixed(1)}`;
-        tsbEl.style.color = (tsb >= 5) ? '#38bdf8' : (tsb >= -15 ? '#10b981' : '#f59e0b');
+        tsbEl.style.color = (tsb < -20) ? '#ef4444' : (tsb < -10 ? '#facc15' : '#10b981');
     }
 
     const tsbStatusEl = document.getElementById('bento-tsb-status');
     if (tsbStatusEl) {
-        tsbStatusEl.textContent = (tsb >= 8) ? 'Freschezza' : (tsb >= 0 ? 'Ricarica' : 'Fatica');
+        tsbStatusEl.textContent = (tsb >= 8) ? 'Freschezza' : (tsb >= 0 ? 'Ricarica' : (tsb >= -10 ? 'Carico OK' : 'Fatica'));
+    }
+
+    const rampEl = document.getElementById('bento-ramprate-val');
+    if (rampEl && ctlAll.length >= 2) {
+        const ctl7Ago = ctlAll.length >= 8 ? ctlAll[ctlAll.length - 8] : ctlAll[0];
+        const ramp7 = Math.round((ctl - ctl7Ago) * 10) / 10;
+        const rampCol = (ramp7 > 5.0 || ramp7 < -5.0) ? '#ef4444' : ((ramp7 >= -2.5 && ramp7 <= 4.5) ? '#10b981' : '#facc15');
+        rampEl.textContent = `${ramp7 > 0 ? '+' : ''}${ramp7.toFixed(1)}`;
+        rampEl.style.color = rampCol;
     }
 
     const acwrBadge = document.getElementById('bento-acwr-badge');
     if (acwrBadge) {
-        const acwrCol = (acwr > 1.5) ? '#ef4444' : (acwr >= 0.8 && acwr <= 1.3 ? '#10b981' : '#f59e0b');
-        acwrBadge.textContent = `🛡️ ACWR ${acwr.toFixed(2)} (${acwr <= 1.3 ? 'Ottimale' : 'Attenzione'})`;
+        const acwrCol = (acwr > 1.50 || acwr < 0.60) ? '#ef4444' : (acwr >= 0.80 && acwr <= 1.30 ? '#10b981' : '#facc15');
+        acwrBadge.textContent = `🛡️ ACWR ${acwr.toFixed(2)} (${acwr <= 1.30 && acwr >= 0.80 ? 'Ottimale' : 'Attenzione'})`;
         acwrBadge.style.color = acwrCol;
         acwrBadge.style.borderColor = acwrCol + '55';
         acwrBadge.style.background = acwrCol + '18';
@@ -1894,7 +1930,7 @@ function updateBentoView() {
     const rCtlEl = document.getElementById('bento-run-ctl');
     if (rCtlEl) rCtlEl.textContent = runCtl.toFixed(1);
 
-    // 2. BIOMETRICHE (HRV, RHR, SONNO)
+    // 2. BIOMETRICHE (HRV, RHR, SONNO — con EWMA 28g dinamico reale)
     const hrv = parseFloat(last['night HRV'] || 0);
     const rhr = parseFloat(last['RHR'] || 0);
     const sleepHours = parseFloat(last['ore sonno'] || last['ore_sonno'] || last['Sleep duration'] || last['Sonno'] || 0);
@@ -1903,6 +1939,7 @@ function updateBentoView() {
     const hrvRows = dashList.map(d => parseFloat(d['night HRV'])).filter(v => !isNaN(v) && v > 0);
     const hrv7 = hrvRows.slice(-7);
     const avgHrv7d = hrv7.length > 0 ? (hrv7.reduce((a,b)=>a+b, 0) / hrv7.length) : hrv;
+    const hrvEwma28 = calcEwma(hrvRows, 28);
 
     // Altini 30-day Baseline & Normal Range (SWC = 0.75 * SD)
     const hrv30 = hrvRows.slice(-30);
@@ -1957,15 +1994,20 @@ function updateBentoView() {
     const snaStatusEl = document.getElementById('bento-sna-status');
     if (snaStatusEl) {
         if (hrv > hrvHigh && rhr <= avgRhr30d) {
-            snaStatusEl.textContent = 'Parasimpatico Dominante (Supercompensazione)';
+            snaStatusEl.textContent = 'Parasimpatico Dominante';
             snaStatusEl.className = 'text-brand-emerald';
         } else if (hrv < hrvLow || rhr >= avgRhr30d + 2) {
-            snaStatusEl.textContent = 'Simpatico Attivo (Fatica da Riassorbire)';
+            snaStatusEl.textContent = 'Simpatico Attivo';
             snaStatusEl.className = 'text-brand-amber';
         } else {
-            snaStatusEl.textContent = 'Parasimpatico Stabile (Equilibrio Omeostatico)';
+            snaStatusEl.textContent = 'Parasimpatico Stabile';
             snaStatusEl.className = 'text-brand-sky';
         }
+    }
+
+    const base30El = document.getElementById('bento-base-30g');
+    if (base30El && hrvEwma28) {
+        base30El.textContent = `(EWMA ${hrvEwma28.toFixed(1)})`;
     }
 
     const trend7gEl = document.getElementById('bento-trend-7g');
@@ -2195,11 +2237,19 @@ function updateBentoView() {
         })
         .catch(err => console.error("Error fetching load distribution for Bento:", err));
 
-    // 5. PESO CORPOREO & IDRATAZIONE
+    // 5. PESO CORPOREO & IDRATAZIONE (scansione ultimo peso valido + delta consolidato reale)
     const wVal = document.getElementById('bento-weight-val');
-    const kg = parseFloat(last['kg']);
-    if (wVal && !isNaN(kg) && kg > 0) {
-        wVal.innerHTML = `${kg.toFixed(1)} <small>kg</small>`;
+    const wDelta = document.getElementById('bento-weight-delta');
+    const kgVals = dashList.map(d => parseFloat(d['kg'])).filter(v => !isNaN(v) && v > 40 && v < 150);
+    const latestKg = kgVals.length > 0 ? kgVals[kgVals.length - 1] : null;
+    if (wVal && latestKg !== null) {
+        wVal.innerHTML = `${latestKg.toFixed(1)} <small>kg</small>`;
+    }
+    if (wDelta && latestKg !== null && kgVals.length >= 3) {
+        const kgMean = kgVals.reduce((a, b) => a + b, 0) / kgVals.length;
+        const kgDiff = latestKg - kgMean;
+        wDelta.textContent = `${kgDiff >= 0 ? '+' : ''}${kgDiff.toFixed(1)} kg vs media (${kgMean.toFixed(1)} kg)`;
+        wDelta.style.color = kgDiff <= 0.1 ? '#10b981' : '#facc15';
     }
 
     if (nutri) {
@@ -2220,6 +2270,34 @@ function updateBentoView() {
 
         const wSalt = document.getElementById('bento-salt-val');
         if (wSalt && nutri.salt_caps !== undefined) wSalt.textContent = `${nutri.salt_caps} Caps`;
+    }
+
+    // 6. NATIVE iOS DOCK SCROLL-SPY
+    if (!window._bentoScrollSpyInit && typeof IntersectionObserver !== 'undefined') {
+        window._bentoScrollSpyInit = true;
+        const secTabMap = {
+            'bento-sec-today': 'today',
+            'bento-sec-load': 'load',
+            'bento-sec-health': 'health',
+            'bento-sec-zones': 'zones',
+            'bento-sec-weight': 'weight'
+        };
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const tabKey = secTabMap[entry.target.id];
+                    if (tabKey) {
+                        document.querySelectorAll('.bento-floating-dock .dock-item').forEach(b => {
+                            b.classList.toggle('active', b.dataset.tab === tabKey);
+                        });
+                    }
+                }
+            });
+        }, { rootMargin: '-20% 0px -65% 0px', threshold: 0.05 });
+        Object.keys(secTabMap).forEach(id => {
+            const el = document.getElementById(id);
+            if (el) obs.observe(el);
+        });
     }
 }
 
