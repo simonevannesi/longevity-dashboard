@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/styles.css?v=1795361381">
+    <link rel="stylesheet" href="static/css/styles.css?v=1795361989">
 
     <!-- iPhone PWA & iOS Safari Bookmark Optimization -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -41,7 +41,7 @@
               let clean = url.substring(5).split('?')[0];
               url = 'api/' + clean + '.json?v=' + _rt_ts;
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 22/11 16:29.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 22/11 16:39.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -392,11 +392,11 @@
             <div class="kpi-card">
                 <div class="kpi-card-header">
                     <span>⚡ HRV</span>
-                    <span id="trend-hrv" class="trend-badge neutral">-0.1</span>
+                    <span id="trend-hrv" class="trend-badge up" title="vs Media Ponderata 28g (52.5 ms) | Giallo ≤ -6% • Rosso ≤ -12%">+4.8%</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-hrv"><span style="color:#facc15">55 <span style="font-size:0.7em; opacity:0.8;">ms</span></span></div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-hrv"><path d="M 0.0,15.0 L 2.1,5.7 L 4.1,3.0 L 6.2,13.7 L 8.3,11.0 L 10.3,16.3 L 12.4,5.7 L 14.5,15.0 L 16.6,19.0 L 18.6,15.0 L 20.7,17.7 L 22.8,20.3 L 24.8,21.7 L 26.9,19.0 L 29.0,16.3 L 31.0,23.0 L 33.1,13.7 L 35.2,15.0 L 37.2,4.3 L 39.3,8.3 L 41.4,21.7 L 43.4,16.3 L 45.5,7.0 L 47.6,7.0 L 49.7,12.3 L 51.7,5.7 L 53.8,11.0 L 55.9,8.3 L 57.9,4.3 L 60.0,8.3" stroke="#facc15"/></svg>
+                    <div class="metric-value" id="kpi-hrv"><span style="color:#10b981">55 <span style="font-size:0.7em; opacity:0.8;">ms</span></span></div>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-hrv"><path d="M 0.0,15.0 L 2.1,5.7 L 4.1,3.0 L 6.2,13.7 L 8.3,11.0 L 10.3,16.3 L 12.4,5.7 L 14.5,15.0 L 16.6,19.0 L 18.6,15.0 L 20.7,17.7 L 22.8,20.3 L 24.8,21.7 L 26.9,19.0 L 29.0,16.3 L 31.0,23.0 L 33.1,13.7 L 35.2,15.0 L 37.2,4.3 L 39.3,8.3 L 41.4,21.7 L 43.4,16.3 L 45.5,7.0 L 47.6,7.0 L 49.7,12.3 L 51.7,5.7 L 53.8,11.0 L 55.9,8.3 L 57.9,4.3 L 60.0,8.3" stroke="#10b981"/></svg>
                 </div>
                 <div class="metric-subtitle"><span>Supino rMSSD</span><span id="kpi-hrv-sub"></span></div>
             </div>
@@ -405,7 +405,7 @@
             <div class="kpi-card">
                 <div class="kpi-card-header">
                     <span>🌙 Sonno / RHR</span>
-                    <span id="trend-sleep" class="trend-badge up">+4.3</span>
+                    <span id="trend-sleep" class="trend-badge up" title="Sonno vs EWMA 28g (82.5) | RHR vs EWMA 28g (44.0 bpm)">+7.9%</span>
                 </div>
                 <div class="compact-val-row">
                     <div class="metric-value" id="kpi-sleep"><span style="color:#10b981">89</span> <span style="opacity:0.5;">/</span> <span style="color:#10b981">42 <span style="font-size:0.65em;">bpm</span></span></div>
@@ -418,10 +418,10 @@
             <div class="kpi-card">
                 <div class="kpi-card-header">
                     <span>⚖️ Bilancio TSB</span>
-                    <span id="trend-tsb" class="trend-badge up">+1.3</span>
+                    <span id="trend-tsb" class="trend-badge up" title="Delta vs EWMA 14g (-0.1) | Verde ≥ -10 • Giallo -20..-10 • Rosso < -20">+0.4</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-tsb"><span style="color:#10b981">+0</span> <span style="font-size:0.7em; opacity:0.8;">TSB</span></div>
+                    <div class="metric-value" id="kpi-tsb"><span style="color:#10b981">+0.3</span> <span style="font-size:0.7em; opacity:0.8;">TSB</span></div>
                     <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-tsb"><path d="M 0.0,11.9 L 2.1,8.9 L 4.1,8.4 L 6.2,16.7 L 8.3,14.2 L 10.3,23.0 L 12.4,15.2 L 14.5,8.5 L 16.6,8.9 L 18.6,3.3 L 20.7,3.0 L 22.8,4.8 L 24.8,10.6 L 26.9,10.2 L 29.0,9.0 L 31.0,19.9 L 33.1,12.7 L 35.2,8.1 L 37.2,13.4 L 39.3,7.2 L 41.4,11.3 L 43.4,12.9 L 45.5,13.9 L 47.6,15.5 L 49.7,21.0 L 51.7,17.6 L 53.8,17.2 L 55.9,15.9 L 57.9,15.7 L 60.0,14.1" stroke="#10b981"/></svg>
                 </div>
                 <div class="metric-subtitle"><span>TSB / ACWR</span><span id="kpi-tsb-sub"><span style="color:#10b981; font-weight:600;">ACWR 0.99</span></span></div>
@@ -431,11 +431,11 @@
             <div class="kpi-card">
                 <div class="kpi-card-header">
                     <span>📊 Total CTL</span>
-                    <span id="trend-total-ctl" class="trend-badge down">-0.9</span>
+                    <span id="trend-total-ctl" class="trend-badge up" title="vs Media Ponderata 30g (50.3) | Giallo ≤ -5% • Rosso ≤ -10%">-0.4%</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-total-ctl"><span style="color:#ef4444">50.1</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span></div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-total-ctl"><path d="M 0.0,13.9 L 2.1,15.3 L 4.1,8.9 L 6.2,10.7 L 8.3,3.0 L 10.3,8.9 L 12.4,14.4 L 14.5,14.8 L 16.6,20.3 L 18.6,22.1 L 20.7,22.1 L 22.8,18.0 L 24.8,18.9 L 26.9,20.3 L 29.0,11.6 L 31.0,17.1 L 33.1,21.6 L 35.2,17.5 L 37.2,23.0 L 39.3,20.3 L 41.4,19.4 L 43.4,18.9 L 45.5,17.5 L 47.6,12.5 L 49.7,14.8 L 51.7,14.8 L 53.8,15.3 L 55.9,15.3 L 57.9,16.6 L 60.0,16.6" stroke="#ef4444"/></svg>
+                    <div class="metric-value" id="kpi-total-ctl"><span style="color:#10b981">50.1</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span></div>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-total-ctl"><path d="M 0.0,13.9 L 2.1,15.3 L 4.1,8.9 L 6.2,10.7 L 8.3,3.0 L 10.3,8.9 L 12.4,14.4 L 14.5,14.8 L 16.6,20.3 L 18.6,22.1 L 20.7,22.1 L 22.8,18.0 L 24.8,18.9 L 26.9,20.3 L 29.0,11.6 L 31.0,17.1 L 33.1,21.6 L 35.2,17.5 L 37.2,23.0 L 39.3,20.3 L 41.4,19.4 L 43.4,18.9 L 45.5,17.5 L 47.6,12.5 L 49.7,14.8 L 51.7,14.8 L 53.8,15.3 L 55.9,15.3 L 57.9,16.6 L 60.0,16.6" stroke="#10b981"/></svg>
                 </div>
                 <div class="metric-subtitle"><span>Fitness Globale</span><span id="kpi-total-ctl-sub"></span></div>
             </div>
@@ -444,11 +444,11 @@
             <div class="kpi-card">
                 <div class="kpi-card-header">
                     <span>🚴 Bike CTL</span>
-                    <span id="trend-bike-ctl" class="trend-badge neutral">0.0</span>
+                    <span id="trend-bike-ctl" class="trend-badge up" title="vs Media Ponderata 30g (25.4) | Giallo ≤ -8% • Rosso ≤ -18%">+0.6%</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-bike-ctl"><span style="color:#facc15">25.5</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span></div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-bike-ctl"><path d="M 0.0,6.6 L 2.1,8.6 L 4.1,3.0 L 6.2,4.9 L 8.3,6.9 L 10.3,8.6 L 12.4,10.5 L 14.5,12.2 L 16.6,13.8 L 18.6,15.5 L 20.7,13.8 L 22.8,15.2 L 24.8,16.9 L 26.9,18.6 L 29.0,19.9 L 31.0,21.6 L 33.1,23.0 L 35.2,18.8 L 37.2,20.5 L 39.3,17.2 L 41.4,14.7 L 43.4,12.7 L 45.5,10.2 L 47.6,11.9 L 49.7,11.6 L 51.7,9.9 L 53.8,11.6 L 55.9,9.9 L 57.9,11.9 L 60.0,11.9" stroke="#facc15"/></svg>
+                    <div class="metric-value" id="kpi-bike-ctl"><span style="color:#10b981">25.5</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span></div>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-bike-ctl"><path d="M 0.0,6.6 L 2.1,8.6 L 4.1,3.0 L 6.2,4.9 L 8.3,6.9 L 10.3,8.6 L 12.4,10.5 L 14.5,12.2 L 16.6,13.8 L 18.6,15.5 L 20.7,13.8 L 22.8,15.2 L 24.8,16.9 L 26.9,18.6 L 29.0,19.9 L 31.0,21.6 L 33.1,23.0 L 35.2,18.8 L 37.2,20.5 L 39.3,17.2 L 41.4,14.7 L 43.4,12.7 L 45.5,10.2 L 47.6,11.9 L 49.7,11.6 L 51.7,9.9 L 53.8,11.6 L 55.9,9.9 L 57.9,11.9 L 60.0,11.9" stroke="#10b981"/></svg>
                 </div>
                 <div class="metric-subtitle"><span>Carico Bici</span><span id="kpi-bike-ctl-sub"><span style="color:#10b981; font-weight:600;">ACWR 1.08</span></span></div>
             </div>
@@ -457,15 +457,15 @@
             <div class="kpi-card">
                 <div class="kpi-card-header">
                     <span>🏃 Run CTL</span>
-                    <span id="trend-run-ctl" class="trend-badge down">-0.6</span>
+                    <span id="trend-run-ctl" class="trend-badge up" title="vs Media Ponderata 30g (11.3) | Giallo ≤ -8% • Rosso ≤ -18%">+8.6%</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-run-ctl"><span style="color:#ef4444">12.3</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span></div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-run-ctl"><path d="M 0.0,17.9 L 2.1,19.0 L 4.1,20.7 L 6.2,17.3 L 8.3,18.4 L 10.3,20.1 L 12.4,21.3 L 14.5,21.3 L 16.6,22.4 L 18.6,19.0 L 20.7,20.1 L 22.8,21.9 L 24.8,17.3 L 26.9,19.0 L 29.0,20.1 L 31.0,21.3 L 33.1,23.0 L 35.2,12.7 L 37.2,14.4 L 39.3,5.9 L 41.4,7.6 L 43.4,9.3 L 45.5,11.0 L 47.6,3.0 L 49.7,4.7 L 51.7,6.4 L 53.8,8.1 L 55.9,9.9 L 57.9,6.4 L 60.0,6.4" stroke="#ef4444"/></svg>
+                    <div class="metric-value" id="kpi-run-ctl"><span style="color:#10b981">12.3</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span></div>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-run-ctl"><path d="M 0.0,17.9 L 2.1,19.0 L 4.1,20.7 L 6.2,17.3 L 8.3,18.4 L 10.3,20.1 L 12.4,21.3 L 14.5,21.3 L 16.6,22.4 L 18.6,19.0 L 20.7,20.1 L 22.8,21.9 L 24.8,17.3 L 26.9,19.0 L 29.0,20.1 L 31.0,21.3 L 33.1,23.0 L 35.2,12.7 L 37.2,14.4 L 39.3,5.9 L 41.4,7.6 L 43.4,9.3 L 45.5,11.0 L 47.6,3.0 L 49.7,4.7 L 51.7,6.4 L 53.8,8.1 L 55.9,9.9 L 57.9,6.4 L 60.0,6.4" stroke="#10b981"/></svg>
                 </div>
                 <div class="metric-subtitle">
-                    <span id="desktop-chassis-badge" style="color: #10b981; font-weight: 700; font-size: 0.68rem;">⚖️ Telaio/Motore: 48% (Equilibrato)</span>
-                    <span id="kpi-run-ctl-sub"><span style="color:#ef4444; font-weight:600;">ACWR 1.30</span></span>
+                    <span id="desktop-chassis-badge" title="Telaio/Motore: 48% (Equilibrato)" style="color: #10b981; font-weight: 700; font-size: 0.68rem;">⚖️ Telaio: 48%</span>
+                    <span id="kpi-run-ctl-sub"><span style="color:#10b981; font-weight:600;">ACWR 1.30</span></span>
                 </div>
             </div>
         </div>
@@ -1243,7 +1243,7 @@
                     <div class="weather-win-item">
                         <div class="weather-win-header">Pomeriggio (12:00 - 18:00)</div>
                         <div class="weather-win-temp" id="w-afternoon-temp">⛅ 24°C</div>
-                        <div class="weather-win-detail" id="w-afternoon-detail">Vento 19 km/h | Pioggia 0%</div>
+                        <div class="weather-win-detail" id="w-afternoon-detail">Vento 17 km/h | Pioggia 0%</div>
                     </div>
                 </div>
 
@@ -1697,6 +1697,6 @@
         </button>
     </nav>
 
-    <script src="static/js/app.js?v=1795361381"></script>
+    <script src="static/js/app.js?v=1795361989"></script>
 </body>
 </html>
