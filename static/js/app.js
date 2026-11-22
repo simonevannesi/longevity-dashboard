@@ -1780,7 +1780,10 @@ function updateBentoView() {
             const sLow = trainType.toLowerCase();
             let cIcon = '🚴';
             let cName = 'Ciclismo';
-            if (sLow.includes('run') || sLow.includes('corsa')) { cIcon = '🏃'; cName = 'Corsa'; }
+            if (trainType.includes('+')) {
+                cIcon = sLow.includes('run') ? '🏃' : (sLow.includes('swim') ? '🏊' : '🚴');
+                cName = trainType;
+            } else if (sLow.includes('run') || sLow.includes('corsa')) { cIcon = '🏃'; cName = 'Corsa'; }
             else if (sLow.includes('swim') || sLow.includes('nuoto')) { cIcon = '🏊'; cName = 'Nuoto'; }
             else if (sLow.includes('mx') || sLow.includes('motocross')) { cIcon = '🏍️'; cName = 'Motocross'; }
 
@@ -1953,9 +1956,11 @@ function updateBentoView() {
             const bt = (w.bento_bike_title || w.bike_title || '').toLowerCase();
             if (bTitle) bTitle.textContent = w.bento_bike_title || w.bike_title || 'Focus Programma';
             if (wIcon && bt) {
-                if (bt.includes('pista') || bt.includes('corsa') || bt.includes('4x1000')) wIcon.textContent = '🏃‍♂️';
-                else if (bt.includes('nuoto')) wIcon.textContent = '🏊‍♂️';
+                if (bt.includes('pista') || bt.includes('corsa') || bt.includes('tartan') || bt.includes('4x1000')) wIcon.textContent = '🏃‍♂️';
+                else if (bt.includes('nuoto') || bt.includes('vasca')) wIcon.textContent = '🏊‍♂️';
                 else if (bt.includes('bici') || bt.includes('ciclismo')) wIcon.textContent = '🚴';
+                else if (bt.includes('riposo')) wIcon.textContent = '🛌';
+                else if (bt.includes('scarico') || bt.includes('mobilit')) wIcon.textContent = '🧘';
             }
             const bTarget = document.getElementById('bento-bike-target');
             if (bTarget) bTarget.textContent = w.bento_bike_target || (w.bike_meta && w.bike_meta.includes('TSS') ? w.bike_meta.match(/\d+\s*TSS/)?.[0] || '60 TSS' : '60 TSS');
@@ -1963,7 +1968,17 @@ function updateBentoView() {
             if (bMeta) bMeta.textContent = w.bento_bike_meta || w.bike_meta || 'Focus cadenza & recupero';
 
             const rTitle = document.getElementById('bento-run-title');
-            if (rTitle) rTitle.textContent = w.bento_run_title || w.run_title || 'Cross-Training & Decompressione';
+            const rt = (w.bento_run_title || w.run_title || '');
+            if (rTitle) rTitle.textContent = rt || 'Cross-Training & Decompressione';
+            const slot2Icon = document.getElementById('bento-slot2-icon');
+            const rtLow = rt.toLowerCase();
+            if (slot2Icon && rtLow) {
+                if (rtLow.includes('bici') || rtLow.includes('ciclismo')) slot2Icon.textContent = '🚴';
+                else if (rtLow.includes('nuoto') || rtLow.includes('vasca')) slot2Icon.textContent = '🏊‍♂️';
+                else if (rtLow.includes('corsa') || rtLow.includes('pista') || rtLow.includes('tartan')) slot2Icon.textContent = '🏃‍♂️';
+                else if (rtLow.includes('riposo')) slot2Icon.textContent = '🛌';
+                else if (rtLow.includes('scarico') || rtLow.includes('mobilit')) slot2Icon.textContent = '🧘';
+            }
             const rTarget = document.getElementById('bento-run-target');
             if (rTarget) {
                 rTarget.textContent = w.bento_run_target || '25 TSS';
