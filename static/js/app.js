@@ -1863,7 +1863,7 @@ function updateBentoView() {
         .then(r => r.json())
         .then(rp => {
             const pill = document.getElementById('bento-race-countdown');
-            const tr = rp && rp.target_race;
+            const tr = rp && (rp.target_event || rp.target_race);
             if (pill && tr && tr.days_left != null && tr.days_left >= 0) {
                 let rNm = String(tr.name || 'Gara Target').replace(/^Test\s+/i, '').split('(')[0].trim();
                 if (rNm.length > 22) rNm = rNm.slice(0, 20).trimEnd() + '…';
