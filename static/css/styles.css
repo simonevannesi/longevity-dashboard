@@ -410,6 +410,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 6px;
 }
 
 /* Fallback breakpoint to maintain min card width on ultra-small screens without wrapping */
