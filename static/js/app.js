@@ -1822,12 +1822,14 @@ function updateBentoView() {
         if (isToday && trainType && trainType.toLowerCase() !== 'nan' && trainType.toLowerCase() !== 'none' && (durMin > 0 || tssVal > 0)) {
             completedBanner.style.display = 'block';
             const sLow = trainType.toLowerCase();
-            let cIcon = '🚴';
-            let cName = 'Ciclismo';
+            let cIcon = '🏅';
+            let cName = trainType;
             if (trainType.includes('+')) {
                 cIcon = sLow.includes('run') ? '🏃' : (sLow.includes('swim') ? '🏊' : '🚴');
                 cName = trainType;
-            } else if (sLow.includes('run') || sLow.includes('corsa')) { cIcon = '🏃'; cName = 'Corsa'; }
+            } else if (sLow.includes('parawing') || sLow.includes('wing') || sLow.includes('foil') || sLow.includes('surf') || sLow.includes('vela')) { cIcon = '🌊'; cName = 'Parawing'; }
+            else if (sLow.includes('bike') || sLow.includes('ride') || sLow.includes('ciclismo') || sLow.includes('bici')) { cIcon = '🚴'; cName = 'Ciclismo'; }
+            else if (sLow.includes('run') || sLow.includes('corsa')) { cIcon = '🏃'; cName = 'Corsa'; }
             else if (sLow.includes('swim') || sLow.includes('nuoto')) { cIcon = '🏊'; cName = 'Nuoto'; }
             else if (sLow.includes('mx') || sLow.includes('motocross')) { cIcon = '🏍️'; cName = 'Motocross'; }
 
@@ -2002,6 +2004,7 @@ function updateBentoView() {
             if (wIcon && bt) {
                 if (bt.includes('pista') || bt.includes('corsa') || bt.includes('tartan') || bt.includes('4x1000')) wIcon.textContent = '🏃‍♂️';
                 else if (bt.includes('nuoto') || bt.includes('vasca')) wIcon.textContent = '🏊‍♂️';
+                else if (bt.includes('parawing') || bt.includes('wing') || bt.includes('foil')) wIcon.textContent = '🌊';
                 else if (bt.includes('bici') || bt.includes('ciclismo')) wIcon.textContent = '🚴';
                 else if (bt.includes('riposo')) wIcon.textContent = '🛌';
                 else if (bt.includes('scarico') || bt.includes('mobilit')) wIcon.textContent = '🧘';
