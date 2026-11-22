@@ -452,46 +452,7 @@ function renderDashboard(dataArray) {
     const validHrv7d = hrvSeries.slice(-7).filter(v => v !== null);
     const avgHrv7d = validHrv7d.length > 0 ? (validHrv7d.reduce((a,b)=>a+b, 0)/validHrv7d.length) : hrvVal;
 
-    // 1. Readiness Card
-    const readinessEl = document.getElementById('kpi-readiness');
-    const readinessDescEl = document.getElementById('kpi-readiness-desc');
-    const readinessCard = document.getElementById('card-readiness');
-
-    let zone = "READY";
-    let color = "#10b981";
-    let hrvStr = hrvVal !== null ? Math.round(hrvVal) + 'ms' : '---';
-    let rhrStr = rhrVal !== null ? Math.round(rhrVal) + 'bpm' : '---';
-    let desc = `HRV ${hrvStr} | FC ${rhrStr} (Parasimpatico OK)`;
-
-    const isStop = (latest.readiness_zone === 'RED' || (hrvVal !== null && hrvVal < 35) || (rhrVal !== null && rhrVal >= 49));
-    // Physiological Check N=1: RHR elevated (>= 47) triggers CAREFUL only if HRV is also suppressed
-    const isRhrTachy = (rhrVal !== null && rhrVal >= 47 && (hrvVal === null || hrvVal < 42 || (avgHrv7d && hrvVal < avgHrv7d * 0.9)));
-    const isHrvSuppressed = (hrvVal !== null && avgHrv7d && hrvVal < avgHrv7d * 0.8) || (hrvVal !== null && hrvVal < 38);
-    const isCareful = !isStop && (latest.readiness_zone === 'YELLOW' || isHrvSuppressed || isRhrTachy || (tsbVal !== null && tsbVal < -20) || (sleepScoreVal !== null && sleepScoreVal < 60));
-    const isGolden = !isStop && !isCareful && (hrvVal && avgHrv7d && hrvVal > (avgHrv7d * 1.15) && rhrVal && rhrVal <= 43);
-
-    if (isStop) {
-        zone = "STOP";
-        color = "#ef4444";
-        desc = `Stress Severo / Riposo Consigliato | HRV ${hrvStr} | FC ${rhrStr}`;
-    } else if (isCareful) {
-        zone = "CAREFUL";
-        color = "#f59e0b";
-        desc = `Fatica Autonomica / Scarico Consigliato (HRV ${hrvStr} | FC ${rhrStr} | TSB ${tsbVal ? Math.round(tsbVal) : '---'})`;
-    } else if (isGolden) {
-        const pctUp = avgHrv7d ? Math.round(((hrvVal - avgHrv7d) / avgHrv7d) * 100) : 15;
-        zone = "GOLDEN DAY";
-        color = "#fbbf24"; // Distinctive Premium Gold
-        desc = `Peak Vagale Eccellente | HRV ${hrvStr} (+${pctUp}% vs 7d) | FC ${rhrStr}`;
-    } else {
-        const pctUp = (hrvVal && avgHrv7d && hrvVal > avgHrv7d) ? ` (+${Math.round(((hrvVal - avgHrv7d) / avgHrv7d) * 100)}%)` : '';
-        const tsbSign = (tsbVal && tsbVal > 0) ? '+' : '';
-        const tsbDisplay = tsbVal !== null ? `${tsbSign}${Math.round(tsbVal)}` : '---';
-        zone = "READY";
-        color = "#10b981";
-        desc = `Parasimpatico Ricaricato | HRV ${hrvStr}${pctUp} | FC ${rhrStr} | TSB ${tsbDisplay}`;
-    }
-
+    // 1. Readiness Date Badge (Stato e colore arrivano dal motore N=1 /api/n1_learning come fonte unica)
     const readinessDateBadge = document.getElementById('readiness-date-badge');
     if (readinessDateBadge && latest) {
         const dDay = latest['day'];
@@ -502,30 +463,6 @@ function renderDashboard(dataArray) {
             const isToday = dDay === today.getDate() && dMonth === (today.getMonth() + 1) && dYear === today.getFullYear();
             readinessDateBadge.textContent = isToday ? `${dDay}/${dMonth}/${dYear} (OGGI)` : `${dDay}/${dMonth}/${dYear}`;
         }
-    }
-
-    if (readinessEl) {
-        readinessEl.textContent = zone;
-        readinessEl.style.color = color;
-    }
-    if (readinessDescEl) {
-        readinessDescEl.textContent = desc;
-        readinessDescEl.style.color = color;
-    }
-    if (readinessCard) {
-        readinessCard.classList.remove('theme-ready', 'theme-golden', 'theme-careful', 'theme-stop', 'theme-gold', 'theme-silver', 'theme-yellow', 'theme-red');
-        const themeCls = (zone === 'ROSSO' || zone === 'STOP') ? 'theme-red' : 
-                         ((zone === 'GIALLO' || zone === 'CAREFUL') ? 'theme-yellow' : 
-                         ((zone === 'GOLD' || zone === 'GOLDEN DAY') ? 'theme-gold' : 'theme-silver'));
-        readinessCard.classList.add(themeCls);
-        readinessCard.style.borderColor = color;
-        readinessCard.style.boxShadow = `0 0 20px ${color}33`;
-
-        // Update mini-histogram bars color to match readiness state
-        const bars = readinessCard.querySelectorAll('.mini-histogram .bar');
-        bars.forEach(b => {
-            b.style.backgroundColor = color;
-        });
     }
 
     function getFullSeries(key) {
@@ -2122,7 +2059,7 @@ function updateBentoView() {
                     dPill.style.backgroundColor = cur.color + '18';
                 }
                 window._currentReadinessTier = cur.tier || (cur.battery_label && cur.battery_label.includes('GOLD') ? 'GOLD' : (cur.battery_label && cur.battery_label.includes('ROSSO') ? 'ROSSO' : (cur.battery_label && cur.battery_label.includes('GIALLO') ? 'GIALLO' : 'SILVER')));
-                // Desktop Elements
+                // Desktop Elements (Single Source of Truth dal motore N=1)
                 const dBadge = document.getElementById('desktop-battery-badge');
                 if (dBadge && cur.battery_label) {
                     dBadge.textContent = cur.battery_label;
@@ -2132,6 +2069,25 @@ function updateBentoView() {
                 if (dPct && cur.battery_pct != null) {
                     dPct.textContent = `${cur.battery_pct}%`;
                     dPct.style.color = cur.battery_color || cur.color;
+                }
+                const dReadiness = document.getElementById('kpi-readiness');
+                if (dReadiness && cur.zone) {
+                    dReadiness.textContent = cur.zone;
+                    dReadiness.style.color = cur.color;
+                }
+                const dReadinessDesc = document.getElementById('kpi-readiness-desc');
+                if (dReadinessDesc && cur.desc) {
+                    dReadinessDesc.textContent = cur.desc;
+                    dReadinessDesc.style.color = cur.color;
+                }
+                const dCard = document.getElementById('card-readiness');
+                if (dCard && cur.zone) {
+                    dCard.classList.remove('theme-ready', 'theme-golden', 'theme-careful', 'theme-stop', 'theme-gold', 'theme-silver', 'theme-yellow', 'theme-red');
+                    const tCls = cur.zone === 'ROSSO' ? 'theme-red' : (cur.zone === 'GIALLO' ? 'theme-yellow' : (cur.zone === 'GOLD' ? 'theme-gold' : 'theme-silver'));
+                    dCard.classList.add(tCls);
+                    dCard.style.borderColor = cur.color;
+                    dCard.style.boxShadow = `0 0 20px ${cur.color}33`;
+                    dCard.querySelectorAll('.mini-histogram .bar').forEach(b => { b.style.backgroundColor = cur.color; });
                 }
             }
 
