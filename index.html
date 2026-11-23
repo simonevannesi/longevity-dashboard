@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/styles.css?v=1795422687">
+    <link rel="stylesheet" href="static/css/styles.css?v=1795423035">
 
     <!-- iPhone PWA & iOS Safari Bookmark Optimization -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -41,7 +41,7 @@
               let clean = url.substring(5).split('?')[0];
               url = 'api/' + clean + '.json?v=' + _rt_ts;
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 23/11 09:31.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 23/11 09:37.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -126,7 +126,7 @@
                     </div>
                 </div>
 
-                <div class="bento-readiness-summary-concise" id="bento-readiness-summary">HRV -- ms • FC 43 bpm • TSB +4.8</div>
+                <div class="bento-readiness-summary-concise" id="bento-readiness-summary">HRV 51 ms • FC 43 bpm • TSB +4.8</div>
 
                 <!-- Drift Alert N=1 (visibile SOLO se rileva un cambiamento fisiologico significativo) -->
                 <div id="bento-phys-alert" style="display: none; font-size: 0.73rem; padding: 0.42rem 0.65rem; border-radius: 10px; border-left: 3px solid #10b981; background: rgba(16, 185, 129, 0.10); color: #e2e8f0; line-height: 1.3;">
@@ -237,8 +237,8 @@
                 <div class="bento-bio-trio">
                     <div class="bento-bio-col">
                         <span class="bento-bio-lbl">🫀 HRV rMSSD</span>
-                        <div class="bento-bio-val text-brand-emerald" id="bento-hrv-val">56 <small>ms</small></div>
-                        <span class="bento-bio-sub" id="bento-hrv-sub">Norma: 47–54 ms (+1.3σ)</span>
+                        <div class="bento-bio-val text-brand-emerald" id="bento-hrv-val">51 <small>ms</small></div>
+                        <span class="bento-bio-sub" id="bento-hrv-sub">Norma: 48–55 ms (Omeostasi OK)</span>
                     </div>
                     <div class="bento-bio-col">
                         <span class="bento-bio-lbl">💓 RHR</span>
@@ -247,8 +247,8 @@
                     </div>
                     <div class="bento-bio-col">
                         <span class="bento-bio-lbl">🌙 Sonno</span>
-                        <div class="bento-bio-val text-brand-purple" id="bento-sleep-val">9.6 <small>h</small></div>
-                        <span class="bento-bio-sub" id="bento-sleep-sub">Score 80 • Ricarica Piena</span>
+                        <div class="bento-bio-val text-brand-purple" id="bento-sleep-val">9.2 <small>h</small></div>
+                        <span class="bento-bio-sub" id="bento-sleep-sub">Score 88 • Ricarica Piena</span>
                     </div>
                 </div>
 
@@ -260,8 +260,8 @@
                     </div>
                     <div class="autonomic-item">
                         <span class="autonomic-lbl">7g:</span>
-                        <strong class="text-brand-sky" id="bento-trend-7g">55.0 ms</strong>
-                        <small id="bento-base-30g" style="color: #64748b; font-size: 0.66rem;">(EWMA 52.5)</small>
+                        <strong class="text-brand-sky" id="bento-trend-7g">54.4 ms</strong>
+                        <small id="bento-base-30g" style="color: #64748b; font-size: 0.66rem;">(EWMA 52.4)</small>
                     </div>
                 </div>
             </div>
@@ -382,7 +382,7 @@
                         <span class="bar" style="height: 70%"></span>
                     </div>
                 </div>
-                <div class="readiness-subtitle" id="kpi-readiness-desc" style="color:#94a3b8;">Parasimpatico Stabile (HRV --, Z=+0.0σ | RHR 43bpm | TSB +5).</div>
+                <div class="readiness-subtitle" id="kpi-readiness-desc" style="color:#94a3b8;">Parasimpatico Stabile (HRV 51ms, Z=-0.2σ | RHR 43bpm | TSB +5).</div>
                 <div id="desktop-battery-box" style="margin-top: 0.35rem; padding-top: 0.35rem; border-top: 1px dashed rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: space-between;">
                     <span id="desktop-battery-badge" style="font-size: 0.72rem; font-weight: 800; color: #94a3b8;">🥈 SILVER DAY</span>
                     <strong id="desktop-battery-pct" style="font-size: 0.75rem; color: #94a3b8;">83%</strong>
@@ -393,11 +393,11 @@
             <div class="kpi-card">
                 <div class="kpi-card-header">
                     <span>⚡ HRV</span>
-                    <span id="trend-hrv" class="trend-badge up" title="vs Media Ponderata 28g (52.5 ms) | Giallo ≤ -6% • Rosso ≤ -12%">0.0%</span>
+                    <span id="trend-hrv" class="trend-badge up" title="vs Media Ponderata 28g (52.4 ms) | Giallo ≤ -6% • Rosso ≤ -12%">-2.6%</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-hrv">N/D</div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-hrv"><path d="M 0.0,5.7 L 2.1,3.0 L 4.1,13.7 L 6.2,11.0 L 8.3,16.3 L 10.3,5.7 L 12.4,15.0 L 14.5,19.0 L 16.6,15.0 L 18.6,17.7 L 20.7,20.3 L 22.8,21.7 L 24.8,19.0 L 26.9,16.3 L 29.0,23.0 L 31.0,13.7 L 33.1,15.0 L 35.2,4.3 L 37.2,8.3 L 39.3,21.7 L 41.4,16.3 L 43.4,7.0 L 45.5,7.0 L 47.6,12.3 L 49.7,5.7 L 51.7,11.0 L 53.8,8.3 L 55.9,4.3 L 57.9,8.3" stroke="#10b981"/></svg>
+                    <div class="metric-value" id="kpi-hrv"><span style="color:#10b981">51 <span style="font-size:0.7em; opacity:0.8;">ms</span></span></div>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-hrv"><path d="M 0.0,5.7 L 2.1,3.0 L 4.1,13.7 L 6.2,11.0 L 8.3,16.3 L 10.3,5.7 L 12.4,15.0 L 14.5,19.0 L 16.6,15.0 L 18.6,17.7 L 20.7,20.3 L 22.8,21.7 L 24.8,19.0 L 26.9,16.3 L 29.0,23.0 L 31.0,13.7 L 33.1,15.0 L 35.2,4.3 L 37.2,8.3 L 39.3,21.7 L 41.4,16.3 L 43.4,7.0 L 45.5,7.0 L 47.6,12.3 L 49.7,5.7 L 51.7,11.0 L 53.8,8.3 L 55.9,4.3 L 57.9,8.3 L 60.0,13.7" stroke="#10b981"/></svg>
                 </div>
                 <div class="metric-subtitle"><span>Supino rMSSD</span><span id="kpi-hrv-sub"></span></div>
             </div>
@@ -406,11 +406,11 @@
             <div class="kpi-card">
                 <div class="kpi-card-header">
                     <span>🌙 Sonno / RHR</span>
-                    <span id="trend-sleep" class="trend-badge up" title="Sonno vs EWMA 28g (82.5) | RHR vs EWMA 28g (43.9 bpm)">0.0%</span>
+                    <span id="trend-sleep" class="trend-badge up" title="Sonno vs EWMA 28g (82.9) | RHR vs EWMA 28g (43.9 bpm)">+6.2%</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-sleep"><span style="color:#10b981">---</span> <span style="opacity:0.5;">/</span> <span style="color:#10b981">43 <span style="font-size:0.65em;">bpm</span></span></div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-sleep"><path d="M 0.0,4.4 L 2.1,5.8 L 4.1,6.4 L 6.2,4.4 L 8.3,7.8 L 10.3,9.2 L 12.4,6.4 L 14.5,9.2 L 16.6,13.3 L 18.6,5.1 L 20.7,14.7 L 22.8,7.8 L 24.8,23.0 L 26.9,16.8 L 29.0,5.8 L 31.0,17.5 L 33.1,7.1 L 35.2,6.4 L 37.2,9.9 L 39.3,10.6 L 41.4,12.0 L 43.4,10.6 L 45.5,6.4 L 47.6,12.0 L 49.7,7.1 L 51.7,3.0 L 53.8,7.8 L 55.9,10.6 L 57.9,4.4" stroke="#10b981"/></svg>
+                    <div class="metric-value" id="kpi-sleep"><span style="color:#10b981">88</span> <span style="opacity:0.5;">/</span> <span style="color:#10b981">43 <span style="font-size:0.65em;">bpm</span></span></div>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-sleep"><path d="M 0.0,4.4 L 2.1,5.8 L 4.1,6.4 L 6.2,4.4 L 8.3,7.8 L 10.3,9.2 L 12.4,6.4 L 14.5,9.2 L 16.6,13.3 L 18.6,5.1 L 20.7,14.7 L 22.8,7.8 L 24.8,23.0 L 26.9,16.8 L 29.0,5.8 L 31.0,17.5 L 33.1,7.1 L 35.2,6.4 L 37.2,9.9 L 39.3,10.6 L 41.4,12.0 L 43.4,10.6 L 45.5,6.4 L 47.6,12.0 L 49.7,7.1 L 51.7,3.0 L 53.8,7.8 L 55.9,10.6 L 57.9,4.4 L 60.0,5.1" stroke="#10b981"/></svg>
                 </div>
                 <div class="metric-subtitle"><span>Score / FC Riposo</span><span id="kpi-sleep-sub"></span></div>
             </div>
@@ -1694,6 +1694,6 @@
         </button>
     </nav>
 
-    <script src="static/js/app.js?v=1795422687"></script>
+    <script src="static/js/app.js?v=1795423035"></script>
 </body>
 </html>
