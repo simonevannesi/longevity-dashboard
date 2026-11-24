@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/styles.css?v=1795514957">
+    <link rel="stylesheet" href="static/css/styles.css?v=1795517711">
 
     <!-- iPhone PWA & iOS Safari Bookmark Optimization -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -41,7 +41,7 @@
               let clean = url.substring(5).split('?')[0];
               url = 'api/' + clean + '.json?v=' + _rt_ts;
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 24/11 11:09.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 24/11 11:55.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -126,7 +126,7 @@
                     </div>
                 </div>
 
-                <div class="bento-readiness-summary-concise" id="bento-readiness-summary">HRV 45 ms • FC 46 bpm • TSB +3.3</div>
+                <div class="bento-readiness-summary-concise" id="bento-readiness-summary">HRV 45 ms • FC 46 bpm • TSB +3.4</div>
 
                 <!-- Drift Alert N=1 (visibile SOLO se rileva un cambiamento fisiologico significativo) -->
                 <div id="bento-phys-alert" style="display: none; font-size: 0.73rem; padding: 0.42rem 0.65rem; border-radius: 10px; border-left: 3px solid #10b981; background: rgba(16, 185, 129, 0.10); color: #e2e8f0; line-height: 1.3;">
@@ -188,22 +188,22 @@
                 <div class="bento-load-grid-4">
                     <div class="bento-load-box">
                         <span class="bento-load-lbl">CTL</span>
-                        <span class="bento-load-val" id="bento-ctl-val" style="color:#10b981;">48.5</span>
+                        <span class="bento-load-val" id="bento-ctl-val" style="color:#10b981;">47.8</span>
                         <span class="bento-load-sub" id="bento-ctl-sub">Fitness</span>
                     </div>
                     <div class="bento-load-box">
                         <span class="bento-load-lbl">ATL</span>
-                        <span class="bento-load-val text-brand-amber" id="bento-atl-val">45.2</span>
+                        <span class="bento-load-val text-brand-amber" id="bento-atl-val">44.4</span>
                         <span class="bento-load-sub">Carico 7gg</span>
                     </div>
                     <div class="bento-load-box">
                         <span class="bento-load-lbl">TSB</span>
-                        <span class="bento-load-val" id="bento-tsb-val" style="color:#10b981;">+3.3</span>
+                        <span class="bento-load-val" id="bento-tsb-val" style="color:#10b981;">+3.4</span>
                         <span class="bento-load-sub" id="bento-tsb-status">Freschezza</span>
                     </div>
                     <div class="bento-load-box">
                         <span class="bento-load-lbl">Ramp 7g</span>
-                        <span class="bento-load-val" id="bento-ramprate-val" style="color:#10b981;">-0.9</span>
+                        <span class="bento-load-val" id="bento-ramprate-val" style="color:#10b981;">-0.8</span>
                         <span class="bento-load-sub">CTL/sett</span>
                     </div>
                 </div>
@@ -213,13 +213,13 @@
                     <div class="ratio-strip-left">
                         <span class="ratio-icon">⚖️</span>
                         <span class="ratio-title">Telaio:</span>
-                        <span class="ratio-detail"><span id="bento-run-ctl">9.6</span> Run / <span id="bento-bike-ctl">23.5</span> Bike</span>
+                        <span class="ratio-detail"><span id="bento-run-ctl">9.0</span> Run / <span id="bento-bike-ctl">23.5</span> Bike</span>
                     </div>
                     <div class="ratio-strip-right">
-                        <span class="bento-ratio-pill" id="bento-chassis-badge" style="color: #10b981; border: 1px solid #10b98166; background: #10b98118;">
-                            <span class="pulse-dot-sm" id="bento-ratio-dot" style="background: #10b981;"></span>
-                            <strong id="bento-chassis-ratio">41%</strong>
-                            <small id="bento-chassis-status">(Equilibrato)</small>
+                        <span class="bento-ratio-pill" id="bento-chassis-badge" style="color: #facc15; border: 1px solid #facc1566; background: #facc1518;">
+                            <span class="pulse-dot-sm" id="bento-ratio-dot" style="background: #facc15;"></span>
+                            <strong id="bento-chassis-ratio">38%</strong>
+                            <small id="bento-chassis-status">(Attenzione)</small>
                         </span>
                     </div>
                     <div id="bento-chassis-hint" style="display: none;"></div>
@@ -419,11 +419,11 @@
             <div class="kpi-card">
                 <div class="kpi-card-header">
                     <span>⚖️ Bilancio TSB</span>
-                    <span id="trend-tsb" class="trend-badge up" title="Delta vs EWMA 14g (+2.5) | Verde ≥ -10 • Giallo -20..-10 • Rosso < -20">+0.8</span>
+                    <span id="trend-tsb" class="trend-badge up" title="Delta vs EWMA 14g (+3.3) | Verde ≥ -10 • Giallo -20..-10 • Rosso < -20">+0.1</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-tsb"><span style="color:#10b981">+3.3</span> <span style="font-size:0.7em; opacity:0.8;">TSB</span></div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-tsb"><path d="M 0.0,8.4 L 2.1,16.7 L 4.1,14.2 L 6.2,23.0 L 8.3,15.2 L 10.3,8.5 L 12.4,8.9 L 14.5,3.3 L 16.6,3.0 L 18.6,4.8 L 20.7,10.6 L 22.8,10.2 L 24.8,9.0 L 26.9,19.9 L 29.0,12.7 L 31.0,8.1 L 33.1,10.2 L 35.2,4.6 L 37.2,9.1 L 39.3,11.1 L 41.4,12.4 L 43.4,14.3 L 45.5,16.5 L 47.6,14.0 L 49.7,14.1 L 51.7,13.5 L 53.8,13.8 L 55.9,12.6 L 57.9,8.2 L 60.0,10.9" stroke="#10b981"/></svg>
+                    <div class="metric-value" id="kpi-tsb"><span style="color:#10b981">+3.4</span> <span style="font-size:0.7em; opacity:0.8;">TSB</span></div>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-tsb"><path d="M 0.0,10.0 L 2.1,17.4 L 4.1,15.2 L 6.2,23.0 L 8.3,16.1 L 10.3,10.1 L 12.4,10.5 L 14.5,5.5 L 16.6,5.3 L 18.6,6.8 L 20.7,12.0 L 22.8,11.6 L 24.8,10.6 L 26.9,20.3 L 29.0,13.9 L 31.0,9.8 L 33.1,7.2 L 35.2,3.0 L 37.2,7.6 L 39.3,10.0 L 41.4,11.5 L 43.4,13.6 L 45.5,16.0 L 47.6,13.9 L 49.7,14.4 L 51.7,14.0 L 53.8,14.4 L 55.9,13.5 L 57.9,9.7 L 60.0,12.2" stroke="#10b981"/></svg>
                 </div>
                 <div class="metric-subtitle"><span>TSB / ACWR</span><span id="kpi-tsb-sub"><span style="color:#10b981; font-weight:600;">ACWR 0.93</span></span></div>
             </div>
@@ -432,11 +432,11 @@
             <div class="kpi-card">
                 <div class="kpi-card-header">
                     <span>📊 Total CTL</span>
-                    <span id="trend-total-ctl" class="trend-badge up" title="vs Media Ponderata 30g (49.6) | Giallo ≤ -5% • Rosso ≤ -10%">-2.2%</span>
+                    <span id="trend-total-ctl" class="trend-badge up" title="vs Media Ponderata 30g (49.1) | Giallo ≤ -5% • Rosso ≤ -10%">-2.6%</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-total-ctl"><span style="color:#10b981">48.5</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span></div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-total-ctl"><path d="M 0.0,8.2 L 2.1,9.8 L 4.1,3.0 L 6.2,8.2 L 8.3,13.0 L 10.3,13.4 L 12.4,18.2 L 14.5,19.8 L 16.6,19.8 L 18.6,16.2 L 20.7,17.0 L 22.8,18.2 L 24.8,10.6 L 26.9,15.4 L 29.0,19.4 L 31.0,18.2 L 33.1,23.0 L 35.2,20.6 L 37.2,19.8 L 39.3,19.0 L 41.4,17.8 L 43.4,16.2 L 45.5,17.8 L 47.6,17.8 L 49.7,18.2 L 51.7,18.2 L 53.8,19.0 L 55.9,22.6 L 57.9,21.4 L 60.0,21.4" stroke="#10b981"/></svg>
+                    <div class="metric-value" id="kpi-total-ctl"><span style="color:#10b981">47.8</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span></div>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-total-ctl"><path d="M 0.0,7.4 L 2.1,8.8 L 4.1,3.0 L 6.2,7.4 L 8.3,11.5 L 10.3,11.8 L 12.4,15.9 L 14.5,17.2 L 16.6,17.2 L 18.6,14.2 L 20.7,14.9 L 22.8,15.9 L 24.8,9.4 L 26.9,13.5 L 29.0,16.9 L 31.0,19.3 L 33.1,23.0 L 35.2,21.0 L 37.2,19.9 L 39.3,19.6 L 41.4,18.3 L 43.4,16.9 L 45.5,18.3 L 47.6,18.3 L 49.7,18.6 L 51.7,18.3 L 53.8,19.3 L 55.9,22.0 L 57.9,21.0 L 60.0,21.0" stroke="#10b981"/></svg>
                 </div>
                 <div class="metric-subtitle"><span>Fitness Globale</span><span id="kpi-total-ctl-sub"></span></div>
             </div>
@@ -458,15 +458,15 @@
             <div class="kpi-card">
                 <div class="kpi-card-header">
                     <span>🏃 Run CTL</span>
-                    <span id="trend-run-ctl" class="trend-badge up" title="vs Media Ponderata 30g (10.0) | Giallo ≤ -8% • Rosso ≤ -18%">-4.4%</span>
+                    <span id="trend-run-ctl" class="trend-badge up" title="vs Media Ponderata 30g (9.6) | Giallo ≤ -8% • Rosso ≤ -18%">-5.8%</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-run-ctl"><span style="color:#10b981">9.6</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span></div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-run-ctl"><path d="M 0.0,16.8 L 2.1,7.6 L 4.1,12.2 L 6.2,15.3 L 8.3,18.4 L 10.3,18.4 L 12.4,21.5 L 14.5,12.2 L 16.6,16.8 L 18.6,19.9 L 20.7,7.6 L 22.8,12.2 L 24.8,15.3 L 26.9,18.4 L 29.0,23.0 L 31.0,12.2 L 33.1,15.3 L 35.2,3.0 L 37.2,7.6 L 39.3,10.7 L 41.4,13.8 L 43.4,3.0 L 45.5,7.6 L 47.6,10.7 L 49.7,15.3 L 51.7,18.4 L 53.8,10.7 L 55.9,13.8 L 57.9,18.4 L 60.0,18.4" stroke="#10b981"/></svg>
+                    <div class="metric-value" id="kpi-run-ctl"><span style="color:#10b981">9.0</span> <span style="font-size:0.7em; opacity:0.8;">CTL</span></div>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-run-ctl"><path d="M 0.0,11.0 L 2.1,3.0 L 4.1,7.0 L 6.2,9.7 L 8.3,12.3 L 10.3,12.3 L 12.4,15.0 L 14.5,7.0 L 16.6,11.0 L 18.6,13.7 L 20.7,3.0 L 22.8,7.0 L 24.8,9.7 L 26.9,12.3 L 29.0,16.3 L 31.0,19.0 L 33.1,21.7 L 35.2,11.0 L 37.2,13.7 L 39.3,17.7 L 41.4,20.3 L 43.4,11.0 L 45.5,13.7 L 47.6,16.3 L 49.7,19.0 L 51.7,23.0 L 53.8,15.0 L 55.9,17.7 L 57.9,20.3 L 60.0,20.3" stroke="#10b981"/></svg>
                 </div>
                 <div class="metric-subtitle">
-                    <span id="desktop-chassis-badge" title="Telaio/Motore: 41% (Equilibrato)" style="color: #10b981; font-weight: 700; font-size: 0.68rem;">⚖️ Telaio: 41%</span>
-                    <span id="kpi-run-ctl-sub"><span style="color:#10b981; font-weight:600;">ACWR 0.82</span></span>
+                    <span id="desktop-chassis-badge" title="Telaio/Motore: 38% (Attenzione)" style="color: #facc15; font-weight: 700; font-size: 0.68rem;">⚖️ Telaio: 38%</span>
+                    <span id="kpi-run-ctl-sub"><span style="color:#10b981; font-weight:600;">ACWR 0.80</span></span>
                 </div>
             </div>
         </div>
@@ -551,15 +551,15 @@
                             <div style="display: flex; flex-direction: column; gap: 0.35rem; flex: 1;">
                                 <div style="display: flex; justify-content: space-between; font-size: 0.75rem; background: rgba(255, 255, 255, 0.03); padding: 0.3rem 0.6rem; border-radius: 6px;">
                                     <span style="color: var(--text-muted);">CTL Attuale:</span>
-                                    <span style="font-weight: 700; color: #38bdf8;" id="prep-current-ctl">48.5 CTL</span>
+                                    <span style="font-weight: 700; color: #38bdf8;" id="prep-current-ctl">47.8 CTL</span>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; font-size: 0.75rem; background: rgba(255, 255, 255, 0.03); padding: 0.3rem 0.6rem; border-radius: 6px;">
                                     <span style="color: var(--text-muted);">CTL Target Gara:</span>
-                                    <span style="font-weight: 700; color: var(--accent-gold);" id="prep-target-ctl">48.5 CTL</span>
+                                    <span style="font-weight: 700; color: var(--accent-gold);" id="prep-target-ctl">47.8 CTL</span>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; font-size: 0.75rem; background: rgba(255, 255, 255, 0.03); padding: 0.3rem 0.6rem; border-radius: 6px;">
                                     <span style="color: var(--text-muted);">TSB Attuale (Freschezza):</span>
-                                    <span style="font-weight: 700; color: #38bdf8;" id="prep-current-tsb">+3.3 TSB (In Scarico)</span>
+                                    <span style="font-weight: 700; color: #38bdf8;" id="prep-current-tsb">+3.4 TSB (In Scarico)</span>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; font-size: 0.75rem; background: rgba(255, 255, 255, 0.03); padding: 0.3rem 0.6rem; border-radius: 6px;">
                                     <span style="color: var(--text-muted);">TSB Target Gara:</span>
@@ -569,7 +569,7 @@
                         </div>
 
                         <div style="font-size: 0.68rem; color: rgba(255, 255, 255, 0.6); line-height: 1.3; border-top: 1px dashed rgba(255, 255, 255, 0.1); padding-top: 0.35rem;" id="prep-explanation-text">
-                            ℹ️ <strong>Origine CTL Target (48.5 CTL):</strong> Basato sul benchmark della letteratura scientifica (60 CTL per Test Triathlon Olimpico Solitaria (Fuerteventura)) ed aggiustato alla CTL massima realmente raggiungibile (48.5) in 2 giorni, considerando un Ramp Rate sicuro (+5 CTL/settimana) ed una finestra di Tapering di 7 giorni per far risalire il TSB a +10 (Freschezza Ottimale).
+                            ℹ️ <strong>Origine CTL Target (47.8 CTL):</strong> Basato sul benchmark della letteratura scientifica (60 CTL per Test Triathlon Olimpico Solitaria (Fuerteventura)) ed aggiustato alla CTL massima realmente raggiungibile (47.8) in 2 giorni, considerando un Ramp Rate sicuro (+5 CTL/settimana) ed una finestra di Tapering di 7 giorni per far risalire il TSB a +10 (Freschezza Ottimale).
                         </div>
                     </div>
 
@@ -1107,7 +1107,7 @@
                                     <span class="zone-metric-val">130 – 138 bpm (LT1 VT1)</span>
                                 </div>
                             </div>
-                            <div class="zone-desc">Fondo lento aerobico delimitato dalla Soglia Ventilatoria VT1 (~138 bpm con Run CTL attuale 9.6). Ossidazione lipidica pura, zero accumulo lattato, respirazione nasale.</div>
+                            <div class="zone-desc">Fondo lento aerobico delimitato dalla Soglia Ventilatoria VT1 (~138 bpm con Run CTL attuale 9.0). Ossidazione lipidica pura, zero accumulo lattato, respirazione nasale.</div>
                         </div><div class="zone-card-item" style="--zone-border: #f59e0b;">
                             <div class="zone-item-header">
                                 <span class="zone-name">Medio / Tempo (LT1-LT2)</span>
@@ -1183,7 +1183,7 @@
                     <div class="dist-bar-item">
                         <div class="dist-bar-label">
                             <span>🟢 Z2 Aerobico / FatMax (Target San Millán: 70-80%)</span>
-                            <span style="color:#10b981;" id="dist-z2-text">59.0% (Mese 67.0% → 🟡 -8.0% 7g)</span>
+                            <span style="color:#10b981;" id="dist-z2-text">59.0% (Mese 67.5% → 🟡 -8.5% 7g)</span>
                         </div>
                         <div class="dist-bar-track">
                             <div class="dist-bar-fill" id="dist-z2-bar" style="width: 59.0%; background: #10b981;"></div>
@@ -1193,7 +1193,7 @@
                     <div class="dist-bar-item">
                         <div class="dist-bar-label">
                             <span>🔵 Z1 Recupero Attivo (Target San Millán: 10-15%)</span>
-                            <span style="color:#38bdf8;" id="dist-z1-text">34.0% (Mese 25.5% → 🔵 +8.5% 7g)</span>
+                            <span style="color:#38bdf8;" id="dist-z1-text">34.0% (Mese 25.7% → 🔵 +8.3% 7g)</span>
                         </div>
                         <div class="dist-bar-track">
                             <div class="dist-bar-fill" id="dist-z1-bar" style="width: 34.0%; background: #38bdf8;"></div>
@@ -1203,7 +1203,7 @@
                     <div class="dist-bar-item">
                         <div class="dist-bar-label">
                             <span>🟡 Z3 Tempo / Zona Grigia (Target: ≤5% "No Z3")</span>
-                            <span style="color:#f59e0b;" id="dist-z3-text">5.3% (Mese 5.8% → 🟡 Deriva Z3 Moderata)</span>
+                            <span style="color:#f59e0b;" id="dist-z3-text">5.3% (Mese 5.1% → 🟡 Deriva Z3 Moderata)</span>
                         </div>
                         <div class="dist-bar-track">
                             <div class="dist-bar-fill" id="dist-z3-bar" style="width: 5.3%; background: #f59e0b;"></div>
@@ -1213,7 +1213,7 @@
                     <div class="dist-bar-item">
                         <div class="dist-bar-label">
                             <span>🟣 Z4-Z5 Soglia & VO2Max (Target San Millán: 10-15%)</span>
-                            <span style="color:#8b5cf6;" id="dist-z4z5-text">1.8% (Mese 1.7% → 🟢 Controllo Ottimale)</span>
+                            <span style="color:#8b5cf6;" id="dist-z4z5-text">1.8% (Mese 1.6% → 🟢 Controllo Ottimale)</span>
                         </div>
                         <div class="dist-bar-track">
                             <div class="dist-bar-fill" id="dist-z4z5-bar" style="width: 1.8%; background: #8b5cf6;"></div>
@@ -1694,6 +1694,6 @@
         </button>
     </nav>
 
-    <script src="static/js/app.js?v=1795514957"></script>
+    <script src="static/js/app.js?v=1795517711"></script>
 </body>
 </html>
