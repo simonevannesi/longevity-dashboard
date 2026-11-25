@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/styles.css?v=1795628840">
+    <link rel="stylesheet" href="static/css/styles.css?v=1795633802">
 
     <!-- iPhone PWA & iOS Safari Bookmark Optimization -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -41,7 +41,7 @@
               let clean = url.substring(5).split('?')[0];
               url = 'api/' + clean + '.json?v=' + _rt_ts;
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 25/11 18:47.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 25/11 20:10.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -894,7 +894,7 @@
                     <div>
                         <div class="zones-title-row">
                             <span class="zones-title-text">Zone di Allenamento Dinamiche — Setup Garmin</span>
-                            <span class="zones-rolling-badge" id="zones-rolling-badge">LT1 DFA α1: 151.3 bpm • 232 W (Salita fino a 240 W)</span>
+                            <span class="zones-rolling-badge" id="zones-rolling-badge">LT1 DFA α1: 152.3 bpm • 240 W (Salita fino a 240 W)</span>
                         </div>
                         <div class="zones-header-sub">
                             Calibrate su test DFA α1 a inizio allenamento • Bici (Watt &amp; FC) • Corsa (Passo &amp; FC)
@@ -953,10 +953,10 @@
                     <div class="zones-decoupling-advice">
                         <div style="font-weight: 700; color: #38bdf8; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
                             <span>🎯 Modulazione Dinamica Z2 Consigliata:</span>
-                            <span id="dec-target-summary" style="color: #fbbf24; font-weight: 800;">160 – 190 W (Z2 Bassa-Media) • FC 121 – 147 bpm</span>
+                            <span id="dec-target-summary" style="color: #fbbf24; font-weight: 800;">160 – 190 W (Z2 Bassa-Media) • FC 121 – 148 bpm</span>
                         </div>
                         <div id="dec-recommendation-text" style="color: rgba(255,255,255,0.85); line-height: 1.4; font-size: 0.78rem;">
-                            Disaccoppiamento cardio-meccanico a +12.1% (hrTSS term. 122.2 vs TSS 109.0). Il cuore lavora con un costo metabolico superiore alla potenza meccanica erogata. Nella prossima sessione Z2 concentrati nella parte medio-bassa (160 – 190 W (Z2 Bassa-Media), FC < 147 bpm) a cadenza agile (78–85 rpm) e idratazione elettrolitica per prevenire deriva precoce.
+                            Disaccoppiamento cardio-meccanico a +12.1% (hrTSS term. 122.2 vs TSS 109.0). Il cuore lavora con un costo metabolico superiore alla potenza meccanica erogata. Nella prossima sessione Z2 concentrati nella parte medio-bassa (160 – 190 W (Z2 Bassa-Media), FC < 148 bpm) a cadenza agile (78–85 rpm) e idratazione elettrolitica per prevenire deriva precoce.
                         </div>
                     </div>
                 </div>
@@ -981,7 +981,7 @@
                             <div class="zone-metrics-row">
                                 <div class="zone-metric-col">
                                     <span class="zone-metric-lbl">Potenza (Watt)</span>
-                                    <span class="zone-metric-val" style="color: #38bdf8;">< 163 W</span>
+                                    <span class="zone-metric-val" style="color: #38bdf8;">< 169 W</span>
                                 </div>
                                 <div class="zone-metric-col">
                                     <span class="zone-metric-lbl">Freq. Cardiaca</span>
@@ -997,14 +997,14 @@
                             <div class="zone-metrics-row">
                                 <div class="zone-metric-col">
                                     <span class="zone-metric-lbl">Potenza (Watt)</span>
-                                    <span class="zone-metric-val" style="color: #10b981;">163 – 232 W (Salita a LT1 fino a 240 W)</span>
+                                    <span class="zone-metric-val" style="color: #10b981;">169 – 240 W (Salita a LT1 fino a 240 W)</span>
                                 </div>
                                 <div class="zone-metric-col">
                                     <span class="zone-metric-lbl">Freq. Cardiaca</span>
-                                    <span class="zone-metric-val">121 – 151 bpm (LT1 DFA α1)</span>
+                                    <span class="zone-metric-val">121 – 152 bpm (LT1 DFA α1)</span>
                                 </div>
                             </div>
-                            <div class="zone-desc">Dominio aerobico e FatMax delimitato da DFA α1 = 0.75 (151 bpm, 232 W su passo lungo e fino a 240 W in salita a muscolo fresco). Lattato basale (< 1.8 mmol/L) e fractalità parasimpatica intatta.</div>
+                            <div class="zone-desc">Dominio aerobico e FatMax delimitato da DFA α1 = 0.75 (152 bpm, 240 W su passo lungo e fino a 240 W in salita a muscolo fresco). Lattato basale (< 1.8 mmol/L) e fractalità parasimpatica intatta.</div>
                         </div><div class="zone-card-item" style="--zone-border: #f59e0b;">
                             <div class="zone-item-header">
                                 <span class="zone-name">Tempo / Aerobico Medio (LT1-LT2)</span>
@@ -1013,14 +1013,14 @@
                             <div class="zone-metrics-row">
                                 <div class="zone-metric-col">
                                     <span class="zone-metric-lbl">Potenza (Watt)</span>
-                                    <span class="zone-metric-val" style="color: #f59e0b;">233 – 265 W (in salita > 240 W)</span>
+                                    <span class="zone-metric-val" style="color: #f59e0b;">241 – 265 W (in salita > 240 W)</span>
                                 </div>
                                 <div class="zone-metric-col">
                                     <span class="zone-metric-lbl">Freq. Cardiaca</span>
-                                    <span class="zone-metric-val">152 – 160 bpm</span>
+                                    <span class="zone-metric-val">153 – 160 bpm</span>
                                 </div>
                             </div>
-                            <div class="zone-desc">Corridoio compreso strettamente tra la Soglia Aerobica LT1 (151 bpm) e la Soglia Anaerobica LT2. Spinta aerobica sostenuta con progressiva transizione glicolitica.</div>
+                            <div class="zone-desc">Corridoio compreso strettamente tra la Soglia Aerobica LT1 (152 bpm) e la Soglia Anaerobica LT2. Spinta aerobica sostenuta con progressiva transizione glicolitica.</div>
                         </div><div class="zone-card-item" style="--zone-border: #f97316;">
                             <div class="zone-item-header">
                                 <span class="zone-name">Soglia Anaerobica / LT2</span>
@@ -1694,6 +1694,6 @@
         </button>
     </nav>
 
-    <script src="static/js/app.js?v=1795628840"></script>
+    <script src="static/js/app.js?v=1795633802"></script>
 </body>
 </html>
