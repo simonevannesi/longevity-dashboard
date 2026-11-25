@@ -1868,12 +1868,15 @@ function updateBentoView() {
     if (rCtlEl) rCtlEl.textContent = runCtl.toFixed(1);
 
     // 2. BIOMETRICHE (HRV, RHR, SONNO — con EWMA 28g dinamico reale)
-    const hrv = parseFloat(last['night HRV'] || 0);
-    const rhr = parseFloat(last['RHR'] || 0);
+    const hrvRows = dashList.map(d => parseFloat(d['night HRV'] ?? d['hrv'])).filter(v => !isNaN(v) && v > 0);
+    const rhrRows = dashList.map(d => parseFloat(d['RHR'] ?? d['rhr'])).filter(v => !isNaN(v) && v > 0);
+    const rawHrv = parseFloat(last['night HRV'] ?? last['hrv']);
+    const rawRhr = parseFloat(last['RHR'] ?? last['rhr']);
+    const hrv = (!isNaN(rawHrv) && rawHrv > 0) ? rawHrv : (hrvRows.length > 0 ? hrvRows[hrvRows.length - 1] : 0);
+    const rhr = (!isNaN(rawRhr) && rawRhr > 0) ? rawRhr : (rhrRows.length > 0 ? rhrRows[rhrRows.length - 1] : 0);
     const sleepHours = parseFloat(last['ore sonno'] || last['ore_sonno'] || last['Sleep duration'] || last['Sonno'] || 0);
     const sleepScore = parseFloat(last['sleep score'] || last['sleep_score'] || 0);
 
-    const hrvRows = dashList.map(d => parseFloat(d['night HRV'])).filter(v => !isNaN(v) && v > 0);
     const hrv7 = hrvRows.slice(-7);
     const avgHrv7d = hrv7.length > 0 ? (hrv7.reduce((a,b)=>a+b, 0) / hrv7.length) : hrv;
     const hrvEwma28 = calcEwma(hrvRows, 28);
@@ -1887,7 +1890,6 @@ function updateBentoView() {
     const hrvHigh = Math.round(avgHrv30d + swc);
 
     // RHR 30-day Baseline
-    const rhrRows = dashList.map(d => parseFloat(d['RHR'])).filter(v => !isNaN(v) && v > 0);
     const rhr30 = rhrRows.slice(-30);
     const avgRhr30d = rhr30.length > 0 ? (rhr30.reduce((a,b)=>a+b, 0) / rhr30.length) : 45.0;
     const deltaRhr = rhr - avgRhr30d;
@@ -1973,7 +1975,9 @@ function updateBentoView() {
 
             const rSumm = document.getElementById('bento-readiness-summary');
             if (rSumm) {
-                rSumm.textContent = `HRV ${Math.round(hrv)} ms • FC ${Math.round(rhr)} bpm • TSB ${tsb >= 0 ? '+' : ''}${tsb.toFixed(1)}`;
+                const hrvTxt = hrv > 0 ? `${Math.round(hrv)} ms` : '-- ms';
+                const rhrTxt = rhr > 0 ? `${Math.round(rhr)} bpm` : '-- bpm';
+                rSumm.textContent = `HRV ${hrvTxt} • FC ${rhrTxt} • TSB ${tsb >= 0 ? '+' : ''}${tsb.toFixed(1)}`;
             }
 
             const wIcon = document.getElementById('bento-workout-icon');
