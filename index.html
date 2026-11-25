@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/styles.css?v=1795594528">
+    <link rel="stylesheet" href="static/css/styles.css?v=1795594878">
 
     <!-- iPhone PWA & iOS Safari Bookmark Optimization -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -41,7 +41,7 @@
               let clean = url.substring(5).split('?')[0];
               url = 'api/' + clean + '.json?v=' + _rt_ts;
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 25/11 09:15.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 25/11 09:21.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -247,8 +247,8 @@
                     </div>
                     <div class="bento-bio-col">
                         <span class="bento-bio-lbl">🌙 Sonno</span>
-                        <div class="bento-bio-val text-brand-purple" id="bento-sleep-val">9.6 <small>h</small></div>
-                        <span class="bento-bio-sub" id="bento-sleep-sub">Score 80 • Ricarica Piena</span>
+                        <div class="bento-bio-val text-brand-purple" id="bento-sleep-val">8.8 <small>h</small></div>
+                        <span class="bento-bio-sub" id="bento-sleep-sub">Score 81 • Ricarica Piena</span>
                     </div>
                 </div>
 
@@ -406,11 +406,11 @@
             <div class="kpi-card">
                 <div class="kpi-card-header">
                     <span>🌙 Sonno / RHR</span>
-                    <span id="trend-sleep" class="trend-badge up" title="Sonno vs EWMA 28g (82.3) | RHR vs EWMA 28g (44.0 bpm)">0.0%</span>
+                    <span id="trend-sleep" class="trend-badge up" title="Sonno vs EWMA 28g (82.2) | RHR vs EWMA 28g (44.0 bpm)">-1.4%</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-sleep"><span style="color:#10b981">---</span> <span style="opacity:0.5;">/</span> <span style="color:#10b981">44 <span style="font-size:0.65em;">bpm</span></span></div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-sleep"><path d="M 0.0,6.4 L 2.1,4.4 L 4.1,7.8 L 6.2,9.2 L 8.3,6.4 L 10.3,9.2 L 12.4,13.3 L 14.5,5.1 L 16.6,14.7 L 18.6,7.8 L 20.7,23.0 L 22.8,16.8 L 24.8,5.8 L 26.9,17.5 L 29.0,7.1 L 31.0,6.4 L 33.1,9.9 L 35.2,10.6 L 37.2,12.0 L 39.3,10.6 L 41.4,6.4 L 43.4,12.0 L 45.5,7.1 L 47.6,3.0 L 49.7,7.8 L 51.7,10.6 L 53.8,4.4 L 55.9,5.1 L 57.9,14.7" stroke="#10b981"/></svg>
+                    <div class="metric-value" id="kpi-sleep"><span style="color:#10b981">81</span> <span style="opacity:0.5;">/</span> <span style="color:#10b981">44 <span style="font-size:0.65em;">bpm</span></span></div>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-sleep"><path d="M 0.0,6.4 L 2.1,4.4 L 4.1,7.8 L 6.2,9.2 L 8.3,6.4 L 10.3,9.2 L 12.4,13.3 L 14.5,5.1 L 16.6,14.7 L 18.6,7.8 L 20.7,23.0 L 22.8,16.8 L 24.8,5.8 L 26.9,17.5 L 29.0,7.1 L 31.0,6.4 L 33.1,9.9 L 35.2,10.6 L 37.2,12.0 L 39.3,10.6 L 41.4,6.4 L 43.4,12.0 L 45.5,7.1 L 47.6,3.0 L 49.7,7.8 L 51.7,10.6 L 53.8,4.4 L 55.9,5.1 L 57.9,14.7 L 60.0,9.9" stroke="#10b981"/></svg>
                 </div>
                 <div class="metric-subtitle"><span>Score / FC Riposo</span><span id="kpi-sleep-sub"></span></div>
             </div>
@@ -1694,6 +1694,6 @@
         </button>
     </nav>
 
-    <script src="static/js/app.js?v=1795594528"></script>
+    <script src="static/js/app.js?v=1795594878"></script>
 </body>
 </html>
