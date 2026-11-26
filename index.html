@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/styles.css?v=1795678704">
+    <link rel="stylesheet" href="static/css/styles.css?v=1795679353">
 
     <!-- iPhone PWA & iOS Safari Bookmark Optimization -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -41,7 +41,7 @@
               let clean = url.substring(5).split('?')[0];
               url = 'api/' + clean + '.json?v=' + _rt_ts;
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 26/11 08:38.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 26/11 08:49.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -119,14 +119,14 @@
                 <div class="bento-battery-row" id="bento-battery-box">
                     <div class="bento-battery-header" style="justify-content: space-between; align-items: center;">
                         <span class="bento-battery-lbl" id="bento-battery-badge" style="color: #94a3b8; font-size: 0.95rem; font-weight: 800; letter-spacing: 0.5px;">🥈 SILVER DAY</span>
-                        <strong class="bento-battery-pct" id="bento-battery-pct" style="color: #94a3b8; font-size: 0.95rem;">78%</strong>
+                        <strong class="bento-battery-pct" id="bento-battery-pct" style="color: #94a3b8; font-size: 0.95rem;">76%</strong>
                     </div>
                     <div class="bento-battery-track">
-                        <div class="bento-battery-fill" id="bento-battery-bar" style="width: 78%; background: #94a3b8;"></div>
+                        <div class="bento-battery-fill" id="bento-battery-bar" style="width: 76%; background: #94a3b8;"></div>
                     </div>
                 </div>
 
-                <div class="bento-readiness-summary-concise" id="bento-readiness-summary">HRV -- ms • FC 45 bpm • TSB +10.5</div>
+                <div class="bento-readiness-summary-concise" id="bento-readiness-summary">HRV 50 ms • FC 45 bpm • TSB +10.5</div>
 
                 <!-- Drift Alert N=1 (visibile SOLO se rileva un cambiamento fisiologico significativo) -->
                 <div id="bento-phys-alert" style="display: none; font-size: 0.73rem; padding: 0.42rem 0.65rem; border-radius: 10px; border-left: 3px solid #10b981; background: rgba(16, 185, 129, 0.10); color: #e2e8f0; line-height: 1.3;">
@@ -237,8 +237,8 @@
                 <div class="bento-bio-trio">
                     <div class="bento-bio-col">
                         <span class="bento-bio-lbl">🫀 HRV rMSSD</span>
-                        <div class="bento-bio-val text-brand-emerald" id="bento-hrv-val">56 <small>ms</small></div>
-                        <span class="bento-bio-sub" id="bento-hrv-sub">Norma: 47–54 ms (+1.3σ)</span>
+                        <div class="bento-bio-val text-brand-emerald" id="bento-hrv-val">50 <small>ms</small></div>
+                        <span class="bento-bio-sub" id="bento-hrv-sub">Norma: 48–54 ms (Omeostasi OK)</span>
                     </div>
                     <div class="bento-bio-col">
                         <span class="bento-bio-lbl">💓 RHR</span>
@@ -260,8 +260,8 @@
                     </div>
                     <div class="autonomic-item">
                         <span class="autonomic-lbl">7g:</span>
-                        <strong class="text-brand-sky" id="bento-trend-7g">53.0 ms</strong>
-                        <small id="bento-base-30g" style="color: #64748b; font-size: 0.66rem;">(EWMA 52.0)</small>
+                        <strong class="text-brand-sky" id="bento-trend-7g">52.6 ms</strong>
+                        <small id="bento-base-30g" style="color: #64748b; font-size: 0.66rem;">(EWMA 51.9)</small>
                     </div>
                 </div>
             </div>
@@ -382,10 +382,10 @@
                         <span class="bar" style="height: 70%"></span>
                     </div>
                 </div>
-                <div class="readiness-subtitle" id="kpi-readiness-desc" style="color:#94a3b8;">Parasimpatico Stabile (HRV --, Z=+0.0σ | RHR 45bpm | TSB +10).</div>
+                <div class="readiness-subtitle" id="kpi-readiness-desc" style="color:#94a3b8;">Parasimpatico Stabile (HRV 50ms, Z=-0.3σ | RHR 45bpm | TSB +10).</div>
                 <div id="desktop-battery-box" style="margin-top: 0.35rem; padding-top: 0.35rem; border-top: 1px dashed rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: space-between;">
                     <span id="desktop-battery-badge" style="font-size: 0.72rem; font-weight: 800; color: #94a3b8;">🥈 SILVER DAY</span>
-                    <strong id="desktop-battery-pct" style="font-size: 0.75rem; color: #94a3b8;">78%</strong>
+                    <strong id="desktop-battery-pct" style="font-size: 0.75rem; color: #94a3b8;">76%</strong>
                 </div>
             </div>
 
@@ -393,11 +393,11 @@
             <div class="kpi-card">
                 <div class="kpi-card-header">
                     <span>⚡ HRV</span>
-                    <span id="trend-hrv" class="trend-badge up" title="vs Media Ponderata 28g (52.0 ms) | Giallo ≤ -6% • Rosso ≤ -12%">0.0%</span>
+                    <span id="trend-hrv" class="trend-badge up" title="vs Media Ponderata 28g (51.9 ms) | Giallo ≤ -6% • Rosso ≤ -12%">-3.6%</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-hrv">N/D</div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-hrv"><path d="M 0.0,10.1 L 2.1,15.9 L 4.1,4.4 L 6.2,14.4 L 8.3,18.7 L 10.3,14.4 L 12.4,17.3 L 14.5,20.1 L 16.6,21.6 L 18.6,18.7 L 20.7,15.9 L 22.8,23.0 L 24.8,13.0 L 26.9,14.4 L 29.0,3.0 L 31.0,7.3 L 33.1,21.6 L 35.2,15.9 L 37.2,5.9 L 39.3,5.9 L 41.4,11.6 L 43.4,4.4 L 45.5,10.1 L 47.6,7.3 L 49.7,3.0 L 51.7,7.3 L 53.8,13.0 L 55.9,21.6 L 57.9,8.7" stroke="#10b981"/></svg>
+                    <div class="metric-value" id="kpi-hrv"><span style="color:#10b981">50 <span style="font-size:0.7em; opacity:0.8;">ms</span></span></div>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-hrv"><path d="M 0.0,10.1 L 2.1,15.9 L 4.1,4.4 L 6.2,14.4 L 8.3,18.7 L 10.3,14.4 L 12.4,17.3 L 14.5,20.1 L 16.6,21.6 L 18.6,18.7 L 20.7,15.9 L 22.8,23.0 L 24.8,13.0 L 26.9,14.4 L 29.0,3.0 L 31.0,7.3 L 33.1,21.6 L 35.2,15.9 L 37.2,5.9 L 39.3,5.9 L 41.4,11.6 L 43.4,4.4 L 45.5,10.1 L 47.6,7.3 L 49.7,3.0 L 51.7,7.3 L 53.8,13.0 L 55.9,21.6 L 57.9,8.7 L 60.0,14.4" stroke="#10b981"/></svg>
                 </div>
                 <div class="metric-subtitle"><span>Supino rMSSD</span><span id="kpi-hrv-sub"></span></div>
             </div>
@@ -1694,6 +1694,6 @@
         </button>
     </nav>
 
-    <script src="static/js/app.js?v=1795678704"></script>
+    <script src="static/js/app.js?v=1795679353"></script>
 </body>
 </html>
