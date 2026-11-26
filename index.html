@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/styles.css?v=1795647824">
+    <link rel="stylesheet" href="static/css/styles.css?v=1795678704">
 
     <!-- iPhone PWA & iOS Safari Bookmark Optimization -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -41,7 +41,7 @@
               let clean = url.substring(5).split('?')[0];
               url = 'api/' + clean + '.json?v=' + _rt_ts;
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 26/11 00:03.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 26/11 08:38.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -119,14 +119,14 @@
                 <div class="bento-battery-row" id="bento-battery-box">
                     <div class="bento-battery-header" style="justify-content: space-between; align-items: center;">
                         <span class="bento-battery-lbl" id="bento-battery-badge" style="color: #94a3b8; font-size: 0.95rem; font-weight: 800; letter-spacing: 0.5px;">🥈 SILVER DAY</span>
-                        <strong class="bento-battery-pct" id="bento-battery-pct" style="color: #94a3b8; font-size: 0.95rem;">80%</strong>
+                        <strong class="bento-battery-pct" id="bento-battery-pct" style="color: #94a3b8; font-size: 0.95rem;">78%</strong>
                     </div>
                     <div class="bento-battery-track">
-                        <div class="bento-battery-fill" id="bento-battery-bar" style="width: 80%; background: #94a3b8;"></div>
+                        <div class="bento-battery-fill" id="bento-battery-bar" style="width: 78%; background: #94a3b8;"></div>
                     </div>
                 </div>
 
-                <div class="bento-readiness-summary-concise" id="bento-readiness-summary">HRV -- ms • FC -- bpm • TSB +10.5</div>
+                <div class="bento-readiness-summary-concise" id="bento-readiness-summary">HRV -- ms • FC 45 bpm • TSB +10.5</div>
 
                 <!-- Drift Alert N=1 (visibile SOLO se rileva un cambiamento fisiologico significativo) -->
                 <div id="bento-phys-alert" style="display: none; font-size: 0.73rem; padding: 0.42rem 0.65rem; border-radius: 10px; border-left: 3px solid #10b981; background: rgba(16, 185, 129, 0.10); color: #e2e8f0; line-height: 1.3;">
@@ -242,8 +242,8 @@
                     </div>
                     <div class="bento-bio-col">
                         <span class="bento-bio-lbl">💓 RHR</span>
-                        <div class="bento-bio-val text-brand-sky" id="bento-rhr-val">44 <small>bpm</small></div>
-                        <span class="bento-bio-sub" id="bento-rhr-sub">Baseline: 45 bpm (-1 bpm)</span>
+                        <div class="bento-bio-val text-brand-sky" id="bento-rhr-val">45 <small>bpm</small></div>
+                        <span class="bento-bio-sub" id="bento-rhr-sub">Baseline: 44 bpm (+1 bpm)</span>
                     </div>
                     <div class="bento-bio-col">
                         <span class="bento-bio-lbl">🌙 Sonno</span>
@@ -338,7 +338,7 @@
                     </div>
                     <div class="bento-macro-item">
                         <span class="bento-macro-label">TDEE Attivo</span>
-                        <span class="bento-macro-val" id="bento-tdee-val" style="color: #f8fafc;">2,214 <small>kcal</small></span>
+                        <span class="bento-macro-val" id="bento-tdee-val" style="color: #f8fafc;">2,174 <small>kcal</small></span>
                     </div>
                 </div>
 
@@ -382,10 +382,10 @@
                         <span class="bar" style="height: 70%"></span>
                     </div>
                 </div>
-                <div class="readiness-subtitle" id="kpi-readiness-desc" style="color:#94a3b8;">Parasimpatico Stabile (HRV --, Z=+0.0σ | RHR -- | TSB +10).</div>
+                <div class="readiness-subtitle" id="kpi-readiness-desc" style="color:#94a3b8;">Parasimpatico Stabile (HRV --, Z=+0.0σ | RHR 45bpm | TSB +10).</div>
                 <div id="desktop-battery-box" style="margin-top: 0.35rem; padding-top: 0.35rem; border-top: 1px dashed rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: space-between;">
                     <span id="desktop-battery-badge" style="font-size: 0.72rem; font-weight: 800; color: #94a3b8;">🥈 SILVER DAY</span>
-                    <strong id="desktop-battery-pct" style="font-size: 0.75rem; color: #94a3b8;">80%</strong>
+                    <strong id="desktop-battery-pct" style="font-size: 0.75rem; color: #94a3b8;">78%</strong>
                 </div>
             </div>
 
@@ -406,10 +406,10 @@
             <div class="kpi-card">
                 <div class="kpi-card-header">
                     <span>🌙 Sonno / RHR</span>
-                    <span id="trend-sleep" class="trend-badge up" title="Sonno vs EWMA 28g (82.2) | RHR vs EWMA 28g (44.0 bpm)">0.0%</span>
+                    <span id="trend-sleep" class="trend-badge up" title="Sonno vs EWMA 28g (82.2) | RHR vs EWMA 28g (44.1 bpm)">0.0%</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-sleep"><span style="color:#10b981">---</span> <span style="opacity:0.5;">/</span> <span style="color:#10b981">--- <span style="font-size:0.65em;">bpm</span></span></div>
+                    <div class="metric-value" id="kpi-sleep"><span style="color:#10b981">---</span> <span style="opacity:0.5;">/</span> <span style="color:#10b981">45 <span style="font-size:0.65em;">bpm</span></span></div>
                     <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-sleep"><path d="M 0.0,4.4 L 2.1,7.8 L 4.1,9.2 L 6.2,6.4 L 8.3,9.2 L 10.3,13.3 L 12.4,5.1 L 14.5,14.7 L 16.6,7.8 L 18.6,23.0 L 20.7,16.8 L 22.8,5.8 L 24.8,17.5 L 26.9,7.1 L 29.0,6.4 L 31.0,9.9 L 33.1,10.6 L 35.2,12.0 L 37.2,10.6 L 39.3,6.4 L 41.4,12.0 L 43.4,7.1 L 45.5,3.0 L 47.6,7.8 L 49.7,10.6 L 51.7,4.4 L 53.8,5.1 L 55.9,14.7 L 57.9,9.9" stroke="#10b981"/></svg>
                 </div>
                 <div class="metric-subtitle"><span>Score / FC Riposo</span><span id="kpi-sleep-sub"></span></div>
@@ -617,7 +617,7 @@
                 <div class="nutrition-stat-box" id="box-tdee">
                     <div class="nutri-stat-header">
                         <span>⚡ SPESA TOTALE (OUT)</span>
-                        <span class="nutri-stat-val" id="nutri-tdee-val">2,214 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span></span>
+                        <span class="nutri-stat-val" id="nutri-tdee-val">2,174 <span style="font-size:0.75rem; font-weight:600; opacity:0.8;">kcal</span></span>
                     </div>
                     <div class="nutri-breakdown-list">
                         <div class="nutri-breakdown-item">
@@ -1237,14 +1237,14 @@
                 <div class="weather-windows-row">
                     <div class="weather-win-item">
                         <div class="weather-win-header">Mattina (8:00 - 12:00)</div>
-                        <div class="weather-win-temp" id="w-morning-temp">☀️ 22°C</div>
+                        <div class="weather-win-temp" id="w-morning-temp">☀️ 21°C</div>
                         <div class="weather-win-detail" id="w-morning-detail">Vento 25 km/h | Pioggia 0%</div>
                     </div>
 
                     <div class="weather-win-item">
                         <div class="weather-win-header">Pomeriggio (12:00 - 18:00)</div>
                         <div class="weather-win-temp" id="w-afternoon-temp">⛅ 23°C</div>
-                        <div class="weather-win-detail" id="w-afternoon-detail">Vento 26 km/h | Pioggia 0%</div>
+                        <div class="weather-win-detail" id="w-afternoon-detail">Vento 28 km/h | Pioggia 0%</div>
                     </div>
                 </div>
 
@@ -1694,6 +1694,6 @@
         </button>
     </nav>
 
-    <script src="static/js/app.js?v=1795647824"></script>
+    <script src="static/js/app.js?v=1795678704"></script>
 </body>
 </html>
