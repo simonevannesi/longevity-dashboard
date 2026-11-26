@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/styles.css?v=1795695715">
+    <link rel="stylesheet" href="static/css/styles.css?v=1795696981">
 
     <!-- iPhone PWA & iOS Safari Bookmark Optimization -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -41,7 +41,7 @@
               let clean = url.substring(5).split('?')[0];
               url = 'api/' + clean + '.json?v=' + _rt_ts;
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 26/11 13:21.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 26/11 13:43.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -882,7 +882,7 @@
 
             <div class="activity-note-box" id="act-note-box">
                 <span>⚡</span>
-                <span id="act-note">Nessuna nota aggiuntiva per questa sessione.</span>
+                <span id="act-note">Test Triathlon Fuerteventura (2:14:54 tot): Swim 1500m 24:03 (1:36/100m, 120bpm) | T1 4:01 | Bike 32.9km 317mD+ 1:00:11 (32.8km/h, 154.4bpm, max 165) | T2 2:49 | Run 10km 43:50 (4:23/km, 170.0bpm, max 184)</span>
             </div>
         </section>
 
@@ -1694,6 +1694,6 @@
         </button>
     </nav>
 
-    <script src="static/js/app.js?v=1795695715"></script>
+    <script src="static/js/app.js?v=1795696981"></script>
 </body>
 </html>
