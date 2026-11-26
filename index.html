@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/styles.css?v=1795679353">
+    <link rel="stylesheet" href="static/css/styles.css?v=1795679697">
 
     <!-- iPhone PWA & iOS Safari Bookmark Optimization -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -41,7 +41,7 @@
               let clean = url.substring(5).split('?')[0];
               url = 'api/' + clean + '.json?v=' + _rt_ts;
             } else if (url === '/sync') {
-              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 26/11 08:49.'}), {headers: {'Content-Type': 'application/json'}}));
+              return Promise.resolve(new Response(JSON.stringify({status: 'info', message: 'Snapshot mobile aggiornato al 26/11 08:54.'}), {headers: {'Content-Type': 'application/json'}}));
             }
           }
           return _origFetch(url, opts).catch(() => new Response('{}'));
@@ -247,7 +247,7 @@
                     </div>
                     <div class="bento-bio-col">
                         <span class="bento-bio-lbl">🌙 Sonno</span>
-                        <div class="bento-bio-val text-brand-purple" id="bento-sleep-val">9.6 <small>h</small></div>
+                        <div class="bento-bio-val text-brand-purple" id="bento-sleep-val">8.4 <small>h</small></div>
                         <span class="bento-bio-sub" id="bento-sleep-sub">Score 80 • Ricarica Piena</span>
                     </div>
                 </div>
@@ -406,11 +406,11 @@
             <div class="kpi-card">
                 <div class="kpi-card-header">
                     <span>🌙 Sonno / RHR</span>
-                    <span id="trend-sleep" class="trend-badge up" title="Sonno vs EWMA 28g (82.2) | RHR vs EWMA 28g (44.1 bpm)">0.0%</span>
+                    <span id="trend-sleep" class="trend-badge up" title="Sonno vs EWMA 28g (82.0) | RHR vs EWMA 28g (44.1 bpm)">-2.5%</span>
                 </div>
                 <div class="compact-val-row">
-                    <div class="metric-value" id="kpi-sleep"><span style="color:#10b981">---</span> <span style="opacity:0.5;">/</span> <span style="color:#10b981">45 <span style="font-size:0.65em;">bpm</span></span></div>
-                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-sleep"><path d="M 0.0,4.4 L 2.1,7.8 L 4.1,9.2 L 6.2,6.4 L 8.3,9.2 L 10.3,13.3 L 12.4,5.1 L 14.5,14.7 L 16.6,7.8 L 18.6,23.0 L 20.7,16.8 L 22.8,5.8 L 24.8,17.5 L 26.9,7.1 L 29.0,6.4 L 31.0,9.9 L 33.1,10.6 L 35.2,12.0 L 37.2,10.6 L 39.3,6.4 L 41.4,12.0 L 43.4,7.1 L 45.5,3.0 L 47.6,7.8 L 49.7,10.6 L 51.7,4.4 L 53.8,5.1 L 55.9,14.7 L 57.9,9.9" stroke="#10b981"/></svg>
+                    <div class="metric-value" id="kpi-sleep"><span style="color:#10b981">80</span> <span style="opacity:0.5;">/</span> <span style="color:#10b981">45 <span style="font-size:0.65em;">bpm</span></span></div>
+                    <svg class="sparkline-svg" viewBox="0 0 60 26" id="spark-sleep"><path d="M 0.0,4.4 L 2.1,7.8 L 4.1,9.2 L 6.2,6.4 L 8.3,9.2 L 10.3,13.3 L 12.4,5.1 L 14.5,14.7 L 16.6,7.8 L 18.6,23.0 L 20.7,16.8 L 22.8,5.8 L 24.8,17.5 L 26.9,7.1 L 29.0,6.4 L 31.0,9.9 L 33.1,10.6 L 35.2,12.0 L 37.2,10.6 L 39.3,6.4 L 41.4,12.0 L 43.4,7.1 L 45.5,3.0 L 47.6,7.8 L 49.7,10.6 L 51.7,4.4 L 53.8,5.1 L 55.9,14.7 L 57.9,9.9 L 60.0,10.6" stroke="#10b981"/></svg>
                 </div>
                 <div class="metric-subtitle"><span>Score / FC Riposo</span><span id="kpi-sleep-sub"></span></div>
             </div>
@@ -1694,6 +1694,6 @@
         </button>
     </nav>
 
-    <script src="static/js/app.js?v=1795679353"></script>
+    <script src="static/js/app.js?v=1795679697"></script>
 </body>
 </html>
